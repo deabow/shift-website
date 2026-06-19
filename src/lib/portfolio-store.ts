@@ -65,6 +65,7 @@ export async function createProject(input: CreatePortfolioInput) {
     id: `prj_${Date.now().toString(36)}`,
     slug,
     title: input.title,
+    clientType: input.clientType ?? "Custom Project",
     category: "Custom Project",
     description: input.description,
     imageUrl: input.imageUrl,
