@@ -1,0 +1,155 @@
+  ▲ Next.js 14.2.5
+  - Local:        http://localhost:3000
+  - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 3s
+ ✓ Compiled /api/chat in 448ms (56 modules)
+[2026-07-23T15:34:33.534Z] [INFO] [chat] Sending 1 turn(s) to Gemini 
+[2026-07-23T15:34:34.018Z] [ERROR] [chat] Gemini attempt 1 failed {
+  status: 429,
+  message: '[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n' +
+    '* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n' +
+    '* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n' +
+    '* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\n' +
+    'Please retry in 26.680814924s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerDayPerProjectPerModel-FreeTier","quotaDimensions":{"model":"gemini-2.0-flash","location":"global"}},{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerMinutePerProjectPerModel-FreeTier","quotaDimensions":{"model":"gemini-2.0-flash","location":"global"}},{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count","quotaId":"GenerateContentInputTokensPerModelPerMinute-FreeTier","quotaDimensions":{"location":"global","model":"gemini-2.0-flash"}}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"26s"}]'
+}
+[2026-07-23T15:34:34.022Z] [INFO] [chat] Retrying in 1000ms due to rate limit 
+[2026-07-23T15:34:35.195Z] [ERROR] [chat] Gemini attempt 2 failed {
+  status: 429,
+  message: '[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n' +
+    '* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n' +
+    '* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n' +
+    '* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\n' +
+    'Please retry in 25.485900709s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerDayPerProjectPerModel-FreeTier","quotaDimensions":{"location":"global","model":"gemini-2.0-flash"}},{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerMinutePerProjectPerModel-FreeTier","quotaDimensions":{"model":"gemini-2.0-flash","location":"global"}},{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count","quotaId":"GenerateContentInputTokensPerModelPerMinute-FreeTier","quotaDimensions":{"model":"gemini-2.0-flash","location":"global"}}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"25s"}]'
+}
+[2026-07-23T15:34:35.196Z] [INFO] [chat] Retrying in 2000ms due to rate limit 
+[2026-07-23T15:34:37.372Z] [ERROR] [chat] Gemini attempt 3 failed {
+  status: 429,
+  message: '[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n' +
+    '* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\n' +
+    '* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n' +
+    '* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n' +
+    'Please retry in 23.306086256s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count","quotaId":"GenerateContentInputTokensPerModelPerMinute-FreeTier","quotaDimensions":{"location":"global","model":"gemini-2.0-flash"}},{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerMinutePerProjectPerModel-FreeTier","quotaDimensions":{"location":"global","model":"gemini-2.0-flash"}},{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerDayPerProjectPerModel-FreeTier","quotaDimensions":{"location":"global","model":"gemini-2.0-flash"}}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"23s"}]'
+}
+[2026-07-23T15:34:37.373Z] [WARN] [chat] All Gemini retries failed, returning fallback 
+ POST /api/chat 200 in 4445ms
+ ○ Compiling / ...
+ ✓ Compiled / in 17.1s (1438 modules)
+ GET / 200 in 18720ms
+ ✓ Compiled in 1586ms (690 modules)
+ ✓ Compiled /favicon.ico in 219ms (757 modules)
+ GET /favicon.ico 200 in 304ms
+   Reload env: .env.local
+ ✓ Compiled in 318ms (676 modules)
+ ✓ Compiled /favicon.ico in 135ms (53 modules)
+ GET /favicon.ico 200 in 290ms
+   Reload env: .env.local
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ✓ Compiled in 212ms (729 modules)
+ ✓ Compiled / in 214ms (729 modules)
+ GET / 200 in 691ms
+ GET /favicon.ico 200 in 38ms
+ ○ Compiling /api/chat ...
+ ✓ Compiled /api/chat in 682ms (757 modules)
+[2026-07-23T15:38:37.904Z] [INFO] [chat] Sending 1 turn(s) to Gemini 
+[2026-07-23T15:38:38.553Z] [ERROR] [chat] Gemini attempt 1 failed {
+  status: 429,
+  message: '[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n' +
+    '* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n' +
+    '* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n' +
+    '* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\n' +
+    'Please retry in 22.146099s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerDayPerProjectPerModel-FreeTier","quotaDimensions":{"location":"global","model":"gemini-2.0-flash"}},{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerMinutePerProjectPerModel-FreeTier","quotaDimensions":{"model":"gemini-2.0-flash","location":"global"}},{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count","quotaId":"GenerateContentInputTokensPerModelPerMinute-FreeTier","quotaDimensions":{"location":"global","model":"gemini-2.0-flash"}}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"22s"}]'
+}
+[2026-07-23T15:38:38.561Z] [INFO] [chat] Retrying in 1000ms due to rate limit 
+[2026-07-23T15:38:40.082Z] [ERROR] [chat] Gemini attempt 2 failed {
+  status: 429,
+  message: '[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n' +
+    '* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\n' +
+    '* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n' +
+    '* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n' +
+    'Please retry in 20.653014261s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count","quotaId":"GenerateContentInputTokensPerModelPerMinute-FreeTier","quotaDimensions":{"model":"gemini-2.0-flash","location":"global"}},{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerMinutePerProjectPerModel-FreeTier","quotaDimensions":{"model":"gemini-2.0-flash","location":"global"}},{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerDayPerProjectPerModel-FreeTier","quotaDimensions":{"model":"gemini-2.0-flash","location":"global"}}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"20s"}]'
+}
+[2026-07-23T15:38:40.082Z] [INFO] [chat] Retrying in 2000ms due to rate limit 
+[2026-07-23T15:38:42.365Z] [ERROR] [chat] Gemini attempt 3 failed {
+  status: 429,
+  message: '[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent: [429 Too Many Requests] You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n' +
+    '* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n' +
+    '* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n' +
+    '* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\n' +
+    'Please retry in 18.414020574s. [{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Learn more about Gemini API quotas","url":"https://ai.google.dev/gemini-api/docs/rate-limits"}]},{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerDayPerProjectPerModel-FreeTier","quotaDimensions":{"location":"global","model":"gemini-2.0-flash"}},{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_requests","quotaId":"GenerateRequestsPerMinutePerProjectPerModel-FreeTier","quotaDimensions":{"model":"gemini-2.0-flash","location":"global"}},{"quotaMetric":"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count","quotaId":"GenerateContentInputTokensPerModelPerMinute-FreeTier","quotaDimensions":{"model":"gemini-2.0-flash","location":"global"}}]},{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"18s"}]'
+}
+[2026-07-23T15:38:42.366Z] [WARN] [chat] All Gemini retries failed, returning fallback 
+ POST /api/chat 200 in 5409ms
+   Reload env: .env.local
+ ✓ Compiled in 8.3s (1408 modules)
+ ✓ Compiled in 313ms (690 modules)
+ ✓ Compiled in 393ms (690 modules)
+ ✓ Compiled in 347ms (690 modules)
+ ✓ Compiled in 325ms (690 modules)
+ ✓ Compiled in 1181ms (1390 modules)
+ ✓ Compiled in 802ms (1390 modules)
+ ✓ Compiled in 560ms (1376 modules)
+ ✓ Compiled in 855ms (1390 modules)
+ ✓ Compiled in 285ms (690 modules)
+ ✓ Compiled in 289ms (690 modules)
+ ✓ Compiled in 280ms (690 modules)
+ ✓ Compiled in 303ms (690 modules)
+ ✓ Compiled in 707ms (1378 modules)
+ ✓ Compiled in 263ms (691 modules)
+ ✓ Compiled in 322ms (691 modules)
+ ✓ Compiled in 259ms (691 modules)
+ ✓ Compiled in 286ms (691 modules)
+ ✓ Compiled in 205ms (691 modules)
+ ✓ Compiled in 227ms (691 modules)
+ ✓ Compiled in 482ms (691 modules)
+ ✓ Compiled in 400ms (691 modules)
+ ✓ Compiled in 845ms (1392 modules)
+ ✓ Compiled in 901ms (1396 modules)
+ ✓ Compiled in 361ms (693 modules)
+ ✓ Compiled in 332ms (693 modules)
+ ✓ Compiled in 875ms (1396 modules)
+ ✓ Compiled in 1020ms (1396 modules)
+ ✓ Compiled in 322ms (693 modules)
+ ✓ Compiled in 436ms (693 modules)
+ ✓ Compiled in 688ms (1396 modules)
+ ✓ Compiled in 905ms (1396 modules)
+ ✓ Compiled in 171ms (693 modules)
+ ✓ Compiled in 582ms (1396 modules)
+ ✓ Compiled in 241ms (693 modules)
+ ✓ Compiled in 194ms (693 modules)
+ ✓ Compiled in 277ms (693 modules)
+ GET / 200 in 337ms
+ ○ Compiling /security ...
+ ✓ Compiled /security in 1270ms (1409 modules)
+ ○ Compiling /portfolio ...
+ ✓ Compiled /portfolio in 2.4s (1457 modules)
+ ○ Compiling /api/portfolio ...
+ ✓ Compiled /api/portfolio in 1345ms (783 modules)
+[2026-07-23T22:50:10.169Z] [INFO] [portfolio] GET (published) 
+[2026-07-23T22:50:10.175Z] [INFO] [portfolio] GET (published) 
+[2026-07-23T22:50:10.177Z] [INFO] [portfolio] Returned 3 projects 
+ GET /api/portfolio?published=true 200 in 1783ms
+[2026-07-23T22:50:10.204Z] [INFO] [portfolio] Returned 3 projects 
+ GET /api/portfolio?published=true 200 in 1804ms
+ ○ Compiling /about ...
+ ✓ Compiled /about in 1495ms (1515 modules)
+ ○ Compiling /services ...
+ ✓ Compiled /services in 1631ms (1497 modules)
+ ○ Compiling /api/chat ...
+ ✓ Compiled /api/chat in 1073ms (800 modules)
+[2026-07-23T22:52:49.229Z] [INFO] [chat] Sending 1 turn(s) to Gemini 
+[2026-07-23T22:52:49.684Z] [ERROR] [chat] Gemini attempt 1 failed {
+  status: 400,
+  message: '[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent: [400 Bad Request] API key not valid. Please pass a valid API key. [{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"API_KEY_INVALID","domain":"googleapis.com","metadata":{"service":"generativelanguage.googleapis.com"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"API key not valid. Please pass a valid API key."}]'
+}
+[2026-07-23T22:52:50.856Z] [ERROR] [chat] Gemini attempt 2 failed {
+  status: 400,
+  message: '[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent: [400 Bad Request] API key not valid. Please pass a valid API key. [{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"API_KEY_INVALID","domain":"googleapis.com","metadata":{"service":"generativelanguage.googleapis.com"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"API key not valid. Please pass a valid API key."}]'
+}
+[2026-07-23T22:52:52.994Z] [ERROR] [chat] Gemini attempt 3 failed {
+  status: 400,
+  message: '[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent: [400 Bad Request] API key not valid. Please pass a valid API key. [{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"API_KEY_INVALID","domain":"googleapis.com","metadata":{"service":"generativelanguage.googleapis.com"}},{"@type":"type.googleapis.com/google.rpc.LocalizedMessage","locale":"en-US","message":"API key not valid. Please pass a valid API key."}]'
+}
+[2026-07-23T22:52:52.994Z] [WARN] [chat] All Gemini retries failed, returning fallback 
+ POST /api/chat 200 in 5150ms

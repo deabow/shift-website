@@ -1,12 +1,14 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
+import type { MouseEvent } from "react";
 import {
   Database,
   ExternalLink,
-  Globe,
+  Code2,
   Shield,
-  Smartphone,
+  Target,
+  Video,
   type LucideIcon,
 } from "lucide-react";
 
@@ -21,68 +23,68 @@ type ServiceCard = {
 };
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
-const DEBO_WHATSAPP = "201211050297";
+const DEBO_WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP || "201211050297";
 
 const services: ServiceCard[] = [
   {
-    icon: Globe,
-    title: "Custom Web Development",
-    tagline: "Next.js · React · TypeScript",
+    icon: Code2,
+    title: "Web & SaaS Development",
+    tagline: "Next.js · AI · ERP · WebGL",
     description:
-      "High-end web platforms built for speed, SEO, and scale. From landing pages to complex SaaS products — crafted with the latest App Router architecture.",
+      "Custom Next.js web applications, AI integrations, ERP solutions, E-commerce, and high-end interactive 3D WebGL/WebGPU experiences. We build digital products that dominate markets.",
     bullets: [
-      "Next.js App Router & Server Components",
-      "Core Web Vitals & Lighthouse 100",
-      "SEO-first technical architecture",
-      "Enterprise-grade performance tuning",
+      "Custom Next.js App Router Architecture",
+      "Advanced AI Models & Agent Integration",
+      "Bespoke ERP & Scalable E-commerce",
+      "Interactive 3D WebGL / WebGPU Experiences",
     ],
     whatsappText:
-      "أهلاً ديبو، أنا مهتم بخدمة Custom Web Development من SHIFT. ممكن تكلمني؟",
+      "Hello, I am interested in Web & SaaS Development. Can we talk?",
   },
   {
-    icon: Smartphone,
-    title: "Mobile App Solutions",
-    tagline: "Flutter · React Native · Expo",
+    icon: Target,
+    title: "Digital Marketing & Demand Generation",
+    tagline: "B2B/B2C · ABM · Lead Gen",
     description:
-      "Cross-platform mobile apps that feel native on iOS and Android. One codebase, zero compromises on performance or UX.",
+      "High-conversion B2B/B2C ad campaigns, account-based marketing (ABM), lead generation, and strategic growth engines designed to aggressively scale your revenue.",
     bullets: [
-      "Flutter & React Native hybrid builds",
-      "Shared business logic across platforms",
-      "App Store & Play Store deployment",
-      "Real-time features & push notifications",
+      "High-Conversion Ad Campaigns",
+      "Account-Based Marketing (ABM)",
+      "Strategic Growth Engines",
+      "Data-Driven Lead Generation",
     ],
     whatsappText:
-      "أهلاً ديبو، أنا مهتم بخدمة Mobile App Solutions من SHIFT. ممكن تكلمني؟",
+      "Hello, I am interested in Digital Marketing & Demand Generation. Can we talk?",
   },
   {
-    icon: Database,
-    title: "Enterprise Systems",
-    tagline: "ERP · Dashboards · Automation",
+    icon: Video,
+    title: "Cinematic Visual Production & Branding",
+    tagline: "Premium Identity · Graphic Design · Drone",
     description:
-      "Custom ERP workflows, role-based management dashboards, and scalable internal tooling built to bring operational clarity to complex organizations.",
+      "Premium brand identity, striking graphic design, and cinematic drone videography. We craft visual narratives that instantly position your brand as an industry leader.",
     bullets: [
-      "Custom ERP & workflow modules",
-      "Role-based access control systems",
-      "Automated reporting & data pipelines",
-      "Legacy system integration & migration",
+      "Premium Brand Identity Systems",
+      "High-End Graphic Design",
+      "Cinematic Drone Videography",
+      "Visual Positioning Strategy",
     ],
     whatsappText:
-      "أهلاً ديبو، أنا مهتم بخدمة Enterprise Systems من SHIFT. ممكن تكلمني؟",
+      "Hello, I am interested in Cinematic Visual Production & Branding. Can we talk?",
   },
   {
     icon: Shield,
-    title: "Cybersecurity & Pentesting",
-    tagline: "OWASP · Pentest · Secure SDLC",
+    title: "Cybersecurity & Penetration Testing",
+    tagline: "Pentest · Vulnerability · Secure SDLC",
     description:
-      "Security-first engineering built into every layer. Vulnerability assessments, penetration testing, and secure coding standards before and after launch.",
+      "Securing digital infrastructure, vulnerability assessments, and web application security. We build impenetrable fortresses around your most valuable digital assets.",
     bullets: [
-      "Web & API vulnerability scanning",
-      "Full penetration testing reports",
-      "Secure Software Development Lifecycle",
-      "Post-pentest remediation support",
+      "Digital Infrastructure Hardening",
+      "Advanced Vulnerability Assessments",
+      "Web Application Security",
+      "Complete Penetration Testing",
     ],
     whatsappText:
-      "أهلاً ديبو، أنا مهتم بخدمة Cybersecurity & Pentesting من SHIFT. ممكن تكلمني؟",
+      "Hello, I am interested in Cybersecurity & Penetration Testing. Can we talk?",
   },
 ];
 
@@ -118,14 +120,37 @@ const headerVariants = {
 function ServiceCard({ service }: { service: ServiceCard }) {
   const Icon = service.icon;
   const href = `https://wa.me/${DEBO_WHATSAPP}?text=${encodeURIComponent(service.whatsappText)}`;
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function handleMouseMove({ currentTarget, clientX, clientY }: MouseEvent) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
 
   return (
     <motion.article
       variants={cardVariants}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/50 p-6 backdrop-blur-lg transition-all duration-300 hover:border-emerald-500/50 hover:shadow-[0_0_40px_rgba(16,185,129,0.12)] md:p-8"
+      onMouseMove={handleMouseMove}
+      className="group relative flex flex-col items-center text-center overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/50 p-6 backdrop-blur-lg transition-all duration-300 hover:border-emerald-500/50 hover:shadow-[0_0_40px_rgba(16,185,129,0.12)] md:p-8"
       whileHover={{ scale: 1.025 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
     >
+      {/* Mouse Spotlight effect */}
+      <motion.div
+        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition duration-300 group-hover:opacity-100"
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(
+              400px circle at ${mouseX}px ${mouseY}px,
+              rgba(16,185,129,0.06),
+              transparent 80%
+            )
+          `,
+        }}
+      />
+
       {/* Hover radial gradient reveal */}
       <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(16,185,129,0.07),transparent_70%)]" />
 
@@ -150,10 +175,10 @@ function ServiceCard({ service }: { service: ServiceCard }) {
       </p>
 
       {/* Feature bullets */}
-      <ul className="mt-5 space-y-2.5 flex-1">
+      <ul className="mt-5 space-y-2.5 flex-1 flex flex-col items-center">
         {service.bullets.map((bullet) => (
-          <li key={bullet} className="flex items-start gap-2.5 text-sm text-zinc-300">
-            <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
+          <li key={bullet} className="flex items-center gap-2.5 text-sm text-zinc-300">
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
             {bullet}
           </li>
         ))}
@@ -188,7 +213,7 @@ export default function ServicesPage() {
         variants={headerVariants}
         initial="hidden"
         animate="visible"
-        className="mb-12 max-w-3xl"
+        className="mb-12 max-w-3xl mx-auto flex flex-col items-center text-center"
       >
         <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-emerald-400">
           What we build
@@ -206,7 +231,7 @@ export default function ServicesPage() {
         </p>
 
         {/* Divider accent */}
-        <div className="mt-7 h-px w-24 bg-gradient-to-r from-emerald-400/60 to-transparent" />
+        <div className="mt-7 h-px w-24 bg-gradient-to-r from-transparent via-emerald-400/60 to-transparent" />
       </motion.header>
 
       {/* ── Service Cards Grid ── */}
@@ -226,9 +251,9 @@ export default function ServicesPage() {
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.85, duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
-        className="mt-14 flex flex-col items-center gap-4 rounded-2xl border border-white/8 bg-white/[0.025] px-6 py-8 text-center backdrop-blur-sm sm:flex-row sm:justify-between sm:text-left"
+        className="mt-14 flex flex-col items-center gap-4 rounded-2xl border border-white/8 bg-white/[0.025] px-6 py-8 text-center backdrop-blur-sm sm:flex-row sm:justify-center"
       >
-        <div>
+        <div className="flex flex-col items-center sm:items-start sm:mr-4">
           <p className="text-lg font-bold text-white md:text-xl">
             Not sure which service fits your project?
           </p>

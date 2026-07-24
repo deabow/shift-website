@@ -1,14 +1,20 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-export function middleware(request: NextRequest) {
-  const isAdminPanelRoute = request.nextUrl.pathname.startsWith("/admin/panel");
-  if (!isAdminPanelRoute) {
-    return NextResponse.next();
-  }
+function isAuthenticated(request: NextRequest): boolean {
+  const adminSecret = process.env.ADMIN_SECRET;
+  if (!adminSecret) return false;
 
-  const isAuthenticated = request.cookies.get("shift-admin-auth")?.value === (process.env.ADMIN_SECRET ?? "shift_secure_session_v1");
-  if (!isAuthenticated) {
-    return NextResponse.redirect(new URL("/admin", request.url));
+  return request.cookies.get("shift-admin-auth")?.value === adminSecret;
+}
+
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  if (pathname.startsWith("/admin/panel")) {
+    if (!isAuthenticated(request)) {
+      return NextResponse.redirect(new URL("/admin", request.url));
+    }
+    return NextResponse.next();
   }
 
   return NextResponse.next();

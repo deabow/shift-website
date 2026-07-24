@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useLanguage } from "@/lib/language-context";
 
 const Facebook = ({ size = 24 }: { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -15,15 +18,17 @@ const Instagram = ({ size = 24 }: { size?: number }) => (
 );
 
 export default function SiteFooter() {
+  const { t, language } = useLanguage();
+
   return (
-    <footer className="mt-16 border-t border-white/10 bg-[#0a0a0a] py-8">
+    <footer className="mt-16 border-t border-white/10 bg-[#0a0a0a] py-8 z-10 relative">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 md:flex-row md:px-8">
-        <p className="text-sm text-zinc-400">
-          © {new Date().getFullYear()} SHIFT Agency. All rights reserved.
+        <p className="text-sm text-zinc-400" dir={language === "ar" ? "rtl" : "ltr"}>
+          © {new Date().getFullYear()} {t.footer.rights}
         </p>
         <div className="flex items-center gap-4">
           <a
-            href="https://facebook.com"
+            href="https://www.facebook.com/profile.php?id=61591717865503"
             target="_blank"
             rel="noopener noreferrer"
             className="text-white/75 transition hover:text-[#8B5CF6]"

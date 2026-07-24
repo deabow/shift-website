@@ -1,7 +1,9 @@
 "use client";
 
 import { PortfolioProject } from "@/lib/portfolio-types";
+import { ImageIcon } from "lucide-react";
 import { useEffect, useState } from "react";
+import { toast, Toaster } from "@/components/toast";
 
 type CreateFormState = {
   title: string;
@@ -18,6 +20,36 @@ const initialFormState: CreateFormState = {
   videoUrl: "",
   published: false,
 };
+
+function ImagePreview({ url, alt }: { url: string; alt: string }) {
+  const [loaded, setLoaded] = useState(false);
+  const [errored, setErrored] = useState(false);
+
+  if (!url.trim()) return null;
+
+  return (
+    <div className="relative mt-2 overflow-hidden rounded-lg border border-white/10 bg-black/50">
+      {!loaded && !errored && (
+        <div className="flex h-24 items-center justify-center">
+          <ImageIcon size={20} className="animate-pulse text-zinc-600" />
+        </div>
+      )}
+      {errored ? (
+        <div className="flex h-20 items-center justify-center text-xs text-zinc-500">
+          Could not load image
+        </div>
+      ) : (
+        <img
+          src={url}
+          alt={alt}
+          onLoad={() => setLoaded(true)}
+          onError={() => setErrored(true)}
+          className={`h-32 w-full object-cover transition-opacity duration-300 ${loaded ? "opacity-100" : "opacity-0 absolute"}`}
+        />
+      )}
+    </div>
+  );
+}
 
 export function AdminPortfolioDashboard() {
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
@@ -86,8 +118,11 @@ export function AdminPortfolioDashboard() {
       setProjects((prev) => [created, ...prev]);
       setForm(initialFormState);
       setIsModalOpen(false);
+      toast("Project created successfully");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to create project.");
+      const msg = err instanceof Error ? err.message : "Failed to create project.";
+      setError(msg);
+      toast(msg, "error");
     } finally {
       setSaving(false);
     }
@@ -99,30 +134,37 @@ export function AdminPortfolioDashboard() {
       Pick<PortfolioProject, "title" | "description" | "imageUrl" | "videoUrl" | "published">
     >,
   ) => {
-    const response = await fetch(`/api/portfolio/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    if (!response.ok) throw new Error("Failed to update project.");
-    const updated = (await response.json()) as PortfolioProject;
-    setProjects((prev) => prev.map((project) => (project.id === id ? updated : project)));
-    setDrafts((prev) => ({
-      ...prev,
-      [id]: {
-        title: updated.title,
-        description: updated.description,
-        imageUrl: updated.imageUrl,
-        videoUrl: updated.videoUrl,
-      },
-    }));
+    try {
+      const response = await fetch(`/api/portfolio/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) throw new Error("Failed to update project.");
+      const updated = (await response.json()) as PortfolioProject;
+      setProjects((prev) => prev.map((project) => (project.id === id ? updated : project)));
+      setDrafts((prev) => ({
+        ...prev,
+        [id]: {
+          title: updated.title,
+          description: updated.description,
+          imageUrl: updated.imageUrl,
+          videoUrl: updated.videoUrl,
+        },
+      }));
+      toast("Project saved successfully");
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Failed to update project.";
+      setError(msg);
+      toast(msg, "error");
+    }
   };
 
   const togglePublished = async (project: PortfolioProject) => {
     try {
       await updateProject(project.id, { published: !project.published });
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to toggle publish state.");
+    } catch {
+      // toast handled in updateProject
     }
   };
 
@@ -131,13 +173,18 @@ export function AdminPortfolioDashboard() {
       const response = await fetch(`/api/portfolio/${id}`, { method: "DELETE" });
       if (!response.ok) throw new Error("Failed to delete project.");
       setProjects((prev) => prev.filter((project) => project.id !== id));
+      toast("Project deleted");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to delete project.");
+      const msg = err instanceof Error ? err.message : "Failed to delete project.";
+      setError(msg);
+      toast(msg, "error");
     }
   };
 
   return (
     <div className="mt-8 rounded-2xl border border-white/10 bg-black/25 p-5">
+      <Toaster />
+
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
           <h2 className="text-lg font-semibold text-white">Portfolio Projects</h2>
@@ -232,6 +279,10 @@ export function AdminPortfolioDashboard() {
                       }
                       className="mt-2 w-full rounded-md border border-white/15 bg-black/35 px-2 py-1.5 text-xs text-zinc-300"
                     />
+                    <ImagePreview
+                      url={drafts[project.id]?.imageUrl ?? project.imageUrl}
+                      alt={project.title}
+                    />
                     <div className="mt-2 flex items-center gap-2">
                       <input
                         value={drafts[project.id]?.videoUrl ?? project.videoUrl}
@@ -274,8 +325,9 @@ export function AdminPortfolioDashboard() {
                                   videoUrl: data.url,
                                 },
                               }));
-                            } catch (err) {
-                              alert("Failed to upload video");
+                              toast("Video uploaded");
+                            } catch {
+                              toast("Failed to upload video", "error");
                             }
                           }}
                         />
@@ -357,6 +409,7 @@ export function AdminPortfolioDashboard() {
                 placeholder="Image URL"
                 className="w-full rounded-lg border border-white/15 bg-black/40 px-3 py-2 text-sm text-white"
               />
+              <ImagePreview url={form.imageUrl} alt="Preview" />
               <div className="flex items-center gap-2">
                 <input
                   value={form.videoUrl}
@@ -382,8 +435,9 @@ export function AdminPortfolioDashboard() {
                         if (!res.ok) throw new Error("Upload failed");
                         const data = await res.json();
                         setForm((prev) => ({ ...prev, videoUrl: data.url }));
-                      } catch (err) {
-                        alert("Failed to upload video");
+                        toast("Video uploaded");
+                      } catch {
+                        toast("Failed to upload video", "error");
                       }
                     }}
                   />

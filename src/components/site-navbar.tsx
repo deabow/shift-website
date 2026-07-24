@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/language-context";
+import { MagneticWrapper } from "./magnetic-wrapper";
 
 const Facebook = ({ size = 24 }: { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -18,15 +20,21 @@ const Instagram = ({ size = 24 }: { size?: number }) => (
   </svg>
 );
 
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/services", label: "Services" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/security", label: "Security" },
-];
-
 export default function SiteNavbar() {
   const pathname = usePathname();
+  const { language, setLanguage, t } = useLanguage();
+
+  const navLinks = [
+    { href: "/", label: t.nav.home },
+    { href: "/about", label: t.nav.about },
+    { href: "/services", label: t.nav.services },
+    { href: "/portfolio", label: t.nav.portfolio },
+    { href: "/security", label: t.nav.security },
+  ];
+
+  const toggleLanguage = () => {
+    setLanguage(language === "en" ? "ar" : "en");
+  };
 
   return (
     <header className="sticky top-0 z-50 px-4 pb-2 pt-4 md:px-8">
@@ -50,7 +58,7 @@ export default function SiteNavbar() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`relative rounded-lg px-2.5 py-1.5 text-xs transition-colors sm:px-3 sm:text-sm ${
+                  className={`relative rounded-lg px-1.5 py-1 text-[10px] transition-colors sm:px-3 sm:py-1.5 sm:text-sm ${
                     isActive ? "text-white" : "text-white/75 hover:text-white"
                   }`}
                 >
@@ -68,22 +76,33 @@ export default function SiteNavbar() {
           })}
         </ul>
         <div className="ml-auto flex items-center gap-4">
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white/75 transition hover:text-[#8B5CF6]"
-          >
-            <Facebook size={18} />
-          </a>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white/75 transition hover:text-[#8B5CF6]"
-          >
-            <Instagram size={18} />
-          </a>
+          <MagneticWrapper>
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center justify-center rounded-lg border border-white/20 px-2 py-1 text-[10px] sm:text-xs font-bold uppercase transition hover:bg-white/10 hover:text-emerald-400"
+            >
+              {language === "en" ? "عربي" : "EN"}
+            </button>
+          </MagneticWrapper>
+          
+          <div className="hidden sm:flex items-center gap-4">
+            <a
+              href="https://www.facebook.com/profile.php?id=61591717865503"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/75 transition hover:text-[#8B5CF6]"
+            >
+              <Facebook size={18} />
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/75 transition hover:text-[#8B5CF6]"
+            >
+              <Instagram size={18} />
+            </a>
+          </div>
         </div>
       </motion.nav>
     </header>

@@ -13,22 +13,18 @@ export function RevealMaskText() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Motion values to track spotlight cursor position and radius
   const cursorX = useMotionValue(0);
   const cursorY = useMotionValue(0);
   const radius = useMotionValue(0);
 
-  // Springs for smooth transition physics
-  const springConfig = { stiffness: 350, damping: 35, mass: 0.5 };
-  const smoothX = useSpring(cursorX, springConfig);
-  const smoothY = useSpring(cursorY, springConfig);
-  const smoothRadius = useSpring(radius, { stiffness: 180, damping: 28 });
+  const smoothX = useSpring(cursorX, { stiffness: 250, damping: 25, mass: 0.4 });
+  const smoothY = useSpring(cursorY, { stiffness: 250, damping: 25, mass: 0.4 });
+  const smoothRadius = useSpring(radius, { stiffness: 150, damping: 22 });
 
-  // Generate dynamic clip path template for CSS spotlight mask
   const clipPath = useMotionTemplate`circle(${smoothRadius}px at ${smoothX}px ${smoothY}px)`;
 
-  // Handles mouse movement over the card
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
@@ -36,23 +32,67 @@ export function RevealMaskText() {
     cursorY.set(event.clientY - rect.top);
   };
 
-  // On hover start, expand spotlight circle radius
   const handleMouseEnter = (event: React.MouseEvent<HTMLDivElement>) => {
     setIsHovered(true);
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     cursorX.set(event.clientX - rect.left);
     cursorY.set(event.clientY - rect.top);
-    radius.set(260); // Spotlight circle radius
+    radius.set(280);
   };
 
-  // On hover exit, snap radius back to 0
   const handleMouseLeave = () => {
     setIsHovered(false);
-    radius.set(0);
+    if (!isMobile) {
+      radius.set(0);
+    }
   };
 
-  // Matrix Digital Rain Canvas Animation Effect
+  useEffect(() => {
+    // Check if device is mobile/touch
+    const checkMobile = () => {
+      const mobile = window.matchMedia("(max-width: 768px)").matches || window.matchMedia("(pointer: coarse)").matches;
+      setIsMobile(mobile);
+      if (mobile) {
+        setIsHovered(true);
+        radius.set(120);
+      } else {
+        setIsHovered(false);
+        radius.set(0);
+      }
+    };
+    
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    
+    let autoAnimateId: number;
+    let angle = 0;
+    
+    const autoAnimate = () => {
+      if (isMobile && containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const movementRadius = Math.min(rect.width, rect.height) * 0.3;
+        
+        cursorX.set(centerX + Math.cos(angle) * movementRadius);
+        cursorY.set(centerY + Math.sin(angle) * movementRadius);
+        
+        angle += 0.02;
+      }
+      autoAnimateId = requestAnimationFrame(autoAnimate);
+    };
+    
+    if (isMobile) {
+      autoAnimate();
+    }
+    
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+      if (autoAnimateId) cancelAnimationFrame(autoAnimateId);
+    };
+  }, [isMobile, cursorX, cursorY, radius]);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -66,8 +106,7 @@ export function RevealMaskText() {
 
     const fontSize = 16;
     let columns = Math.floor(width / fontSize);
-    
-    // Spawn drops at various offsets above the canvas to stagger entrance
+
     let drops = Array(columns)
       .fill(1)
       .map(() => Math.floor(Math.random() * -(height / fontSize)));
@@ -75,11 +114,9 @@ export function RevealMaskText() {
     const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ$#@%&*+-/<>".split("");
 
     const drawMatrix = () => {
-      // Semi-transparent black background to leave code trails
       ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
       ctx.fillRect(0, 0, width, height);
 
-      // Terminal green style code raindrops
       ctx.fillStyle = "#10b981";
       ctx.font = `bold ${fontSize}px monospace`;
 
@@ -90,14 +127,12 @@ export function RevealMaskText() {
 
         ctx.fillText(char, x, y);
 
-        // Render head of digital drop in bright white for high contrast digital aesthetics
         if (Math.random() > 0.98) {
           ctx.fillStyle = "#ffffff";
           ctx.fillText(char, x, y);
           ctx.fillStyle = "#10b981";
         }
 
-        // Reset raindrop back to top at random intervals
         if (y > height && Math.random() > 0.975) {
           drops[i] = 0;
         }
@@ -106,7 +141,7 @@ export function RevealMaskText() {
     };
 
     let lastTime = 0;
-    const fps = 30; // Target Matrix speed
+    const fps = 30;
     const interval = 1000 / fps;
 
     const renderLoop = (time: number) => {
@@ -143,28 +178,34 @@ export function RevealMaskText() {
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="relative flex w-full max-w-5xl items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-[#0a0a0c]/60 p-4 transition-colors duration-500 h-44 sm:h-56 md:h-72 lg:h-[320px]"
+      className="group relative flex w-full max-w-5xl items-center justify-center overflow-hidden rounded-2xl md:rounded-3xl border border-white/[0.06] bg-zinc-900/40 p-2 md:p-4 backdrop-blur-xl transition-colors duration-500 h-28 sm:h-44 md:h-72 lg:h-[320px]"
       animate={{
-        borderColor: isHovered ? "rgba(16, 185, 129, 0.45)" : "rgba(255, 255, 255, 0.08)",
+        borderColor: isHovered
+          ? "rgba(16, 185, 129, 0.4)"
+          : "rgba(255, 255, 255, 0.06)",
         boxShadow: isHovered
-          ? "0 0 45px rgba(16, 185, 129, 0.28), inset 0 0 20px rgba(16, 185, 129, 0.12)"
-          : "0 15px 60px rgba(0, 0, 0, 0.65), inset 0 0 0px rgba(0, 0, 0, 0)",
+          ? "0 0 60px rgba(16, 185, 129, 0.15), inset 0 0 30px rgba(16, 185, 129, 0.08)"
+          : "0 20px 70px rgba(0, 0, 0, 0.5), inset 0 0 0px rgba(0, 0, 0, 0)",
       }}
+      transition={{ type: "spring", stiffness: 120, damping: 22 }}
     >
-      {/* Background cyber grid overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:24px_24px] opacity-40" />
+      {/* Ambient radial glow behind the card */}
+      <div className="pointer-events-none absolute -inset-20 -z-10 opacity-0 transition-opacity duration-700 group-hover:opacity-100 bg-[radial-gradient(ellipse_at_center,theme(colors.emerald.500/12),transparent_70%)]" />
 
-      {/* Layer 1: Clean minimalist static text (Base state) */}
+      {/* Grid overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:24px_24px] opacity-30" />
+
+      {/* Layer 1: static text outline + fill */}
       <svg className="absolute inset-0 h-full w-full select-none">
         <text
           x="50%"
           y="50%"
           dominantBaseline="central"
           textAnchor="middle"
-          stroke="rgba(255, 255, 255, 0.18)"
+          stroke="rgba(255, 255, 255, 0.12)"
           strokeWidth="2"
           fill="none"
-          className={`${orbitron.className} uppercase text-7xl md:text-9xl lg:text-[15rem] tracking-[0.04em] sm:tracking-[0.08em] md:tracking-[0.12em] lg:tracking-[0.16em] font-black`}
+          className={`${orbitron.className} uppercase text-[20vw] sm:text-7xl md:text-9xl lg:text-[15rem] tracking-[0.02em] sm:tracking-[0.08em] md:tracking-[0.12em] lg:tracking-[0.16em] font-black`}
         >
           SHIFT
         </text>
@@ -174,15 +215,15 @@ export function RevealMaskText() {
           dominantBaseline="central"
           textAnchor="middle"
           fill="rgba(255, 255, 255, 0.85)"
-          className={`${orbitron.className} uppercase text-7xl md:text-9xl lg:text-[15rem] tracking-[0.04em] sm:tracking-[0.08em] md:tracking-[0.12em] lg:tracking-[0.16em] font-black transition-all duration-300 group-hover:opacity-10`}
+          className={`${orbitron.className} uppercase text-[20vw] sm:text-7xl md:text-9xl lg:text-[15rem] tracking-[0.02em] sm:tracking-[0.08em] md:tracking-[0.12em] lg:tracking-[0.16em] font-black`}
         >
           SHIFT
         </text>
       </svg>
 
-      {/* Layer 2: Matrix Canvas text reveal (Masked/Hover state) */}
+      {/* Layer 2: Matrix canvas reveal */}
       <motion.div
-        className="pointer-events-none absolute inset-0 h-full w-full bg-black"
+        className="pointer-events-none absolute inset-0 h-full w-full bg-black/90"
         style={{ clipPath }}
       >
         <svg className="h-full w-full select-none">
@@ -193,7 +234,7 @@ export function RevealMaskText() {
                 y="50%"
                 dominantBaseline="central"
                 textAnchor="middle"
-                className={`${orbitron.className} uppercase text-7xl md:text-9xl lg:text-[15rem] tracking-[0.04em] sm:tracking-[0.08em] md:tracking-[0.12em] lg:tracking-[0.16em] font-black`}
+                className={`${orbitron.className} uppercase text-[20vw] sm:text-7xl md:text-9xl lg:text-[15rem] tracking-[0.02em] sm:tracking-[0.08em] md:tracking-[0.12em] lg:tracking-[0.16em] font-black`}
               >
                 SHIFT
               </text>

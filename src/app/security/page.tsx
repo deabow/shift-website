@@ -222,7 +222,7 @@ export default function SecurityPage() {
             </p>
           </div>
           <a
-            href={`https://wa.me/201211050297?text=${encodeURIComponent(
+            href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP || "201211050297"}?text=${encodeURIComponent(
               "أهلاً ديبو، أنا مهتم بعمل Security Assessment مع SHIFT. ممكن تكلمني؟"
             )}`}
             target="_blank"

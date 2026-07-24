@@ -3,11 +3,17 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default function AdminLoginPage() {
-  const isAuthenticated = cookies().get("shift-admin-auth")?.value === (process.env.ADMIN_SECRET ?? "shift_secure_session_v1");
+  const adminSecret = process.env.ADMIN_SECRET;
+  const isAuthenticated = adminSecret
+    ? cookies().get("shift-admin-auth")?.value === adminSecret
+    : false;
 
   if (isAuthenticated) {
     redirect("/admin/panel");
   }
+
+  const errorParam = null; // In Next.js 14, we can use searchParams but this is a server component
+  // For simplicity, we check via URL in client-side or just show the form
 
   return (
     <main className="mx-auto flex min-h-[calc(100vh-96px)] w-full max-w-6xl items-center px-4 pb-16 pt-10 md:px-8">
@@ -21,6 +27,12 @@ export default function AdminLoginPage() {
         <p className="mt-3 text-zinc-300">
           Authenticate to access the SHIFT admin panel.
         </p>
+
+        {!adminSecret && (
+          <div className="mt-4 rounded-xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+            ADMIN_SECRET environment variable is not configured. Please set it in .env.local.
+          </div>
+        )}
 
         <form action="/api/admin/login" method="post" className="mt-8 space-y-4">
           <label className="block text-sm text-zinc-200" htmlFor="password">
@@ -36,7 +48,8 @@ export default function AdminLoginPage() {
           />
           <button
             type="submit"
-            className="w-full rounded-xl bg-[#8B5CF6] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#7C3AED]"
+            disabled={!adminSecret}
+            className="w-full rounded-xl bg-[#8B5CF6] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#7C3AED] disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Login to Admin
           </button>

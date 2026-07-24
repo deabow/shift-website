@@ -5,7 +5,7 @@ import { ArrowLeft, MessageCircle, Send, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
-const DEBO_WHATSAPP = "201211050297";
+const DEBO_WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP || "201211050297";
 const MAX_USER_MESSAGES = 3;
 const LOTTIE_URL = "https://assets2.lottiefiles.com/packages/lf20_jcikwtux.json";
 
