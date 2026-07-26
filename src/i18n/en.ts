@@ -4,24 +4,22 @@ export const en = {
     about: "About",
     services: "Services",
     portfolio: "Portfolio",
-    security: "Security",
   },
   hero: {
     badge: "Shift Agency",
-    titleLine1: "Cyber-grade digital experiences",
+    titleLine1: "Precision-engineered digital experiences",
     titleLine2: "with gravity-defying performance.",
-    subtitle: "Immersive interfaces, secure engineering, and futuristic systems built to move ambitious brands into their next era.",
+    subtitle: "Immersive interfaces, intelligent marketing, and cinematic storytelling — built to move ambitious brands into their next era.",
     btnServices: "Explore Services",
     btnWork: "View Our Work"
   },
   services: {
     title: "Our Arsenal",
-    subtitle: "We don't just build websites. We engineer digital ecosystems designed for dominance.",
+    subtitle: "We don't just build websites. We engineer digital ecosystems, ignite growth engines, and craft visual identities that command authority.",
     items: {
-      webSaaS: { title: "Web & SaaS Development", desc: "Custom Next.js web applications, AI integrations, ERP solutions, E-commerce, and high-end interactive 3D WebGL/WebGPU experiences." },
-      marketing: { title: "Digital Marketing & Demand Generation", desc: "High-conversion B2B/B2C ad campaigns, account-based marketing (ABM), lead generation, and strategic growth engines." },
-      branding: { title: "Cinematic Visual Production & Branding", desc: "Premium brand identity, graphic design, and cinematic drone videography." },
-      cyber: { title: "Cybersecurity & Penetration Testing", desc: "Securing digital infrastructure, vulnerability assessments, and web application security." }
+      webSaaS: { title: "Web & Software Development", desc: "Custom Next.js applications, AI-powered systems, immersive 3D WebGL experiences, and enterprise digital infrastructure — engineered to dominate." },
+      marketing: { title: "Digital Marketing", desc: "High-conversion ad campaigns, strategic social media growth, and data-driven demand generation systems designed to aggressively scale your revenue." },
+      branding: { title: "Media Production & Branding", desc: "Cinematic videography, professional commercial photography, and premium visual identity — we craft brand worlds that command instant authority." }
     }
   },
   portfolio: {
@@ -30,7 +28,7 @@ export const en = {
     projects: {
       p1: { title: "Project Alpha", cat: "Web3 Protocol" },
       p2: { title: "Neon Interface", cat: "UI/UX System" },
-      p3: { title: "Secure Vault", cat: "Cybersecurity" },
+      p3: { title: "Secure Vault", cat: "Digital Systems" },
       p4: { title: "Omni Mobile", cat: "Cross-platform App" }
     }
   },

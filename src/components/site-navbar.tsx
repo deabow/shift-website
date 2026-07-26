@@ -29,7 +29,6 @@ export default function SiteNavbar() {
     { href: "/about", label: t.nav.about },
     { href: "/services", label: t.nav.services },
     { href: "/portfolio", label: t.nav.portfolio },
-    { href: "/security", label: t.nav.security },
   ];
 
   const toggleLanguage = () => {
@@ -42,23 +41,35 @@ export default function SiteNavbar() {
         initial={{ opacity: 0, y: -14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="relative mx-auto flex w-full max-w-6xl items-center rounded-2xl border border-white/10 bg-white/5 px-4 py-3 shadow-[0_8px_30px_rgb(0,0,0,0.45)] backdrop-blur-xl md:px-6"
+        className="relative mx-auto flex w-full max-w-6xl flex-col md:flex-row items-center rounded-2xl border border-white/10 bg-white/5 px-4 py-3 shadow-[0_8px_30px_rgb(0,0,0,0.45)] backdrop-blur-xl md:px-6 gap-3 md:gap-0"
       >
-        <Link
-          href="/"
-          className="text-sm font-semibold tracking-[0.25em] text-white md:text-base"
-        >
-          SHIFT
-        </Link>
+        <div className="flex w-full items-center justify-between md:w-auto md:justify-start">
+          <Link
+            href="/"
+            className="text-sm font-semibold tracking-[0.25em] text-white md:text-base"
+          >
+            SHIFT
+          </Link>
+          
+          {/* Mobile Language Button */}
+          <div className="flex md:hidden">
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center justify-center rounded-lg border border-white/20 px-2 py-1 text-[10px] font-bold uppercase transition hover:bg-white/10 hover:text-emerald-400"
+            >
+              {language === "en" ? "عربي" : "EN"}
+            </button>
+          </div>
+        </div>
 
-        <ul className="absolute left-1/2 flex -translate-x-1/2 items-center gap-1 sm:gap-2">
+        <ul className="flex w-full flex-wrap items-center justify-center gap-1 sm:gap-2 md:absolute md:left-1/2 md:-translate-x-1/2 md:w-auto md:flex-nowrap">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`relative rounded-lg px-1.5 py-1 text-[10px] transition-colors sm:px-3 sm:py-1.5 sm:text-sm ${
+                  className={`relative rounded-lg px-2 py-1.5 text-[11px] transition-colors sm:px-3 sm:py-1.5 sm:text-sm ${
                     isActive ? "text-white" : "text-white/75 hover:text-white"
                   }`}
                 >
@@ -75,17 +86,17 @@ export default function SiteNavbar() {
             );
           })}
         </ul>
-        <div className="ml-auto flex items-center gap-4">
+        <div className="hidden md:flex ml-auto items-center gap-4">
           <MagneticWrapper>
             <button
               onClick={toggleLanguage}
-              className="flex items-center justify-center rounded-lg border border-white/20 px-2 py-1 text-[10px] sm:text-xs font-bold uppercase transition hover:bg-white/10 hover:text-emerald-400"
+              className="flex items-center justify-center rounded-lg border border-white/20 px-2 py-1 text-xs font-bold uppercase transition hover:bg-white/10 hover:text-emerald-400"
             >
               {language === "en" ? "عربي" : "EN"}
             </button>
           </MagneticWrapper>
           
-          <div className="hidden sm:flex items-center gap-4">
+          <div className="flex items-center gap-4">
             <a
               href="https://www.facebook.com/profile.php?id=61591717865503"
               target="_blank"
