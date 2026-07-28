@@ -80,7 +80,7 @@ export function BentoServices() {
               </span>
             </div>
             <div className="space-y-1.5 text-zinc-300 overflow-x-auto leading-relaxed">
-              <p className="text-zinc-500">// Initialize High-Frequency Cyber System</p>
+              <p className="text-zinc-500">{"// Initialize High-Frequency Cyber System"}</p>
               <p>
                 <span className="text-emerald-400">export const</span> appConfig ={" "}
                 <span className="text-emerald-300">defineEngine</span>&#40;&#123;

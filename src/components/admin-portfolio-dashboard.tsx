@@ -39,6 +39,7 @@ function ImagePreview({ url, alt }: { url: string; alt: string }) {
           Could not load image
         </div>
       ) : (
+        /* eslint-disable-next-line @next/next/no-img-element */
         <img
           src={url}
           alt={alt}
