@@ -5,8 +5,9 @@ import { AnimatePresence, motion, useMotionTemplate, useMotionValue, useSpring }
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState, MouseEvent } from "react";
-import { Play, ExternalLink, X, Sparkles, ArrowUpRight } from "lucide-react";
+import { Play, ExternalLink, X, Sparkles, ArrowUpRight, Layers } from "lucide-react";
 import { MagneticWrapper } from "@/components/magnetic-wrapper";
+import { useLanguage } from "@/lib/language-context";
 
 const blurDataURL =
   "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTIwJyBoZWlnaHQ9JzgwJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnPjxyZWN0IHdpZHRoPScxMjAnIGhlaWdodD0nODAnIGZpbGw9JyMxMjEyMTYnLz48L3N2Zz4=";
@@ -29,6 +30,19 @@ const cardVariants = {
   },
 };
 
+function getCategoryBadgeLabel(category: string, isAr: boolean) {
+  if (category === "web-dev" || category.includes("Web")) {
+    return isAr ? "تطوير الويب والبرمجيات" : "Web & Software Development";
+  }
+  if (category === "digital-marketing" || category.includes("Marketing")) {
+    return isAr ? "التسويق الرقمي" : "Digital Marketing";
+  }
+  if (category === "media-production" || category.includes("Media")) {
+    return isAr ? "الإنتاج الإعلامي وبناء الهوية" : "Media Production & Branding";
+  }
+  return category;
+}
+
 // ─── BentoCard with Mouse-Tracking Border Spotlight ───────────────────────────
 function BentoCard({
   project,
@@ -38,6 +52,8 @@ function BentoCard({
   onOpen: (p: PortfolioProject) => void;
 }) {
   const [imgLoaded, setImgLoaded] = useState(false);
+  const { language } = useLanguage();
+  const isAr = language === "ar";
   
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -92,7 +108,7 @@ function BentoCard({
         style={{ background: borderSpotlight }}
       />
 
-      <div className="relative h-full w-full rounded-[calc(1.5rem-1px)] overflow-hidden bg-zinc-950/90 backdrop-blur-2xl z-0">
+      <div className="relative h-full w-full rounded-[calc(1.5rem-1px)] overflow-hidden bg-zinc-950/90 backdrop-blur-2xl z-0 flex flex-col justify-between">
         {/* Image */}
         <Image
           src={project.imageUrl}
@@ -119,7 +135,7 @@ function BentoCard({
               <Play size={22} fill="currentColor" />
             </motion.div>
             <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-white">
-              Explore Case Study
+              {isAr ? "استكشف المشروع" : "Explore Case Study"}
             </span>
           </div>
         </div>
@@ -128,7 +144,7 @@ function BentoCard({
         <div className="absolute bottom-0 left-0 right-0 z-20 p-6 flex flex-col justify-end">
           <div className="flex items-center justify-between mb-2">
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full">
-              {project.clientType}
+              {getCategoryBadgeLabel(project.category, isAr)}
             </span>
             <ArrowUpRight className="w-4 h-4 text-zinc-400 group-hover:text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
           </div>
@@ -152,6 +168,9 @@ function CaseStudyModal({
   project: PortfolioProject;
   onClose: () => void;
 }) {
+  const { language } = useLanguage();
+  const isAr = language === "ar";
+
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -174,7 +193,7 @@ function CaseStudyModal({
         exit={{ opacity: 0, y: 20, scale: 0.98 }}
         transition={{ type: "spring" as const, stiffness: 100, damping: 22 }}
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-3xl rounded-3xl border border-white/[0.08] bg-zinc-950/95 p-6 shadow-[0_30px_100px_rgba(0,0,0,0.9)] backdrop-blur-2xl md:p-8 overflow-hidden"
+        className="relative w-full max-w-3xl rounded-3xl border border-white/[0.08] bg-zinc-950/95 p-6 shadow-[0_30px_100px_rgba(0,0,0,0.9)] backdrop-blur-2xl md:p-8 overflow-hidden max-h-[90vh] overflow-y-auto"
       >
         <button
           type="button"
@@ -201,7 +220,7 @@ function CaseStudyModal({
                 <Play size={26} fill="currentColor" />
               </div>
               <span className="rounded-full border border-white/10 bg-black/60 px-3.5 py-1 text-[11px] font-bold uppercase tracking-widest text-emerald-400 backdrop-blur-sm">
-                Case Reel Active
+                {isAr ? "الفيديو الوثائقي للمشروع" : "Case Reel Active"}
               </span>
             </div>
           </div>
@@ -210,7 +229,7 @@ function CaseStudyModal({
         {/* Meta */}
         <div className="mt-6">
           <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full inline-block">
-            {project.clientType}
+            {getCategoryBadgeLabel(project.category, isAr)}
           </span>
           <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-zinc-100 md:text-3xl">
             {project.title}
@@ -223,9 +242,9 @@ function CaseStudyModal({
         {/* Detail cards */}
         <div className="mt-6 grid gap-3 sm:grid-cols-3">
           {[
-            { label: "Challenge", body: project.challenge },
-            { label: "Our Solution", body: project.solution },
-            { label: "Results", body: project.results },
+            { label: isAr ? "التحدي" : "Challenge", body: project.challenge },
+            { label: isAr ? "حلول شيفت" : "Our Solution", body: project.solution },
+            { label: isAr ? "النتايج والأرقام" : "Results", body: project.results },
           ].map(({ label, body }) => (
             <div
               key={label}
@@ -240,10 +259,10 @@ function CaseStudyModal({
         </div>
 
         {/* Key features */}
-        {project.keyFeatures.length > 0 && (
+        {project.keyFeatures && project.keyFeatures.length > 0 && (
           <div className="mt-6">
             <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.18em] text-zinc-500">
-              Key Deliverables
+              {isAr ? "أهم المخرجات والتقنيات" : "Key Deliverables"}
             </p>
             <div className="flex flex-wrap gap-2">
               {project.keyFeatures.map((f) => (
@@ -267,7 +286,7 @@ function CaseStudyModal({
             >
               <span className="relative z-10 flex items-center gap-2">
                 <ExternalLink size={14} />
-                Full Case Study
+                {isAr ? "تفاصيل المشروع الكاملة" : "Full Case Study"}
               </span>
             </Link>
           </MagneticWrapper>
@@ -278,7 +297,7 @@ function CaseStudyModal({
               onClick={onClose}
               className="flex w-full items-center justify-center rounded-xl border border-white/10 bg-zinc-900/60 px-5 py-3.5 text-xs font-extrabold uppercase tracking-[0.16em] text-zinc-300 backdrop-blur-sm transition-all duration-300 hover:border-emerald-500/40 hover:text-white"
             >
-              Close
+              {isAr ? "إغلاق" : "Close"}
             </button>
           </MagneticWrapper>
         </div>
@@ -287,11 +306,22 @@ function CaseStudyModal({
   );
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
+// ─── Main Portfolio Page ───────────────────────────────────────────────────────
 export default function PortfolioPage() {
+  const { language, t } = useLanguage();
+  const isAr = language === "ar";
+
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<PortfolioProject | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string>("all");
+
+  const categoryTabs = [
+    { id: "all", label: t.portfolio.categories.all },
+    { id: "web-dev", label: t.portfolio.categories.webDev },
+    { id: "digital-marketing", label: t.portfolio.categories.marketing },
+    { id: "media-production", label: t.portfolio.categories.media },
+  ];
 
   const fetchProjects = async () => {
     try {
@@ -309,6 +339,10 @@ export default function PortfolioPage() {
     void fetchProjects();
   }, []);
 
+  const filteredProjects = activeCategory === "all"
+    ? projects
+    : projects.filter((p) => p.category === activeCategory);
+
   return (
     <main className="relative mx-auto min-h-[calc(100vh-96px)] w-full max-w-6xl px-4 pb-24 pt-12 md:px-8">
       {/* Cinematic backdrop */}
@@ -320,24 +354,43 @@ export default function PortfolioPage() {
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: "spring" as const, stiffness: 100, damping: 20 }}
-        className="mb-12"
+        className="mb-10 text-center flex flex-col items-center"
       >
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/[0.08] border border-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-[0.2em] mb-4 backdrop-blur-md shadow-[0_0_20px_rgba(16,185,129,0.15)]">
           <Sparkles className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
-          <span>Selected Missions</span>
+          <span>{isAr ? "معرض أعمال شيفت الرقمية" : "Selected Missions"}</span>
         </div>
 
         <h1 className="text-4xl font-extrabold tracking-tight text-zinc-100 md:text-5xl lg:text-6xl leading-[1.1]">
-          Exclusive SHIFT showcase.
+          {t.portfolio.title}
         </h1>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-zinc-400 md:text-lg">
-          Every project is a case study in craft — from identity systems to
-          large-scale environmental branding and digital architecture.
+          {t.portfolio.subtitle}
         </p>
 
-        <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-emerald-500/25 bg-emerald-500/[0.07] px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-400">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
-          Live &middot; Verified Case Studies
+        {/* ── Category Filter Tabs (3 Core Services) ── */}
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-2xl bg-zinc-950/80 border border-white/[0.08] backdrop-blur-2xl">
+          {categoryTabs.map((tab) => {
+            const isActive = activeCategory === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveCategory(tab.id)}
+                className={`relative px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-xl transition-colors duration-300 ${
+                  isActive ? "text-zinc-950 font-extrabold" : "text-zinc-400 hover:text-white"
+                }`}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="active-portfolio-tab"
+                    className="absolute inset-0 bg-emerald-400 rounded-xl shadow-[0_0_20px_rgba(16,185,129,0.5)] -z-10"
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  />
+                )}
+                <span>{tab.label}</span>
+              </button>
+            );
+          })}
         </div>
       </motion.header>
 
@@ -353,12 +406,14 @@ export default function PortfolioPage() {
             />
           ))}
         </div>
-      ) : projects.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-32 text-center rounded-3xl border border-white/[0.08] bg-zinc-950/80 p-8 backdrop-blur-2xl">
+      ) : filteredProjects.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-24 text-center rounded-3xl border border-white/[0.08] bg-zinc-950/80 p-8 backdrop-blur-2xl">
           <div className="mb-4 text-4xl">📂</div>
-          <p className="text-xl font-bold text-zinc-100">No projects published yet.</p>
+          <p className="text-xl font-bold text-zinc-100">
+            {isAr ? "لا توجد مشاريع في هذا القسم حالياً." : "No projects in this discipline yet."}
+          </p>
           <p className="mt-2 text-sm text-zinc-400">
-            Add and publish projects from the admin panel to showcase your work.
+            {isAr ? "يمكنك إضافة مشاريع جديدة لهذا التخصص من لوحة التحكم." : "Add projects for this section from the admin panel."}
           </p>
         </div>
       ) : (
@@ -368,7 +423,7 @@ export default function PortfolioPage() {
           animate="visible"
           className="grid grid-cols-1 gap-6 md:grid-cols-3 auto-rows-[280px]"
         >
-          {projects.map((project) => (
+          {filteredProjects.map((project) => (
             <BentoCard
               key={project.id}
               project={project}

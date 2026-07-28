@@ -10,11 +10,17 @@ const DEFAULT_BENTO_SPANS = [
 ];
 
 async function readProjects(): Promise<PortfolioProject[]> {
-  const raw = await fs.readFile(DATA_FILE, "utf8");
-  return JSON.parse(raw) as PortfolioProject[];
+  try {
+    const raw = await fs.readFile(DATA_FILE, "utf8");
+    return JSON.parse(raw) as PortfolioProject[];
+  } catch {
+    return [];
+  }
 }
 
 async function writeProjects(projects: PortfolioProject[]) {
+  const dir = path.dirname(DATA_FILE);
+  await fs.mkdir(dir, { recursive: true });
   await fs.writeFile(DATA_FILE, JSON.stringify(projects, null, 2), "utf8");
 }
 
@@ -65,15 +71,15 @@ export async function createProject(input: CreatePortfolioInput) {
     id: `prj_${Date.now().toString(36)}`,
     slug,
     title: input.title,
-    clientType: input.clientType ?? "Custom Project",
-    category: "Custom Project",
+    category: input.category ?? "web-dev",
+    clientType: input.clientType ?? "Enterprise Client",
     description: input.description,
     imageUrl: input.imageUrl,
     videoUrl: input.videoUrl,
-    challenge: input.description,
-    solution: "Solution details will be added from the admin panel.",
-    results: "Result metrics will be added after launch.",
-    keyFeatures: ["Responsive", "AI Chatbot", "Secure DB"],
+    challenge: input.challenge ?? input.description,
+    solution: input.solution ?? "Architected end-to-end digital ecosystem.",
+    results: input.results ?? "Delivered sub-second latency and high engagement.",
+    keyFeatures: input.keyFeatures && input.keyFeatures.length > 0 ? input.keyFeatures : ["Next.js 14", "Responsive Design", "Cyber Security"],
     bentoSpan:
       DEFAULT_BENTO_SPANS[projects.length % DEFAULT_BENTO_SPANS.length] ??
       DEFAULT_BENTO_SPANS[0],
@@ -89,9 +95,7 @@ export async function createProject(input: CreatePortfolioInput) {
 
 export async function updateProject(
   id: string,
-  updates: Partial<
-    Pick<PortfolioProject, "title" | "description" | "imageUrl" | "videoUrl" | "published">
-  >,
+  updates: Partial<PortfolioProject>,
 ) {
   const projects = await readProjects();
   const index = projects.findIndex((project) => project.id === id);
@@ -111,11 +115,7 @@ export async function updateProject(
 
   const updated: PortfolioProject = {
     ...current,
-    title: updates.title ?? current.title,
-    description: updates.description ?? current.description,
-    imageUrl: updates.imageUrl ?? current.imageUrl,
-    videoUrl: updates.videoUrl ?? current.videoUrl,
-    published: updates.published ?? current.published,
+    ...updates,
     slug: nextSlug,
     updatedAt: now,
   };

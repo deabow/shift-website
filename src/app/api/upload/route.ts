@@ -5,7 +5,19 @@ import { logger } from "@/lib/logger";
 import { requireAuth } from "@/lib/auth";
 
 const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB
-const ALLOWED_EXTENSIONS = [".mp4", ".webm", ".ogg", ".mov", ".avi"];
+const ALLOWED_EXTENSIONS = [
+  ".jpg",
+  ".jpeg",
+  ".png",
+  ".webp",
+  ".gif",
+  ".svg",
+  ".mp4",
+  ".webm",
+  ".ogg",
+  ".mov",
+  ".avi",
+];
 
 export async function POST(request: NextRequest) {
   const auth = requireAuth();

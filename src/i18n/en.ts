@@ -6,15 +6,15 @@ export const en = {
     portfolio: "Portfolio",
   },
   hero: {
-    badge: "Shift Agency",
+    badge: "SHIFT Agency",
     titleLine1: "Precision-engineered digital experiences",
     titleLine2: "with gravity-defying performance.",
     subtitle: "Immersive interfaces, intelligent marketing, and cinematic storytelling — built to move ambitious brands into their next era.",
     btnServices: "Explore Services",
-    btnWork: "View Our Work"
+    btnWork: "View Our Work",
   },
   services: {
-    title: "Our Arsenal",
+    title: "Our Core Disciplines",
     subtitle: "We don't just build websites. We engineer digital ecosystems, ignite growth engines, and craft visual identities that command authority.",
     items: {
       webSaaS: { title: "Web & Software Development", desc: "Custom Next.js applications, AI-powered systems, immersive 3D WebGL experiences, and enterprise digital infrastructure — engineered to dominate." },
@@ -24,12 +24,18 @@ export const en = {
   },
   portfolio: {
     title: "Selected Works",
-    subtitle: "Scroll to explore our latest missions.",
+    subtitle: "Explore our latest missions categorized across our 3 core services.",
+    categories: {
+      all: "All Projects",
+      webDev: "Web & Software Development",
+      marketing: "Digital Marketing",
+      media: "Media Production & Branding",
+    },
     projects: {
-      p1: { title: "Project Alpha", cat: "Web3 Protocol" },
-      p2: { title: "Neon Interface", cat: "UI/UX System" },
-      p3: { title: "Secure Vault", cat: "Digital Systems" },
-      p4: { title: "Omni Mobile", cat: "Cross-platform App" }
+      p1: { title: "Project Alpha", cat: "Web & Software Development" },
+      p2: { title: "Neon Interface", cat: "Digital Marketing" },
+      p3: { title: "Secure Vault", cat: "Media Production & Branding" },
+      p4: { title: "Omni Mobile", cat: "Web & Software Development" }
     }
   },
   stats: {
