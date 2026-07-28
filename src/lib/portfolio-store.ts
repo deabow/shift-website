@@ -1,27 +1,74 @@
 import { promises as fs } from "fs";
 import path from "path";
+import os from "os";
 import { CreatePortfolioInput, PortfolioProject } from "@/lib/portfolio-types";
 
 const DATA_FILE = path.join(process.cwd(), "data", "portfolio-projects.json");
+const TMP_FILE = path.join(os.tmpdir(), "portfolio-projects.json");
+
 const DEFAULT_BENTO_SPANS = [
   "md:col-span-1 md:row-span-1",
   "md:col-span-2 md:row-span-1",
   "md:col-span-1 md:row-span-2",
 ];
 
+// Global in-memory cache for serverless Vercel persistence
+const globalStore = globalThis as unknown as {
+  __SHIFT_PORTFOLIO_CACHE__?: PortfolioProject[];
+};
+
 async function readProjects(): Promise<PortfolioProject[]> {
+  if (globalStore.__SHIFT_PORTFOLIO_CACHE__ && globalStore.__SHIFT_PORTFOLIO_CACHE__.length > 0) {
+    return globalStore.__SHIFT_PORTFOLIO_CACHE__;
+  }
+
+  // Try reading from process.cwd() data directory
   try {
     const raw = await fs.readFile(DATA_FILE, "utf8");
-    return JSON.parse(raw) as PortfolioProject[];
+    const data = JSON.parse(raw) as PortfolioProject[];
+    if (data && data.length > 0) {
+      globalStore.__SHIFT_PORTFOLIO_CACHE__ = data;
+      return data;
+    }
   } catch {
-    return [];
+    // Ignore and try tmp file
   }
+
+  // Try reading from tmp directory
+  try {
+    const raw = await fs.readFile(TMP_FILE, "utf8");
+    const data = JSON.parse(raw) as PortfolioProject[];
+    if (data && data.length > 0) {
+      globalStore.__SHIFT_PORTFOLIO_CACHE__ = data;
+      return data;
+    }
+  } catch {
+    // Ignore
+  }
+
+  globalStore.__SHIFT_PORTFOLIO_CACHE__ = [];
+  return [];
 }
 
 async function writeProjects(projects: PortfolioProject[]) {
-  const dir = path.dirname(DATA_FILE);
-  await fs.mkdir(dir, { recursive: true });
-  await fs.writeFile(DATA_FILE, JSON.stringify(projects, null, 2), "utf8");
+  globalStore.__SHIFT_PORTFOLIO_CACHE__ = projects;
+
+  // Try writing to primary DATA_FILE
+  try {
+    const dir = path.dirname(DATA_FILE);
+    await fs.mkdir(dir, { recursive: true });
+    await fs.writeFile(DATA_FILE, JSON.stringify(projects, null, 2), "utf8");
+    return;
+  } catch {
+    // Failover for Vercel / serverless read-only filesystem
+  }
+
+  // Failover: write to /tmp directory
+  try {
+    await fs.writeFile(TMP_FILE, JSON.stringify(projects, null, 2), "utf8");
+  } catch {
+    // Ignore if tmp also restricted
+  }
 }
 
 function slugify(value: string) {
