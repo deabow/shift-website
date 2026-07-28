@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useLanguage } from "@/lib/language-context";
 import { MagneticWrapper } from "@/components/magnetic-wrapper";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 const ClientMarquee = dynamic(() => import("@/components/client-marquee").then(mod => mod.ClientMarquee));
 const BentoServices = dynamic(() => import("@/components/bento-services").then(mod => mod.BentoServices));
@@ -51,19 +52,20 @@ export default function Home() {
       <div className="pointer-events-none fixed left-1/2 top-1/3 -z-10 h-[520px] w-[95vw] max-w-[1000px] -translate-x-1/2 rounded-full bg-[#10b981]/6 blur-[200px]" />
 
       {/* ── Hero ── */}
-      <section className="flex min-h-screen w-full max-w-5xl flex-col items-center justify-center px-4 md:px-8">
+      <section className="flex min-h-screen w-full max-w-5xl flex-col items-center justify-center px-4 md:px-8 py-20">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="flex w-full flex-col items-center text-center px-2 md:px-0"
         >
-          <motion.p
+          <motion.div
             variants={itemVariants}
-            className="text-[10px] font-bold uppercase tracking-[0.3em] text-emerald-400/70 bg-emerald-500/[0.07] border border-emerald-500/15 px-4 py-1.5 rounded-full"
+            className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-emerald-400/90 bg-emerald-500/[0.08] border border-emerald-500/20 px-4 py-1.5 rounded-full shadow-[0_0_20px_rgba(16,185,129,0.15)] backdrop-blur-md"
           >
-            {t.hero.badge}
-          </motion.p>
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping inline-block" />
+            <span>{t.hero.badge}</span>
+          </motion.div>
 
           <motion.div variants={itemVariants} className="mt-6 md:mt-8 w-full">
             <RevealMaskText />
@@ -71,7 +73,7 @@ export default function Home() {
 
           <motion.h1
             variants={itemVariants}
-            className="mt-10 md:mt-12 text-3xl font-bold tracking-tight text-zinc-100 sm:text-5xl md:text-6xl px-4 md:px-0 leading-[1.1]"
+            className="mt-10 md:mt-12 text-3xl font-extrabold tracking-tight text-zinc-100 sm:text-5xl md:text-6xl px-4 md:px-0 leading-[1.1]"
           >
             {t.hero.titleLine1} <br className="hidden sm:inline" />
             <span className="bg-gradient-to-r from-zinc-100 via-[#a7f3d0] to-[#10b981] bg-clip-text text-transparent">
@@ -88,29 +90,35 @@ export default function Home() {
 
           <motion.div
             variants={itemVariants}
-            className="mt-8 md:mt-12 flex flex-col md:flex-row items-center justify-center gap-4 w-full md:w-auto px-4 md:px-0"
+            className="mt-8 md:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto px-4 sm:px-0"
           >
-            <MagneticWrapper className="w-full md:w-auto">
+            <MagneticWrapper className="w-full sm:w-auto" distanceMultiplier={0.3} springConfig={{ stiffness: 200, damping: 12, mass: 0.1 }}>
               <Link
                 href="/services"
-                className="group relative flex h-13 w-full md:w-auto items-center justify-center overflow-hidden rounded-xl bg-[#10b981] px-8 text-xs font-bold uppercase tracking-[0.16em] text-black transition-all duration-500 hover:-translate-y-0.5 hover:shadow-[0_0_40px_rgba(16,185,129,0.5)]"
+                className="group relative flex h-14 w-full sm:w-auto items-center justify-center overflow-hidden rounded-xl bg-emerald-500 px-8 text-xs font-extrabold uppercase tracking-[0.18em] text-zinc-950 transition-all duration-500 hover:shadow-[0_0_45px_rgba(16,185,129,0.55)] hover:scale-[1.02] active:scale-[0.98]"
               >
                 <motion.span
-                  className="absolute inset-0 bg-white/30"
-                  initial={{ x: "-100%", skewX: "-15deg" }}
-                  whileHover={{ x: "200%", skewX: "-15deg" }}
-                  transition={{ duration: 0.6, ease: "easeInOut" }}
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+                  initial={{ x: "-100%", skewX: "-20deg" }}
+                  whileHover={{ x: "200%", skewX: "-20deg" }}
+                  transition={{ duration: 0.7, ease: "easeInOut" }}
                 />
-                <span className="relative z-10 py-4">{t.hero.btnServices}</span>
+                <span className="relative z-10 py-4 flex items-center gap-2">
+                  <span>{t.hero.btnServices}</span>
+                  <ArrowRight className="w-4 h-4 text-zinc-950 group-hover:translate-x-1 transition-transform duration-300" />
+                </span>
               </Link>
             </MagneticWrapper>
 
-            <MagneticWrapper className="w-full md:w-auto">
+            <MagneticWrapper className="w-full sm:w-auto" distanceMultiplier={0.3} springConfig={{ stiffness: 200, damping: 12, mass: 0.1 }}>
               <Link
                 href="/portfolio"
-                className="group flex h-13 w-full md:w-auto items-center justify-center rounded-xl border border-white/15 bg-zinc-900/50 px-8 text-xs font-bold uppercase tracking-[0.16em] text-white backdrop-blur-xl transition-all duration-500 hover:-translate-y-0.5 hover:border-emerald-500/40 hover:bg-emerald-500/10 hover:shadow-[0_0_35px_rgba(16,185,129,0.2)] hover:text-white"
+                className="group flex h-14 w-full sm:w-auto items-center justify-center rounded-xl border border-white/15 bg-zinc-900/60 px-8 text-xs font-extrabold uppercase tracking-[0.18em] text-zinc-100 backdrop-blur-2xl transition-all duration-500 hover:border-emerald-500/50 hover:bg-emerald-500/10 hover:shadow-[0_0_35px_rgba(16,185,129,0.25)] hover:text-white hover:scale-[1.02] active:scale-[0.98]"
               >
-                <span className="py-4">{t.hero.btnWork}</span>
+                <span className="py-4 flex items-center gap-2">
+                  <span>{t.hero.btnWork}</span>
+                  <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all duration-300" />
+                </span>
               </Link>
             </MagneticWrapper>
           </motion.div>
