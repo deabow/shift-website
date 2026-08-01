@@ -30,9 +30,17 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
 
   let body: {
     title?: string;
+    category?: string;
+    clientType?: string;
     description?: string;
     imageUrl?: string;
     videoUrl?: string;
+    gallery?: { type: "image" | "video"; url: string; caption?: string }[];
+    liveUrl?: string;
+    challenge?: string;
+    solution?: string;
+    results?: string;
+    keyFeatures?: string[];
     published?: boolean;
   };
 
@@ -49,11 +57,21 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
   try {
     const updated = await updateProject(context.params.id, {
       title: body.title,
+      category: body.category,
+      clientType: body.clientType,
       description: body.description,
       imageUrl: body.imageUrl,
       videoUrl: body.videoUrl,
+      gallery: body.gallery,
+      liveUrl: body.liveUrl,
+      challenge: body.challenge,
+      solution: body.solution,
+      results: body.results,
+      keyFeatures: body.keyFeatures,
       published: body.published,
     });
+
+
 
     if (!updated) {
       logger.warn("portfolio/[id]", `Project not found: ${context.params.id}`);

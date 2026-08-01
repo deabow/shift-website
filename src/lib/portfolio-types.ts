@@ -10,6 +10,12 @@ export const PORTFOLIO_CATEGORIES = [
   { id: "media-production", labelEn: "Media Production & Branding", labelAr: "الإنتاج الإعلامي وبناء الهوية" },
 ] as const;
 
+export type MediaItem = {
+  type: "image" | "video";
+  url: string;
+  caption?: string;
+};
+
 export type PortfolioProject = {
   id: string;
   slug: string;
@@ -20,6 +26,8 @@ export type PortfolioProject = {
   description: string;
   imageUrl: string;
   videoUrl: string;
+  gallery?: MediaItem[];
+  liveUrl?: string;
   challenge: string;
   solution: string;
   results: string;
@@ -37,9 +45,12 @@ export type CreatePortfolioInput = {
   description: string;
   imageUrl: string;
   videoUrl: string;
+  gallery?: MediaItem[];
+  liveUrl?: string;
   challenge?: string;
   solution?: string;
   results?: string;
   keyFeatures?: string[];
   published: boolean;
 };
+

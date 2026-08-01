@@ -15,32 +15,34 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>("en");
-  const [mounted, setMounted] = useState(false);
+export function LanguageProvider({
+  children,
+  initialLanguage = "en",
+}: {
+  children: React.ReactNode;
+  initialLanguage?: Language;
+}) {
+  const [language, setLanguageState] = useState<Language>(initialLanguage);
 
   useEffect(() => {
-    // Load saved language or default to en
-    const savedLang = localStorage.getItem("language") as Language | null;
-    if (savedLang === "ar" || savedLang === "en") {
-      setLanguageState(savedLang);
-    }
-    setMounted(true);
-  }, []);
+    // Sync document HTML attributes on mount
+    document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+    document.documentElement.lang = language;
+  }, [language]);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem("language", lang);
+    // Persist to Cookies for Server-Side Rendering (SSR)
+    document.cookie = `language=${lang}; path=/; max-age=31536000; SameSite=Lax`;
+    // Sync localStorage
+    try {
+      localStorage.setItem("language", lang);
+    } catch {
+      // Ignore if unavailable
+    }
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
     document.documentElement.lang = lang;
   };
-
-  useEffect(() => {
-    if (mounted) {
-      document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
-      document.documentElement.lang = language;
-    }
-  }, [language, mounted]);
 
   const t = language === "ar" ? ar : en;
 
@@ -58,3 +60,4 @@ export function useLanguage() {
   }
   return context;
 }
+

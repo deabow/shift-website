@@ -42,9 +42,17 @@ export async function POST(request: NextRequest) {
 
   let body: {
     title?: string;
+    category?: string;
+    clientType?: string;
     description?: string;
     imageUrl?: string;
     videoUrl?: string;
+    gallery?: { type: "image" | "video"; url: string; caption?: string }[];
+    liveUrl?: string;
+    challenge?: string;
+    solution?: string;
+    results?: string;
+    keyFeatures?: string[];
     published?: boolean;
   };
 
@@ -58,32 +66,38 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  if (
-    !body.title?.trim() ||
-    !body.description?.trim() ||
-    !body.imageUrl?.trim() ||
-    !body.videoUrl?.trim()
-  ) {
+  if (!body.title?.trim() || !body.description?.trim()) {
     logger.warn("portfolio", "POST with missing required fields", {
       title: !!body.title,
       description: !!body.description,
-      imageUrl: !!body.imageUrl,
-      videoUrl: !!body.videoUrl,
     });
     return NextResponse.json(
-      { error: "Title, description, imageUrl, and videoUrl are required." },
+      { error: "Title and description are required." },
       { status: 400 },
     );
   }
 
+  const defaultImageUrl =
+    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80";
+  const defaultVideoUrl = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+
   try {
     const created = await createProject({
       title: body.title.trim(),
+      category: body.category?.trim() || "web-dev",
+      clientType: body.clientType?.trim() || "Enterprise Client",
       description: body.description.trim(),
-      imageUrl: body.imageUrl.trim(),
-      videoUrl: body.videoUrl.trim(),
+      imageUrl: body.imageUrl?.trim() || defaultImageUrl,
+      videoUrl: body.videoUrl?.trim() || defaultVideoUrl,
+      gallery: body.gallery,
+      liveUrl: body.liveUrl?.trim(),
+      challenge: body.challenge?.trim(),
+      solution: body.solution?.trim(),
+      results: body.results?.trim(),
+      keyFeatures: body.keyFeatures,
       published: Boolean(body.published),
     });
+
 
     logger.info("portfolio", `Created project: ${created.id} (${created.slug})`);
 
@@ -97,4 +111,5 @@ export async function POST(request: NextRequest) {
       { status: 500 },
     );
   }
+
 }

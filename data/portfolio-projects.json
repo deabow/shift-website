@@ -1,1 +1,120 @@
-[]
+[
+  {
+    "id": "prj_omni_saas_01",
+    "slug": "omni-saas-enterprise-platform",
+    "title": "OmniSaaS Enterprise Engine",
+    "clientType": "Global FinTech Enterprise",
+    "category": "web-dev",
+    "description": "Architected an ultra-fast Next.js 14 platform with AI workflow automation, WebGL 3D analytics dashboard, and zero-trust cybersecurity. Live demonstration available at https://shift-agency.com",
+    "imageUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+    "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "liveUrl": "https://shift-agency.com",
+    "gallery": [
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        "type": "video",
+        "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80"
+      }
+    ],
+    "challenge": "The client faced 4.2-second page load times and vulnerable legacy infrastructure handling over $50M in daily transaction volume.",
+    "solution": "Re-engineered the entire core with Next.js App Router, edge serverless API routes, WebGL hardware-accelerated charts, and OWASP Top-10 security compliance.",
+    "results": "Achieved sub-200ms TTFB, 100 Lighthouse score, and 340% increase in enterprise user conversion.",
+    "keyFeatures": [
+      "Next.js 14 App Router",
+      "AI Workflow Automation",
+      "WebGL 3D Data Visualizer",
+      "Zero-Trust Architecture"
+    ],
+    "bentoSpan": "md:col-span-2 md:row-span-1",
+    "published": true,
+    "createdAt": "2026-07-15T10:00:00.000Z",
+    "updatedAt": "2026-07-15T10:00:00.000Z"
+  },
+  {
+    "id": "prj_neon_growth_02",
+    "slug": "neon-velocity-abm-surge",
+    "title": "Neon Velocity Global ABM Surge",
+    "clientType": "B2B AI Software Unicorn",
+    "category": "digital-marketing",
+    "description": "Deploys data-driven Account-Based Marketing (ABM) engine and high-conversion ad funnels scaling pipeline value across 12 countries. Explore strategy at https://shift-agency.com/services",
+    "imageUrl": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+    "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "liveUrl": "https://shift-agency.com/services",
+    "gallery": [
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        "type": "video",
+        "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+      }
+    ],
+    "challenge": "High customer acquisition costs (CAC) and stagnant organic brand authority in hyper-competitive North American & Gulf markets.",
+    "solution": "Built a multi-channel demand generation system with real-time attribution, targeted Meta & LinkedIn campaigns, and custom landing page funnels.",
+    "results": "Lowered CAC by 42%, generated $4.8M in qualified pipeline within 90 days, and tripled trial conversions.",
+    "keyFeatures": [
+      "Account-Based Marketing (ABM)",
+      "Real-Time Attribution Dashboard",
+      "Omnichannel Meta & Google Ads",
+      "Custom High-Converting Funnels"
+    ],
+    "bentoSpan": "md:col-span-1 md:row-span-1",
+    "published": true,
+    "createdAt": "2026-07-18T14:30:00.000Z",
+    "updatedAt": "2026-07-18T14:30:00.000Z"
+  },
+  {
+    "id": "prj_aetheria_film_03",
+    "slug": "aetheria-luxury-brand-world",
+    "title": "Aetheria Luxury Brand World",
+    "clientType": "Ultra-High-Net-Worth Real Estate",
+    "category": "media-production",
+    "description": "Produced an 8K cinematic commercial film, architectural photography, and a commandingly regal brand identity system.",
+    "imageUrl": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+    "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "liveUrl": "https://shift-agency.com/about",
+    "gallery": [
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        "type": "video",
+        "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
+      }
+    ],
+    "challenge": "A multi-million dollar luxury development needed a visual positioning system that instantly commanded market dominance and buyer trust.",
+    "solution": "Filmed anamorphic 8K aerial & interior cinematography, composed custom acoustic scoring, and launched a luxury brand design kit.",
+    "results": "Sold out 85% of luxury residences in presale and won International Property Media Award 2026.",
+    "keyFeatures": [
+      "8K Anamorphic Cinematography",
+      "3D Spatial Sound Design",
+      "Architectural Photography",
+      "Bespoke Brand Book & Guidelines"
+    ],
+    "bentoSpan": "md:col-span-1 md:row-span-2",
+    "published": true,
+    "createdAt": "2026-07-22T09:15:00.000Z",
+    "updatedAt": "2026-07-22T09:15:00.000Z"
+  }
+]

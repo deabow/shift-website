@@ -160,6 +160,10 @@ function BentoCard({
   );
 }
 
+import { MediaGalleryCarousel } from "@/components/media-gallery-carousel";
+import { renderFormattedDescription } from "@/lib/link-utils";
+import { Globe } from "lucide-react";
+
 // ─── Case Study Modal ─────────────────────────────────────────────────────────
 function CaseStudyModal({
   project,
@@ -178,6 +182,14 @@ function CaseStudyModal({
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, [onClose]);
+
+  const mediaItems =
+    project.gallery && project.gallery.length > 0
+      ? project.gallery
+      : [
+          ...(project.imageUrl ? [{ type: "image" as const, url: project.imageUrl }] : []),
+          ...(project.videoUrl ? [{ type: "video" as const, url: project.videoUrl }] : []),
+        ];
 
   return (
     <motion.div
@@ -204,39 +216,38 @@ function CaseStudyModal({
           <X size={16} />
         </button>
 
-        {/* Hero image */}
-        <div className="relative h-56 overflow-hidden rounded-2xl border border-white/[0.08] md:h-72">
-          <Image
-            src={project.imageUrl}
-            alt={project.title}
-            fill
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
-
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="flex flex-col items-center gap-2">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full border border-emerald-400/50 bg-emerald-500/20 text-emerald-400 shadow-[0_0_35px_rgba(16,185,129,0.4)]">
-                <Play size={26} fill="currentColor" />
-              </div>
-              <span className="rounded-full border border-white/10 bg-black/60 px-3.5 py-1 text-[11px] font-bold uppercase tracking-widest text-emerald-400 backdrop-blur-sm">
-                {isAr ? "الفيديو الوثائقي للمشروع" : "Case Reel Active"}
-              </span>
-            </div>
-          </div>
+        {/* ── Interactive Multi-Media Carousel (Photos + Videos) ── */}
+        <div className="mt-2">
+          <MediaGalleryCarousel items={mediaItems} title={project.title} />
         </div>
 
-        {/* Meta */}
+        {/* Meta & Interactive Link Description */}
         <div className="mt-6">
-          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full inline-block">
-            {getCategoryBadgeLabel(project.category, isAr)}
-          </span>
-          <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-zinc-100 md:text-3xl">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full inline-block">
+              {getCategoryBadgeLabel(project.category, isAr)}
+            </span>
+
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-bold transition hover:bg-emerald-500 hover:text-zinc-950 hover:shadow-[0_0_20px_rgba(16,185,129,0.5)]"
+              >
+                <Globe size={13} />
+                <span>{isAr ? "زيارة الموقع الحي 🌐" : "Visit Live Website 🌐"}</span>
+              </a>
+            )}
+          </div>
+
+          <h2 className="mt-3 text-2xl font-extrabold tracking-tight text-zinc-100 md:text-3xl">
             {project.title}
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-zinc-400">
-            {project.description}
-          </p>
+          
+          <div className="mt-3 text-sm leading-relaxed text-zinc-300">
+            {renderFormattedDescription(project.description)}
+          </div>
         </div>
 
         {/* Detail cards */}
@@ -250,10 +261,12 @@ function CaseStudyModal({
               key={label}
               className="rounded-xl border border-white/[0.06] bg-zinc-900/60 p-4 backdrop-blur-sm"
             >
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-400">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-400 mb-2">
                 {label}
               </p>
-              <p className="mt-2 text-xs leading-relaxed text-zinc-300">{body}</p>
+              <div className="text-xs leading-relaxed text-zinc-300">
+                {renderFormattedDescription(body)}
+              </div>
             </div>
           ))}
         </div>
@@ -279,17 +292,29 @@ function CaseStudyModal({
 
         {/* CTA */}
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <MagneticWrapper className="flex-1" distanceMultiplier={0.25}>
-            <Link
-              href={`/portfolio/${project.slug}`}
-              className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-emerald-500 px-5 py-3.5 text-xs font-extrabold uppercase tracking-[0.16em] text-zinc-950 transition-all duration-500 hover:shadow-[0_0_35px_rgba(16,185,129,0.5)] hover:bg-emerald-400"
-            >
-              <span className="relative z-10 flex items-center gap-2">
+          {project.liveUrl ? (
+            <MagneticWrapper className="flex-1" distanceMultiplier={0.25}>
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-emerald-500 px-5 py-3.5 text-xs font-extrabold uppercase tracking-[0.16em] text-zinc-950 transition-all duration-500 hover:shadow-[0_0_35px_rgba(16,185,129,0.5)] hover:bg-emerald-400"
+              >
+                <Globe size={15} />
+                <span>{isAr ? "زيارة الموقع الإلكتروني" : "Visit Live Website"}</span>
+              </a>
+            </MagneticWrapper>
+          ) : (
+            <MagneticWrapper className="flex-1" distanceMultiplier={0.25}>
+              <Link
+                href={`/portfolio/${project.slug}`}
+                className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-emerald-500 px-5 py-3.5 text-xs font-extrabold uppercase tracking-[0.16em] text-zinc-950 transition-all duration-500 hover:shadow-[0_0_35px_rgba(16,185,129,0.5)] hover:bg-emerald-400"
+              >
                 <ExternalLink size={14} />
-                {isAr ? "تفاصيل المشروع الكاملة" : "Full Case Study"}
-              </span>
-            </Link>
-          </MagneticWrapper>
+                <span>{isAr ? "تفاصيل المشروع الكاملة" : "Full Case Study"}</span>
+              </Link>
+            </MagneticWrapper>
+          )}
 
           <MagneticWrapper className="flex-1" distanceMultiplier={0.25}>
             <button
@@ -305,6 +330,7 @@ function CaseStudyModal({
     </motion.div>
   );
 }
+
 
 // ─── Main Portfolio Page ───────────────────────────────────────────────────────
 export default function PortfolioPage() {

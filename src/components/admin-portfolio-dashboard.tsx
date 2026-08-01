@@ -24,7 +24,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { toast, Toaster } from "@/components/toast";
-import { PortfolioProject, PORTFOLIO_CATEGORIES } from "@/lib/portfolio-types";
+import { PortfolioProject, PORTFOLIO_CATEGORIES, MediaItem } from "@/lib/portfolio-types";
 
 type ProjectFormState = {
   title: string;
@@ -33,6 +33,8 @@ type ProjectFormState = {
   description: string;
   imageUrl: string;
   videoUrl: string;
+  liveUrl: string;
+  gallery: MediaItem[];
   challenge: string;
   solution: string;
   results: string;
@@ -46,6 +48,8 @@ const initialFormState: ProjectFormState = {
   description: "",
   imageUrl: "",
   videoUrl: "",
+  liveUrl: "",
+  gallery: [],
   challenge: "",
   solution: "",
   results: "",
@@ -92,6 +96,13 @@ export function AdminPortfolioDashboard() {
 
   const openEditModal = (project: PortfolioProject) => {
     setEditingId(project.id);
+    const existingGallery = project.gallery && project.gallery.length > 0
+      ? project.gallery
+      : [
+          ...(project.imageUrl ? [{ type: "image" as const, url: project.imageUrl }] : []),
+          ...(project.videoUrl ? [{ type: "video" as const, url: project.videoUrl }] : []),
+        ];
+
     setForm({
       title: project.title,
       category: project.category || "web-dev",
@@ -99,6 +110,8 @@ export function AdminPortfolioDashboard() {
       description: project.description || "",
       imageUrl: project.imageUrl || "",
       videoUrl: project.videoUrl || "",
+      liveUrl: project.liveUrl || "",
+      gallery: existingGallery,
       challenge: project.challenge || "",
       solution: project.solution || "",
       results: project.results || "",
@@ -129,12 +142,22 @@ export function AdminPortfolioDashboard() {
       }
 
       const { url } = await res.json();
+      const newItem: MediaItem = { type, url };
+
       if (type === "image") {
-        setForm((prev) => ({ ...prev, imageUrl: url }));
-        toast("Image uploaded successfully!");
+        setForm((prev) => ({
+          ...prev,
+          imageUrl: prev.imageUrl || url,
+          gallery: [...prev.gallery, newItem],
+        }));
+        toast("Image uploaded & added to gallery!");
       } else {
-        setForm((prev) => ({ ...prev, videoUrl: url }));
-        toast("Video uploaded successfully!");
+        setForm((prev) => ({
+          ...prev,
+          videoUrl: prev.videoUrl || url,
+          gallery: [...prev.gallery, newItem],
+        }));
+        toast("Video uploaded & added to gallery!");
       }
     } catch (err) {
       toast(err instanceof Error ? err.message : "Upload failed.", "error");
@@ -142,6 +165,14 @@ export function AdminPortfolioDashboard() {
       setter(false);
     }
   };
+
+  const removeGalleryItem = (indexToRemove: number) => {
+    setForm((prev) => ({
+      ...prev,
+      gallery: prev.gallery.filter((_, idx) => idx !== indexToRemove),
+    }));
+  };
+
 
   const saveProject = async () => {
     if (!form.title.trim() || !form.description.trim()) {
@@ -454,10 +485,25 @@ export function AdminPortfolioDashboard() {
                   />
                 </div>
 
-                {/* Image Upload / URL */}
+                {/* Live Website URL */}
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1.5 flex items-center gap-1">
+                    <Globe className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Live Website / Project Link (Optional)</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={form.liveUrl}
+                    onChange={(e) => setForm({ ...form, liveUrl: e.target.value })}
+                    placeholder="e.g. https://client-website.com"
+                    className="w-full rounded-xl border border-white/10 bg-zinc-900/80 p-3 text-sm text-zinc-100 focus:border-emerald-500/50 focus:outline-none"
+                  />
+                </div>
+
+                {/* Main Cover Image Upload / URL */}
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1.5">
-                    Image (Upload file or enter URL)
+                    Cover Image (Upload file or enter URL)
                   </label>
                   <div className="flex gap-2">
                     <input
@@ -481,21 +527,15 @@ export function AdminPortfolioDashboard() {
                       className="flex items-center gap-1.5 rounded-xl border border-white/15 bg-zinc-900 px-4 text-xs font-bold uppercase text-emerald-400 hover:bg-zinc-800"
                     >
                       <Upload className="w-4 h-4" />
-                      <span>{uploadingImg ? "..." : "Upload"}</span>
+                      <span>{uploadingImg ? "..." : "Upload Image"}</span>
                     </button>
                   </div>
-                  {form.imageUrl && (
-                    <div className="mt-2 h-24 w-full rounded-xl overflow-hidden border border-white/10 relative">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={form.imageUrl} alt="Preview" className="h-full w-full object-cover" />
-                    </div>
-                  )}
                 </div>
 
                 {/* Video Upload / URL */}
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1.5">
-                    Video Reel (Upload MP4 or enter URL)
+                    Video Reel (Upload MP4 or YouTube / Vimeo URL)
                   </label>
                   <div className="flex gap-2">
                     <input
@@ -519,10 +559,51 @@ export function AdminPortfolioDashboard() {
                       className="flex items-center gap-1.5 rounded-xl border border-white/15 bg-zinc-900 px-4 text-xs font-bold uppercase text-emerald-400 hover:bg-zinc-800"
                     >
                       <Film className="w-4 h-4" />
-                      <span>{uploadingVid ? "..." : "Upload"}</span>
+                      <span>{uploadingVid ? "..." : "Upload Video"}</span>
                     </button>
                   </div>
                 </div>
+
+                {/* Multi-Media Gallery Manager */}
+                {form.gallery.length > 0 && (
+                  <div className="rounded-2xl border border-white/[0.08] bg-zinc-900/40 p-4 space-y-3">
+                    <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-emerald-400">
+                      <span className="flex items-center gap-1.5">
+                        <Layers className="w-4 h-4" />
+                        <span>Project Media Gallery ({form.gallery.length} Items)</span>
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                      {form.gallery.map((media, idx) => (
+                        <div
+                          key={idx}
+                          className="group relative h-20 rounded-xl overflow-hidden border border-white/10 bg-zinc-950 flex items-center justify-center"
+                        >
+                          {media.type === "image" ? (
+                            /* eslint-disable-next-line @next/next/no-img-element */
+                            <img src={media.url} alt={`Media ${idx + 1}`} className="h-full w-full object-cover" />
+                          ) : (
+                            <div className="flex flex-col items-center gap-1 text-emerald-400">
+                              <Film size={20} />
+                              <span className="text-[9px] font-mono text-zinc-300">Video</span>
+                            </div>
+                          )}
+
+                          <button
+                            type="button"
+                            onClick={() => removeGalleryItem(idx)}
+                            className="absolute top-1 right-1 h-6 w-6 rounded-full bg-red-600/90 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                            title="Remove item"
+                          >
+                            <X size={12} />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
 
                 {/* Additional Optional Details */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

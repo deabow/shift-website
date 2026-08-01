@@ -2,15 +2,16 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-const DEFAULT_ADMIN_SECRET = "shift_session_xK9mP2vL8nQ4wR7jT";
-
 export default function AdminLoginPage() {
-  const adminSecret = process.env.ADMIN_SECRET || DEFAULT_ADMIN_SECRET;
-  const isAuthenticated = cookies().get("shift-admin-auth")?.value === adminSecret;
+  const adminSecret = process.env.ADMIN_SECRET;
+  const isAuthenticated = Boolean(
+    adminSecret && cookies().get("shift-admin-auth")?.value === adminSecret,
+  );
 
   if (isAuthenticated) {
     redirect("/admin/panel");
   }
+
 
   return (
     <main className="mx-auto flex min-h-[calc(100vh-96px)] w-full max-w-6xl items-center justify-center px-4 pb-16 pt-10 md:px-8">

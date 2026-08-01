@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { cookies } from "next/headers";
 import { ChatFab } from "@/components/chat-fab";
 import SiteNavbar from "@/components/site-navbar";
 import SiteFooter from "@/components/site-footer";
@@ -46,10 +47,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = cookies();
+  const savedLang = cookieStore.get("language")?.value;
+  const initialLanguage = savedLang === "ar" ? "ar" : "en";
+  const dir = initialLanguage === "ar" ? "rtl" : "ltr";
+
   return (
-    <html lang="en">
+    <html lang={initialLanguage} dir={dir}>
       <body className={`${inter.className} bg-[#0a0a0a] text-white antialiased`}>
-        <LanguageProvider>
+        <LanguageProvider initialLanguage={initialLanguage}>
           <CustomCursor />
           <ParticlesBackground />
           <SiteNavbar />
@@ -61,3 +67,4 @@ export default function RootLayout({
     </html>
   );
 }
+
