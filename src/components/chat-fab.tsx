@@ -44,7 +44,8 @@ function uid(): string {
 }
 
 // ─── Robot avatar (Lottie with graceful fallback) ─────────────────────────────
-function RobotAvatar() {
+// Lottie is only loaded when the chat is open (saves 2 network requests on page load)
+function RobotAvatar({ shouldLoad = false }: { shouldLoad?: boolean }) {
   const [LottiePlayer, setLottiePlayer] = useState<React.ComponentType<{
     animationData: object;
     play: boolean;
@@ -54,9 +55,10 @@ function RobotAvatar() {
   const [animData, setAnimData] = useState<object | null>(null);
 
   useEffect(() => {
+    if (!shouldLoad) return;
     let alive = true;
 
-    // Dynamic import to avoid SSR issues
+    // Dynamic import to avoid SSR issues — only when chat is open
     void (async () => {
       try {
         const [mod, res] = await Promise.all([
@@ -75,7 +77,7 @@ function RobotAvatar() {
     return () => {
       alive = false;
     };
-  }, []);
+  }, [shouldLoad]);
 
   if (LottiePlayer && animData) {
     return (
@@ -223,7 +225,7 @@ function ChatWindow({
     >
       {/* ── Header ── */}
       <div className="flex items-center gap-3 border-b border-white/10 px-4 py-3">
-        <RobotAvatar />
+        <RobotAvatar shouldLoad />
         <div className="flex-1">
           <p className="text-xs font-bold text-emerald-400">Shift AI Agent</p>
           <div className="flex items-center gap-1.5 mt-0.5">

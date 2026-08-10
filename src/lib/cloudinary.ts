@@ -1,3 +1,4 @@
+import { createHash } from "crypto";
 import { logger } from "@/lib/logger";
 
 export type UploadResult = {
@@ -8,6 +9,12 @@ export type UploadResult = {
 /**
  * Serverless-ready Cloudinary Media Uploader.
  * Uploads media buffers directly via Cloudinary REST API.
+ *
+ * Supports two modes:
+ *   1. **Unsigned upload** — when CLOUDINARY_UPLOAD_PRESET is set
+ *   2. **Signed upload**  — when CLOUDINARY_API_KEY + CLOUDINARY_API_SECRET are set
+ *      (generates SHA-1 signature per Cloudinary docs)
+ *
  * If Cloudinary environment variables are missing, provides a clean Data URI fallback.
  */
 export async function uploadToCloudinary(
@@ -46,12 +53,25 @@ export async function uploadToCloudinary(
     const uint8Array = new Uint8Array(buffer);
     const blob = new Blob([uint8Array], { type: mimeType });
     formData.append("file", blob, fileName);
-
+    formData.append("folder", folder);
 
     if (unsignedPreset) {
+      // ── Unsigned upload mode ──
       formData.append("upload_preset", unsignedPreset);
+    } else if (apiKey && apiSecret) {
+      // ── Signed upload mode ──
+      // Cloudinary requires: api_key, timestamp, signature
+      // signature = SHA1("folder=<folder>&timestamp=<ts><api_secret>")
+      const timestamp = Math.floor(Date.now() / 1000).toString();
+
+      // Parameters that affect the signature must be sorted alphabetically
+      const signaturePayload = `folder=${folder}&timestamp=${timestamp}${apiSecret}`;
+      const signature = createHash("sha1").update(signaturePayload).digest("hex");
+
+      formData.append("api_key", apiKey);
+      formData.append("timestamp", timestamp);
+      formData.append("signature", signature);
     }
-    formData.append("folder", folder);
 
     const response = await fetch(uploadUrl, {
       method: "POST",

@@ -178,21 +178,17 @@ export function BentoServices() {
               </div>
             </div>
 
-            {/* Live Audio Equalizer Waveform Visualizer */}
+            {/* Live Audio Equalizer Waveform Visualizer — CSS animation (no JS) */}
             <div className="flex items-center justify-center gap-1.5 h-12 py-2">
               {[40, 75, 30, 95, 60, 100, 45, 85, 50, 90, 65, 35, 80, 55, 95, 40].map((height, i) => (
-                <motion.div
+                <div
                   key={i}
                   className="w-1.5 bg-gradient-to-t from-emerald-600 via-emerald-400 to-teal-200 rounded-full"
-                  animate={{
-                    height: [`${height * 0.3}%`, `${height}%`, `${height * 0.4}%`],
-                  }}
-                  transition={{
-                    duration: 1.2,
-                    repeat: Infinity,
-                    repeatType: "mirror",
-                    delay: i * 0.08,
-                    ease: "easeInOut",
+                  style={{
+                    animation: `eq-bar 1.2s ease-in-out ${i * 0.08}s infinite alternate`,
+                    height: `${height * 0.3}%`,
+                    // CSS custom property for the target height
+                    ["--eq-h" as string]: `${height}%`,
                   }}
                 />
               ))}

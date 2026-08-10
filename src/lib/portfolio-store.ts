@@ -13,10 +13,63 @@ const DEFAULT_BENTO_SPANS = [
   "md:col-span-1 md:row-span-2",
 ];
 
+// Vercel Blob constants
+const BLOB_STORE_KEY = "portfolio-projects.json";
+
 // Global in-memory cache for serverless instance reuse
 const globalStore = globalThis as unknown as {
   __SHIFT_PORTFOLIO_CACHE__?: PortfolioProject[];
 };
+
+/* ─── Vercel Blob helpers ─────────────────────────────────────────────────── */
+
+async function readFromVercelBlob(): Promise<PortfolioProject[] | null> {
+  if (!process.env.BLOB_READ_WRITE_TOKEN) return null;
+
+  try {
+    // Dynamic import to avoid errors when @vercel/blob is not installed
+    const { list: listBlobs } = await import("@vercel/blob");
+
+    const { blobs } = await listBlobs({ prefix: BLOB_STORE_KEY, limit: 1 });
+    if (blobs.length === 0) return null;
+
+    const response = await fetch(blobs[0].url);
+    if (!response.ok) return null;
+
+    const data = (await response.json()) as PortfolioProject[];
+    if (Array.isArray(data)) {
+      logger.info("portfolio-store", `Loaded ${data.length} projects from Vercel Blob.`);
+      return data;
+    }
+    return null;
+  } catch (error) {
+    logger.error("portfolio-store", "Vercel Blob read failed", error);
+    return null;
+  }
+}
+
+async function writeToVercelBlob(projects: PortfolioProject[]): Promise<boolean> {
+  if (!process.env.BLOB_READ_WRITE_TOKEN) return false;
+
+  try {
+    const { put } = await import("@vercel/blob");
+
+    const jsonString = JSON.stringify(projects, null, 2);
+    await put(BLOB_STORE_KEY, jsonString, {
+      access: "public",
+      contentType: "application/json",
+      addRandomSuffix: false,
+    });
+
+    logger.info("portfolio-store", `Persisted ${projects.length} projects to Vercel Blob.`);
+    return true;
+  } catch (error) {
+    logger.error("portfolio-store", "Vercel Blob write failed", error);
+    return false;
+  }
+}
+
+/* ─── Cloud Database adapter placeholder ──────────────────────────────────── */
 
 /**
  * Serverless Database Adapter Placeholder / External Provider Fetcher.
@@ -37,6 +90,8 @@ async function fetchFromCloudDatabase(): Promise<PortfolioProject[] | null> {
   }
 }
 
+/* ─── Core read/write ─────────────────────────────────────────────────────── */
+
 async function readProjects(): Promise<PortfolioProject[]> {
   if (globalStore.__SHIFT_PORTFOLIO_CACHE__ && globalStore.__SHIFT_PORTFOLIO_CACHE__.length > 0) {
     return globalStore.__SHIFT_PORTFOLIO_CACHE__;
@@ -49,7 +104,14 @@ async function readProjects(): Promise<PortfolioProject[]> {
     return dbData;
   }
 
-  // 2. Try primary DATA_FILE
+  // 2. Try Vercel Blob store (persistent serverless storage)
+  const blobData = await readFromVercelBlob();
+  if (blobData && blobData.length > 0) {
+    globalStore.__SHIFT_PORTFOLIO_CACHE__ = blobData;
+    return blobData;
+  }
+
+  // 3. Try primary DATA_FILE (local development)
   try {
     const raw = await fs.readFile(DATA_FILE, "utf8");
     const data = JSON.parse(raw) as PortfolioProject[];
@@ -61,7 +123,7 @@ async function readProjects(): Promise<PortfolioProject[]> {
     // Ignore and proceed
   }
 
-  // 3. Try TMP_FILE
+  // 4. Try TMP_FILE
   try {
     const raw = await fs.readFile(TMP_FILE, "utf8");
     const data = JSON.parse(raw) as PortfolioProject[];
@@ -91,7 +153,11 @@ async function writeProjects(projects: PortfolioProject[]) {
     }
   }
 
-  // 2. Try writing to primary DATA_FILE (Works locally / non-serverless)
+  // 2. Try Vercel Blob store (persistent serverless storage)
+  const blobSuccess = await writeToVercelBlob(projects);
+  if (blobSuccess) return;
+
+  // 3. Try writing to primary DATA_FILE (Works locally / non-serverless)
   try {
     const dir = path.dirname(DATA_FILE);
     await fs.mkdir(dir, { recursive: true });
@@ -101,13 +167,15 @@ async function writeProjects(projects: PortfolioProject[]) {
     // Read-only filesystem failover (Vercel serverless environment)
   }
 
-  // 3. Failover: write to /tmp directory
+  // 4. Failover: write to /tmp directory
   try {
     await fs.writeFile(TMP_FILE, JSON.stringify(projects, null, 2), "utf8");
   } catch {
     // Ignore if tmp also restricted
   }
 }
+
+/* ─── Helpers ─────────────────────────────────────────────────────────────── */
 
 function slugify(value: string) {
   return value
@@ -128,6 +196,8 @@ function ensureUniqueSlug(baseSlug: string, existing: PortfolioProject[]) {
   }
   return slug;
 }
+
+/* ─── Public API ──────────────────────────────────────────────────────────── */
 
 export async function getAllProjects() {
   const projects = await readProjects();
@@ -227,4 +297,3 @@ export async function deleteProject(id: string) {
   await writeProjects(next);
   return true;
 }
-

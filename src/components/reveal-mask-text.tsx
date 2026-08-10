@@ -14,6 +14,7 @@ export function RevealMaskText() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const isVisibleRef = useRef(true);
 
   const cursorX = useMotionValue(0);
   const cursorY = useMotionValue(0);
@@ -48,8 +49,20 @@ export function RevealMaskText() {
     }
   };
 
+  // ── Intersection Observer — pause when off-screen ────────────
   useEffect(() => {
-    // Check if device is mobile/touch
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { isVisibleRef.current = entry.isIntersecting; },
+      { threshold: 0.05 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // ── Mobile detection + auto-animate ──────────────────────────
+  useEffect(() => {
     const checkMobile = () => {
       const mobile = window.matchMedia("(max-width: 768px)").matches || window.matchMedia("(pointer: coarse)").matches;
       setIsMobile(mobile);
@@ -69,7 +82,7 @@ export function RevealMaskText() {
     let angle = 0;
     
     const autoAnimate = () => {
-      if (isMobile && containerRef.current) {
+      if (isMobile && containerRef.current && isVisibleRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
@@ -84,7 +97,7 @@ export function RevealMaskText() {
     };
     
     if (isMobile) {
-      autoAnimate();
+      autoAnimateId = requestAnimationFrame(autoAnimate);
     }
     
     return () => {
@@ -93,6 +106,7 @@ export function RevealMaskText() {
     };
   }, [isMobile, cursorX, cursorY, radius]);
 
+  // ── Matrix canvas (throttled to 20 FPS, pauses when off-screen) ──
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -141,11 +155,11 @@ export function RevealMaskText() {
     };
 
     let lastTime = 0;
-    const fps = 30;
+    const fps = 20; // Reduced from 30 → 20 (matrix doesn't need more)
     const interval = 1000 / fps;
 
     const renderLoop = (time: number) => {
-      if (time - lastTime > interval) {
+      if (isVisibleRef.current && time - lastTime > interval) {
         drawMatrix();
         lastTime = time;
       }

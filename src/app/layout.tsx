@@ -1,13 +1,28 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { cookies } from "next/headers";
-import { ChatFab } from "@/components/chat-fab";
+import dynamic from "next/dynamic";
 import SiteNavbar from "@/components/site-navbar";
 import SiteFooter from "@/components/site-footer";
-import { CustomCursor } from "@/components/custom-cursor";
-import { ParticlesBackground } from "@/components/particles-background";
 import { LanguageProvider } from "@/lib/language-context";
 import "./globals.css";
+
+// ── Heavy client components loaded lazily (reduces initial JS bundle) ──
+const CustomCursor = dynamic(
+  () => import("@/components/custom-cursor").then((m) => m.CustomCursor),
+  { ssr: false }
+);
+const ParticlesBackground = dynamic(
+  () =>
+    import("@/components/particles-background").then(
+      (m) => m.ParticlesBackground
+    ),
+  { ssr: false }
+);
+const ChatFab = dynamic(
+  () => import("@/components/chat-fab").then((m) => m.ChatFab),
+  { ssr: false }
+);
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -67,4 +82,3 @@ export default function RootLayout({
     </html>
   );
 }
-

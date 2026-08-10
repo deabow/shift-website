@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
+    "@vercel/blob": "^2.7.0",
     "framer-motion": "^12.40.0",
     "lottie-react": "^2.4.1",
     "lottie-web": "^5.13.0",

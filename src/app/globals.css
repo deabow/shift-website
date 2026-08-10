@@ -77,6 +77,13 @@ textarea {
   }
 }
 
+/* ── Equalizer bar animation (replaces 16 Framer Motion instances) ── */
+@keyframes eq-bar {
+  0%   { height: var(--eq-h, 30%); transform: scaleY(0.3); }
+  50%  { height: var(--eq-h, 30%); transform: scaleY(1);   }
+  100% { height: var(--eq-h, 30%); transform: scaleY(0.4); }
+}
+
 .matrix-code-layer {
   display: grid;
   grid-template-rows: repeat(6, 1fr);
