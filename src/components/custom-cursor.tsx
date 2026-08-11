@@ -1,22 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 
 export function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
 
+  // Direct motion values without spring physics lag for instantaneous 1:1 mouse tracking
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  const springConfig = { damping: 25, stiffness: 400, mass: 0.5 };
-  const cursorXSpring = useSpring(cursorX, springConfig);
-  const cursorYSpring = useSpring(cursorY, springConfig);
-
   useEffect(() => {
-    // Only run on desktop
-    if (window.innerWidth < 768) return;
+    // Only enable custom cursor on desktop screens
+    if (typeof window === "undefined" || window.innerWidth < 768) return;
 
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX - 16);
@@ -26,24 +23,27 @@ export function CustomCursor() {
     const handleMouseEnter = () => setIsVisible(true);
     const handleMouseLeave = () => setIsVisible(false);
 
-    // Hover effect for links and buttons
+    // Hover detection for interactive buttons, links, and clickable cards
     const handleHoverStart = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (
-        target.tagName.toLowerCase() === "a" ||
-        target.tagName.toLowerCase() === "button" ||
+      const target = e.target as Element | null;
+      if (!target) return;
+
+      const clickable =
         target.closest("a") ||
-        target.closest("button")
-      ) {
+        target.closest("button") ||
+        target.closest("[role='button']") ||
+        (target.classList && target.classList.contains("cursor-pointer"));
+
+      if (clickable) {
         setIsHovering(true);
       }
     };
+
     const handleHoverEnd = () => setIsHovering(false);
 
-    window.addEventListener("mousemove", moveCursor);
+    window.addEventListener("mousemove", moveCursor, { passive: true });
     document.addEventListener("mouseenter", handleMouseEnter);
     document.addEventListener("mouseleave", handleMouseLeave);
-    
     document.addEventListener("mouseover", handleHoverStart);
     document.addEventListener("mouseout", handleHoverEnd);
 
@@ -64,22 +64,22 @@ export function CustomCursor() {
     <motion.div
       className="pointer-events-none fixed left-0 top-0 z-[100] hidden md:flex items-center justify-center rounded-full mix-blend-difference"
       style={{
-        x: cursorXSpring,
-        y: cursorYSpring,
+        x: cursorX,
+        y: cursorY,
         width: 32,
         height: 32,
       }}
       animate={{
-        scale: isHovering ? 2.5 : 1,
-        backgroundColor: isHovering ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0.2)",
-        border: isHovering ? "none" : "2px solid rgba(255, 255, 255, 0.8)",
+        scale: isHovering ? 2 : 1,
+        backgroundColor: isHovering ? "rgba(16, 185, 129, 0.9)" : "rgba(255, 255, 255, 0.15)",
+        border: isHovering ? "none" : "1.5px solid rgba(255, 255, 255, 0.7)",
       }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      transition={{ duration: 0.1, ease: "easeOut" }}
     >
-      <motion.div 
-        className="w-1.5 h-1.5 rounded-full bg-white"
+      <motion.div
+        className="w-1.5 h-1.5 rounded-full bg-emerald-400"
         animate={{
-          opacity: isHovering ? 0 : 1
+          opacity: isHovering ? 0 : 1,
         }}
       />
     </motion.div>

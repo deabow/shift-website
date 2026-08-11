@@ -6,11 +6,11 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useLanguage } from "@/lib/language-context";
 import { MagneticWrapper } from "@/components/magnetic-wrapper";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const ClientMarquee = dynamic(() => import("@/components/client-marquee").then(mod => mod.ClientMarquee));
 const BentoServices = dynamic(() => import("@/components/bento-services").then(mod => mod.BentoServices));
-const HorizontalPortfolio = dynamic(() => import("@/components/horizontal-portfolio").then(mod => mod.HorizontalPortfolio));
+const BentoPortfolio = dynamic(() => import("@/components/bento-portfolio").then(mod => mod.BentoPortfolio));
 const StatsCounter = dynamic(() => import("@/components/stats-counter").then(mod => mod.StatsCounter));
 const Testimonials = dynamic(() => import("@/components/testimonials").then(mod => mod.Testimonials));
 
@@ -136,7 +136,7 @@ export default function Home() {
       </div>
 
       <div className="w-full relative">
-        <HorizontalPortfolio />
+        <BentoPortfolio />
       </div>
 
       <section className="w-full max-w-5xl px-4 md:px-8">
