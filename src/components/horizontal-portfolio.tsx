@@ -21,6 +21,69 @@ function getCategoryLabel(category: string, isAr: boolean) {
   return category;
 }
 
+const DEFAULT_PORTFOLIO_PLACEHOLDERS: PortfolioProject[] = [
+  {
+    id: "ph_1",
+    slug: "web-software-development",
+    title: "تطوير المنصات والأنظمة السحابية",
+    category: "web-dev",
+    clientType: "Enterprise Web Systems",
+    description: "بناء تطبيقات Next.js وأنظمة ERP معقدة واجهات تفاعلية 3D فائقة السرعة والأداء.",
+    imageUrl: "/portfolio-covers/web-dev-cover.png",
+    videoUrl: "",
+    gallery: [{ type: "image", url: "/portfolio-covers/web-dev-cover.png" }],
+    liveUrl: "",
+    challenge: "تطوير معمارية فائقة الأداء لمؤسسات كبرى بمرونة حماية متكاملة.",
+    solution: "استخدام Next.js App Router و WebGL 3D visualizations لتجربة مستخدم مبهرة.",
+    results: "تحسين سرعة الأداء وزيادة معدل التحويل.",
+    keyFeatures: ["Next.js 14", "WebGL 3D", "Sub-second Latency"],
+    bentoSpan: "md:col-span-1 md:row-span-1",
+    published: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: "ph_2",
+    slug: "cinematic-media-production",
+    title: "الإنتاج الإعلامي والسينمائي",
+    category: "media-production",
+    clientType: "Commercial Real Estate & Brands",
+    description: "تصوير تجاري سينمائي 8K، لقطات درون احترافية، وهويات بصرية تفرض السيادة في السوق.",
+    imageUrl: "/portfolio-covers/al-khaleej-cover.png",
+    videoUrl: "",
+    gallery: [{ type: "image", url: "/portfolio-covers/al-khaleej-cover.png" }],
+    liveUrl: "",
+    challenge: "إبراز قوة البراند والمشاريع التجارية بأسلوب سينمائي يواكب العلامات العالمية.",
+    solution: "تصوير احترافي وتلوين سينمائي مع مونتاج موسيقي مبتكر.",
+    results: "زيادة ثقة العملاء وتحقيق أعلى نسبة تفاعل.",
+    keyFeatures: ["8K Commercial Photography", "Drone Footage", "Brand Identity"],
+    bentoSpan: "md:col-span-1 md:row-span-1",
+    published: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: "ph_3",
+    slug: "mobile-applications",
+    title: "تطبيقات الموبايل الذكية",
+    category: "web-dev",
+    clientType: "iOS & Android Mobile Apps",
+    description: "تطبيقات موبايل احترافية لنظامي iOS و Android بـ Flutter مع تشفير كامل وأعلى سرعة استجابة.",
+    imageUrl: "/portfolio-covers/mobile-app-cover.png",
+    videoUrl: "",
+    gallery: [{ type: "image", url: "/portfolio-covers/mobile-app-cover.png" }],
+    liveUrl: "",
+    challenge: "بناء واجهة مستخدم سلسة للأجهزة الذكية مع دعم الأداء اللحظي.",
+    solution: "برمجة بـ Flutter وتصميم واجهات متطورة بنظام حماية عالي.",
+    results: "تجربة مستخدم فائقة وسلاسة تنقل كاملة.",
+    keyFeatures: ["Flutter Cross-Platform", "AES-256 Security", "Biometrics"],
+    bentoSpan: "md:col-span-1 md:row-span-1",
+    published: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+];
+
 export function HorizontalPortfolio() {
   const { t, language } = useLanguage();
   const isAr = language === "ar";
@@ -55,6 +118,8 @@ export function HorizontalPortfolio() {
   const xTransformValues = isAr ? ["-1%", "75%"] : ["1%", "-75%"];
   const x = useTransform(scrollYProgress, [0, 1], xTransformValues);
 
+  const projectsToDisplay = apiProjects.length > 0 ? apiProjects : DEFAULT_PORTFOLIO_PLACEHOLDERS;
+
   return (
     <section ref={targetRef} className={`relative bg-black ${isMobile ? "py-24" : "h-[300vh]"}`}>
       <div className={`${isMobile ? "relative" : "sticky top-0 h-screen"} flex flex-col items-center justify-center overflow-hidden`}>
@@ -75,7 +140,7 @@ export function HorizontalPortfolio() {
           style={isMobile ? {} : { x }} 
           className={`flex gap-6 md:gap-10 ${isMobile ? "overflow-x-auto snap-x snap-mandatory px-4 pb-8 w-full" : "px-12 xl:px-32 mt-28"}`}
         >
-          {apiProjects.map((project) => {
+          {projectsToDisplay.map((project) => {
             const hasVideo = Boolean(project.videoUrl);
             const coverImage = project.imageUrl || "/portfolio-covers/al-khaleej-cover.png";
 
@@ -120,7 +185,7 @@ export function HorizontalPortfolio() {
                   </span>
                 </div>
 
-                {/* Center Play Button Overlay */}
+                {/* Center Play / View Button Overlay */}
                 <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
                   <div className="flex h-16 w-16 items-center justify-center rounded-full border border-emerald-400/40 bg-emerald-500/20 text-emerald-300 backdrop-blur-md group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-zinc-950 group-hover:shadow-[0_0_40px_rgba(16,185,129,0.7)] transition-all duration-500">
                     {hasVideo ? <Play size={24} className="ml-1 fill-current" /> : <ArrowRight size={24} />}
@@ -228,7 +293,7 @@ export function HorizontalPortfolio() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-white/10">
                     <div className="rounded-xl border border-white/10 bg-zinc-900/50 p-4">
                       <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-1">
-                        🎯 التحدي والهادف
+                        🎯 التحدي والهدف
                       </h4>
                       <p className="text-xs text-zinc-300 leading-relaxed">
                         {activeModalProject.challenge}
