@@ -6,7 +6,7 @@
   --background: #0a0a0a;
   --foreground: #ffffff;
   --foreground-muted: #d4d4d8;
-  --accent: #8b5cf6;
+  --accent: #10b981;
 }
 
 html {
@@ -18,7 +18,7 @@ html {
 }
 
 *::selection {
-  background: rgba(139, 92, 246, 0.4);
+  background: rgba(16, 185, 129, 0.4);
   color: var(--foreground);
 }
 
@@ -29,12 +29,12 @@ body {
   background-color: var(--background);
   background-image: radial-gradient(
       650px circle at 18% 10%,
-      rgba(139, 92, 246, 0.16),
+      rgba(16, 185, 129, 0.10),
       transparent 60%
     ),
     radial-gradient(
       500px circle at 80% 85%,
-      rgba(139, 92, 246, 0.1),
+      rgba(5, 150, 105, 0.06),
       transparent 55%
     );
 }
@@ -50,7 +50,7 @@ textarea {
 /* Dark, minimal scrollbar theme */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #8b5cf6 #0f0f12;
+  scrollbar-color: #10b981 #0f0f12;
 }
 
 ::-webkit-scrollbar {
@@ -64,11 +64,11 @@ textarea {
 ::-webkit-scrollbar-thumb {
   border-radius: 999px;
   border: 2px solid #0f0f12;
-  background: linear-gradient(180deg, #8b5cf6, #6d28d9);
+  background: linear-gradient(180deg, #10b981, #059669);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #a78bfa, #7c3aed);
+  background: linear-gradient(180deg, #34d399, #10b981);
 }
 
 @layer utilities {

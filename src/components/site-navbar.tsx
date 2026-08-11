@@ -14,13 +14,7 @@ const FacebookIcon = ({ size = 18 }: { size?: number }) => (
   </svg>
 );
 
-const InstagramIcon = ({ size = 18 }: { size?: number }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-  </svg>
-);
+
 
 const DEBO_WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP || "201211050297";
 
@@ -126,15 +120,6 @@ export default function SiteNavbar() {
             >
               <FacebookIcon size={16} />
             </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition hover:text-emerald-400"
-              aria-label="Instagram"
-            >
-              <InstagramIcon size={16} />
-            </a>
           </div>
         </div>
 
@@ -228,7 +213,7 @@ export default function SiteNavbar() {
                   <ArrowRight className="w-4 h-4 text-zinc-950" />
                 </a>
 
-                <div className="flex items-center justify-between text-xs text-zinc-400 pt-1">
+                <div className="flex items-center gap-3 text-xs text-zinc-400 pt-1">
                   <span>Connect with us</span>
                   <div className="flex items-center gap-4 text-zinc-300">
                     <a
@@ -239,15 +224,6 @@ export default function SiteNavbar() {
                       aria-label="Facebook"
                     >
                       <FacebookIcon size={18} />
-                    </a>
-                    <a
-                      href="https://instagram.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-1 hover:text-emerald-400 transition-colors"
-                      aria-label="Instagram"
-                    >
-                      <InstagramIcon size={18} />
                     </a>
                   </div>
                 </div>

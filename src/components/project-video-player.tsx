@@ -17,14 +17,22 @@ function getVimeoEmbed(url: string) {
   return match ? `https://player.vimeo.com/video/${match[1]}` : null;
 }
 
+function getGoogleDriveEmbed(url: string) {
+  const match =
+    url.match(/drive\.google\.com\/file\/d\/([^/]+)/) ??
+    url.match(/drive\.google\.com\/open\?id=([^&]+)/);
+  return match ? `https://drive.google.com/file/d/${match[1]}/preview` : null;
+}
+
 export function ProjectVideoPlayer({ videoUrl, title, className }: ProjectVideoPlayerProps) {
   const normalized = videoUrl.trim();
   const youtube = getYouTubeEmbed(normalized);
   const vimeo = getVimeoEmbed(normalized);
+  const gdrive = getGoogleDriveEmbed(normalized);
   const isDirectVideo = /\.(mp4|webm|ogg)(\?.*)?$/i.test(normalized);
 
-  if (youtube || vimeo) {
-    const src = youtube ?? vimeo ?? "";
+  if (youtube || vimeo || gdrive) {
+    const src = youtube ?? vimeo ?? gdrive ?? "";
     return (
       <iframe
         src={src}
@@ -56,3 +64,4 @@ export function ProjectVideoPlayer({ videoUrl, title, className }: ProjectVideoP
     </div>
   );
 }
+

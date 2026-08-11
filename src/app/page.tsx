@@ -11,6 +11,8 @@ import { ArrowRight, Sparkles } from "lucide-react";
 const ClientMarquee = dynamic(() => import("@/components/client-marquee").then(mod => mod.ClientMarquee));
 const BentoServices = dynamic(() => import("@/components/bento-services").then(mod => mod.BentoServices));
 const HorizontalPortfolio = dynamic(() => import("@/components/horizontal-portfolio").then(mod => mod.HorizontalPortfolio));
+const StatsCounter = dynamic(() => import("@/components/stats-counter").then(mod => mod.StatsCounter));
+const Testimonials = dynamic(() => import("@/components/testimonials").then(mod => mod.Testimonials));
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -135,6 +137,14 @@ export default function Home() {
 
       <div className="w-full relative">
         <HorizontalPortfolio />
+      </div>
+
+      <section className="w-full max-w-5xl px-4 md:px-8">
+        <StatsCounter />
+      </section>
+
+      <div className="w-full relative">
+        <Testimonials />
       </div>
     </main>
   );
