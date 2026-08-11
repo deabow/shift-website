@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useLanguage } from "@/lib/language-context";
 
 const Facebook = ({ size = 24 }: { size?: number }) => (
@@ -13,9 +12,9 @@ export default function SiteFooter() {
   const { t, language } = useLanguage();
 
   return (
-    <footer className="mt-16 border-t border-white/10 bg-[#0a0a0a] py-8 z-10 relative">
+    <footer className="mt-16 border-t border-black/10 dark:border-white/10 bg-white/80 dark:bg-[#0a0a0a] py-8 z-10 relative transition-colors duration-300">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 md:flex-row md:px-8">
-        <p className="text-sm text-zinc-400" dir={language === "ar" ? "rtl" : "ltr"}>
+        <p className="text-sm text-zinc-600 dark:text-zinc-400" dir={language === "ar" ? "rtl" : "ltr"}>
           © {new Date().getFullYear()} {t.footer.rights}
         </p>
         <div className="flex items-center gap-4">
@@ -23,7 +22,7 @@ export default function SiteFooter() {
             href="https://www.facebook.com/profile.php?id=61591717865503"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/75 transition hover:text-emerald-400"
+            className="text-zinc-600 dark:text-white/75 transition hover:text-emerald-500"
           >
             <Facebook size={20} />
           </a>

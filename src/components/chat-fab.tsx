@@ -218,7 +218,7 @@ function ChatWindow({
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.9, y: 18 }}
       transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] as const }}
-      className="absolute bottom-[calc(100%+16px)] right-0 flex w-[93vw] max-w-sm origin-bottom-right flex-col rounded-2xl border border-white/12 bg-zinc-950/90 shadow-[0_20px_70px_rgba(0,0,0,0.7)] backdrop-blur-xl"
+      className="absolute bottom-[calc(100%+16px)] right-0 flex w-[93vw] max-w-sm origin-bottom-right flex-col rounded-2xl border border-black/10 dark:border-white/12 bg-white/95 dark:bg-zinc-950/95 shadow-[0_20px_70px_rgba(0,0,0,0.3)] dark:shadow-[0_20px_70px_rgba(0,0,0,0.8)] backdrop-blur-xl transition-colors duration-300"
       dir="rtl"
       aria-label="Shift AI chat"
     >
@@ -267,9 +267,9 @@ function ChatWindow({
               onChange={(e) => onInputChange(e.target.value)}
               disabled={isInputDisabled || isTyping}
               placeholder={
-                isInputDisabled ? "جاري التوصيل بديبو..." : "اكتب رسالتك..."
+                isInputDisabled ? "تواصل مع ديبو على واتساب..." : "اكتب سؤالك هنا..."
               }
-              className="flex-1 rounded-xl border border-white/15 bg-black/40 px-3 py-2.5 text-right text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-emerald-500/50 disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex-1 rounded-xl border border-black/15 dark:border-white/15 bg-zinc-100 dark:bg-black/40 px-3 py-2.5 text-right text-sm text-zinc-900 dark:text-white outline-none transition placeholder:text-zinc-500 focus:border-emerald-500/50 disabled:cursor-not-allowed disabled:opacity-40"
             />
             <button
               type="submit"
