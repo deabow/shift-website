@@ -6,22 +6,23 @@ import {
   Plus,
   Trash2,
   Edit3,
-  CheckCircle2,
-  XCircle,
+  Copy,
   Upload,
   Image as ImageIcon,
   Film,
   Layers,
   Globe,
   X,
-  Check,
   Sparkles,
   Eye,
   EyeOff,
   Video,
   Code2,
   Target,
-  ExternalLink,
+  Search,
+  CheckCircle2,
+  Grid,
+  Maximize2,
 } from "lucide-react";
 import { toast, Toaster } from "@/components/toast";
 import { PortfolioProject, PORTFOLIO_CATEGORIES, MediaItem } from "@/lib/portfolio-types";
@@ -38,6 +39,8 @@ type ProjectFormState = {
   challenge: string;
   solution: string;
   results: string;
+  keyFeatures: string;
+  bentoSpan: string;
   published: boolean;
 };
 
@@ -53,6 +56,8 @@ const initialFormState: ProjectFormState = {
   challenge: "",
   solution: "",
   results: "",
+  keyFeatures: "",
+  bentoSpan: "md:col-span-1 md:row-span-1",
   published: true,
 };
 
@@ -66,6 +71,7 @@ export function AdminPortfolioDashboard() {
   const [uploadingImg, setUploadingImg] = useState(false);
   const [uploadingVid, setUploadingVid] = useState(false);
   const [selectedCategoryFilter, setSelectedCategoryFilter] = useState<string>("all");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const imageFileInputRef = useRef<HTMLInputElement>(null);
   const videoFileInputRef = useRef<HTMLInputElement>(null);
@@ -96,12 +102,13 @@ export function AdminPortfolioDashboard() {
 
   const openEditModal = (project: PortfolioProject) => {
     setEditingId(project.id);
-    const existingGallery = project.gallery && project.gallery.length > 0
-      ? project.gallery
-      : [
-          ...(project.imageUrl ? [{ type: "image" as const, url: project.imageUrl }] : []),
-          ...(project.videoUrl ? [{ type: "video" as const, url: project.videoUrl }] : []),
-        ];
+    const existingGallery =
+      project.gallery && project.gallery.length > 0
+        ? project.gallery
+        : [
+            ...(project.imageUrl ? [{ type: "image" as const, url: project.imageUrl }] : []),
+            ...(project.videoUrl ? [{ type: "video" as const, url: project.videoUrl }] : []),
+          ];
 
     setForm({
       title: project.title,
@@ -115,9 +122,41 @@ export function AdminPortfolioDashboard() {
       challenge: project.challenge || "",
       solution: project.solution || "",
       results: project.results || "",
+      keyFeatures: Array.isArray(project.keyFeatures) ? project.keyFeatures.join(", ") : "",
+      bentoSpan: project.bentoSpan || "md:col-span-1 md:row-span-1",
       published: project.published,
     });
     setIsModalOpen(true);
+  };
+
+  const duplicateProject = (project: PortfolioProject) => {
+    setEditingId(null);
+    const existingGallery =
+      project.gallery && project.gallery.length > 0
+        ? project.gallery
+        : [
+            ...(project.imageUrl ? [{ type: "image" as const, url: project.imageUrl }] : []),
+            ...(project.videoUrl ? [{ type: "video" as const, url: project.videoUrl }] : []),
+          ];
+
+    setForm({
+      title: `${project.title} (Copy)`,
+      category: project.category || "web-dev",
+      clientType: project.clientType || "Enterprise Client",
+      description: project.description || "",
+      imageUrl: project.imageUrl || "",
+      videoUrl: project.videoUrl || "",
+      liveUrl: project.liveUrl || "",
+      gallery: existingGallery,
+      challenge: project.challenge || "",
+      solution: project.solution || "",
+      results: project.results || "",
+      keyFeatures: Array.isArray(project.keyFeatures) ? project.keyFeatures.join(", ") : "",
+      bentoSpan: project.bentoSpan || "md:col-span-1 md:row-span-1",
+      published: true,
+    });
+    setIsModalOpen(true);
+    toast("Project duplicated! Review details and save.", "success");
   };
 
   const handleFileUpload = async (e: ChangeEvent<HTMLInputElement>, type: "image" | "video") => {
@@ -173,7 +212,6 @@ export function AdminPortfolioDashboard() {
     }));
   };
 
-
   const saveProject = async () => {
     if (!form.title.trim() || !form.description.trim()) {
       toast("Project title and description are required.", "error");
@@ -181,13 +219,22 @@ export function AdminPortfolioDashboard() {
     }
 
     setSaving(true);
+    const parsedFeatures = form.keyFeatures
+      ? form.keyFeatures.split(",").map((s) => s.trim()).filter(Boolean)
+      : ["Next.js 14", "Responsive Design", "Security First"];
+
+    const payload = {
+      ...form,
+      keyFeatures: parsedFeatures,
+    };
+
     try {
       if (editingId) {
         // Update
         const response = await fetch(`/api/portfolio/${editingId}`, {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
+          body: JSON.stringify(payload),
         });
         if (!response.ok) throw new Error("Unable to update project.");
         const updated = (await response.json()) as PortfolioProject;
@@ -198,7 +245,7 @@ export function AdminPortfolioDashboard() {
         const response = await fetch("/api/portfolio", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
+          body: JSON.stringify(payload),
         });
         if (!response.ok) throw new Error("Unable to create project.");
         const created = (await response.json()) as PortfolioProject;
@@ -242,75 +289,109 @@ export function AdminPortfolioDashboard() {
     }
   };
 
-  const filteredProjects = selectedCategoryFilter === "all"
-    ? projects
-    : projects.filter((p) => p.category === selectedCategoryFilter);
+  const filteredProjects = projects.filter((p) => {
+    const matchesCat =
+      selectedCategoryFilter === "all" ||
+      (selectedCategoryFilter === "published" && p.published) ||
+      (selectedCategoryFilter === "drafts" && !p.published) ||
+      p.category === selectedCategoryFilter;
+
+    const matchesSearch =
+      searchQuery === "" ||
+      p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      p.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (p.clientType && p.clientType.toLowerCase().includes(searchQuery.toLowerCase()));
+
+    return matchesCat && matchesSearch;
+  });
 
   const liveCount = projects.filter((p) => p.published).length;
   const draftCount = projects.filter((p) => !p.published).length;
 
   return (
-    <div className="w-full space-y-8">
+    <div className="w-full space-y-8" dir="rtl">
       <Toaster />
 
-      {/* Top Overview Bar */}
-      <div className="rounded-3xl border border-white/[0.08] bg-zinc-950/80 p-6 md:p-8 backdrop-blur-2xl shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
-        <div>
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-400 mb-2">
+      {/* Top Control Bar */}
+      <div className="rounded-3xl border border-black/10 dark:border-white/[0.08] bg-white/80 dark:bg-zinc-950/80 p-6 md:p-8 backdrop-blur-2xl shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="text-right w-full md:w-auto">
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-500 mb-2">
             <Sparkles className="w-4 h-4 text-emerald-400 animate-pulse" />
-            <span>Admin Control Core</span>
+            <span>لوحة تحكم معرض الأعمال — SHIFT Core</span>
           </div>
-          <h1 className="text-2xl md:text-3xl font-extrabold text-zinc-100">
-            Portfolio Management
+          <h1 className="text-2xl md:text-3xl font-extrabold text-zinc-900 dark:text-zinc-100">
+            إدارة المشاريع والأعمال
           </h1>
-          <p className="text-sm text-zinc-400 mt-1">
-            Easily create, edit, upload media, and manage showcase projects across the 3 core disciplines.
+          <p className="text-xs md:text-sm text-zinc-600 dark:text-zinc-400 mt-1">
+            إضافة وتعديل ورفع الوسائط بشكل مباشر وكامل بدون أي بيانات وهمية تلقائية.
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="flex items-center gap-4 px-4 py-2 rounded-2xl bg-zinc-900/90 border border-white/[0.06] text-xs text-zinc-300">
+        <div className="flex flex-wrap items-center gap-3 w-full md:w-auto justify-end">
+          <div className="flex items-center gap-4 px-4 py-2 rounded-2xl bg-zinc-100 dark:bg-zinc-900/90 border border-black/10 dark:border-white/[0.06] text-xs text-zinc-700 dark:text-zinc-300">
             <div>
-              <span className="text-zinc-500 block text-[10px] font-bold uppercase">Total</span>
-              <span className="font-mono text-sm font-bold text-white">{projects.length}</span>
+              <span className="text-zinc-500 block text-[10px] font-bold uppercase">الإجمالي</span>
+              <span className="font-mono text-sm font-bold text-zinc-900 dark:text-white">{projects.length}</span>
             </div>
-            <div className="h-6 w-px bg-white/10" />
+            <div className="h-6 w-px bg-black/10 dark:bg-white/10" />
             <div>
-              <span className="text-emerald-500 block text-[10px] font-bold uppercase">Live</span>
+              <span className="text-emerald-500 block text-[10px] font-bold uppercase">منشور (Live)</span>
               <span className="font-mono text-sm font-bold text-emerald-400">{liveCount}</span>
             </div>
-            <div className="h-6 w-px bg-white/10" />
+            <div className="h-6 w-px bg-black/10 dark:bg-white/10" />
             <div>
-              <span className="text-amber-500 block text-[10px] font-bold uppercase">Drafts</span>
+              <span className="text-amber-500 block text-[10px] font-bold uppercase">مسودة (Draft)</span>
               <span className="font-mono text-sm font-bold text-amber-400">{draftCount}</span>
             </div>
           </div>
 
           <button
             onClick={openCreateModal}
-            className="flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-3 text-xs font-extrabold uppercase tracking-[0.14em] text-zinc-950 transition hover:bg-emerald-400 hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] active:scale-95"
+            className="flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-3 text-xs font-extrabold uppercase tracking-wider text-zinc-950 transition hover:bg-emerald-400 hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] active:scale-95"
           >
             <Plus className="w-4 h-4 text-zinc-950" />
-            <span>Add New Project</span>
+            <span>إضافة مشروع جديد</span>
           </button>
         </div>
       </div>
 
-      {/* Category Filter Pills */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2">
-        {PORTFOLIO_CATEGORIES.map((cat) => (
-          <button
-            key={cat.id}
-            onClick={() => setSelectedCategoryFilter(cat.id)}
-            className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
-              selectedCategoryFilter === cat.id
-                ? "bg-emerald-500 text-zinc-950 shadow-[0_0_20px_rgba(16,185,129,0.4)]"
-                : "bg-zinc-900/60 border border-white/[0.06] text-zinc-400 hover:text-white"
-            }`}
-          >
-            {cat.labelEn}
-          </button>
-        ))}
+      {/* Filter Tabs & Live Search Bar */}
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+        {/* Category Filters */}
+        <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0">
+          {[
+            { id: "all", label: "الكل" },
+            { id: "published", label: "المنشورة (Live)" },
+            { id: "drafts", label: "المسودات (Drafts)" },
+            { id: "web-dev", label: "الويب والتطبيقات" },
+            { id: "digital-marketing", label: "التسويق" },
+            { id: "media-production", label: "الإنتاج الإعلامي" },
+          ].map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => setSelectedCategoryFilter(cat.id)}
+              className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap ${
+                selectedCategoryFilter === cat.id
+                  ? "bg-emerald-500 text-zinc-950 shadow-[0_0_20px_rgba(16,185,129,0.4)]"
+                  : "bg-zinc-100 dark:bg-zinc-900/60 border border-black/10 dark:border-white/[0.06] text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+              }`}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Live Search Input */}
+        <div className="relative w-full sm:w-64">
+          <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="بحث بالاسم أو البراند..."
+            className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900/80 pr-9 pl-4 py-2 text-xs text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-500 focus:border-emerald-500 focus:outline-none"
+          />
+        </div>
       </div>
 
       {/* Project Grid */}
@@ -321,21 +402,32 @@ export function AdminPortfolioDashboard() {
           ))}
         </div>
       ) : filteredProjects.length === 0 ? (
-        <div className="rounded-3xl border border-white/[0.08] bg-zinc-950/80 p-12 text-center backdrop-blur-2xl">
-          <div className="text-4xl mb-3">📁</div>
-          <h3 className="text-xl font-bold text-zinc-100">No Projects Found</h3>
-          <p className="text-sm text-zinc-400 mt-1">Click &quot;Add New Project&quot; above to create your first case study.</p>
+        <div className="rounded-3xl border border-black/10 dark:border-white/[0.08] bg-white/80 dark:bg-zinc-950/80 p-12 text-center backdrop-blur-2xl flex flex-col items-center">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 mb-3">
+            <Sparkles size={28} />
+          </div>
+          <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">لا توجد مشاريع مطابقة</h3>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 max-w-sm">
+            اضغط على &quot;إضافة مشروع جديد&quot; أعلاه لإنشاء مشروعك الأول وإدارته مباشرة.
+          </p>
+          <button
+            onClick={openCreateModal}
+            className="mt-5 inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 text-xs font-bold text-zinc-950 uppercase tracking-wider transition hover:bg-emerald-400"
+          >
+            <Plus size={16} />
+            <span>إضافة مشروع جديد الآن</span>
+          </button>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="group relative rounded-3xl border border-white/[0.08] bg-zinc-950/80 backdrop-blur-2xl p-5 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:border-emerald-500/40 hover:shadow-[0_0_40px_rgba(16,185,129,0.15)]"
+              className="group relative rounded-3xl border border-black/10 dark:border-white/[0.08] bg-white/90 dark:bg-zinc-950/80 backdrop-blur-2xl p-5 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:border-emerald-500/40 hover:shadow-[0_0_40px_rgba(16,185,129,0.15)] text-right"
             >
               <div>
                 {/* Media Thumbnail */}
-                <div className="relative h-44 w-full overflow-hidden rounded-2xl border border-white/[0.06] bg-zinc-900 mb-4">
+                <div className="relative h-44 w-full overflow-hidden rounded-2xl border border-black/10 dark:border-white/[0.06] bg-zinc-900 mb-4">
                   {project.imageUrl ? (
                     /* eslint-disable-next-line @next/next/no-img-element */
                     <img
@@ -349,45 +441,60 @@ export function AdminPortfolioDashboard() {
                     </div>
                   )}
 
-                  {/* Status Badge */}
+                  {/* Status Toggle Button */}
                   <button
                     onClick={() => togglePublished(project)}
-                    className={`absolute top-3 right-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-md transition-transform active:scale-95 flex items-center gap-1 ${
+                    className={`absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-md transition-transform active:scale-95 flex items-center gap-1 ${
                       project.published
-                        ? "bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)]"
-                        : "bg-amber-500/20 border border-amber-500/40 text-amber-400"
+                        ? "bg-emerald-500/90 text-zinc-950 shadow-[0_0_15px_rgba(16,185,129,0.5)]"
+                        : "bg-amber-500/90 text-zinc-950"
                     }`}
                   >
                     {project.published ? <Eye className="w-3 h-3" /> : <EyeOff className="w-3 h-3" />}
-                    <span>{project.published ? "LIVE" : "DRAFT"}</span>
+                    <span>{project.published ? "منشور (Live)" : "مسودة (Draft)"}</span>
                   </button>
                 </div>
 
                 {/* Category Pill */}
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full inline-block">
                   {PORTFOLIO_CATEGORIES.find((c) => c.id === project.category)?.labelEn || project.category}
                 </span>
 
-                <h3 className="text-lg font-bold text-zinc-100 mt-2 line-clamp-1">{project.title}</h3>
-                <p className="text-xs text-zinc-400 mt-1 line-clamp-2 leading-relaxed">{project.description}</p>
+                <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 mt-2 line-clamp-1">
+                  {project.title}
+                </h3>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
+                  {project.description}
+                </p>
               </div>
 
               {/* Card Actions */}
-              <div className="mt-5 pt-4 border-t border-white/[0.06] flex items-center justify-between">
-                <button
-                  onClick={() => openEditModal(project)}
-                  className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-zinc-300 hover:text-emerald-400 transition-colors"
-                >
-                  <Edit3 className="w-3.5 h-3.5" />
-                  <span>Edit</span>
-                </button>
+              <div className="mt-5 pt-4 border-t border-black/10 dark:border-white/[0.06] flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => openEditModal(project)}
+                    className="flex items-center gap-1 text-xs font-bold uppercase text-zinc-700 dark:text-zinc-300 hover:text-emerald-500 transition-colors"
+                  >
+                    <Edit3 className="w-3.5 h-3.5" />
+                    <span>تعديل</span>
+                  </button>
+
+                  <button
+                    onClick={() => duplicateProject(project)}
+                    className="flex items-center gap-1 text-xs font-bold uppercase text-zinc-700 dark:text-zinc-300 hover:text-emerald-500 transition-colors"
+                    title="تكرار المشروع"
+                  >
+                    <Copy className="w-3.5 h-3.5" />
+                    <span>نسخ</span>
+                  </button>
+                </div>
 
                 <button
                   onClick={() => removeProject(project.id)}
-                  className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-red-400/80 hover:text-red-400 transition-colors"
+                  className="flex items-center gap-1 text-xs font-bold uppercase text-red-500 hover:text-red-600 transition-colors"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
-                  <span>Delete</span>
+                  <span>حذف</span>
                 </button>
               </div>
             </div>
@@ -410,31 +517,31 @@ export function AdminPortfolioDashboard() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-2xl rounded-3xl border border-white/[0.08] bg-zinc-950 p-6 md:p-8 shadow-2xl backdrop-blur-2xl my-8 overflow-hidden max-h-[90vh] overflow-y-auto"
+              className="relative w-full max-w-2xl rounded-3xl border border-black/10 dark:border-white/[0.08] bg-white dark:bg-zinc-950 p-6 md:p-8 shadow-2xl backdrop-blur-2xl my-8 overflow-hidden max-h-[90vh] overflow-y-auto text-right"
             >
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-zinc-900 text-zinc-400 hover:text-white"
+                className="absolute top-4 left-4 flex h-8 w-8 items-center justify-center rounded-full border border-black/10 dark:border-white/10 bg-zinc-100 dark:bg-zinc-900 text-zinc-500 hover:text-zinc-900 dark:hover:text-white"
               >
                 <X className="w-4 h-4" />
               </button>
 
-              <h2 className="text-xl font-bold text-zinc-100 flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-emerald-400" />
-                <span>{editingId ? "Edit Case Study" : "Create New Case Study"}</span>
+              <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-emerald-500" />
+                <span>{editingId ? "تعديل بيانات المشروع" : "إضافة مشروع جديد للمعرض"}</span>
               </h2>
 
               <div className="mt-6 space-y-5">
                 {/* Category Selection */}
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">
-                    Service Category (Required)
+                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-2">
+                    تصنيف الخدمة (مطلوب)
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                     {[
-                      { id: "web-dev", label: "Web & Software", icon: Code2 },
-                      { id: "digital-marketing", label: "Digital Marketing", icon: Target },
-                      { id: "media-production", label: "Media Production", icon: Video },
+                      { id: "web-dev", label: "برمجة وتطوير الويب", icon: Code2 },
+                      { id: "digital-marketing", label: "تسويق رقمي", icon: Target },
+                      { id: "media-production", label: "إنتاج سينمائي وهوية", icon: Video },
                     ].map((cat) => {
                       const CatIcon = cat.icon;
                       const isSelected = form.category === cat.id;
@@ -445,11 +552,11 @@ export function AdminPortfolioDashboard() {
                           onClick={() => setForm((prev) => ({ ...prev, category: cat.id }))}
                           className={`flex items-center justify-center gap-2 p-3 rounded-xl border text-xs font-bold uppercase transition-all ${
                             isSelected
-                              ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)]"
-                              : "bg-zinc-900/60 border-white/[0.06] text-zinc-400 hover:text-zinc-200"
+                              ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-600 dark:text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)]"
+                              : "bg-zinc-100 dark:bg-zinc-900/60 border-black/10 dark:border-white/[0.06] text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
                           }`}
                         >
-                          <CatIcon className="w-4 h-4 text-emerald-400" />
+                          <CatIcon className="w-4 h-4 text-emerald-500" />
                           <span>{cat.label}</span>
                         </button>
                       );
@@ -457,61 +564,76 @@ export function AdminPortfolioDashboard() {
                   </div>
                 </div>
 
-                {/* Title */}
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1.5">
-                    Project Title
-                  </label>
-                  <input
-                    type="text"
-                    value={form.title}
-                    onChange={(e) => setForm({ ...form, title: e.target.value })}
-                    placeholder="e.g. NextGen E-Commerce Platform"
-                    className="w-full rounded-xl border border-white/10 bg-zinc-900/80 p-3 text-sm text-zinc-100 focus:border-emerald-500/50 focus:outline-none"
-                  />
+                {/* Title & Client Type */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
+                      عنوان المشروع (مطلوب)
+                    </label>
+                    <input
+                      type="text"
+                      value={form.title}
+                      onChange={(e) => setForm({ ...form, title: e.target.value })}
+                      placeholder="مثال: منصة تسوق إلكترونية متكاملة"
+                      className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-emerald-500 focus:outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
+                      نوع العميل / البراند
+                    </label>
+                    <input
+                      type="text"
+                      value={form.clientType}
+                      onChange={(e) => setForm({ ...form, clientType: e.target.value })}
+                      placeholder="مثال: شركة تطوير عقاري / SaaS"
+                      className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-emerald-500 focus:outline-none"
+                    />
+                  </div>
                 </div>
 
                 {/* Description */}
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1.5">
-                    Description
+                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
+                    وصف المشروع (مطلوب)
                   </label>
                   <textarea
                     rows={3}
                     value={form.description}
                     onChange={(e) => setForm({ ...form, description: e.target.value })}
-                    placeholder="Brief summary of the case study..."
-                    className="w-full rounded-xl border border-white/10 bg-zinc-900/80 p-3 text-sm text-zinc-100 focus:border-emerald-500/50 focus:outline-none"
+                    placeholder="شرح مختصر ومبهر عن تفاصيل المشروع ومميزاته..."
+                    className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
 
                 {/* Live Website URL */}
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1.5 flex items-center gap-1">
-                    <Globe className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>Live Website / Project Link (Optional)</span>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5 flex items-center gap-1">
+                    <Globe className="w-3.5 h-3.5 text-emerald-500" />
+                    <span>رابط الموقع الحي المباشر (اختياري)</span>
                   </label>
                   <input
                     type="text"
                     value={form.liveUrl}
                     onChange={(e) => setForm({ ...form, liveUrl: e.target.value })}
-                    placeholder="e.g. https://client-website.com"
-                    className="w-full rounded-xl border border-white/10 bg-zinc-900/80 p-3 text-sm text-zinc-100 focus:border-emerald-500/50 focus:outline-none"
+                    placeholder="https://client-website.com"
+                    className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-emerald-500 focus:outline-none"
                   />
                 </div>
 
                 {/* Main Cover Image Upload / URL */}
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1.5">
-                    Cover Image (Upload file or enter URL)
+                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
+                    صورة الغلاف الكفر (رفع ملف أو لصق رابط)
                   </label>
                   <div className="flex gap-2">
                     <input
                       type="text"
                       value={form.imageUrl}
                       onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
-                      placeholder="https://... or click upload"
-                      className="flex-1 rounded-xl border border-white/10 bg-zinc-900/80 p-3 text-sm text-zinc-100 focus:border-emerald-500/50 focus:outline-none"
+                      placeholder="https://... أو اضغط رفع صورة"
+                      className="flex-1 rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-emerald-500 focus:outline-none"
                     />
                     <input
                       ref={imageFileInputRef}
@@ -524,26 +646,26 @@ export function AdminPortfolioDashboard() {
                       type="button"
                       onClick={() => imageFileInputRef.current?.click()}
                       disabled={uploadingImg}
-                      className="flex items-center gap-1.5 rounded-xl border border-white/15 bg-zinc-900 px-4 text-xs font-bold uppercase text-emerald-400 hover:bg-zinc-800"
+                      className="flex items-center gap-1.5 rounded-xl border border-black/10 dark:border-white/15 bg-zinc-100 dark:bg-zinc-900 px-4 text-xs font-bold uppercase text-emerald-600 dark:text-emerald-400 hover:bg-zinc-200 dark:hover:bg-zinc-800"
                     >
                       <Upload className="w-4 h-4" />
-                      <span>{uploadingImg ? "..." : "Upload Image"}</span>
+                      <span>{uploadingImg ? "..." : "رفع صورة"}</span>
                     </button>
                   </div>
                 </div>
 
                 {/* Video Upload / URL */}
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1.5">
-                    Video Reel (Upload MP4 or YouTube / Vimeo URL)
+                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
+                    فيديو العرض Reel (رابط Google Drive أو YouTube أو MP4)
                   </label>
                   <div className="flex gap-2">
                     <input
                       type="text"
                       value={form.videoUrl}
                       onChange={(e) => setForm({ ...form, videoUrl: e.target.value })}
-                      placeholder="https://... or click upload MP4"
-                      className="flex-1 rounded-xl border border-white/10 bg-zinc-900/80 p-3 text-sm text-zinc-100 focus:border-emerald-500/50 focus:outline-none"
+                      placeholder="https://drive.google.com/... أو YouTube / Vimeo"
+                      className="flex-1 rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-emerald-500 focus:outline-none"
                     />
                     <input
                       ref={videoFileInputRef}
@@ -556,21 +678,21 @@ export function AdminPortfolioDashboard() {
                       type="button"
                       onClick={() => videoFileInputRef.current?.click()}
                       disabled={uploadingVid}
-                      className="flex items-center gap-1.5 rounded-xl border border-white/15 bg-zinc-900 px-4 text-xs font-bold uppercase text-emerald-400 hover:bg-zinc-800"
+                      className="flex items-center gap-1.5 rounded-xl border border-black/10 dark:border-white/15 bg-zinc-100 dark:bg-zinc-900 px-4 text-xs font-bold uppercase text-emerald-600 dark:text-emerald-400 hover:bg-zinc-200 dark:hover:bg-zinc-800"
                     >
                       <Film className="w-4 h-4" />
-                      <span>{uploadingVid ? "..." : "Upload Video"}</span>
+                      <span>{uploadingVid ? "..." : "رفع فيديو"}</span>
                     </button>
                   </div>
                 </div>
 
                 {/* Multi-Media Gallery Manager */}
                 {form.gallery.length > 0 && (
-                  <div className="rounded-2xl border border-white/[0.08] bg-zinc-900/40 p-4 space-y-3">
-                    <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-emerald-400">
+                  <div className="rounded-2xl border border-black/10 dark:border-white/[0.08] bg-zinc-50 dark:bg-zinc-900/40 p-4 space-y-3">
+                    <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-emerald-500">
                       <span className="flex items-center gap-1.5">
                         <Layers className="w-4 h-4" />
-                        <span>Project Media Gallery ({form.gallery.length} Items)</span>
+                        <span>معرض الوسائط الإضافية ({form.gallery.length} عناصر)</span>
                       </span>
                     </div>
 
@@ -578,7 +700,7 @@ export function AdminPortfolioDashboard() {
                       {form.gallery.map((media, idx) => (
                         <div
                           key={idx}
-                          className="group relative h-20 rounded-xl overflow-hidden border border-white/10 bg-zinc-950 flex items-center justify-center"
+                          className="group relative h-20 rounded-xl overflow-hidden border border-black/10 dark:border-white/10 bg-zinc-950 flex items-center justify-center"
                         >
                           {media.type === "image" ? (
                             /* eslint-disable-next-line @next/next/no-img-element */
@@ -594,7 +716,7 @@ export function AdminPortfolioDashboard() {
                             type="button"
                             onClick={() => removeGalleryItem(idx)}
                             className="absolute top-1 right-1 h-6 w-6 rounded-full bg-red-600/90 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                            title="Remove item"
+                            title="إزالة العنصر"
                           >
                             <X size={12} />
                           </button>
@@ -604,31 +726,61 @@ export function AdminPortfolioDashboard() {
                   </div>
                 )}
 
-
-                {/* Additional Optional Details */}
+                {/* Key Features Tags & Layout Size */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1.5">
-                      The Challenge (Optional)
+                    <label className="block text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
+                      الكلمات المفتاحية والمميزات (فواصل بين الكلمات)
+                    </label>
+                    <input
+                      type="text"
+                      value={form.keyFeatures}
+                      onChange={(e) => setForm({ ...form, keyFeatures: e.target.value })}
+                      placeholder="Next.js 14, تصوير درون, حماية عالية"
+                      className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-emerald-500 focus:outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
+                      حجم الكارت في Bento Grid
+                    </label>
+                    <select
+                      value={form.bentoSpan}
+                      onChange={(e) => setForm({ ...form, bentoSpan: e.target.value })}
+                      className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-emerald-500 focus:outline-none"
+                    >
+                      <option value="md:col-span-1 md:row-span-1">كارت قياسي (Standard 1x1)</option>
+                      <option value="md:col-span-2 md:row-span-2">كارت مميز كبير (Featured Big 2x2)</option>
+                      <option value="md:col-span-2 md:row-span-1">كارت عريض (Wide 2x1)</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Challenge & Solution */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
+                      التحدي والهدف (اختياري)
                     </label>
                     <textarea
                       rows={2}
                       value={form.challenge}
                       onChange={(e) => setForm({ ...form, challenge: e.target.value })}
-                      placeholder="Problem statement..."
-                      className="w-full rounded-xl border border-white/10 bg-zinc-900/80 p-2.5 text-xs text-zinc-100 focus:border-emerald-500/50 focus:outline-none"
+                      placeholder="أهداف العميل والتحديات المطلوبة..."
+                      className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-2.5 text-xs text-zinc-900 dark:text-zinc-100 focus:border-emerald-500 focus:outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1.5">
-                      The Solution (Optional)
+                    <label className="block text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
+                      الحل والتنفيذ (اختياري)
                     </label>
                     <textarea
                       rows={2}
                       value={form.solution}
                       onChange={(e) => setForm({ ...form, solution: e.target.value })}
-                      placeholder="Architectural solution..."
-                      className="w-full rounded-xl border border-white/10 bg-zinc-900/80 p-2.5 text-xs text-zinc-100 focus:border-emerald-500/50 focus:outline-none"
+                      placeholder="كيف قامت SHIFT بحل التحدي..."
+                      className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-2.5 text-xs text-zinc-900 dark:text-zinc-100 focus:border-emerald-500 focus:outline-none"
                     />
                   </div>
                 </div>
@@ -640,22 +792,22 @@ export function AdminPortfolioDashboard() {
                     id="publishedCheck"
                     checked={form.published}
                     onChange={(e) => setForm({ ...form, published: e.target.checked })}
-                    className="h-4 w-4 rounded accent-emerald-500"
+                    className="h-4 w-4 rounded accent-emerald-500 cursor-pointer"
                   />
-                  <label htmlFor="publishedCheck" className="text-xs font-bold uppercase text-zinc-200 cursor-pointer">
-                    Publish Immediately to Website (Live)
+                  <label htmlFor="publishedCheck" className="text-xs font-bold uppercase text-zinc-800 dark:text-zinc-200 cursor-pointer">
+                    نشر المشروع مباشرة في الموقع (Live)
                   </label>
                 </div>
               </div>
 
               {/* Modal Buttons */}
-              <div className="mt-8 flex justify-end gap-3 pt-4 border-t border-white/10">
+              <div className="mt-8 flex justify-end gap-3 pt-4 border-t border-black/10 dark:border-white/10">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="rounded-xl border border-white/10 bg-zinc-900 px-5 py-2.5 text-xs font-bold uppercase text-zinc-400 hover:text-white"
+                  className="rounded-xl border border-black/10 dark:border-white/10 bg-zinc-100 dark:bg-zinc-900 px-5 py-2.5 text-xs font-bold uppercase text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
                 >
-                  Cancel
+                  إلغاء
                 </button>
                 <button
                   type="button"
@@ -663,7 +815,7 @@ export function AdminPortfolioDashboard() {
                   disabled={saving}
                   className="rounded-xl bg-emerald-500 px-6 py-2.5 text-xs font-extrabold uppercase tracking-wider text-zinc-950 hover:bg-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.5)]"
                 >
-                  {saving ? "Saving..." : editingId ? "Update Project" : "Create Project"}
+                  {saving ? "جاري الحفظ..." : editingId ? "تحديث المشروع" : "إنشاء المشروع"}
                 </button>
               </div>
             </motion.div>

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring, useMotionTemplate } from "framer-motion";
 import { useLanguage } from "@/lib/language-context";
 import Link from "next/link";
-import { ArrowRight, Sparkles, Play, X, ExternalLink, Film, Image as ImageIcon, Layers, Eye } from "lucide-react";
+import { ArrowRight, Sparkles, Play, X, ExternalLink, Film, Image as ImageIcon, PlusCircle, Eye } from "lucide-react";
 import { PortfolioProject } from "@/lib/portfolio-types";
 import { ProjectVideoPlayer } from "@/components/project-video-player";
 
@@ -20,73 +20,6 @@ function getCategoryLabel(category: string, isAr: boolean) {
   }
   return category;
 }
-
-// Default showcase items displayed when data is freshly initialized
-const DEFAULT_BENTO_PROJECTS: PortfolioProject[] = [
-  {
-    id: "p_al_khaleej",
-    slug: "al-khaleej-real-estate",
-    title: "شركة الخليج للتطوير العقاري — سينمائي",
-    category: "media-production",
-    clientType: "Enterprise Real Estate",
-    description: "فيلم دعائي سينمائي شامل لمولات ومشاريع شركة الخليج للتطوير العقاري في مدينة السادات مع تصوير درون 8K وهوية بصرية فاخرة.",
-    imageUrl: "/portfolio-covers/al-khaleej-cover.png",
-    videoUrl: "https://drive.google.com/file/d/1uvCsyHN_RqUhRzK0MJRMB-ARrdPUmFad/view?usp=drive_link",
-    gallery: [
-      { type: "image", url: "/portfolio-covers/al-khaleej-cover.png" },
-      { type: "video", url: "https://drive.google.com/file/d/1uvCsyHN_RqUhRzK0MJRMB-ARrdPUmFad/view?usp=drive_link" },
-    ],
-    liveUrl: "",
-    challenge: "عرض أكثر من 12 مول تجاري ومواصفات تشطيبات الشركة في عرض بصري سينمائي واحد لافت للمستثمرين.",
-    solution: "تصوير احترافي بالدرون والكاميرات السينمائية وتلوين 8K يعكس فخامة العلامة التجارية.",
-    results: "تحقيق انتشار واسع في السوشيال ميديا واجتماعات المستثمرين.",
-    keyFeatures: ["8K Videography", "Drone Aerial Footage", "Commercial Real Estate"],
-    bentoSpan: "md:col-span-2 md:row-span-2",
-    published: true,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
-  {
-    id: "p_web_saas",
-    slug: "cloud-saas-platform",
-    title: "منصة Dev-UNIT السحابية",
-    category: "web-dev",
-    clientType: "Enterprise SaaS",
-    description: "تطوير نظام ويب متكامل بـ Next.js 14 وأنظمة ذكاء اصطناعي تفاعلية مع أداء تحت الثانية.",
-    imageUrl: "/portfolio-covers/web-dev-cover.png",
-    videoUrl: "",
-    gallery: [{ type: "image", url: "/portfolio-covers/web-dev-cover.png" }],
-    liveUrl: "https://shift-agency.com",
-    challenge: "معالجة بيانات ضخمة وعرض رسوم بيانية WebGL 3D دون أي بطء في الواجهة.",
-    solution: "استخدام Next.js App Router مع Server Components لسرعة تحميل فائقة.",
-    results: "زيادة سرعة التحميل 3.5x ومضاعفة معدل تحويل العملاء.",
-    keyFeatures: ["Next.js 14", "WebGL 3D", "Sub-second Latency"],
-    bentoSpan: "md:col-span-1 md:row-span-1",
-    published: true,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
-  {
-    id: "p_mobile_app",
-    slug: "omni-mobile-app",
-    title: "تطبيق Omni الذكي للموبايل",
-    category: "web-dev",
-    clientType: "iOS & Android Mobile App",
-    description: "تطبيق موبايل احترافي بـ Flutter مع تشفير كامل للبيانات وتجربة مستخدم سلسة للغاية.",
-    imageUrl: "/portfolio-covers/mobile-app-cover.png",
-    videoUrl: "",
-    gallery: [{ type: "image", url: "/portfolio-covers/mobile-app-cover.png" }],
-    liveUrl: "",
-    challenge: "تقديم تطبيق متوافق تماماً مع iOS و Android مع دعم البصمة والحماية الحيوية.",
-    solution: "معمارية Flutter هجينة فائقة السرعة مع تشفير AES-256.",
-    results: "+100,000 تنزيل وتقييم 4.9 على المتاجر.",
-    keyFeatures: ["Flutter Engine", "Biometric Auth", "Arabic RTL"],
-    bentoSpan: "md:col-span-1 md:row-span-1",
-    published: true,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
-];
 
 // Spotlight Bento Card Component
 function BentoGridCard({
@@ -147,8 +80,9 @@ function BentoGridCard({
       onMouseLeave={handleMouseLeave}
       onClick={() => onClick(project)}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      className={`group relative rounded-3xl p-[1px] bg-white/[0.08] cursor-pointer transition-all duration-500 hover:shadow-[0_0_50px_rgba(16,185,129,0.25)] ${project.bentoSpan || (isMain ? "md:col-span-2 md:row-span-2" : "md:col-span-1 md:row-span-1")
-        }`}
+      className={`group relative rounded-3xl p-[1px] bg-black/10 dark:bg-white/[0.08] cursor-pointer transition-all duration-500 hover:shadow-[0_0_50px_rgba(16,185,129,0.25)] ${
+        project.bentoSpan || (isMain ? "md:col-span-2 md:row-span-2" : "md:col-span-1 md:row-span-1")
+      }`}
     >
       {/* Mouse Spotlight Border */}
       <motion.div
@@ -156,7 +90,7 @@ function BentoGridCard({
         style={{ background: borderSpotlight }}
       />
 
-      <div className="relative h-full w-full min-h-[340px] md:min-h-[420px] rounded-[calc(1.5rem-1px)] overflow-hidden bg-zinc-950/90 backdrop-blur-2xl z-0 flex flex-col justify-between p-6 md:p-8">
+      <div className="relative h-full w-full min-h-[340px] md:min-h-[420px] rounded-[calc(1.5rem-1px)] overflow-hidden bg-white/90 dark:bg-zinc-950/90 backdrop-blur-2xl z-0 flex flex-col justify-between p-6 md:p-8">
         {/* Cover image */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -230,22 +164,22 @@ export function BentoPortfolio() {
   const isAr = language === "ar";
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [apiProjects, setApiProjects] = useState<PortfolioProject[]>([]);
+  const [loading, setLoading] = useState(true);
   const [activeModalProject, setActiveModalProject] = useState<PortfolioProject | null>(null);
 
   useEffect(() => {
     fetch("/api/portfolio?published=true", { cache: "no-store" })
       .then((res) => (res.ok ? res.json() : []))
       .then((data: PortfolioProject[]) => {
-        if (Array.isArray(data) && data.length > 0) {
+        if (Array.isArray(data)) {
           setApiProjects(data);
         }
       })
-      .catch(() => { });
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, []);
 
-  const projectsToDisplay = apiProjects.length > 0 ? apiProjects : DEFAULT_BENTO_PROJECTS;
-
-  const filteredProjects = projectsToDisplay.filter((project) => {
+  const filteredProjects = apiProjects.filter((project) => {
     if (selectedCategory === "all") return true;
     if (selectedCategory === "web-dev") return project.category === "web-dev" || project.category.includes("Web");
     if (selectedCategory === "digital-marketing") return project.category === "digital-marketing" || project.category.includes("Marketing");
@@ -269,24 +203,25 @@ export function BentoPortfolio() {
           <span>{isAr ? "معرض أعمال SHIFT التفاعلي" : "Interactive Portfolio Bento"}</span>
         </div>
 
-        <h2 className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-white via-zinc-200 to-zinc-500 bg-clip-text text-transparent">
+        <h2 className="text-4xl md:text-6xl font-extrabold text-zinc-900 dark:text-transparent dark:bg-gradient-to-r dark:from-white dark:via-zinc-200 dark:to-zinc-500 dark:bg-clip-text">
           {t.portfolio.title}
         </h2>
-        <p className="text-zinc-400 mt-3 max-w-2xl text-sm md:text-base leading-relaxed">
+        <p className="text-zinc-600 dark:text-zinc-400 mt-3 max-w-2xl text-sm md:text-base leading-relaxed">
           {t.portfolio.subtitle}
         </p>
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex flex-wrap items-center justify-center gap-2 mb-12 p-1.5 rounded-2xl border border-white/10 bg-zinc-950/80 backdrop-blur-2xl">
+      <div className="flex flex-wrap items-center justify-center gap-2 mb-12 p-1.5 rounded-2xl border border-black/10 dark:border-white/10 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-2xl">
         {categoryTabs.map((tab) => {
           const isActive = selectedCategory === tab.id;
           return (
             <button
               key={tab.id}
               onClick={() => setSelectedCategory(tab.id)}
-              className={`relative rounded-xl px-5 py-2.5 text-xs font-extrabold transition-all duration-300 ${isActive ? "text-zinc-950" : "text-zinc-400 hover:text-white"
-                }`}
+              className={`relative rounded-xl px-5 py-2.5 text-xs font-extrabold transition-all duration-300 ${
+                isActive ? "text-zinc-950" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+              }`}
             >
               {isActive && (
                 <motion.div
@@ -301,22 +236,61 @@ export function BentoPortfolio() {
         })}
       </div>
 
-      {/* Bento Grid */}
-      <motion.div
-        layout
-        className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
-      >
-        <AnimatePresence mode="popLayout">
-          {filteredProjects.map((project, idx) => (
-            <BentoGridCard
-              key={project.id}
-              project={project}
-              isMain={idx === 0}
-              onClick={(p) => setActiveModalProject(p)}
-            />
+      {/* Loading Skeleton */}
+      {loading && (
+        <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="h-96 rounded-3xl border border-white/10 bg-zinc-900/40 animate-pulse" />
           ))}
-        </AnimatePresence>
-      </motion.div>
+        </div>
+      )}
+
+      {/* Empty State when no real projects exist */}
+      {!loading && filteredProjects.length === 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="w-full max-w-lg rounded-3xl border border-dashed border-black/20 dark:border-white/20 bg-white/50 dark:bg-zinc-950/50 p-10 text-center backdrop-blur-xl flex flex-col items-center"
+        >
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 mb-4">
+            <Sparkles size={28} />
+          </div>
+          <h3 className="text-xl font-bold text-zinc-900 dark:text-white">
+            {isAr ? "لا توجد مشاريع مضافة حالياً" : "No Portfolio Projects Yet"}
+          </h3>
+          <p className="mt-2 text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-sm">
+            {isAr
+              ? "يتم التحكم بكافة المشاريع والمعروضات بشكل كامل ومباشر من خلال لوحة التحكم الخاصة بالشركة."
+              : "All portfolio projects are managed 100% dynamically from the admin panel."}
+          </p>
+          <Link
+            href="/admin"
+            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-6 py-3 text-xs font-extrabold uppercase tracking-wider text-zinc-950 transition hover:bg-emerald-400 hover:shadow-[0_0_25px_rgba(16,185,129,0.4)]"
+          >
+            <PlusCircle size={16} />
+            <span>{isAr ? "إضافة مشروع من لوحة التحكم" : "Add Project from Admin Panel"}</span>
+          </Link>
+        </motion.div>
+      )}
+
+      {/* Bento Grid */}
+      {!loading && filteredProjects.length > 0 && (
+        <motion.div
+          layout
+          className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, idx) => (
+              <BentoGridCard
+                key={project.id}
+                project={project}
+                isMain={idx === 0}
+                onClick={(p) => setActiveModalProject(p)}
+              />
+            ))}
+          </AnimatePresence>
+        </motion.div>
+      )}
 
       {/* Interactive Modal */}
       <AnimatePresence>
@@ -410,7 +384,7 @@ export function BentoPortfolio() {
                     href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP || "201211050297"}?text=${encodeURIComponent(`أهلاً ديبو، شفت مشروع "${activeModalProject.title}" وعايز انفذ فكرة مشابهة لشركتي.`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-6 py-3 text-xs font-extrabold uppercase tracking-wider text-zinc-950 transition hover:bg-emerald-400 hover:shadow-[0_0_30px_rgba(16,185,129,0.5)]"
+                    className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-6 py-3 text-xs font-extrabold uppercase tracking-wider text-zinc-950 transition hover:bg-emerald-400 hover:shadow-[0_0_30px_rgba(16,185,129,0.55)]"
                   >
                     <span>طلب مشروع مشابه على واتساب</span>
                     <ArrowRight size={16} />
