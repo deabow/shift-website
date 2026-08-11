@@ -12,6 +12,10 @@
       {
         "type": "video",
         "url": "https://vimeo.com/1217314483"
+      },
+      {
+        "type": "image",
+        "url": "https://res.cloudinary.com/dectynbgx/image/upload/v1786463061/shift-portfolio/lpxugp93qjf69ayo541y.jpg"
       }
     ],
     "liveUrl": "",
@@ -27,7 +31,7 @@
     "bentoSpan": "md:col-span-2 md:row-span-1",
     "published": true,
     "createdAt": "2026-08-11T18:35:00.000Z",
-    "updatedAt": "2026-08-11T18:35:00.000Z"
+    "updatedAt": "2026-08-11T15:44:27.731Z"
   },
   {
     "id": "p_khaleej_real_estate_drive",
@@ -42,6 +46,10 @@
       {
         "type": "video",
         "url": "https://drive.google.com/file/d/1uvCsyHN_RqUhRzK0MJRMB-ARrdPUmFad/view?usp=drive_link"
+      },
+      {
+        "type": "image",
+        "url": "https://res.cloudinary.com/dectynbgx/image/upload/v1786462980/shift-portfolio/lpa8yhismfkezy33ls4p.jpg"
       }
     ],
     "liveUrl": "",
@@ -56,7 +64,7 @@
     "bentoSpan": "md:col-span-1 md:row-span-1",
     "published": true,
     "createdAt": "2026-08-11T18:35:00.000Z",
-    "updatedAt": "2026-08-11T18:35:00.000Z"
+    "updatedAt": "2026-08-11T15:43:19.115Z"
   },
   {
     "id": "p_kamal_abou_ali_law_video",

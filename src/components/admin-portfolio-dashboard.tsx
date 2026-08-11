@@ -441,6 +441,18 @@ export function AdminPortfolioDashboard() {
                     </div>
                   )}
 
+                  {/* Quick Replace Cover Overlay */}
+                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                    <button
+                      type="button"
+                      onClick={() => openEditModal(project)}
+                      className="pointer-events-auto flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500 text-zinc-950 text-xs font-extrabold shadow-lg hover:scale-105 transition-transform"
+                    >
+                      <ImageIcon className="w-3.5 h-3.5" />
+                      <span>تغير صورة الكفر</span>
+                    </button>
+                  </div>
+
                   {/* Status Toggle Button */}
                   <button
                     onClick={() => togglePublished(project)}
@@ -625,14 +637,37 @@ export function AdminPortfolioDashboard() {
                 {/* Main Cover Image Upload / URL */}
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
-                    صورة الغلاف الكفر (رفع ملف أو لصق رابط)
+                    صورة الغلاف الكفر (رفع ملف جديدة أو تغيير الرابط)
                   </label>
+
+                  {/* Live Cover Preview if URL exists */}
+                  {form.imageUrl && (
+                    <div className="relative mb-3 h-36 w-full overflow-hidden rounded-2xl border border-emerald-500/30 bg-zinc-900 shadow-md">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={form.imageUrl}
+                        alt="Cover Preview"
+                        className="h-full w-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                        <button
+                          type="button"
+                          onClick={() => imageFileInputRef.current?.click()}
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500 text-zinc-950 text-xs font-extrabold shadow-lg"
+                        >
+                          <Upload className="w-3.5 h-3.5" />
+                          <span>تغيير هذه الصورة</span>
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="flex gap-2">
                     <input
                       type="text"
                       value={form.imageUrl}
                       onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
-                      placeholder="https://... أو اضغط رفع صورة"
+                      placeholder="https://... أو اضغط رفع صورة جديدة"
                       className="flex-1 rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-emerald-500 focus:outline-none"
                     />
                     <input
@@ -649,7 +684,7 @@ export function AdminPortfolioDashboard() {
                       className="flex items-center gap-1.5 rounded-xl border border-black/10 dark:border-white/15 bg-zinc-100 dark:bg-zinc-900 px-4 text-xs font-bold uppercase text-emerald-600 dark:text-emerald-400 hover:bg-zinc-200 dark:hover:bg-zinc-800"
                     >
                       <Upload className="w-4 h-4" />
-                      <span>{uploadingImg ? "..." : "رفع صورة"}</span>
+                      <span>{uploadingImg ? "جاري الرفع..." : "رفع صورة الكفر"}</span>
                     </button>
                   </div>
                 </div>
