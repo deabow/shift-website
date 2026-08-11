@@ -5,7 +5,6 @@ import dynamic from "next/dynamic";
 import SiteNavbar from "@/components/site-navbar";
 import SiteFooter from "@/components/site-footer";
 import { LanguageProvider } from "@/lib/language-context";
-import { ThemeProvider } from "@/lib/theme-context";
 import "./globals.css";
 
 // ── Heavy client components loaded lazily (reduces initial JS bundle) ──
@@ -66,23 +65,19 @@ export default function RootLayout({
   const cookieStore = cookies();
   const savedLang = cookieStore.get("language")?.value;
   const initialLanguage = savedLang === "ar" ? "ar" : "en";
-  const savedTheme = cookieStore.get("theme")?.value;
-  const initialTheme = savedTheme === "light" ? "light" : "dark";
   const dir = initialLanguage === "ar" ? "rtl" : "ltr";
 
   return (
-    <html lang={initialLanguage} dir={dir} className={initialTheme}>
-      <body className={`${inter.className} antialiased transition-colors duration-300`}>
-        <ThemeProvider initialTheme={initialTheme}>
-          <LanguageProvider initialLanguage={initialLanguage}>
-            <CustomCursor />
-            <ParticlesBackground />
-            <SiteNavbar />
-            {children}
-            <SiteFooter />
-            <ChatFab />
-          </LanguageProvider>
-        </ThemeProvider>
+    <html lang={initialLanguage} dir={dir}>
+      <body className={`${inter.className} bg-[#0a0a0a] text-white antialiased`}>
+        <LanguageProvider initialLanguage={initialLanguage}>
+          <CustomCursor />
+          <ParticlesBackground />
+          <SiteNavbar />
+          {children}
+          <SiteFooter />
+          <ChatFab />
+        </LanguageProvider>
       </body>
     </html>
   );

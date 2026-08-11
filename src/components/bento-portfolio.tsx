@@ -147,9 +147,8 @@ function BentoGridCard({
       onMouseLeave={handleMouseLeave}
       onClick={() => onClick(project)}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      className={`group relative rounded-3xl p-[1px] bg-black/10 dark:bg-white/[0.08] cursor-pointer transition-all duration-500 hover:shadow-[0_0_50px_rgba(16,185,129,0.25)] ${
-        project.bentoSpan || (isMain ? "md:col-span-2 md:row-span-2" : "md:col-span-1 md:row-span-1")
-      }`}
+      className={`group relative rounded-3xl p-[1px] bg-white/[0.08] cursor-pointer transition-all duration-500 hover:shadow-[0_0_50px_rgba(16,185,129,0.25)] ${project.bentoSpan || (isMain ? "md:col-span-2 md:row-span-2" : "md:col-span-1 md:row-span-1")
+        }`}
     >
       {/* Mouse Spotlight Border */}
       <motion.div
@@ -157,7 +156,7 @@ function BentoGridCard({
         style={{ background: borderSpotlight }}
       />
 
-      <div className="relative h-full w-full min-h-[340px] md:min-h-[420px] rounded-[calc(1.5rem-1px)] overflow-hidden bg-white/90 dark:bg-zinc-950/90 backdrop-blur-2xl z-0 flex flex-col justify-between p-6 md:p-8">
+      <div className="relative h-full w-full min-h-[340px] md:min-h-[420px] rounded-[calc(1.5rem-1px)] overflow-hidden bg-zinc-950/90 backdrop-blur-2xl z-0 flex flex-col justify-between p-6 md:p-8">
         {/* Cover image */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -241,7 +240,7 @@ export function BentoPortfolio() {
           setApiProjects(data);
         }
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   const projectsToDisplay = apiProjects.length > 0 ? apiProjects : DEFAULT_BENTO_PROJECTS;
@@ -270,25 +269,24 @@ export function BentoPortfolio() {
           <span>{isAr ? "معرض أعمال SHIFT التفاعلي" : "Interactive Portfolio Bento"}</span>
         </div>
 
-        <h2 className="text-4xl md:text-6xl font-extrabold text-zinc-900 dark:text-transparent dark:bg-gradient-to-r dark:from-white dark:via-zinc-200 dark:to-zinc-500 dark:bg-clip-text">
+        <h2 className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-white via-zinc-200 to-zinc-500 bg-clip-text text-transparent">
           {t.portfolio.title}
         </h2>
-        <p className="text-zinc-600 dark:text-zinc-400 mt-3 max-w-2xl text-sm md:text-base leading-relaxed">
+        <p className="text-zinc-400 mt-3 max-w-2xl text-sm md:text-base leading-relaxed">
           {t.portfolio.subtitle}
         </p>
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex flex-wrap items-center justify-center gap-2 mb-12 p-1.5 rounded-2xl border border-black/10 dark:border-white/10 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-2xl">
+      <div className="flex flex-wrap items-center justify-center gap-2 mb-12 p-1.5 rounded-2xl border border-white/10 bg-zinc-950/80 backdrop-blur-2xl">
         {categoryTabs.map((tab) => {
           const isActive = selectedCategory === tab.id;
           return (
             <button
               key={tab.id}
               onClick={() => setSelectedCategory(tab.id)}
-              className={`relative rounded-xl px-5 py-2.5 text-xs font-extrabold transition-all duration-300 ${
-                isActive ? "text-zinc-950" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
-              }`}
+              className={`relative rounded-xl px-5 py-2.5 text-xs font-extrabold transition-all duration-300 ${isActive ? "text-zinc-950" : "text-zinc-400 hover:text-white"
+                }`}
             >
               {isActive && (
                 <motion.div

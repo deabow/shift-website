@@ -7,17 +7,6 @@
   --foreground: #ffffff;
   --foreground-muted: #d4d4d8;
   --accent: #10b981;
-  --card-bg: rgba(9, 9, 11, 0.9);
-  --card-border: rgba(255, 255, 255, 0.08);
-}
-
-html.light {
-  --background: #fafafa;
-  --foreground: #09090b;
-  --foreground-muted: #52525b;
-  --accent: #10b981;
-  --card-bg: rgba(255, 255, 255, 0.85);
-  --card-border: rgba(0, 0, 0, 0.08);
 }
 
 html {
@@ -38,33 +27,12 @@ body {
   min-height: 100vh;
   color: var(--foreground);
   background-color: var(--background);
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-html.dark body {
-  background-image: radial-gradient(
-      650px circle at 18% 10%,
+  background-image: radial-gradient(650px circle at 18% 10%,
       rgba(16, 185, 129, 0.10),
-      transparent 60%
-    ),
-    radial-gradient(
-      500px circle at 80% 85%,
+      transparent 60%),
+    radial-gradient(500px circle at 80% 85%,
       rgba(5, 150, 105, 0.06),
-      transparent 55%
-    );
-}
-
-html.light body {
-  background-image: radial-gradient(
-      650px circle at 18% 10%,
-      rgba(16, 185, 129, 0.06),
-      transparent 60%
-    ),
-    radial-gradient(
-      500px circle at 80% 85%,
-      rgba(5, 150, 105, 0.04),
-      transparent 55%
-    );
+      transparent 55%);
 }
 
 body,
@@ -75,14 +43,10 @@ textarea {
     Helvetica, Arial, sans-serif;
 }
 
-/* Scrollbar theme */
+/* Dark, minimal scrollbar theme */
 * {
   scrollbar-width: thin;
   scrollbar-color: #10b981 #0f0f12;
-}
-
-html.light * {
-  scrollbar-color: #10b981 #f4f4f5;
 }
 
 ::-webkit-scrollbar {
@@ -93,18 +57,9 @@ html.light * {
   background: #0f0f12;
 }
 
-html.light ::-webkit-scrollbar-track {
-  background: #f4f4f5;
-}
-
 ::-webkit-scrollbar-thumb {
   border-radius: 999px;
   border: 2px solid #0f0f12;
-  background: linear-gradient(180deg, #10b981, #059669);
-}
-
-html.light ::-webkit-scrollbar-thumb {
-  border: 2px solid #f4f4f5;
   background: linear-gradient(180deg, #10b981, #059669);
 }
 
@@ -118,7 +73,24 @@ html.light ::-webkit-scrollbar-thumb {
   }
 }
 
-/* ── Matrix animation layer ── */
+/* ── Equalizer bar animation (replaces 16 Framer Motion instances) ── */
+@keyframes eq-bar {
+  0% {
+    height: var(--eq-h, 30%);
+    transform: scaleY(0.3);
+  }
+
+  50% {
+    height: var(--eq-h, 30%);
+    transform: scaleY(1);
+  }
+
+  100% {
+    height: var(--eq-h, 30%);
+    transform: scaleY(0.4);
+  }
+}
+
 .matrix-code-layer {
   display: grid;
   grid-template-rows: repeat(6, 1fr);
@@ -152,11 +124,42 @@ html.light ::-webkit-scrollbar-thumb {
     transform: translateY(0);
     opacity: 0.5;
   }
+
   50% {
     opacity: 0.95;
   }
+
   100% {
     transform: translateY(24px);
     opacity: 0.5;
+  }
+}
+
+.hero-3d-orb {
+  background: radial-gradient(circle at 30% 28%,
+      rgba(167, 139, 250, 0.65),
+      transparent 40%),
+    radial-gradient(circle at 65% 65%,
+      rgba(45, 212, 191, 0.4),
+      transparent 45%),
+    linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(15, 23, 42, 0.2));
+  box-shadow: inset -30px -30px 70px rgba(0, 0, 0, 0.28),
+    inset 22px 22px 60px rgba(255, 255, 255, 0.06),
+    0 0 90px rgba(139, 92, 246, 0.34);
+  filter: blur(0.2px);
+  animation: hero-orb-float 9s ease-in-out infinite;
+}
+
+@keyframes hero-orb-float {
+  0% {
+    transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg) scale(0.98);
+  }
+
+  50% {
+    transform: translate(-50%, -52%) rotateX(8deg) rotateY(-8deg) scale(1.04);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg) scale(0.98);
   }
 }
