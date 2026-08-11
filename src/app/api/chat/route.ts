@@ -38,35 +38,35 @@ const RETRY_BASE_DELAY_MS = 1000;
 
 function getLocalFallbackResponse(message: string): { reply: string; showWhatsApp: boolean } {
   const lowerMsg = message.toLowerCase();
-  
+
   if (lowerMsg.includes("سعر") || lowerMsg.includes("أسعار") || lowerMsg.includes("بكام") || lowerMsg.includes("price") || lowerMsg.includes("تكلفة")) {
     return {
       reply: "أسعارنا بتختلف حسب حجم المشروع وتفاصيله. تقدر تكلم ديبو على واتساب وهيديك تسعير دقيق بعد ما يفهم متطلباتك! 💬",
       showWhatsApp: true
     };
   }
-  
+
   if (lowerMsg.includes("خدمات") || lowerMsg.includes("بتعملوا ايه") || lowerMsg.includes("services")) {
     return {
       reply: "إحنا في SHIFT بنقدم 4 خدمات أساسية: تطوير مواقع وتطبيقات، تسويق رقمي، هوية بصرية وإنتاج سينمائي، وأمن سيبراني. محتاج تفاصيل عن خدمة معينة؟",
       showWhatsApp: false
     };
   }
-  
+
   if (lowerMsg.includes("موبايل") || lowerMsg.includes("تطبيقات") || lowerMsg.includes("app")) {
     return {
       reply: "بنبرمج تطبيقات الموبايل باستخدام Flutter و React Native عشان نضمن أعلى أداء على iOS و Android. كلم ديبو لو عندك فكرة تطبيق!",
       showWhatsApp: true
     };
   }
-  
+
   if (lowerMsg.includes("سلام") || lowerMsg.includes("اهلا") || lowerMsg.includes("أهلا") || lowerMsg.includes("hi") || lowerMsg.includes("مرحبا")) {
     return {
       reply: "أهلاً بيك! إزاي أقدر أساعدك في تطوير البيزنس بتاعك النهاردة؟",
       showWhatsApp: false
     };
   }
-  
+
   return {
     reply: "انا المساعد الذكي لـ SHIFT! حالياً في ضغط على السيرفر بس تقدر تكلم ديبو مباشرة على واتساب وهيجاوبك فوراً 👇",
     showWhatsApp: true
@@ -205,7 +205,7 @@ export async function POST(req: Request): Promise<NextResponse> {
   logger.info("chat", `Sending ${sanitizedContents.length} turn(s) to Gemini`);
 
   let replyText = null;
-  
+
   if (apiKey) {
     replyText = await callGeminiWithRetry(sanitizedContents, apiKey);
   } else {
@@ -222,9 +222,9 @@ export async function POST(req: Request): Promise<NextResponse> {
   }
 
   logger.warn("chat", "All Gemini retries failed or API key invalid, returning smart fallback");
-  
+
   const fallback = getLocalFallbackResponse(rawMessage);
-  
+
   const response = NextResponse.json<ChatResponse>(fallback);
   applyRateLimitHeaders(response, rateResult);
   return response;

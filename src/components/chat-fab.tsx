@@ -130,11 +130,10 @@ function MessageBubble({ msg }: { msg: Message }) {
       className={`flex ${isUser ? "justify-start" : "justify-end"}`}
     >
       <div
-        className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
-          isUser
+        className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${isUser
             ? "rounded-tr-none bg-[#10b981] text-white shadow-[0_4px_20px_rgba(16,185,129,0.3)]"
             : "rounded-tl-none border border-white/10 bg-white/[0.06] text-zinc-200"
-        }`}
+          }`}
       >
         {msg.text}
       </div>
@@ -287,11 +286,10 @@ function ChatWindow({
         {!showWhatsApp && (
           <p className="mt-2 text-center text-[10px] text-zinc-600">
             {MAX_USER_MESSAGES - messages.filter((m) => m.role === "user").length > 0
-              ? `${MAX_USER_MESSAGES - messages.filter((m) => m.role === "user").length} ${
-                  MAX_USER_MESSAGES - messages.filter((m) => m.role === "user").length === 1
-                    ? "سؤال متبقي"
-                    : "أسئلة متبقية"
-                }`
+              ? `${MAX_USER_MESSAGES - messages.filter((m) => m.role === "user").length} ${MAX_USER_MESSAGES - messages.filter((m) => m.role === "user").length === 1
+                ? "سؤال متبقي"
+                : "أسئلة متبقية"
+              }`
               : ""}
           </p>
         )}
