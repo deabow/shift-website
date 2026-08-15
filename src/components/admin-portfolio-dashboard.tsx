@@ -186,17 +186,17 @@ export function AdminPortfolioDashboard() {
       if (type === "image") {
         setForm((prev) => ({
           ...prev,
-          imageUrl: prev.imageUrl || url,
+          imageUrl: url,
           gallery: [...prev.gallery, newItem],
         }));
-        toast("Image uploaded & added to gallery!");
+        toast("Image uploaded & set as cover!");
       } else {
         setForm((prev) => ({
           ...prev,
-          videoUrl: prev.videoUrl || url,
+          videoUrl: url,
           gallery: [...prev.gallery, newItem],
         }));
-        toast("Video uploaded & added to gallery!");
+        toast("Video uploaded & added to reel!");
       }
     } catch (err) {
       toast(err instanceof Error ? err.message : "Upload failed.", "error");
