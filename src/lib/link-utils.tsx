@@ -20,11 +20,11 @@ export function renderFormattedDescription(text: string): React.ReactNode {
           href={part}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 font-bold text-emerald-400 underline underline-offset-4 transition-colors hover:text-emerald-300"
+          className="inline-flex items-center gap-1 font-bold text-violet-400 underline underline-offset-4 transition-colors hover:text-violet-300"
           onClick={(e) => e.stopPropagation()}
         >
           <span>{displayUrl}</span>
-          <ExternalLink size={12} className="shrink-0 text-emerald-400" />
+          <ExternalLink size={12} className="shrink-0 text-violet-400" />
         </a>
       );
     }

@@ -22,7 +22,7 @@ export function BentoServices() {
   return (
     <section className="w-full max-w-6xl mx-auto px-4 md:px-8 py-24 md:py-32 z-10 relative">
       {/* Background ambient lighting for Bento section */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[600px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/5 blur-[160px]" />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[600px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-500/5 blur-[160px]" />
 
       {/* Section Header with Cyber Badge & Typographic Hierarchy */}
       <motion.div
@@ -32,14 +32,14 @@ export function BentoServices() {
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className="mb-16 md:mb-20 flex flex-col items-center text-center"
       >
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/[0.08] border border-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-[0.2em] mb-4 backdrop-blur-md shadow-[0_0_20px_rgba(16,185,129,0.15)]">
-          <Sparkles className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-violet-500/[0.08] border border-violet-500/20 text-violet-400 text-xs font-semibold uppercase tracking-[0.2em] mb-4 backdrop-blur-md shadow-[0_0_20px_rgba(139, 92, 246,0.15)]">
+          <Sparkles className="w-3.5 h-3.5 text-violet-400 animate-pulse" />
           <span>Core Capabilities</span>
         </div>
 
         <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-5 text-zinc-100 leading-[1.1]">
           {t.services.title}{" "}
-          <span className="bg-gradient-to-r from-emerald-400 via-emerald-300 to-teal-200 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-violet-400 via-violet-300 to-fuchsia-300 bg-clip-text text-transparent">
             Engineered.
           </span>
         </h2>
@@ -68,22 +68,22 @@ export function BentoServices() {
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block" />
                 <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block" />
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
+                <span className="w-2.5 h-2.5 rounded-full bg-violet-500/80 inline-block" />
                 <span className="text-[11px] text-zinc-400 ml-2 font-sans font-medium flex items-center gap-1.5">
-                  <Terminal className="w-3 h-3 text-emerald-400" />
+                  <Terminal className="w-3 h-3 text-violet-400" />
                   shift-app.config.ts
                 </span>
               </div>
-              <span className="text-[10px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded font-sans flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping inline-block" />
+              <span className="text-[10px] text-violet-400 bg-violet-500/10 border border-violet-500/20 px-2 py-0.5 rounded font-sans flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-ping inline-block" />
                 OPTIMIZED 100 FPS
               </span>
             </div>
             <div className="space-y-1.5 text-zinc-300 overflow-x-auto leading-relaxed">
               <p className="text-zinc-500">{"// Initialize High-Frequency Cyber System"}</p>
               <p>
-                <span className="text-emerald-400">export const</span> appConfig ={" "}
-                <span className="text-emerald-300">defineEngine</span>&#40;&#123;
+                <span className="text-violet-400">export const</span> appConfig ={" "}
+                <span className="text-violet-300">defineEngine</span>&#40;&#123;
               </p>
               <p className="pl-4">
                 framework: <span className="text-amber-300">&quot;Next.js App Router&quot;</span>,
@@ -92,7 +92,7 @@ export function BentoServices() {
                 performance: <span className="text-amber-300">&quot;Ultra Low Latency&quot;</span>,
               </p>
               <p className="pl-4">
-                cyberShield: <span className="text-emerald-400">true</span>,
+                cyberShield: <span className="text-violet-400">true</span>,
               </p>
               <p>&#125;&#41;;</p>
             </div>
@@ -115,10 +115,10 @@ export function BentoServices() {
           <div className="mt-8 rounded-xl border border-white/[0.08] bg-zinc-950/90 p-5 shadow-2xl relative overflow-hidden flex flex-col justify-between">
             <div className="flex items-center justify-between mb-4">
               <span className="text-xs font-semibold text-zinc-400 flex items-center gap-1.5">
-                <TrendingUp className="w-4 h-4 text-emerald-400" />
+                <TrendingUp className="w-4 h-4 text-violet-400" />
                 Conversion Surge
               </span>
-              <span className="text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full">
+              <span className="text-xs font-bold text-violet-400 bg-violet-500/10 border border-violet-500/20 px-2.5 py-1 rounded-full">
                 +340% YoY
               </span>
             </div>
@@ -128,14 +128,14 @@ export function BentoServices() {
               <svg className="w-full h-full overflow-visible" viewBox="0 0 200 60">
                 <defs>
                   <linearGradient id="growthGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#10b981" stopOpacity="0.4" />
-                    <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
+                    <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.4" />
+                    <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0" />
                   </linearGradient>
                 </defs>
                 <path
                   d="M0,50 Q40,45 80,30 T160,15 T200,5"
                   fill="none"
-                  stroke="#10b981"
+                  stroke="#8b5cf6"
                   strokeWidth="3"
                   strokeLinecap="round"
                 />
@@ -144,8 +144,8 @@ export function BentoServices() {
                   fill="url(#growthGradient)"
                 />
                 {/* Glowing Pulse Dot */}
-                <circle cx="200" cy="5" r="4" fill="#34d399" className="animate-ping" />
-                <circle cx="200" cy="5" r="4" fill="#10b981" />
+                <circle cx="200" cy="5" r="4" fill="#a78bfa" className="animate-ping" />
+                <circle cx="200" cy="5" r="4" fill="#8b5cf6" />
               </svg>
             </div>
           </div>
@@ -174,7 +174,7 @@ export function BentoServices() {
               <div className="flex items-center gap-3 font-mono text-[11px] text-zinc-400">
                 <span>FPS: 60</span>
                 <span>ISO: 800</span>
-                <span className="text-emerald-400 font-semibold">ANAMORPHIC</span>
+                <span className="text-violet-400 font-semibold">ANAMORPHIC</span>
               </div>
             </div>
 
@@ -183,7 +183,7 @@ export function BentoServices() {
               {[40, 75, 30, 95, 60, 100, 45, 85, 50, 90, 65, 35, 80, 55, 95, 40].map((height, i) => (
                 <div
                   key={i}
-                  className="w-1.5 bg-gradient-to-t from-emerald-600 via-emerald-400 to-teal-200 rounded-full"
+                  className="w-1.5 bg-gradient-to-t from-violet-600 via-violet-400 to-fuchsia-300 rounded-full"
                   style={{
                     animation: `eq-bar 1.2s ease-in-out ${i * 0.08}s infinite alternate`,
                     height: `${height * 0.3}%`,
@@ -196,10 +196,10 @@ export function BentoServices() {
 
             <div className="flex items-center justify-between text-[11px] text-zinc-400 pt-3 border-t border-white/[0.08] font-mono">
               <span className="flex items-center gap-1.5 text-zinc-300">
-                <Film className="w-3.5 h-3.5 text-emerald-400" />
+                <Film className="w-3.5 h-3.5 text-violet-400" />
                 SHIFT CINEMA CORE v2.4
               </span>
-              <span className="text-emerald-400/80">DOLBY ATMOS SYNC</span>
+              <span className="text-violet-400/80">DOLBY ATMOS SYNC</span>
             </div>
           </div>
         </BentoCard>
@@ -266,8 +266,8 @@ function BentoCard({
   const borderSpotlight = useMotionTemplate`
     radial-gradient(
       320px circle at ${mouseX}px ${mouseY}px,
-      rgba(16, 185, 129, 0.8) 0%,
-      rgba(16, 185, 129, 0.2) 45%,
+      rgba(139, 92, 246, 0.8) 0%,
+      rgba(139, 92, 246, 0.2) 45%,
       transparent 80%
     )
   `;
@@ -275,8 +275,8 @@ function BentoCard({
   const innerSpotlight = useMotionTemplate`
     radial-gradient(
       450px circle at ${mouseX}px ${mouseY}px,
-      rgba(16, 185, 129, 0.12) 0%,
-      rgba(5, 150, 105, 0.03) 50%,
+      rgba(139, 92, 246, 0.12) 0%,
+      rgba(124, 58, 237, 0.03) 50%,
       transparent 80%
     )
   `;
@@ -294,7 +294,7 @@ function BentoCard({
         rotateY,
         transformStyle: "preserve-3d",
       }}
-      className={`group relative rounded-3xl p-[1px] bg-white/[0.08] transition-all duration-500 hover:shadow-[0_0_50px_rgba(16,185,129,0.15)] ${colSpan}`}
+      className={`group relative rounded-3xl p-[1px] bg-white/[0.08] transition-all duration-500 hover:shadow-[0_0_50px_rgba(139, 92, 246,0.15)] ${colSpan}`}
     >
       {/* ── Advanced Hover State: Mouse-Tracking Spotlight Border Glow ── */}
       <motion.div
@@ -316,11 +316,11 @@ function BentoCard({
         <div>
           {/* Top Row: Numeric Cyber Index & Badge */}
           <div className="flex items-center justify-between mb-6">
-            <span className="font-mono text-2xl md:text-3xl font-black text-emerald-400/40 group-hover:text-emerald-400 transition-colors duration-500">
+            <span className="font-mono text-2xl md:text-3xl font-black text-violet-400/40 group-hover:text-violet-400 transition-colors duration-500">
               {index}
             </span>
-            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900/80 border border-white/10 text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-400">
-              <Icon className="w-3.5 h-3.5 text-emerald-400" />
+            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900/80 border border-white/10 text-[11px] font-bold uppercase tracking-[0.2em] text-violet-400">
+              <Icon className="w-3.5 h-3.5 text-violet-400" />
               <span>{badge}</span>
             </div>
           </div>
@@ -342,7 +342,7 @@ function BentoCard({
                 {tags.map((tag, i) => (
                   <span
                     key={i}
-                    className="text-[11px] font-medium text-zinc-400 bg-zinc-900/90 border border-white/[0.06] px-2.5 py-1 rounded-md group-hover:border-emerald-500/20 group-hover:text-zinc-300 transition-colors"
+                    className="text-[11px] font-medium text-zinc-400 bg-zinc-900/90 border border-white/[0.06] px-2.5 py-1 rounded-md group-hover:border-violet-500/20 group-hover:text-zinc-300 transition-colors"
                   >
                     {tag}
                   </span>
@@ -360,14 +360,14 @@ function BentoCard({
           <MagneticWrapper distanceMultiplier={0.25}>
             <Link
               href={ctaHref}
-              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-zinc-300 group-hover:text-emerald-400 transition-colors py-2 px-1"
+              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-zinc-300 group-hover:text-violet-400 transition-colors py-2 px-1"
             >
               <span>{ctaText}</span>
-              <ArrowUpRight className="w-4 h-4 text-zinc-400 group-hover:text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+              <ArrowUpRight className="w-4 h-4 text-zinc-400 group-hover:text-violet-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
             </Link>
           </MagneticWrapper>
 
-          <div className="w-2 h-2 rounded-full bg-emerald-500/30 group-hover:bg-emerald-400 group-hover:shadow-[0_0_10px_#10b981] transition-all" />
+          <div className="w-2 h-2 rounded-full bg-violet-500/30 group-hover:bg-violet-400 group-hover:shadow-[0_0_10px_#8b5cf6] transition-all" />
         </div>
       </div>
     </motion.div>

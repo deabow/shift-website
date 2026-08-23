@@ -37,7 +37,7 @@ export function Testimonials() {
       
       <div className="text-center mb-16 px-4 relative z-10">
         <h2 className="text-3xl md:text-5xl font-bold mb-4">
-          <span className="bg-gradient-to-r from-purple-400 to-emerald-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-purple-400 to-violet-400 bg-clip-text text-transparent">
             {t.testimonials.title}
           </span>
         </h2>
@@ -72,7 +72,7 @@ export function Testimonials() {
               <p className="text-zinc-300 text-lg mb-6 leading-relaxed text-center" dir="ltr">&quot;{tItem.content}&quot;</p>
               <div dir="ltr" className="text-center">
                 <h4 className="text-white font-bold">{tItem.name}</h4>
-                <p className="text-emerald-400 text-sm">{tItem.role}</p>
+                <p className="text-violet-400 text-sm">{tItem.role}</p>
               </div>
             </div>
           ))}

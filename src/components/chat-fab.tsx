@@ -5,7 +5,7 @@ import { ArrowLeft, MessageCircle, Send, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
-const DEBO_WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP || "201211050297";
+const CEO_WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP || "201211050297";
 const MAX_USER_MESSAGES = 3;
 const LOTTIE_URL = "https://assets2.lottiefiles.com/packages/lf20_jcikwtux.json";
 
@@ -28,15 +28,15 @@ function buildWhatsAppLink(messages: Message[]): string {
     .map((m, i) => `${i + 1}. ${m.text}`)
     .join("\n");
 
-  const text = `أهلاً ديبو 👋
+  const text = `أهلاً CEO SHIFT 👋
 كنت بتكلم مع Shift AI Agent وعندي استفسار عن خدمات SHIFT.
 
 📋 ملخص المحادثة:
 ${userMessages}
 
-أنا مهتم بالتعاون مع SHIFT، ممكن تكلمني؟`;
+أنا مهتم بالتعاون مع SHIFT، ممكن نتواصل؟`;
 
-  return `https://wa.me/${DEBO_WHATSAPP}?text=${encodeURIComponent(text)}`;
+  return `https://wa.me/${CEO_WHATSAPP}?text=${encodeURIComponent(text)}`;
 }
 
 function uid(): string {
@@ -81,7 +81,7 @@ function RobotAvatar({ shouldLoad = false }: { shouldLoad?: boolean }) {
 
   if (LottiePlayer && animData) {
     return (
-      <div className="relative h-9 w-9 overflow-hidden rounded-full border border-emerald-400/30 bg-emerald-400/10">
+      <div className="relative h-9 w-9 overflow-hidden rounded-full border border-violet-400/30 bg-violet-400/10">
         <LottiePlayer
           animationData={animData}
           play
@@ -94,7 +94,7 @@ function RobotAvatar({ shouldLoad = false }: { shouldLoad?: boolean }) {
 
   // Fallback
   return (
-    <div className="flex h-9 w-9 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-400/10 text-base">
+    <div className="flex h-9 w-9 items-center justify-center rounded-full border border-violet-400/30 bg-violet-400/10 text-base">
       🤖
     </div>
   );
@@ -109,7 +109,7 @@ function TypingDots() {
           {[0, 150, 300].map((delay) => (
             <span
               key={delay}
-              className="h-2 w-2 rounded-full bg-emerald-400/70 animate-bounce"
+              className="h-2 w-2 rounded-full bg-violet-400/70 animate-bounce"
               style={{ animationDelay: `${delay}ms` }}
             />
           ))}
@@ -131,7 +131,7 @@ function MessageBubble({ msg }: { msg: Message }) {
     >
       <div
         className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${isUser
-          ? "rounded-tr-none bg-[#10b981] text-white shadow-[0_4px_20px_rgba(16,185,129,0.3)]"
+          ? "rounded-tr-none bg-[#8b5cf6] text-white shadow-[0_4px_20px_rgba(139, 92, 246,0.3)]"
           : "rounded-tl-none border border-white/10 bg-white/[0.06] text-zinc-200"
           }`}
       >
@@ -151,7 +151,7 @@ function WhatsAppCTA({ href }: { href: string }) {
       className="space-y-2"
     >
       <p className="text-center text-[11px] text-zinc-500">
-        ديبو مستنيك على واتساب دلوقتي 👇
+        CEO SHIFT متاح للتواصل على واتساب الآن 👇
       </p>
       <motion.a
         href={href}
@@ -167,7 +167,7 @@ function WhatsAppCTA({ href }: { href: string }) {
           animate={{ opacity: [0.25, 0.4, 0.25] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
         />
-        <span className="relative z-10">ابعت لديبو على واتساب</span>
+        <span className="relative z-10">تواصل مع CEO SHIFT على واتساب</span>
         <ArrowLeft size={18} className="relative z-10" />
       </motion.a>
     </motion.div>
@@ -226,9 +226,9 @@ function ChatWindow({
       <div className="flex items-center gap-3 border-b border-white/10 px-4 py-3">
         <RobotAvatar shouldLoad />
         <div className="flex-1">
-          <p className="text-xs font-bold text-emerald-400">Shift AI Agent</p>
+          <p className="text-xs font-bold text-violet-400">Shift AI Agent</p>
           <div className="flex items-center gap-1.5 mt-0.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse" />
             <span className="text-[10px] text-zinc-400">أونلاين الآن</span>
           </div>
         </div>
@@ -267,14 +267,14 @@ function ChatWindow({
               onChange={(e) => onInputChange(e.target.value)}
               disabled={isInputDisabled || isTyping}
               placeholder={
-                isInputDisabled ? "جاري التوصيل بديبو..." : "اكتب رسالتك..."
+                isInputDisabled ? "جاري التحويل إلى CEO SHIFT..." : "اكتب رسالتك..."
               }
-              className="flex-1 rounded-xl border border-white/15 bg-black/40 px-3 py-2.5 text-right text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-emerald-500/50 disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex-1 rounded-xl border border-white/15 bg-black/40 px-3 py-2.5 text-right text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-violet-500/50 disabled:cursor-not-allowed disabled:opacity-40"
             />
             <button
               type="submit"
               disabled={!input.trim() || isTyping || isInputDisabled}
-              className="flex shrink-0 items-center justify-center rounded-xl bg-[#10b981] p-2.5 text-black transition hover:bg-emerald-400 disabled:opacity-40"
+              className="flex shrink-0 items-center justify-center rounded-xl bg-[#8b5cf6] p-2.5 text-black transition hover:bg-violet-400 disabled:opacity-40"
               aria-label="إرسال"
             >
               <Send size={17} className="rotate-180" />
@@ -372,7 +372,7 @@ export function ChatFab() {
           {
             id: uid(),
             role: "bot",
-            text: "عندي مشكلة تقنية بسيطة دلوقتي 😅 تقدر تكلم ديبو مباشرة على واتساب وهيساعدك فوراً.",
+            text: "عندي مشكلة تقنية بسيطة دلوقتي 😅 تقدر تتواصل مع CEO SHIFT مباشرة على واتساب وهيساعدك فوراً.",
           },
         ]);
         setShowWhatsApp(true);
@@ -407,13 +407,13 @@ export function ChatFab() {
         onClick={() => setIsOpen((prev) => !prev)}
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.93 }}
-        className="relative flex h-14 w-14 items-center justify-center rounded-full border border-emerald-500/30 bg-[#10b981] text-black shadow-[0_12px_35px_rgba(16,185,129,0.5)] transition"
+        className="relative flex h-14 w-14 items-center justify-center rounded-full border border-violet-500/30 bg-[#8b5cf6] text-black shadow-[0_12px_35px_rgba(139, 92, 246,0.5)] transition"
         aria-label={isOpen ? "إغلاق المحادثة" : "فتح المحادثة مع AI"}
       >
         {/* Subtle ring animation when chat is closed */}
         {!isOpen && (
           <motion.span
-            className="absolute inset-0 rounded-full border-2 border-emerald-400/50"
+            className="absolute inset-0 rounded-full border-2 border-violet-400/50"
             animate={{ scale: [1, 1.35], opacity: [0.6, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
           />

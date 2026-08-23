@@ -22,13 +22,13 @@ const SYSTEM_INSTRUCTION = `أنت "Shift AI Agent"، المساعد الذكي 
 
 معلومات عن SHIFT:
 - متخصصة في تطوير الويب (Next.js, React)، تطبيقات الموبايل (Flutter, React Native)، أنظمة المؤسسات والـ ERP المخصصة، والأمن السيبراني واختبار الاختراق.
-- المدير التقني للشركة هو ديبو (Mohamed Tarek).
+- المدير التنفيذي للشركة هو CEO SHIFT (Mohamed Tarek).
 
 قواعد التعامل:
-- تكلم العملاء باللهجة المصرية العامية فقط، بأسلوب ذكي ومختصر وودود.
+- تكلم العملاء باللهجة المصرية العامية المحترفة والراقية، بأسلوب ذكي ومختصر وودود.
 - لا تتكلم أكتر من 3-4 جمل في الرد الواحد.
-- وضح دايماً إزاي SHIFT تقدر تحل مشكلة العميل.
-- لو العميل سأل عن التواصل أو الأسعار، وجهه لديبو على واتساب.
+- وضح دايماً إزاي SHIFT تقدر تحل مشكلة العميل بأحدث التقنيات.
+- لو العميل سأل عن التواصل أو الأسعار، وجهه للتواصل مباشرة مع CEO SHIFT على واتساب.
 - ما تذكرش أسماء منافسين أو شركات تانية أبداً.`;
 
 const RATE_LIMIT = { windowMs: 60_000, maxRequests: 10 };
@@ -41,7 +41,7 @@ function getLocalFallbackResponse(message: string): { reply: string; showWhatsAp
 
   if (lowerMsg.includes("سعر") || lowerMsg.includes("أسعار") || lowerMsg.includes("بكام") || lowerMsg.includes("price") || lowerMsg.includes("تكلفة")) {
     return {
-      reply: "أسعارنا بتختلف حسب حجم المشروع وتفاصيله. تقدر تكلم ديبو على واتساب وهيديك تسعير دقيق بعد ما يفهم متطلباتك! 💬",
+      reply: "أسعارنا بتختلف حسب حجم المشروع وتفاصيله. تقدر تتواصل مباشرة مع CEO SHIFT على واتساب وهيقدم لك استشارة وتسعير دقيق بعد دراسة متطلباتك! 💬",
       showWhatsApp: true
     };
   }
@@ -55,7 +55,7 @@ function getLocalFallbackResponse(message: string): { reply: string; showWhatsAp
 
   if (lowerMsg.includes("موبايل") || lowerMsg.includes("تطبيقات") || lowerMsg.includes("app")) {
     return {
-      reply: "بنبرمج تطبيقات الموبايل باستخدام Flutter و React Native عشان نضمن أعلى أداء على iOS و Android. كلم ديبو لو عندك فكرة تطبيق!",
+      reply: "بنبرمج تطبيقات الموبايل باستخدام Flutter و React Native عشان نضمن أعلى أداء على iOS و Android. تواصل مع CEO SHIFT لو عندك فكرة تطبيق جاهزة للتنفيذ!",
       showWhatsApp: true
     };
   }
@@ -68,7 +68,7 @@ function getLocalFallbackResponse(message: string): { reply: string; showWhatsAp
   }
 
   return {
-    reply: "انا المساعد الذكي لـ SHIFT! حالياً في ضغط على السيرفر بس تقدر تكلم ديبو مباشرة على واتساب وهيجاوبك فوراً 👇",
+    reply: "أنا المساعد الذكي لـ SHIFT! حالياً تقدر تتواصل مباشرة مع CEO SHIFT على واتساب للمساعدة الفورية 👇",
     showWhatsApp: true
   };
 }
@@ -173,8 +173,8 @@ export async function POST(req: Request): Promise<NextResponse> {
     logger.info("chat", "User hit 3-message limit, showing WhatsApp CTA");
     const response = NextResponse.json<ChatResponse>({
       reply:
-        "واضح إن مشروعك كبير ومحتاج حل متخصص 🔥 لخصت طلبك وديبو (المدير التقني) مستنيك على واتساب دلوقتي!",
-      showWhatsApp: true,
+        "مشروعك واعد ويستحق حل تقني متكامل 🚀 لخصت تفاصيل طلبك وCEO SHIFT متاح للتواصل معك على واتساب الآن لمناقشة خطة العمل!",
+      showWhatsApp: true
     });
     applyRateLimitHeaders(response, rateResult);
     return response;

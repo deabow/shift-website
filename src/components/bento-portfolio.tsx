@@ -60,8 +60,8 @@ function BentoGridCard({
   const borderSpotlight = useMotionTemplate`
     radial-gradient(
       350px circle at ${mouseX}px ${mouseY}px,
-      rgba(16, 185, 129, 0.8) 0%,
-      rgba(16, 185, 129, 0.2) 45%,
+      rgba(139, 92, 246, 0.8) 0%,
+      rgba(139, 92, 246, 0.2) 45%,
       transparent 80%
     )
   `;
@@ -80,7 +80,7 @@ function BentoGridCard({
       onMouseLeave={handleMouseLeave}
       onClick={() => onClick(project)}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      className={`group relative rounded-3xl p-[1px] bg-black/10 dark:bg-white/[0.08] cursor-pointer transition-all duration-500 hover:shadow-[0_0_50px_rgba(16,185,129,0.25)] ${
+      className={`group relative rounded-3xl p-[1px] bg-black/10 dark:bg-white/[0.08] cursor-pointer transition-all duration-500 hover:shadow-[0_0_50px_rgba(139, 92, 246,0.25)] ${
         project.bentoSpan || (isMain ? "md:col-span-2 md:row-span-2" : "md:col-span-1 md:row-span-1")
       }`}
     >
@@ -101,19 +101,19 @@ function BentoGridCard({
 
         {/* Ambient Dark Gradient Vignette */}
         <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent z-10" />
-        <div className="absolute inset-0 bg-emerald-950/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+        <div className="absolute inset-0 bg-violet-950/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
 
         {/* Top Badges */}
         <div className="relative z-20 flex items-center justify-between">
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-zinc-950/80 border border-white/15 text-[11px] font-extrabold uppercase tracking-wider text-emerald-400 backdrop-blur-md shadow-lg">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-zinc-950/80 border border-white/15 text-[11px] font-extrabold uppercase tracking-wider text-violet-400 backdrop-blur-md shadow-lg">
             {hasVideo ? (
               <>
-                <Film size={13} className="text-emerald-400" />
+                <Film size={13} className="text-violet-400" />
                 <span>{isAr ? "فيديو سينمائي 8K" : "Cinematic Reel"}</span>
               </>
             ) : (
               <>
-                <ImageIcon size={13} className="text-emerald-400" />
+                <ImageIcon size={13} className="text-violet-400" />
                 <span>{isAr ? "مشروع تقني" : "Tech Showcase"}</span>
               </>
             )}
@@ -126,14 +126,14 @@ function BentoGridCard({
 
         {/* Hover Center Indicator */}
         <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 transition-all duration-400 group-hover:opacity-100 pointer-events-none">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full border border-emerald-400/50 bg-emerald-500/25 text-emerald-300 backdrop-blur-md group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-zinc-950 group-hover:shadow-[0_0_40px_rgba(16,185,129,0.8)] transition-all duration-500">
+          <div className="flex h-16 w-16 items-center justify-center rounded-full border border-violet-400/50 bg-violet-500/25 text-violet-300 backdrop-blur-md group-hover:scale-110 group-hover:bg-violet-500 group-hover:text-zinc-950 group-hover:shadow-[0_0_40px_rgba(139, 92, 246,0.8)] transition-all duration-500">
             {hasVideo ? <Play size={24} className="ml-1 fill-current" /> : <Eye size={24} />}
           </div>
         </div>
 
         {/* Bottom Content */}
         <div className="relative z-20 flex flex-col justify-end text-right">
-          <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white group-hover:text-emerald-300 transition-colors leading-tight">
+          <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white group-hover:text-violet-300 transition-colors leading-tight">
             {project.title}
           </h3>
           <p className="mt-2 text-xs md:text-sm leading-relaxed text-zinc-300 line-clamp-2">
@@ -146,7 +146,7 @@ function BentoGridCard({
               {project.keyFeatures.slice(0, 3).map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-md border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-400/90"
+                  className="rounded-md border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] font-semibold text-violet-400/90"
                 >
                   {tag}
                 </span>
@@ -198,8 +198,8 @@ export function BentoPortfolio() {
     <section className="relative w-full py-20 px-4 md:px-8 max-w-6xl mx-auto flex flex-col items-center">
       {/* Section Header */}
       <div className="text-center mb-12 flex flex-col items-center">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/[0.08] border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-[0.2em] mb-4 backdrop-blur-md shadow-[0_0_20px_rgba(16,185,129,0.15)]">
-          <Sparkles className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-violet-500/[0.08] border border-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-[0.2em] mb-4 backdrop-blur-md shadow-[0_0_20px_rgba(139, 92, 246,0.15)]">
+          <Sparkles className="w-3.5 h-3.5 text-violet-400 animate-pulse" />
           <span>{isAr ? "معرض أعمال SHIFT التفاعلي" : "Interactive Portfolio Bento"}</span>
         </div>
 
@@ -226,7 +226,7 @@ export function BentoPortfolio() {
               {isActive && (
                 <motion.div
                   layoutId="active-portfolio-tab"
-                  className="absolute inset-0 rounded-xl bg-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.5)]"
+                  className="absolute inset-0 rounded-xl bg-violet-400 shadow-[0_0_25px_rgba(139, 92, 246,0.5)]"
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
               )}
@@ -252,7 +252,7 @@ export function BentoPortfolio() {
           animate={{ opacity: 1, y: 0 }}
           className="w-full max-w-lg rounded-3xl border border-dashed border-black/20 dark:border-white/20 bg-white/50 dark:bg-zinc-950/50 p-10 text-center backdrop-blur-xl flex flex-col items-center"
         >
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 mb-4">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-violet-500/10 border border-violet-500/20 text-violet-400 mb-4">
             <Sparkles size={28} />
           </div>
           <h3 className="text-xl font-bold text-zinc-900 dark:text-white">
@@ -265,7 +265,7 @@ export function BentoPortfolio() {
           </p>
           <Link
             href="/admin"
-            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-6 py-3 text-xs font-extrabold uppercase tracking-wider text-zinc-950 transition hover:bg-emerald-400 hover:shadow-[0_0_25px_rgba(16,185,129,0.4)]"
+            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-violet-500 px-6 py-3 text-xs font-extrabold uppercase tracking-wider text-zinc-950 transition hover:bg-violet-400 hover:shadow-[0_0_25px_rgba(139, 92, 246,0.4)]"
           >
             <PlusCircle size={16} />
             <span>{isAr ? "إضافة مشروع من لوحة التحكم" : "Add Project from Admin Panel"}</span>
@@ -314,13 +314,13 @@ export function BentoPortfolio() {
               <button
                 type="button"
                 onClick={() => setActiveModalProject(null)}
-                className="absolute top-5 left-5 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-zinc-900/80 text-zinc-300 backdrop-blur-md transition hover:border-emerald-500/50 hover:bg-emerald-500 hover:text-zinc-950"
+                className="absolute top-5 left-5 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-zinc-900/80 text-zinc-300 backdrop-blur-md transition hover:border-violet-500/50 hover:bg-violet-500 hover:text-zinc-950"
               >
                 <X size={18} />
               </button>
 
               <div className="mb-6">
-                <span className="inline-block px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2">
+                <span className="inline-block px-3.5 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider mb-2">
                   {getCategoryLabel(activeModalProject.category, isAr)}
                 </span>
                 <h2 className="text-2xl md:text-4xl font-extrabold text-white">
@@ -351,7 +351,7 @@ export function BentoPortfolio() {
 
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-base font-bold text-emerald-400 mb-2">عن المشروع</h3>
+                  <h3 className="text-base font-bold text-violet-400 mb-2">عن المشروع</h3>
                   <p className="text-sm leading-relaxed text-zinc-300 whitespace-pre-line">
                     {activeModalProject.description}
                   </p>
@@ -360,7 +360,7 @@ export function BentoPortfolio() {
                 {activeModalProject.challenge && (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-white/10">
                     <div className="rounded-xl border border-white/10 bg-zinc-900/50 p-4">
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-1">
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-violet-400 mb-1">
                         🎯 التحدي والهدف
                       </h4>
                       <p className="text-xs text-zinc-300 leading-relaxed">
@@ -369,7 +369,7 @@ export function BentoPortfolio() {
                     </div>
 
                     <div className="rounded-xl border border-white/10 bg-zinc-900/50 p-4">
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-1">
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-violet-400 mb-1">
                         🚀 الحل والتنفيذ
                       </h4>
                       <p className="text-xs text-zinc-300 leading-relaxed">
@@ -381,10 +381,10 @@ export function BentoPortfolio() {
 
                 <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/10">
                   <a
-                    href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP || "201211050297"}?text=${encodeURIComponent(`أهلاً ديبو، شفت مشروع "${activeModalProject.title}" وعايز انفذ فكرة مشابهة لشركتي.`)}`}
+                    href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP || "201211050297"}?text=${encodeURIComponent(`أهلاً CEO SHIFT، اطلعت على مشروع "${activeModalProject.title}" وأرغب في تنفيذ حل مماثل لشركتي.`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-6 py-3 text-xs font-extrabold uppercase tracking-wider text-zinc-950 transition hover:bg-emerald-400 hover:shadow-[0_0_30px_rgba(16,185,129,0.55)]"
+                    className="inline-flex items-center gap-2 rounded-xl bg-violet-500 px-6 py-3 text-xs font-extrabold uppercase tracking-wider text-zinc-950 transition hover:bg-violet-400 hover:shadow-[0_0_30px_rgba(139, 92, 246,0.55)]"
                   >
                     <span>طلب مشروع مشابه على واتساب</span>
                     <ArrowRight size={16} />
@@ -395,7 +395,7 @@ export function BentoPortfolio() {
                       href={activeModalProject.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-white transition-colors"
+                      className="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-white transition-colors"
                     >
                       <span>زيارة الموقع المباشر</span>
                       <ExternalLink size={14} />

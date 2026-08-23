@@ -1,7 +1,7 @@
 export default function ServicesLoading() {
   return (
     <main className="relative mx-auto min-h-[calc(100vh-96px)] w-full max-w-6xl px-4 pb-20 pt-12 md:px-8">
-      <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-emerald-500/4 blur-[200px]" />
+      <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-violet-500/4 blur-[200px]" />
 
       <div className="mb-12 max-w-3xl animate-pulse">
         <div className="h-3 w-24 rounded-full bg-white/5" />

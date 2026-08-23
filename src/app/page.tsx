@@ -12,7 +12,6 @@ const ClientMarquee = dynamic(() => import("@/components/client-marquee").then(m
 const BentoServices = dynamic(() => import("@/components/bento-services").then(mod => mod.BentoServices));
 const BentoPortfolio = dynamic(() => import("@/components/bento-portfolio").then(mod => mod.BentoPortfolio));
 const StatsCounter = dynamic(() => import("@/components/stats-counter").then(mod => mod.StatsCounter));
-const Testimonials = dynamic(() => import("@/components/testimonials").then(mod => mod.Testimonials));
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -40,8 +39,8 @@ export default function Home() {
   return (
     <main className="relative flex w-full flex-col items-center overflow-hidden bg-black">
       {/* Cinematic lighting layers */}
-      <div className="pointer-events-none fixed inset-0 -z-20 bg-[radial-gradient(1300px_circle_at_50%_40%,rgba(16,185,129,0.08),transparent_65%),radial-gradient(800px_circle_at_20%_80%,rgba(5,150,105,0.04),transparent_55%)] bg-[#030303]" />
-      <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,theme(colors.emerald.900/10),transparent_70%)]" />
+      <div className="pointer-events-none fixed inset-0 -z-20 bg-[radial-gradient(1300px_circle_at_50%_40%,rgba(139, 92, 246,0.08),transparent_65%),radial-gradient(800px_circle_at_20%_80%,rgba(124, 58, 237,0.04),transparent_55%)] bg-[#030303]" />
+      <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,theme(colors.violet.900/10),transparent_70%)]" />
 
       <div
         className="pointer-events-none fixed inset-0 -z-10 bg-[linear-gradient(rgba(255,255,255,0.008)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.008)_1px,transparent_1px)] bg-[size:48px_48px]"
@@ -51,7 +50,7 @@ export default function Home() {
         }}
       />
 
-      <div className="pointer-events-none fixed left-1/2 top-1/3 -z-10 h-[520px] w-[95vw] max-w-[1000px] -translate-x-1/2 rounded-full bg-[#10b981]/6 blur-[200px]" />
+      <div className="pointer-events-none fixed left-1/2 top-1/3 -z-10 h-[520px] w-[95vw] max-w-[1000px] -translate-x-1/2 rounded-full bg-[#8b5cf6]/6 blur-[200px]" />
 
       {/* ── Hero ── */}
       <section className="flex min-h-screen w-full max-w-5xl flex-col items-center justify-center px-4 md:px-8 py-20">
@@ -63,9 +62,9 @@ export default function Home() {
         >
           <motion.div
             variants={itemVariants}
-            className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-emerald-400/90 bg-emerald-500/[0.08] border border-emerald-500/20 px-4 py-1.5 rounded-full shadow-[0_0_20px_rgba(16,185,129,0.15)] backdrop-blur-md"
+            className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-violet-400/90 bg-violet-500/[0.08] border border-violet-500/20 px-4 py-1.5 rounded-full shadow-[0_0_20px_rgba(139, 92, 246,0.15)] backdrop-blur-md"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping inline-block" />
+            <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-ping inline-block" />
             <span>{t.hero.badge}</span>
           </motion.div>
 
@@ -78,7 +77,7 @@ export default function Home() {
             className="mt-10 md:mt-12 text-3xl font-extrabold tracking-tight text-zinc-100 sm:text-5xl md:text-6xl px-4 md:px-0 leading-[1.1]"
           >
             {t.hero.titleLine1} <br className="hidden sm:inline" />
-            <span className="bg-gradient-to-r from-zinc-100 via-[#a7f3d0] to-[#10b981] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-zinc-100 via-[#c4b5fd] to-[#8b5cf6] bg-clip-text text-transparent">
               {t.hero.titleLine2}
             </span>
           </motion.h1>
@@ -97,7 +96,7 @@ export default function Home() {
             <MagneticWrapper className="w-full sm:w-auto" distanceMultiplier={0.3} springConfig={{ stiffness: 200, damping: 12, mass: 0.1 }}>
               <Link
                 href="/services"
-                className="group relative flex h-14 w-full sm:w-auto items-center justify-center overflow-hidden rounded-xl bg-emerald-500 px-8 text-xs font-extrabold uppercase tracking-[0.18em] text-zinc-950 transition-all duration-500 hover:shadow-[0_0_45px_rgba(16,185,129,0.55)] hover:scale-[1.02] active:scale-[0.98]"
+                className="group relative flex h-14 w-full sm:w-auto items-center justify-center overflow-hidden rounded-xl bg-violet-500 px-8 text-xs font-extrabold uppercase tracking-[0.18em] text-zinc-950 transition-all duration-500 hover:shadow-[0_0_45px_rgba(139, 92, 246,0.55)] hover:scale-[1.02] active:scale-[0.98]"
               >
                 <motion.span
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
@@ -115,11 +114,11 @@ export default function Home() {
             <MagneticWrapper className="w-full sm:w-auto" distanceMultiplier={0.3} springConfig={{ stiffness: 200, damping: 12, mass: 0.1 }}>
               <Link
                 href="/portfolio"
-                className="group flex h-14 w-full sm:w-auto items-center justify-center rounded-xl border border-white/15 bg-zinc-900/60 px-8 text-xs font-extrabold uppercase tracking-[0.18em] text-zinc-100 backdrop-blur-2xl transition-all duration-500 hover:border-emerald-500/50 hover:bg-emerald-500/10 hover:shadow-[0_0_35px_rgba(16,185,129,0.25)] hover:text-white hover:scale-[1.02] active:scale-[0.98]"
+                className="group flex h-14 w-full sm:w-auto items-center justify-center rounded-xl border border-white/15 bg-zinc-900/60 px-8 text-xs font-extrabold uppercase tracking-[0.18em] text-zinc-100 backdrop-blur-2xl transition-all duration-500 hover:border-violet-500/50 hover:bg-violet-500/10 hover:shadow-[0_0_35px_rgba(139, 92, 246,0.25)] hover:text-white hover:scale-[1.02] active:scale-[0.98]"
               >
                 <span className="py-4 flex items-center gap-2">
                   <span>{t.hero.btnWork}</span>
-                  <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all duration-300" />
+                  <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:text-violet-400 group-hover:translate-x-1 transition-all duration-300" />
                 </span>
               </Link>
             </MagneticWrapper>
@@ -143,9 +142,6 @@ export default function Home() {
         <StatsCounter />
       </section>
 
-      <div className="w-full relative">
-        <Testimonials />
-      </div>
     </main>
   );
 }

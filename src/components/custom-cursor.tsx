@@ -71,13 +71,13 @@ export function CustomCursor() {
       }}
       animate={{
         scale: isHovering ? 2 : 1,
-        backgroundColor: isHovering ? "rgba(16, 185, 129, 0.9)" : "rgba(255, 255, 255, 0.15)",
+        backgroundColor: isHovering ? "rgba(139, 92, 246, 0.9)" : "rgba(255, 255, 255, 0.15)",
         border: isHovering ? "none" : "1.5px solid rgba(255, 255, 255, 0.7)",
       }}
       transition={{ duration: 0.1, ease: "easeOut" }}
     >
       <motion.div
-        className="w-1.5 h-1.5 rounded-full bg-emerald-400"
+        className="w-1.5 h-1.5 rounded-full bg-violet-400"
         animate={{
           opacity: isHovering ? 0 : 1,
         }}

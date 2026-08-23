@@ -1,7 +1,7 @@
 export default function PortfolioLoading() {
   return (
     <main className="relative mx-auto min-h-[calc(100vh-96px)] w-full max-w-6xl px-4 pb-20 pt-12 md:px-8">
-      <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-[#10b981]/4 blur-[200px]" />
+      <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-[#8b5cf6]/4 blur-[200px]" />
 
       <div className="mb-10 animate-pulse">
         <div className="h-3 w-20 rounded-full bg-white/5" />

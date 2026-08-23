@@ -41,7 +41,7 @@ export function ClientMarquee() {
           {CLIENTS.map((name, i) => (
             <span
               key={`${name}-${i}`}
-              className="select-none text-sm font-bold uppercase tracking-[0.22em] text-zinc-600 transition-colors duration-300 hover:text-emerald-400"
+              className="select-none text-sm font-bold uppercase tracking-[0.22em] text-zinc-600 transition-colors duration-300 hover:text-violet-400"
             >
               {name}
             </span>

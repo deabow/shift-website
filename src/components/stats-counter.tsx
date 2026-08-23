@@ -45,10 +45,10 @@ export function StatsCounter() {
       {stats.map((stat) => (
         <div
           key={stat.label}
-          className="group relative overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.02] px-6 py-8 text-center backdrop-blur-sm transition-all duration-500 hover:border-emerald-500/20"
+          className="group relative overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.02] px-6 py-8 text-center backdrop-blur-sm transition-all duration-500 hover:border-violet-500/20"
         >
           {/* Hover radial glow */}
-          <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(16,185,129,0.06),transparent_70%)]" />
+          <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(139, 92, 246,0.06),transparent_70%)]" />
 
           <p className="text-4xl font-bold tracking-tight text-white md:text-5xl">
             <CountUp target={stat.value} suffix={stat.suffix} />

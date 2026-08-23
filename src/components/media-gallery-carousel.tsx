@@ -82,15 +82,15 @@ export function MediaGalleryCarousel({ items, title }: MediaGalleryCarouselProps
         {/* ── Top Bar Meta (Type Badge + Counter + Fullscreen Button) ── */}
         <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-20 pointer-events-none">
           <div className="flex items-center gap-2 pointer-events-auto">
-            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-900/80 border border-white/15 text-[10px] font-bold uppercase tracking-wider text-emerald-400 backdrop-blur-md shadow-lg">
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-900/80 border border-white/15 text-[10px] font-bold uppercase tracking-wider text-violet-400 backdrop-blur-md shadow-lg">
               {currentItem.type === "video" ? (
                 <>
-                  <Film className="w-3 h-3 text-emerald-400" />
+                  <Film className="w-3 h-3 text-violet-400" />
                   <span>Video Reel</span>
                 </>
               ) : (
                 <>
-                  <ImageIcon className="w-3 h-3 text-emerald-400" />
+                  <ImageIcon className="w-3 h-3 text-violet-400" />
                   <span>Photo Showcase</span>
                 </>
               )}
@@ -106,7 +106,7 @@ export function MediaGalleryCarousel({ items, title }: MediaGalleryCarouselProps
           <button
             type="button"
             onClick={() => setIsFullscreen(true)}
-            className="pointer-events-auto flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-zinc-900/80 text-zinc-300 backdrop-blur-md transition hover:border-emerald-500/40 hover:text-white"
+            className="pointer-events-auto flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-zinc-900/80 text-zinc-300 backdrop-blur-md transition hover:border-violet-500/40 hover:text-white"
             title="Expand Fullscreen"
           >
             <Maximize2 size={13} />
@@ -119,7 +119,7 @@ export function MediaGalleryCarousel({ items, title }: MediaGalleryCarouselProps
             <button
               type="button"
               onClick={handlePrev}
-              className="absolute left-3 top-1/2 -translate-y-1/2 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-zinc-900/80 text-zinc-200 backdrop-blur-md opacity-80 sm:opacity-0 group-hover:opacity-100 transition-all duration-300 hover:border-emerald-500/40 hover:bg-emerald-500 hover:text-zinc-950 hover:shadow-[0_0_20px_rgba(16,185,129,0.5)]"
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-zinc-900/80 text-zinc-200 backdrop-blur-md opacity-80 sm:opacity-0 group-hover:opacity-100 transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-500 hover:text-zinc-950 hover:shadow-[0_0_20px_rgba(139, 92, 246,0.5)]"
               aria-label="Previous Media"
             >
               <ChevronLeft size={20} />
@@ -128,7 +128,7 @@ export function MediaGalleryCarousel({ items, title }: MediaGalleryCarouselProps
             <button
               type="button"
               onClick={handleNext}
-              className="absolute right-3 top-1/2 -translate-y-1/2 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-zinc-900/80 text-zinc-200 backdrop-blur-md opacity-80 sm:opacity-0 group-hover:opacity-100 transition-all duration-300 hover:border-emerald-500/40 hover:bg-emerald-500 hover:text-zinc-950 hover:shadow-[0_0_20px_rgba(16,185,129,0.5)]"
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-zinc-900/80 text-zinc-200 backdrop-blur-md opacity-80 sm:opacity-0 group-hover:opacity-100 transition-all duration-300 hover:border-violet-500/40 hover:bg-violet-500 hover:text-zinc-950 hover:shadow-[0_0_20px_rgba(139, 92, 246,0.5)]"
               aria-label="Next Media"
             >
               <ChevronRight size={20} />
@@ -149,7 +149,7 @@ export function MediaGalleryCarousel({ items, title }: MediaGalleryCarouselProps
                 onClick={() => setCurrentIndex(idx)}
                 className={`relative h-14 w-20 shrink-0 overflow-hidden rounded-xl border transition-all duration-300 ${
                   isActive
-                    ? "border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.4)] scale-105 z-10"
+                    ? "border-violet-400 shadow-[0_0_15px_rgba(139, 92, 246,0.4)] scale-105 z-10"
                     : "border-white/10 opacity-50 hover:opacity-100 hover:border-white/30"
                 }`}
               >
@@ -161,12 +161,12 @@ export function MediaGalleryCarousel({ items, title }: MediaGalleryCarouselProps
                     className="h-full w-full object-cover"
                   />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center bg-zinc-900 text-emerald-400">
+                  <div className="flex h-full w-full items-center justify-center bg-zinc-900 text-violet-400">
                     <Play size={16} fill="currentColor" />
                   </div>
                 )}
                 {item.type === "video" && (
-                  <div className="absolute top-1 right-1 h-3 w-3 rounded-full bg-emerald-500/80 flex items-center justify-center">
+                  <div className="absolute top-1 right-1 h-3 w-3 rounded-full bg-violet-500/80 flex items-center justify-center">
                     <Play size={7} fill="currentColor" className="text-zinc-950" />
                   </div>
                 )}
@@ -189,7 +189,7 @@ export function MediaGalleryCarousel({ items, title }: MediaGalleryCarouselProps
             <button
               type="button"
               onClick={() => setIsFullscreen(false)}
-              className="absolute top-6 right-6 z-30 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-zinc-900/80 text-white backdrop-blur-md hover:border-emerald-400"
+              className="absolute top-6 right-6 z-30 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-zinc-900/80 text-white backdrop-blur-md hover:border-violet-400"
             >
               <X size={20} />
             </button>

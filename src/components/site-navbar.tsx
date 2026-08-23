@@ -16,7 +16,7 @@ const FacebookIcon = ({ size = 18 }: { size?: number }) => (
 
 
 
-const DEBO_WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP || "201211050297";
+const CEO_WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP || "201211050297";
 
 export default function SiteNavbar() {
   const pathname = usePathname();
@@ -67,7 +67,7 @@ export default function SiteNavbar() {
           <span className="text-base font-extrabold tracking-[0.25em] text-zinc-100 group-hover:text-white transition-colors">
             SHIFT
           </span>
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+          <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-ping" />
         </Link>
 
         {/* Desktop Links (Hidden on Mobile) */}
@@ -84,7 +84,7 @@ export default function SiteNavbar() {
                   {isActive && (
                     <motion.span
                       layoutId="active-nav-pill"
-                      className="absolute inset-0 -z-10 rounded-xl bg-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.5)]"
+                      className="absolute inset-0 -z-10 rounded-xl bg-violet-400 shadow-[0_0_20px_rgba(139, 92, 246,0.5)]"
                       transition={{ type: "spring", stiffness: 430, damping: 35 }}
                     />
                   )}
@@ -100,9 +100,9 @@ export default function SiteNavbar() {
           <MagneticWrapper distanceMultiplier={0.25}>
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-1.5 rounded-xl border border-white/10 bg-zinc-900/60 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-emerald-400 backdrop-blur-md transition hover:border-emerald-500/40 hover:bg-emerald-500/10"
+              className="flex items-center gap-1.5 rounded-xl border border-white/10 bg-zinc-900/60 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-violet-400 backdrop-blur-md transition hover:border-violet-500/40 hover:bg-violet-500/10"
             >
-              <Globe className="w-3.5 h-3.5 text-emerald-400" />
+              <Globe className="w-3.5 h-3.5 text-violet-400" />
               <span>{language === "en" ? "عربي" : "EN"}</span>
             </button>
           </MagneticWrapper>
@@ -114,7 +114,7 @@ export default function SiteNavbar() {
               href="https://www.facebook.com/profile.php?id=61591717865503"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition hover:text-emerald-400"
+              className="transition hover:text-violet-400"
               aria-label="Facebook"
             >
               <FacebookIcon size={16} />
@@ -126,18 +126,18 @@ export default function SiteNavbar() {
         <div className="flex md:hidden items-center gap-3">
           <button
             onClick={toggleLanguage}
-            className="flex items-center gap-1 rounded-lg border border-white/15 bg-zinc-900/80 px-2.5 py-1 text-[11px] font-bold uppercase text-emerald-400 transition active:scale-95"
+            className="flex items-center gap-1 rounded-lg border border-white/15 bg-zinc-900/80 px-2.5 py-1 text-[11px] font-bold uppercase text-violet-400 transition active:scale-95"
           >
-            <Globe className="w-3 h-3 text-emerald-400" />
+            <Globe className="w-3 h-3 text-violet-400" />
             <span>{language === "en" ? "عربي" : "EN"}</span>
           </button>
 
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/15 bg-zinc-900/80 text-zinc-100 backdrop-blur-md transition active:scale-95 hover:border-emerald-500/40"
+            className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/15 bg-zinc-900/80 text-zinc-100 backdrop-blur-md transition active:scale-95 hover:border-violet-500/40"
             aria-label="Toggle Navigation Menu"
           >
-            {isOpen ? <X className="w-5 h-5 text-emerald-400" /> : <Menu className="w-5 h-5 text-zinc-100" />}
+            {isOpen ? <X className="w-5 h-5 text-violet-400" /> : <Menu className="w-5 h-5 text-zinc-100" />}
           </button>
         </div>
       </motion.nav>
@@ -155,8 +155,8 @@ export default function SiteNavbar() {
             <div className="p-6 flex flex-col justify-between space-y-6">
               {/* Top Cyber Status Pill */}
               <div className="flex items-center justify-between pb-4 border-b border-white/[0.06]">
-                <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-400">
-                  <Sparkles className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+                <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-violet-400">
+                  <Sparkles className="w-3.5 h-3.5 text-violet-400 animate-pulse" />
                   <span>Navigation System</span>
                 </div>
                 <span className="text-[10px] font-mono text-zinc-500">SHIFT v2.4</span>
@@ -177,19 +177,19 @@ export default function SiteNavbar() {
                         href={link.href}
                         onClick={() => setIsOpen(false)}
                         className={`flex items-center justify-between rounded-2xl p-3.5 transition-all ${isActive
-                            ? "bg-emerald-500/10 border border-emerald-500/20 text-white font-bold"
-                            : "text-zinc-400 hover:text-white hover:bg-white/[0.04]"
+                          ? "bg-violet-500/10 border border-violet-500/20 text-white font-bold"
+                          : "text-zinc-400 hover:text-white hover:bg-white/[0.04]"
                           }`}
                       >
                         <div className="flex items-center gap-3">
-                          <span className="font-mono text-xs text-emerald-400/50">
+                          <span className="font-mono text-xs text-violet-400/50">
                             {link.index}
                           </span>
                           <span className="text-base tracking-wide">{link.label}</span>
                         </div>
 
                         {isActive ? (
-                          <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_#10b981]" />
+                          <span className="h-2 w-2 rounded-full bg-violet-400 shadow-[0_0_10px_#8b5cf6]" />
                         ) : (
                           <ArrowRight className="w-4 h-4 text-zinc-600" />
                         )}
@@ -202,10 +202,10 @@ export default function SiteNavbar() {
               {/* Bottom Drawer Actions: WhatsApp CTA + Social Icons */}
               <div className="pt-4 border-t border-white/[0.06] flex flex-col space-y-4">
                 <a
-                  href={`https://wa.me/${DEBO_WHATSAPP}?text=${encodeURIComponent("Hello SHIFT, I'm reaching out from your website.")}`}
+                  href={`https://wa.me/${CEO_WHATSAPP}?text=${encodeURIComponent("Hello SHIFT, I'm reaching out from your website.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 rounded-xl bg-emerald-500 py-3 text-xs font-extrabold uppercase tracking-[0.16em] text-zinc-950 shadow-[0_0_25px_rgba(16,185,129,0.4)] active:scale-[0.98] transition-transform"
+                  className="flex items-center justify-center gap-2 rounded-xl bg-violet-500 py-3 text-xs font-extrabold uppercase tracking-[0.16em] text-zinc-950 shadow-[0_0_25px_rgba(139, 92, 246,0.4)] active:scale-[0.98] transition-transform"
                 >
                   <span>Talk to SHIFT</span>
                   <ArrowRight className="w-4 h-4 text-zinc-950" />
@@ -218,7 +218,7 @@ export default function SiteNavbar() {
                       href="https://www.facebook.com/profile.php?id=61591717865503"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-1 hover:text-emerald-400 transition-colors"
+                      className="p-1 hover:text-violet-400 transition-colors"
                       aria-label="Facebook"
                     >
                       <FacebookIcon size={18} />

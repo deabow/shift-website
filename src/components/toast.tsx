@@ -51,12 +51,12 @@ export function Toaster() {
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
             className={`flex items-center gap-3 rounded-xl border px-4 py-3 shadow-[0_12px_40px_rgba(0,0,0,0.5)] backdrop-blur-xl ${
               t.variant === "success"
-                ? "border-emerald-500/30 bg-emerald-500/15"
+                ? "border-violet-500/30 bg-violet-500/15"
                 : "border-red-400/30 bg-red-500/15"
             }`}
           >
             {t.variant === "success" ? (
-              <CheckCircle size={18} className="shrink-0 text-emerald-400" />
+              <CheckCircle size={18} className="shrink-0 text-violet-400" />
             ) : (
               <XCircle size={18} className="shrink-0 text-red-400" />
             )}

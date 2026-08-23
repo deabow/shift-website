@@ -315,8 +315,8 @@ export function AdminPortfolioDashboard() {
       {/* Top Control Bar */}
       <div className="rounded-3xl border border-black/10 dark:border-white/[0.08] bg-white/80 dark:bg-zinc-950/80 p-6 md:p-8 backdrop-blur-2xl shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="text-right w-full md:w-auto">
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-500 mb-2">
-            <Sparkles className="w-4 h-4 text-emerald-400 animate-pulse" />
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-violet-500 mb-2">
+            <Sparkles className="w-4 h-4 text-violet-400 animate-pulse" />
             <span>لوحة تحكم معرض الأعمال — SHIFT Core</span>
           </div>
           <h1 className="text-2xl md:text-3xl font-extrabold text-zinc-900 dark:text-zinc-100">
@@ -335,8 +335,8 @@ export function AdminPortfolioDashboard() {
             </div>
             <div className="h-6 w-px bg-black/10 dark:bg-white/10" />
             <div>
-              <span className="text-emerald-500 block text-[10px] font-bold uppercase">منشور (Live)</span>
-              <span className="font-mono text-sm font-bold text-emerald-400">{liveCount}</span>
+              <span className="text-violet-500 block text-[10px] font-bold uppercase">منشور (Live)</span>
+              <span className="font-mono text-sm font-bold text-violet-400">{liveCount}</span>
             </div>
             <div className="h-6 w-px bg-black/10 dark:bg-white/10" />
             <div>
@@ -347,7 +347,7 @@ export function AdminPortfolioDashboard() {
 
           <button
             onClick={openCreateModal}
-            className="flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-3 text-xs font-extrabold uppercase tracking-wider text-zinc-950 transition hover:bg-emerald-400 hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] active:scale-95"
+            className="flex items-center gap-2 rounded-xl bg-violet-500 px-5 py-3 text-xs font-extrabold uppercase tracking-wider text-zinc-950 transition hover:bg-violet-400 hover:shadow-[0_0_25px_rgba(139, 92, 246,0.5)] active:scale-95"
           >
             <Plus className="w-4 h-4 text-zinc-950" />
             <span>إضافة مشروع جديد</span>
@@ -372,7 +372,7 @@ export function AdminPortfolioDashboard() {
               onClick={() => setSelectedCategoryFilter(cat.id)}
               className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap ${
                 selectedCategoryFilter === cat.id
-                  ? "bg-emerald-500 text-zinc-950 shadow-[0_0_20px_rgba(16,185,129,0.4)]"
+                  ? "bg-violet-500 text-zinc-950 shadow-[0_0_20px_rgba(139, 92, 246,0.4)]"
                   : "bg-zinc-100 dark:bg-zinc-900/60 border border-black/10 dark:border-white/[0.06] text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
               }`}
             >
@@ -389,7 +389,7 @@ export function AdminPortfolioDashboard() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="بحث بالاسم أو البراند..."
-            className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900/80 pr-9 pl-4 py-2 text-xs text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-500 focus:border-emerald-500 focus:outline-none"
+            className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900/80 pr-9 pl-4 py-2 text-xs text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-500 focus:border-violet-500 focus:outline-none"
           />
         </div>
       </div>
@@ -403,7 +403,7 @@ export function AdminPortfolioDashboard() {
         </div>
       ) : filteredProjects.length === 0 ? (
         <div className="rounded-3xl border border-black/10 dark:border-white/[0.08] bg-white/80 dark:bg-zinc-950/80 p-12 text-center backdrop-blur-2xl flex flex-col items-center">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 mb-3">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-violet-500/10 border border-violet-500/20 text-violet-400 mb-3">
             <Sparkles size={28} />
           </div>
           <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">لا توجد مشاريع مطابقة</h3>
@@ -412,7 +412,7 @@ export function AdminPortfolioDashboard() {
           </p>
           <button
             onClick={openCreateModal}
-            className="mt-5 inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 text-xs font-bold text-zinc-950 uppercase tracking-wider transition hover:bg-emerald-400"
+            className="mt-5 inline-flex items-center gap-2 rounded-xl bg-violet-500 px-5 py-2.5 text-xs font-bold text-zinc-950 uppercase tracking-wider transition hover:bg-violet-400"
           >
             <Plus size={16} />
             <span>إضافة مشروع جديد الآن</span>
@@ -423,7 +423,7 @@ export function AdminPortfolioDashboard() {
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="group relative rounded-3xl border border-black/10 dark:border-white/[0.08] bg-white/90 dark:bg-zinc-950/80 backdrop-blur-2xl p-5 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:border-emerald-500/40 hover:shadow-[0_0_40px_rgba(16,185,129,0.15)] text-right"
+              className="group relative rounded-3xl border border-black/10 dark:border-white/[0.08] bg-white/90 dark:bg-zinc-950/80 backdrop-blur-2xl p-5 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:border-violet-500/40 hover:shadow-[0_0_40px_rgba(139, 92, 246,0.15)] text-right"
             >
               <div>
                 {/* Media Thumbnail */}
@@ -446,7 +446,7 @@ export function AdminPortfolioDashboard() {
                     <button
                       type="button"
                       onClick={() => openEditModal(project)}
-                      className="pointer-events-auto flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500 text-zinc-950 text-xs font-extrabold shadow-lg hover:scale-105 transition-transform"
+                      className="pointer-events-auto flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-violet-500 text-zinc-950 text-xs font-extrabold shadow-lg hover:scale-105 transition-transform"
                     >
                       <ImageIcon className="w-3.5 h-3.5" />
                       <span>تغير صورة الكفر</span>
@@ -458,7 +458,7 @@ export function AdminPortfolioDashboard() {
                     onClick={() => togglePublished(project)}
                     className={`absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-md transition-transform active:scale-95 flex items-center gap-1 ${
                       project.published
-                        ? "bg-emerald-500/90 text-zinc-950 shadow-[0_0_15px_rgba(16,185,129,0.5)]"
+                        ? "bg-violet-500/90 text-zinc-950 shadow-[0_0_15px_rgba(139, 92, 246,0.5)]"
                         : "bg-amber-500/90 text-zinc-950"
                     }`}
                   >
@@ -468,7 +468,7 @@ export function AdminPortfolioDashboard() {
                 </div>
 
                 {/* Category Pill */}
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full inline-block">
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-violet-600 dark:text-violet-400 bg-violet-500/10 border border-violet-500/20 px-2.5 py-0.5 rounded-full inline-block">
                   {PORTFOLIO_CATEGORIES.find((c) => c.id === project.category)?.labelEn || project.category}
                 </span>
 
@@ -485,7 +485,7 @@ export function AdminPortfolioDashboard() {
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => openEditModal(project)}
-                    className="flex items-center gap-1 text-xs font-bold uppercase text-zinc-700 dark:text-zinc-300 hover:text-emerald-500 transition-colors"
+                    className="flex items-center gap-1 text-xs font-bold uppercase text-zinc-700 dark:text-zinc-300 hover:text-violet-500 transition-colors"
                   >
                     <Edit3 className="w-3.5 h-3.5" />
                     <span>تعديل</span>
@@ -493,7 +493,7 @@ export function AdminPortfolioDashboard() {
 
                   <button
                     onClick={() => duplicateProject(project)}
-                    className="flex items-center gap-1 text-xs font-bold uppercase text-zinc-700 dark:text-zinc-300 hover:text-emerald-500 transition-colors"
+                    className="flex items-center gap-1 text-xs font-bold uppercase text-zinc-700 dark:text-zinc-300 hover:text-violet-500 transition-colors"
                     title="تكرار المشروع"
                   >
                     <Copy className="w-3.5 h-3.5" />
@@ -539,7 +539,7 @@ export function AdminPortfolioDashboard() {
               </button>
 
               <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-emerald-500" />
+                <Sparkles className="w-5 h-5 text-violet-500" />
                 <span>{editingId ? "تعديل بيانات المشروع" : "إضافة مشروع جديد للمعرض"}</span>
               </h2>
 
@@ -564,11 +564,11 @@ export function AdminPortfolioDashboard() {
                           onClick={() => setForm((prev) => ({ ...prev, category: cat.id }))}
                           className={`flex items-center justify-center gap-2 p-3 rounded-xl border text-xs font-bold uppercase transition-all ${
                             isSelected
-                              ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-600 dark:text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)]"
+                              ? "bg-violet-500/20 border-violet-500/50 text-violet-600 dark:text-violet-400 shadow-[0_0_15px_rgba(139, 92, 246,0.3)]"
                               : "bg-zinc-100 dark:bg-zinc-900/60 border-black/10 dark:border-white/[0.06] text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
                           }`}
                         >
-                          <CatIcon className="w-4 h-4 text-emerald-500" />
+                          <CatIcon className="w-4 h-4 text-violet-500" />
                           <span>{cat.label}</span>
                         </button>
                       );
@@ -587,7 +587,7 @@ export function AdminPortfolioDashboard() {
                       value={form.title}
                       onChange={(e) => setForm({ ...form, title: e.target.value })}
                       placeholder="مثال: منصة تسوق إلكترونية متكاملة"
-                      className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-emerald-500 focus:outline-none"
+                      className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-violet-500 focus:outline-none"
                     />
                   </div>
 
@@ -600,7 +600,7 @@ export function AdminPortfolioDashboard() {
                       value={form.clientType}
                       onChange={(e) => setForm({ ...form, clientType: e.target.value })}
                       placeholder="مثال: شركة تطوير عقاري / SaaS"
-                      className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-emerald-500 focus:outline-none"
+                      className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-violet-500 focus:outline-none"
                     />
                   </div>
                 </div>
@@ -615,14 +615,14 @@ export function AdminPortfolioDashboard() {
                     value={form.description}
                     onChange={(e) => setForm({ ...form, description: e.target.value })}
                     placeholder="شرح مختصر ومبهر عن تفاصيل المشروع ومميزاته..."
-                    className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-emerald-500 focus:outline-none"
+                    className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-violet-500 focus:outline-none"
                   />
                 </div>
 
                 {/* Live Website URL */}
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5 flex items-center gap-1">
-                    <Globe className="w-3.5 h-3.5 text-emerald-500" />
+                    <Globe className="w-3.5 h-3.5 text-violet-500" />
                     <span>رابط الموقع الحي المباشر (اختياري)</span>
                   </label>
                   <input
@@ -630,7 +630,7 @@ export function AdminPortfolioDashboard() {
                     value={form.liveUrl}
                     onChange={(e) => setForm({ ...form, liveUrl: e.target.value })}
                     placeholder="https://client-website.com"
-                    className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-emerald-500 focus:outline-none"
+                    className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-violet-500 focus:outline-none"
                   />
                 </div>
 
@@ -642,7 +642,7 @@ export function AdminPortfolioDashboard() {
 
                   {/* Live Cover Preview if URL exists */}
                   {form.imageUrl && (
-                    <div className="relative mb-3 h-36 w-full overflow-hidden rounded-2xl border border-emerald-500/30 bg-zinc-900 shadow-md">
+                    <div className="relative mb-3 h-36 w-full overflow-hidden rounded-2xl border border-violet-500/30 bg-zinc-900 shadow-md">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={form.imageUrl}
@@ -653,7 +653,7 @@ export function AdminPortfolioDashboard() {
                         <button
                           type="button"
                           onClick={() => imageFileInputRef.current?.click()}
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500 text-zinc-950 text-xs font-extrabold shadow-lg"
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-violet-500 text-zinc-950 text-xs font-extrabold shadow-lg"
                         >
                           <Upload className="w-3.5 h-3.5" />
                           <span>تغيير هذه الصورة</span>
@@ -668,7 +668,7 @@ export function AdminPortfolioDashboard() {
                       value={form.imageUrl}
                       onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
                       placeholder="https://... أو اضغط رفع صورة جديدة"
-                      className="flex-1 rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-emerald-500 focus:outline-none"
+                      className="flex-1 rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-violet-500 focus:outline-none"
                     />
                     <input
                       ref={imageFileInputRef}
@@ -681,7 +681,7 @@ export function AdminPortfolioDashboard() {
                       type="button"
                       onClick={() => imageFileInputRef.current?.click()}
                       disabled={uploadingImg}
-                      className="flex items-center gap-1.5 rounded-xl border border-black/10 dark:border-white/15 bg-zinc-100 dark:bg-zinc-900 px-4 text-xs font-bold uppercase text-emerald-600 dark:text-emerald-400 hover:bg-zinc-200 dark:hover:bg-zinc-800"
+                      className="flex items-center gap-1.5 rounded-xl border border-black/10 dark:border-white/15 bg-zinc-100 dark:bg-zinc-900 px-4 text-xs font-bold uppercase text-violet-600 dark:text-violet-400 hover:bg-zinc-200 dark:hover:bg-zinc-800"
                     >
                       <Upload className="w-4 h-4" />
                       <span>{uploadingImg ? "جاري الرفع..." : "رفع صورة الكفر"}</span>
@@ -700,7 +700,7 @@ export function AdminPortfolioDashboard() {
                       value={form.videoUrl}
                       onChange={(e) => setForm({ ...form, videoUrl: e.target.value })}
                       placeholder="https://drive.google.com/... أو YouTube / Vimeo"
-                      className="flex-1 rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-emerald-500 focus:outline-none"
+                      className="flex-1 rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-violet-500 focus:outline-none"
                     />
                     <input
                       ref={videoFileInputRef}
@@ -713,7 +713,7 @@ export function AdminPortfolioDashboard() {
                       type="button"
                       onClick={() => videoFileInputRef.current?.click()}
                       disabled={uploadingVid}
-                      className="flex items-center gap-1.5 rounded-xl border border-black/10 dark:border-white/15 bg-zinc-100 dark:bg-zinc-900 px-4 text-xs font-bold uppercase text-emerald-600 dark:text-emerald-400 hover:bg-zinc-200 dark:hover:bg-zinc-800"
+                      className="flex items-center gap-1.5 rounded-xl border border-black/10 dark:border-white/15 bg-zinc-100 dark:bg-zinc-900 px-4 text-xs font-bold uppercase text-violet-600 dark:text-violet-400 hover:bg-zinc-200 dark:hover:bg-zinc-800"
                     >
                       <Film className="w-4 h-4" />
                       <span>{uploadingVid ? "..." : "رفع فيديو"}</span>
@@ -724,7 +724,7 @@ export function AdminPortfolioDashboard() {
                 {/* Multi-Media Gallery Manager */}
                 {form.gallery.length > 0 && (
                   <div className="rounded-2xl border border-black/10 dark:border-white/[0.08] bg-zinc-50 dark:bg-zinc-900/40 p-4 space-y-3">
-                    <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-emerald-500">
+                    <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-violet-500">
                       <span className="flex items-center gap-1.5">
                         <Layers className="w-4 h-4" />
                         <span>معرض الوسائط الإضافية ({form.gallery.length} عناصر)</span>
@@ -741,7 +741,7 @@ export function AdminPortfolioDashboard() {
                             /* eslint-disable-next-line @next/next/no-img-element */
                             <img src={media.url} alt={`Media ${idx + 1}`} className="h-full w-full object-cover" />
                           ) : (
-                            <div className="flex flex-col items-center gap-1 text-emerald-400">
+                            <div className="flex flex-col items-center gap-1 text-violet-400">
                               <Film size={20} />
                               <span className="text-[9px] font-mono text-zinc-300">Video</span>
                             </div>
@@ -772,7 +772,7 @@ export function AdminPortfolioDashboard() {
                       value={form.keyFeatures}
                       onChange={(e) => setForm({ ...form, keyFeatures: e.target.value })}
                       placeholder="Next.js 14, تصوير درون, حماية عالية"
-                      className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-emerald-500 focus:outline-none"
+                      className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-violet-500 focus:outline-none"
                     />
                   </div>
 
@@ -783,7 +783,7 @@ export function AdminPortfolioDashboard() {
                     <select
                       value={form.bentoSpan}
                       onChange={(e) => setForm({ ...form, bentoSpan: e.target.value })}
-                      className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-emerald-500 focus:outline-none"
+                      className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-3 text-sm text-zinc-900 dark:text-zinc-100 focus:border-violet-500 focus:outline-none"
                     >
                       <option value="md:col-span-1 md:row-span-1">كارت قياسي (Standard 1x1)</option>
                       <option value="md:col-span-2 md:row-span-2">كارت مميز كبير (Featured Big 2x2)</option>
@@ -803,7 +803,7 @@ export function AdminPortfolioDashboard() {
                       value={form.challenge}
                       onChange={(e) => setForm({ ...form, challenge: e.target.value })}
                       placeholder="أهداف العميل والتحديات المطلوبة..."
-                      className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-2.5 text-xs text-zinc-900 dark:text-zinc-100 focus:border-emerald-500 focus:outline-none"
+                      className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-2.5 text-xs text-zinc-900 dark:text-zinc-100 focus:border-violet-500 focus:outline-none"
                     />
                   </div>
                   <div>
@@ -815,7 +815,7 @@ export function AdminPortfolioDashboard() {
                       value={form.solution}
                       onChange={(e) => setForm({ ...form, solution: e.target.value })}
                       placeholder="كيف قامت SHIFT بحل التحدي..."
-                      className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-2.5 text-xs text-zinc-900 dark:text-zinc-100 focus:border-emerald-500 focus:outline-none"
+                      className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-2.5 text-xs text-zinc-900 dark:text-zinc-100 focus:border-violet-500 focus:outline-none"
                     />
                   </div>
                 </div>
@@ -827,7 +827,7 @@ export function AdminPortfolioDashboard() {
                     id="publishedCheck"
                     checked={form.published}
                     onChange={(e) => setForm({ ...form, published: e.target.checked })}
-                    className="h-4 w-4 rounded accent-emerald-500 cursor-pointer"
+                    className="h-4 w-4 rounded accent-violet-500 cursor-pointer"
                   />
                   <label htmlFor="publishedCheck" className="text-xs font-bold uppercase text-zinc-800 dark:text-zinc-200 cursor-pointer">
                     نشر المشروع مباشرة في الموقع (Live)
@@ -848,7 +848,7 @@ export function AdminPortfolioDashboard() {
                   type="button"
                   onClick={saveProject}
                   disabled={saving}
-                  className="rounded-xl bg-emerald-500 px-6 py-2.5 text-xs font-extrabold uppercase tracking-wider text-zinc-950 hover:bg-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.5)]"
+                  className="rounded-xl bg-violet-500 px-6 py-2.5 text-xs font-extrabold uppercase tracking-wider text-zinc-950 hover:bg-violet-400 hover:shadow-[0_0_20px_rgba(139, 92, 246,0.5)]"
                 >
                   {saving ? "جاري الحفظ..." : editingId ? "تحديث المشروع" : "إنشاء المشروع"}
                 </button>

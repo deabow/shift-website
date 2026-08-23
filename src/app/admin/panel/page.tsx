@@ -8,7 +8,7 @@ export default function AdminPanelPage() {
       <section className="w-full rounded-3xl border border-black/10 dark:border-white/10 bg-white/80 dark:bg-zinc-950/80 p-6 md:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.7)] backdrop-blur-2xl transition-colors duration-300">
         <div className="flex items-center justify-between border-b border-black/10 dark:border-white/10 pb-6 mb-8">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-600 dark:text-violet-400 text-xs font-bold uppercase tracking-wider mb-2">
               <ShieldCheck size={14} />
               <span>منطقة الإدارة المشفرة الآمنة</span>
             </div>
@@ -24,7 +24,7 @@ export default function AdminPanelPage() {
             <Link
               href="/portfolio"
               target="_blank"
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-xl border border-black/10 dark:border-white/15 bg-zinc-100 dark:bg-zinc-900 px-4 py-2.5 text-xs font-bold text-zinc-800 dark:text-zinc-200 transition hover:border-emerald-500/50 hover:text-emerald-500"
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-xl border border-black/10 dark:border-white/15 bg-zinc-100 dark:bg-zinc-900 px-4 py-2.5 text-xs font-bold text-zinc-800 dark:text-zinc-200 transition hover:border-violet-500/50 hover:text-violet-500"
             >
               <span>معاينة معرض الأعمال بالموقع</span>
               <ExternalLink size={14} />

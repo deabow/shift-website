@@ -6,7 +6,7 @@
   --background: #0a0a0a;
   --foreground: #ffffff;
   --foreground-muted: #d4d4d8;
-  --accent: #10b981;
+  --accent: #8b5cf6;
 }
 
 html {
@@ -18,7 +18,7 @@ html {
 }
 
 *::selection {
-  background: rgba(16, 185, 129, 0.4);
+  background: rgba(139, 92, 246, 0.4);
   color: var(--foreground);
 }
 
@@ -28,10 +28,10 @@ body {
   color: var(--foreground);
   background-color: var(--background);
   background-image: radial-gradient(650px circle at 18% 10%,
-      rgba(16, 185, 129, 0.10),
+      rgba(139, 92, 246, 0.10),
       transparent 60%),
     radial-gradient(500px circle at 80% 85%,
-      rgba(5, 150, 105, 0.06),
+      rgba(124, 58, 237, 0.06),
       transparent 55%);
 }
 
@@ -46,7 +46,7 @@ textarea {
 /* Dark, minimal scrollbar theme */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #10b981 #0f0f12;
+  scrollbar-color: #8b5cf6 #0f0f12;
 }
 
 ::-webkit-scrollbar {
@@ -60,11 +60,11 @@ textarea {
 ::-webkit-scrollbar-thumb {
   border-radius: 999px;
   border: 2px solid #0f0f12;
-  background: linear-gradient(180deg, #10b981, #059669);
+  background: linear-gradient(180deg, #8b5cf6, #7c3aed);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #34d399, #10b981);
+  background: linear-gradient(180deg, #a78bfa, #8b5cf6);
 }
 
 @layer utilities {
@@ -103,20 +103,20 @@ textarea {
 
 .matrix-row {
   margin: 0;
-  color: rgba(52, 211, 153, 0.85);
+  color: rgba(167, 139, 250, 0.85);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
   font-size: clamp(0.55rem, 0.9vw, 0.72rem);
   letter-spacing: 0.16em;
   line-height: 1.5;
-  text-shadow: 0 0 10px rgba(16, 185, 129, 0.38);
+  text-shadow: 0 0 10px rgba(139, 92, 246, 0.38);
   white-space: nowrap;
   animation: matrix-scroll 11s linear infinite;
 }
 
 .matrix-text-fill {
-  color: rgba(74, 222, 128, 0.2);
-  text-shadow: 0 0 25px rgba(16, 185, 129, 0.5);
+  color: rgba(167, 139, 250, 0.2);
+  text-shadow: 0 0 25px rgba(139, 92, 246, 0.5);
 }
 
 @keyframes matrix-scroll {
@@ -140,7 +140,7 @@ textarea {
       rgba(167, 139, 250, 0.65),
       transparent 40%),
     radial-gradient(circle at 65% 65%,
-      rgba(45, 212, 191, 0.4),
+      rgba(192, 132, 252, 0.4),
       transparent 45%),
     linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(15, 23, 42, 0.2));
   box-shadow: inset -30px -30px 70px rgba(0, 0, 0, 0.28),

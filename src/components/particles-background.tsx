@@ -132,7 +132,7 @@ export function ParticlesBackground() {
       }
 
       // Draw particles
-      ctx.fillStyle = "rgba(16, 185, 129, 0.45)";
+      ctx.fillStyle = "rgba(139, 92, 246, 0.45)";
       ctx.beginPath();
       for (let i = 0; i < count; i++) {
         ctx.moveTo(px[i] + psz[i], py[i]);
@@ -173,7 +173,7 @@ export function ParticlesBackground() {
                 const ldSq = ldx * ldx + ldy * ldy;
                 if (ldSq < CONNECT_DIST_SQ) {
                   const alpha = 0.14 * (1 - ldSq / CONNECT_DIST_SQ);
-                  ctx.strokeStyle = `rgba(16,185,129,${alpha})`;
+                  ctx.strokeStyle = `rgba(139, 92, 246,${alpha})`;
                   ctx.beginPath();
                   ctx.moveTo(px[i], py[i]);
                   ctx.lineTo(px[j], py[j]);

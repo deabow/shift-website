@@ -131,7 +131,7 @@ export function RevealMaskText() {
       ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
       ctx.fillRect(0, 0, width, height);
 
-      ctx.fillStyle = "#10b981";
+      ctx.fillStyle = "#8b5cf6";
       ctx.font = `bold ${fontSize}px monospace`;
 
       for (let i = 0; i < drops.length; i++) {
@@ -144,7 +144,7 @@ export function RevealMaskText() {
         if (Math.random() > 0.98) {
           ctx.fillStyle = "#ffffff";
           ctx.fillText(char, x, y);
-          ctx.fillStyle = "#10b981";
+          ctx.fillStyle = "#8b5cf6";
         }
 
         if (y > height && Math.random() > 0.975) {
@@ -195,16 +195,16 @@ export function RevealMaskText() {
       className="group relative flex w-full max-w-5xl items-center justify-center overflow-hidden rounded-2xl md:rounded-3xl border border-white/[0.06] bg-zinc-900/40 p-2 md:p-4 backdrop-blur-xl transition-colors duration-500 h-28 sm:h-44 md:h-72 lg:h-[320px]"
       animate={{
         borderColor: isHovered
-          ? "rgba(16, 185, 129, 0.4)"
+          ? "rgba(139, 92, 246, 0.4)"
           : "rgba(255, 255, 255, 0.06)",
         boxShadow: isHovered
-          ? "0 0 60px rgba(16, 185, 129, 0.15), inset 0 0 30px rgba(16, 185, 129, 0.08)"
+          ? "0 0 60px rgba(139, 92, 246, 0.15), inset 0 0 30px rgba(139, 92, 246, 0.08)"
           : "0 20px 70px rgba(0, 0, 0, 0.5), inset 0 0 0px rgba(0, 0, 0, 0)",
       }}
       transition={{ type: "spring", stiffness: 120, damping: 22 }}
     >
       {/* Ambient radial glow behind the card */}
-      <div className="pointer-events-none absolute -inset-20 -z-10 opacity-0 transition-opacity duration-700 group-hover:opacity-100 bg-[radial-gradient(ellipse_at_center,theme(colors.emerald.500/12),transparent_70%)]" />
+      <div className="pointer-events-none absolute -inset-20 -z-10 opacity-0 transition-opacity duration-700 group-hover:opacity-100 bg-[radial-gradient(ellipse_at_center,theme(colors.violet.500/12),transparent_70%)]" />
 
       {/* Grid overlay */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:24px_24px] opacity-30" />

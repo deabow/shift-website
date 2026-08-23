@@ -23,7 +23,7 @@ export default function SiteFooter() {
             href="https://www.facebook.com/profile.php?id=61591717865503"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/75 transition hover:text-emerald-400"
+            className="text-white/75 transition hover:text-violet-400"
           >
             <Facebook size={20} />
           </a>
