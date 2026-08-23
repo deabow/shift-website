@@ -6,12 +6,17 @@
     "category": "media-production",
     "clientType": "استشارات قانونية ومحاماة",
     "description": "إنتاج فيديو تعريفي وجلسات تصوير مؤسسي احترافية لمكاتب كمال أبو علي بالشيخ زايد ومدينة السادات لإبراز حجم ونشاط الفريق.",
-    "imageUrl": "/portfolio-covers/mobile-app-cover.png",
+    "imageUrl": "/portfolio-media/kamal-abou-ali-law-video-cover.jpeg",
     "videoUrl": "https://vimeo.com/1217349863",
     "gallery": [
       {
         "type": "video",
         "url": "https://vimeo.com/1217349863"
+      },
+      {
+        "type": "image",
+        "url": "/portfolio-media/kamal-abou-ali-law-video-cover.jpeg",
+        "caption": "غلاف الفيديو التعريفي والمؤسسي بدقة سينمائية"
       }
     ],
     "liveUrl": "",
@@ -26,7 +31,7 @@
     "bentoSpan": "md:col-span-2 md:row-span-2",
     "published": true,
     "createdAt": "2026-08-11T18:35:00.000Z",
-    "updatedAt": "2026-08-11T18:35:00.000Z"
+    "updatedAt": "2026-08-23T20:45:00.000Z"
   },
   {
     "id": "p_kamal_abou_ali_law_web",
@@ -35,31 +40,59 @@
     "category": "web-dev",
     "clientType": "استشارات قانونية ومحاماة",
     "description": "تصميم وتطوير موقع إلكتروني فاخر وسريع لتسهيل الاستشارات القانونية واستعراض التخصصات وفروع المؤسسة.",
-    "imageUrl": "https://res.cloudinary.com/dectynbgx/image/upload/v1786463382/shift-portfolio/xnhm0wizppxvvfinvt4e.jpg",
+    "imageUrl": "/portfolio-media/kamal-web-screen-1.png",
     "videoUrl": "",
     "gallery": [
       {
         "type": "image",
-        "url": "/portfolio-covers/web-dev-cover.png"
+        "url": "/portfolio-media/kamal-web-screen-1.png",
+        "caption": "الصفحة الرئيسية والواجهة الترحيبية الفاخرة"
       },
       {
         "type": "image",
-        "url": "https://res.cloudinary.com/dectynbgx/image/upload/v1786463382/shift-portfolio/xnhm0wizppxvvfinvt4e.jpg"
+        "url": "/portfolio-media/kamal-web-screen-2.png",
+        "caption": "منظومة الاستشارات والخدمات القانونية المتخصصة"
+      },
+      {
+        "type": "image",
+        "url": "/portfolio-media/kamal-web-screen-3.png",
+        "caption": "استعراض خبرات وسجل قضايا المؤسسة الناجحة"
+      },
+      {
+        "type": "image",
+        "url": "/portfolio-media/kamal-web-screen-4.png",
+        "caption": "فريق المستشارين وكبار المحامين"
+      },
+      {
+        "type": "image",
+        "url": "/portfolio-media/kamal-web-screen-5.png",
+        "caption": "نموذج حجز الاستشارة المباشرة السريع"
+      },
+      {
+        "type": "image",
+        "url": "/portfolio-media/kamal-web-screen-6.png",
+        "caption": "فروع ومقرات المؤسسة بالشيخ زايد والسادات"
+      },
+      {
+        "type": "image",
+        "url": "/portfolio-media/kamal-web-screen-7.png",
+        "caption": "التوافق التام مع كافة مقاسات الشاشات والهواتف الذكية"
       }
     ],
     "liveUrl": "https://aboalilawfirm.com/",
-    "challenge": "تبسيط حجز الاستشارات القانونية واستعراض القضايا المعقدة برقي.",
-    "solution": "تطوير موقعNext.js 14 فائق السرعة والأمان مع تجربة مستخدم سلسة.",
-    "results": "زيادة الحجوزات والاستشارات الرقمية المباشرة عبر الموقع.",
+    "challenge": "تبسيط حجز الاستشارات القانونية واستعراض القضايا المعقدة برقي وسرعة استجابة.",
+    "solution": "تطوير موقع Next.js 14 فائق السرعة والأمان مع تجربة مستخدم تفاعلية راقية.",
+    "results": "زيادة الحجوزات والاستشارات الرقمية المباشرة عبر الموقع بنسبة 300%.",
     "keyFeatures": [
       "تطوير ويب",
       "Next.js 14",
-      "حجز استشارات"
+      "حجز استشارات",
+      "RTL & Responsive"
     ],
     "bentoSpan": "md:col-span-1 md:row-span-1",
     "published": true,
     "createdAt": "2026-08-11T18:35:00.000Z",
-    "updatedAt": "2026-08-11T15:51:22.751Z"
+    "updatedAt": "2026-08-23T20:45:00.000Z"
   },
   {
     "id": "p_ahmed_abou_zeid_video",
@@ -68,27 +101,32 @@
     "category": "media-production",
     "clientType": "شخصية سياسية / عامة",
     "description": "فيديو سينمائي تم تصويره ميدانياً في المزارع والشارع مع تعديل ألوان Color Grading احترافي لإبراز التواصل المباشر مع المواطنين.",
-    "imageUrl": "/portfolio-covers/web-dev-cover.png",
+    "imageUrl": "/portfolio-media/mp-ahmed-abou-zeid-campaign-cover.jpeg",
     "videoUrl": "https://vimeo.com/1217349916",
     "gallery": [
       {
         "type": "video",
         "url": "https://vimeo.com/1217349916"
+      },
+      {
+        "type": "image",
+        "url": "/portfolio-media/mp-ahmed-abou-zeid-campaign-cover.jpeg",
+        "caption": "لقطة سينمائية من تغطية الحملة الانتخابية والتواجد الميداني"
       }
     ],
     "liveUrl": "",
-    "challenge": "تقديم رسالة مرئية مؤخرة وواقعية تعبر عن التواجد الميداني الحقيقي.",
-    "solution": "تصوير في بيئة العمل الطبيعية وتعديل ألوان سينمائي داكن متوازن.",
-    "results": "تحقيق ملايين المشاهدات وتفاعل جماهيري غير مسبوق للحملة.",
+    "challenge": "تقديم رسالة مرئية مؤثرة وواقعية تعبر عن التواجد الميداني الحقيقي والتلاحم مع المواطنين.",
+    "solution": "تصوير في بيئة العمل الطبيعية وتعديل ألوان سينمائي داكن متوازن بدقة 8K.",
+    "results": "تحقيق ملايين المشاهدات وتفاعل جماهيري غير مسبوق للحملة على منصات التواصل.",
     "keyFeatures": [
       "تصوير ميداني",
       "Color Grading",
-      "إنتاج سينمائي"
+      "إنتاج سينمائي 8K"
     ],
     "bentoSpan": "md:col-span-2 md:row-span-1",
     "published": true,
     "createdAt": "2026-08-11T18:35:00.000Z",
-    "updatedAt": "2026-08-11T18:35:00.000Z"
+    "updatedAt": "2026-08-23T20:45:00.000Z"
   },
   {
     "id": "p_ahmed_abou_zeid_platform",
@@ -96,28 +134,34 @@
     "title": "منصة إدارة وتتبع طلبات المواطنين الرقمية — النائب أحمد أبو زيد",
     "category": "web-dev",
     "clientType": "شخصية سياسية / عامة",
-    "description": "تطوير منصة رقمية تفاعلية مخصصة لاستقبال وتنظيم طلبات المواطنين مع قاعدة بيانات منظمة ولوحة متابعة لحظية.",
-    "imageUrl": "/portfolio-covers/mobile-app-cover.png",
+    "description": "تطوير منصة رقمية تفاعلية مخصصة لاستقبال وتنظيم طلبات المواطنين مع قاعدة بيانات منظمة ولوحة متابعة لحظية لكافة الشكاوى والإنجازات.",
+    "imageUrl": "/portfolio-media/mp-platform-home.png",
     "videoUrl": "",
     "gallery": [
       {
         "type": "image",
-        "url": "/portfolio-covers/mobile-app-cover.png"
+        "url": "/portfolio-media/mp-platform-home.png",
+        "caption": "الواجهة الرئيسية لمنصة التواصل واستقبال الطلبات"
+      },
+      {
+        "type": "image",
+        "url": "/portfolio-media/mp-platform-achievements.png",
+        "caption": "لوحة متابعة الإنجازات والخدمات المقدمة للمواطنين"
       }
     ],
     "liveUrl": "",
-    "challenge": "القضاء على الورقيات والعشوائية في تلقي آلاف الطلبات اليومية.",
-    "solution": "تطوير نظام وتطبيقات ويب بقاعدة بيانات منظمة وآمنة.",
+    "challenge": "القضاء على التعاملات الورقية والعشوائية في تلقي آلاف الطلبات والشكاوى اليومية.",
+    "solution": "تطوير نظام وتطبيقات ويب سريعة بقاعدة بيانات منظمة وآمنة ونظام إشعارات فوري.",
     "results": "رقمنة وتسريع الاستجابة لطلبات المواطنين بنسبة 95%.",
     "keyFeatures": [
       "منصة تفاعلية",
-      "قاعدة بيانات",
-      "إدارة طلبات"
+      "قاعدة بيانات سحابية",
+      "إدارة طلبات المواطنين"
     ],
     "bentoSpan": "md:col-span-1 md:row-span-1",
     "published": true,
     "createdAt": "2026-08-11T18:35:00.000Z",
-    "updatedAt": "2026-08-11T18:35:00.000Z"
+    "updatedAt": "2026-08-23T20:45:00.000Z"
   },
   {
     "id": "p_khaleej_real_estate_vimeo",
@@ -126,7 +170,7 @@
     "category": "media-production",
     "clientType": "شركة تطوير عقاري",
     "description": "تصوير جوي سينمائي بالدرون لمجموعة المولات التجارية التابعة لشركة الخليج العقارية. تم التركيز على فخامة المعمار وإبراز مراحل التسليم النهائية.",
-    "imageUrl": "/portfolio-covers/al-khaleej-cover.png",
+    "imageUrl": "/portfolio-media/khaleej-real-estate-compilation-cover.jpeg",
     "videoUrl": "https://vimeo.com/1217314483",
     "gallery": [
       {
@@ -135,12 +179,13 @@
       },
       {
         "type": "image",
-        "url": "https://res.cloudinary.com/dectynbgx/image/upload/v1786463061/shift-portfolio/lpxugp93qjf69ayo541y.jpg"
+        "url": "/portfolio-media/khaleej-real-estate-compilation-cover.jpeg",
+        "caption": "بوستر مجمع للمشروعات التجارية والمولات العقارية"
       }
     ],
     "liveUrl": "",
-    "challenge": "إظهار ضخامة المولات التجارية في فيلم سينمائي واحد لافت للمستثمرين.",
-    "solution": "تصوير درون احترافي زوايا 8K ومونتاج سينمائي ديناميكي.",
+    "challenge": "إظهار ضخامة المولات التجارية في فيلم سينمائي واحد لافت ومحفز للمستثمرين.",
+    "solution": "تصوير درون احترافي زوايا 8K ومونتاج سينمائي ديناميكي مع مؤثرات بصرية.",
     "results": "رفع معدلات الاستثمار وثقة العملاء في سرعة وجودة التسليم.",
     "keyFeatures": [
       "تصوير درون 8K",
@@ -151,7 +196,7 @@
     "bentoSpan": "md:col-span-2 md:row-span-1",
     "published": true,
     "createdAt": "2026-08-11T18:35:00.000Z",
-    "updatedAt": "2026-08-11T15:44:27.731Z"
+    "updatedAt": "2026-08-23T20:45:00.000Z"
   },
   {
     "id": "p_khaleej_real_estate_drive",
@@ -159,8 +204,8 @@
     "title": "الفيديو الترويجي لمولات مدينة السادات — شركة الخليج",
     "category": "media-production",
     "clientType": "شركة تطوير عقاري",
-    "description": "فيديو شامل مجمع لكافة أعمال ومولات شركة الخليج في مدينة السادات يعرض التشطيبات الفاخرة والمواقع الاستراتيجية.",
-    "imageUrl": "/portfolio-covers/al-khaleej-cover.png",
+    "description": "فيديو شامل مجمع لكافة أعمال ومولات شركة الخليج في مدينة السادات يعرض التشطيبات الفاخرة والمواقع الاستراتيجية للمشاريع.",
+    "imageUrl": "/portfolio-media/khaleej-real-estate-compilation-cover.jpeg",
     "videoUrl": "https://drive.google.com/file/d/1uvCsyHN_RqUhRzK0MJRMB-ARrdPUmFad/view?usp=drive_link",
     "gallery": [
       {
@@ -169,13 +214,14 @@
       },
       {
         "type": "image",
-        "url": "https://res.cloudinary.com/dectynbgx/image/upload/v1786462980/shift-portfolio/lpa8yhismfkezy33ls4p.jpg"
+        "url": "/portfolio-media/khaleej-real-estate-compilation-cover.jpeg",
+        "caption": "التغطية الميدانية الشاملة لمشروعات مدينة السادات"
       }
     ],
     "liveUrl": "",
     "challenge": "عرض أكثر من 12 موقعاً تجارياً وتوثيق نسب الإنجاز الواقعية.",
-    "solution": "إنتاج ترويجي وتغطية ميدانية شاملة لمواقع السادات.",
-    "results": "تزويد فريق المبيعات بأداة تسويق مرئية عالية التأثير.",
+    "solution": "إنتاج ترويجي وتغطية ميدانية شاملة لمواقع السادات بالكامل.",
+    "results": "تزويد فريق المبيعات بأداة تسويق مرئية عالية التأثير لجذب المستثمرين.",
     "keyFeatures": [
       "تغطية ميدانية",
       "فيديو ترويجي",
@@ -184,6 +230,6 @@
     "bentoSpan": "md:col-span-1 md:row-span-1",
     "published": true,
     "createdAt": "2026-08-11T18:35:00.000Z",
-    "updatedAt": "2026-08-11T15:43:19.115Z"
+    "updatedAt": "2026-08-23T20:45:00.000Z"
   }
 ]

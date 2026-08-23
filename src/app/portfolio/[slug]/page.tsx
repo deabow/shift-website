@@ -71,7 +71,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-violet-500/20 border border-violet-400/40 text-violet-300 text-xs font-bold transition hover:bg-violet-500 hover:text-zinc-950 hover:shadow-[0_0_25px_rgba(139,92,246,0.5)]"
               >
                 <Globe size={14} />
-                <span>Visit Live Website 🌐</span>
+                <span>Visit Live Website</span>
               </a>
             )}
           </div>
