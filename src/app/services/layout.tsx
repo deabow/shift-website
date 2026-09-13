@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: "خدماتنا | Services",
   description:
-    "SHIFT delivers full-stack web engineering, mobile apps, enterprise systems, and cybersecurity. Custom solutions built with Next.js, Flutter, React Native, and secure-by-design architecture.",
+    "خدمات حضور المتكاملة — إنتاج إعلامي، تصميم جرافيكي، تسويق رقمي، تطوير مواقع، وإدارة سوشيال ميديا.",
   openGraph: {
-    title: "Services | SHIFT Agency",
+    title: "خدماتنا | Hodour حضور",
     description:
-      "Gravity-defying digital solutions — web, mobile, enterprise, and cybersecurity.",
+      "خمس خدمات متكاملة تبني لك حضور حقيقي في السوق المصري.",
   },
   twitter: {
-    title: "Services | SHIFT Agency",
+    title: "خدماتنا | Hodour حضور",
     description:
-      "Gravity-defying digital solutions — web, mobile, enterprise, and cybersecurity.",
+      "خمس خدمات متكاملة تبني لك حضور حقيقي في السوق المصري.",
   },
 };
 

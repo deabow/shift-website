@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Portfolio",
+  title: "أعمالنا | Portfolio",
   description:
-    "Exclusive SHIFT showcase — every project is a case study in craft. Brand identity, environmental branding, web development, and more.",
+    "نماذج من أعمال حضور — تصوير، تصميم، تسويق، ومواقع إلكترونية.",
   openGraph: {
-    title: "Portfolio | SHIFT Agency",
+    title: "أعمالنا | Hodour حضور",
     description:
-      "Exclusive SHIFT showcase — brand identity, environmental branding, and digital craft.",
+      "نماذج من شغلنا اللي بيتكلم عن نفسه.",
   },
   twitter: {
-    title: "Portfolio | SHIFT Agency",
+    title: "أعمالنا | Hodour حضور",
     description:
-      "Exclusive SHIFT showcase — brand identity, environmental branding, and digital craft.",
+      "نماذج من شغلنا اللي بيتكلم عن نفسه.",
   },
 };
 

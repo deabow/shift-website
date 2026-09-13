@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/admin/", "/api/"],
       },
     ],
-    sitemap: "https://shift-agency.com/sitemap.xml",
+    sitemap: "https://hodour.com/sitemap.xml",
   };
 }

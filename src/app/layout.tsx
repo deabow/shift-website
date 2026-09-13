@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { cookies } from "next/headers";
 import dynamic from "next/dynamic";
 import SiteNavbar from "@/components/site-navbar";
@@ -7,49 +6,36 @@ import SiteFooter from "@/components/site-footer";
 import { LanguageProvider } from "@/lib/language-context";
 import "./globals.css";
 
-// ── Heavy client components loaded lazily (reduces initial JS bundle) ──
-const CustomCursor = dynamic(
-  () => import("@/components/custom-cursor").then((m) => m.CustomCursor),
-  { ssr: false }
-);
-const ParticlesBackground = dynamic(
-  () =>
-    import("@/components/particles-background").then(
-      (m) => m.ParticlesBackground
-    ),
-  { ssr: false }
-);
-const ChatFab = dynamic(
-  () => import("@/components/chat-fab").then((m) => m.ChatFab),
+// ── Lazy-loaded client components ──
+const WhatsAppFab = dynamic(
+  () => import("@/components/whatsapp-fab").then((m) => m.WhatsAppFab),
   { ssr: false }
 );
 
-const inter = Inter({ subsets: ["latin"] });
-
-const BASE_URL = "https://shift-agency.com";
+const BASE_URL = "https://hodour.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "SHIFT | Antigravity Digital Agency",
-    template: "%s | SHIFT",
+    default: "حضور | Hodour — شركة إعلانات وتسويق متكاملة",
+    template: "%s | Hodour حضور",
   },
   description:
-    "SHIFT crafts futuristic, high-performance digital experiences with a security-first mindset. Web, mobile, enterprise & cybersecurity.",
+    "حضور — شركة إعلانات وتسويق متكاملة في مصر. إنتاج إعلامي، تصميم جرافيكي، تسويق رقمي، تطوير مواقع، وإدارة سوشيال ميديا.",
   openGraph: {
     type: "website",
-    locale: "en_US",
-    siteName: "SHIFT Agency",
+    locale: "ar_EG",
+    siteName: "Hodour حضور",
     url: BASE_URL,
-    title: "SHIFT | Antigravity Digital Agency",
+    title: "حضور | Hodour — شركة إعلانات وتسويق متكاملة",
     description:
-      "Futuristic, high-performance digital experiences — web, mobile, enterprise, and cybersecurity.",
+      "إنتاج إعلامي، تصميم جرافيكي، تسويق رقمي، تطوير مواقع، وإدارة سوشيال ميديا — كل اللي محتاجه عشان يكون ليك حضور حقيقي في السوق.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "SHIFT | Antigravity Digital Agency",
+    title: "حضور | Hodour — شركة إعلانات وتسويق متكاملة",
     description:
-      "Futuristic, high-performance digital experiences — web, mobile, enterprise, and cybersecurity.",
+      "إنتاج إعلامي، تصميم جرافيكي، تسويق رقمي، تطوير مواقع، وإدارة سوشيال ميديا.",
   },
   robots: {
     index: true,
@@ -64,19 +50,17 @@ export default function RootLayout({
 }>) {
   const cookieStore = cookies();
   const savedLang = cookieStore.get("language")?.value;
-  const initialLanguage = savedLang === "ar" ? "ar" : "en";
+  const initialLanguage = savedLang === "en" ? "en" : "ar";
   const dir = initialLanguage === "ar" ? "rtl" : "ltr";
 
   return (
     <html lang={initialLanguage} dir={dir}>
-      <body className={`${inter.className} bg-[#0a0a0a] text-white antialiased`}>
+      <body className="bg-[#0B0B0C] text-[#F2D3B1] antialiased">
         <LanguageProvider initialLanguage={initialLanguage}>
-          <CustomCursor />
-          <ParticlesBackground />
           <SiteNavbar />
           {children}
           <SiteFooter />
-          <ChatFab />
+          <WhatsAppFab />
         </LanguageProvider>
       </body>
     </html>

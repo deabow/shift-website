@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "من نحن | About",
   description:
-    "SHIFT builds digital growth engines — not just websites. Security-first engineering, future-stack technology, and Arabic-first mindset.",
+    "حضور شركة إعلانات وتسويق متكاملة في مصر. بنساعدك تتشاف صح في السوق المصري.",
   openGraph: {
-    title: "About | SHIFT Agency",
+    title: "من نحن | Hodour حضور",
     description:
-      "We build digital growth engines — security-first, performance-obsessed, Arabic-first.",
+      "حضور مش مجرد اسم. هو وعد بحضور حقيقي في السوق.",
   },
   twitter: {
-    title: "About | SHIFT Agency",
+    title: "من نحن | Hodour حضور",
     description:
-      "We build digital growth engines — security-first, performance-obsessed, Arabic-first.",
+      "حضور مش مجرد اسم. هو وعد بحضور حقيقي في السوق.",
   },
 };
 
