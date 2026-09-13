@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -15,6 +16,20 @@ const config: Config = {
           cream: "#F2D3B1",
           orange: "#FF4D1A",
           gray: "#2E2A29",
+        },
+        theme: {
+          bg: "var(--bg-primary)",
+          surface: "var(--bg-surface)",
+          card: "var(--bg-card)",
+          "card-hover": "var(--bg-card-hover)",
+          primary: "var(--text-primary)",
+          secondary: "var(--text-secondary)",
+          muted: "var(--text-muted)",
+          border: "var(--border-color)",
+          "border-subtle": "var(--border-subtle)",
+          cta: "var(--accent-cta)",
+          "cta-hover": "var(--accent-cta-hover)",
+          spark: "var(--accent-spark)",
         },
       },
       fontFamily: {

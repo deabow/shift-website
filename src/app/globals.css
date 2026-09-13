@@ -2,19 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Ember Noir Palette ─────────────────────────────────────────────────────── */
-:root {
-  --bg-deep: #0B0B0C;
-  --bg-surface: #2E2A29;
-  --accent: #9F0F1F;
-  --accent-bright: #FF4D1A;
-  --cream: #F2D3B1;
-  --cream-muted: rgba(242, 211, 177, 0.7);
-  --cream-subtle: rgba(242, 211, 177, 0.4);
+/* ── Google Fonts ───────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Changa:wght@400;600;700;800&family=Tajawal:wght@300;400;500;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ── Theme Definitions ─────────────────────────────────────────────────────── */
+:root,
+.dark,
+[data-theme="dark"] {
+  --bg-primary: #0B0B0C;
+  --bg-surface: #171618;
+  --bg-card: #121214;
+  --bg-card-hover: #1c1b1f;
+  --text-primary: #F2D3B1;
+  --text-secondary: rgba(242, 211, 177, 0.75);
+  --text-muted: rgba(242, 211, 177, 0.5);
+  --border-color: rgba(242, 211, 177, 0.09);
+  --border-subtle: rgba(242, 211, 177, 0.05);
+  --accent-cta: #C41E2F; /* Enhanced contrast for dark mode WCAG AA compliance */
+  --accent-cta-hover: #D82B3C;
+  --accent-glow: rgba(196, 30, 47, 0.35);
+  --accent-spark: #FF4D1A;
+  --nav-bg: rgba(11, 11, 12, 0.88);
+  --nav-border: rgba(242, 211, 177, 0.09);
+  --scrollbar-track: #0B0B0C;
+  --scrollbar-thumb: #9F0F1F;
+  --selection-bg: rgba(159, 15, 31, 0.45);
+  --selection-color: #F2D3B1;
 }
 
-/* ── Google Fonts ───────────────────────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Changa:wght@400;700;800&family=Tajawal:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+.light,
+[data-theme="light"] {
+  --bg-primary: #F2D3B1; /* الكريمي الأساسي المطلوب بدقة */
+  --bg-surface: #E8C8A5;
+  --bg-card: #FAF1E6;
+  --bg-card-hover: #FFFFFF;
+  --text-primary: #0B0B0C; /* أسود عميق بدقة */
+  --text-secondary: #2E2A29; /* رمادي داكن بدقة */
+  --text-muted: rgba(46, 42, 41, 0.7);
+  --border-color: rgba(46, 42, 41, 0.15); /* #2E2A29 بـopacity 15% */
+  --border-subtle: rgba(46, 42, 41, 0.08);
+  --accent-cta: #9F0F1F; /* الأحمر العميق تباين ممتاز 5.8:1 */
+  --accent-cta-hover: #800C19;
+  --accent-glow: rgba(159, 15, 31, 0.25);
+  --accent-spark: #FF4D1A;
+  --nav-bg: rgba(242, 211, 177, 0.88);
+  --nav-border: rgba(46, 42, 41, 0.15);
+  --scrollbar-track: #F2D3B1;
+  --scrollbar-thumb: #9F0F1F;
+  --selection-bg: #9F0F1F;
+  --selection-color: #FAF1E6;
+}
 
 html {
   scroll-behavior: smooth;
@@ -25,32 +62,33 @@ html {
 }
 
 *::selection {
-  background: rgba(159, 15, 31, 0.45);
-  color: var(--cream);
+  background: var(--selection-bg);
+  color: var(--selection-color);
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  color: var(--cream);
-  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* ── Font stacks ────────────────────────────────────────────────────────────── */
+/* ── Typography Stacks ──────────────────────────────────────────────────────── */
 body,
 input,
 button,
-textarea {
-  font-family: 'Tajawal', 'Inter', ui-sans-serif, system-ui, -apple-system,
-    sans-serif;
+textarea,
+select {
+  font-family: 'Tajawal', 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
-/* Arabic headings */
+/* Headings: Changa for Arabic, Space Grotesk for English */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Changa', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.02em;
 }
 
-/* When lang=en, swap heading font priority */
 :lang(en) h1, :lang(en) h2, :lang(en) h3,
 :lang(en) h4, :lang(en) h5, :lang(en) h6 {
   font-family: 'Space Grotesk', 'Changa', ui-sans-serif, system-ui, sans-serif;
@@ -59,14 +97,26 @@ h1, h2, h3, h4, h5, h6 {
 :lang(en) body,
 :lang(en) input,
 :lang(en) button,
-:lang(en) textarea {
+:lang(en) textarea,
+:lang(en) select {
   font-family: 'Inter', 'Tajawal', ui-sans-serif, system-ui, sans-serif;
 }
 
-/* ── Dark scrollbar ─────────────────────────────────────────────────────────── */
+/* ── Accessibility & Focus Rings ────────────────────────────────────────────── */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
+  ring: 2px solid var(--accent-spark);
+  box-shadow: 0 0 0 3px var(--accent-spark), 0 0 12px rgba(255, 77, 26, 0.4);
+}
+
+/* ── Scrollbars ─────────────────────────────────────────────────────────────── */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--accent) var(--bg-deep);
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }
 
 ::-webkit-scrollbar {
@@ -74,34 +124,27 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-deep);
+  background: var(--scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 999px;
-  border: 2px solid var(--bg-deep);
-  background: var(--accent);
+  border: 2px solid var(--scrollbar-track);
+  background: var(--scrollbar-thumb);
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #c4162a;
 }
 
-/* ── Utility layer ──────────────────────────────────────────────────────────── */
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
-/* ── Subtle ambient glow keyframes ──────────────────────────────────────────── */
+/* ── Keyframes & Micro-Animations ───────────────────────────────────────────── */
 @keyframes ember-pulse {
   0%, 100% {
     opacity: 0.4;
     transform: scale(1);
   }
   50% {
-    opacity: 0.7;
+    opacity: 0.75;
     transform: scale(1.05);
   }
 }
@@ -111,50 +154,47 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
   }
 }
 
-@keyframes fade-in-up {
+@keyframes spin-slow {
   from {
-    opacity: 0;
-    transform: translateY(24px);
+    transform: rotate(0deg);
   }
   to {
-    opacity: 1;
-    transform: translateY(0);
+    transform: rotate(360deg);
   }
 }
 
-/* ── Reusable glow classes ──────────────────────────────────────────────────── */
-.ember-glow {
-  box-shadow: 0 0 40px rgba(159, 15, 31, 0.15),
-              0 0 80px rgba(159, 15, 31, 0.08);
-}
-
-.ember-glow-strong {
-  box-shadow: 0 0 30px rgba(159, 15, 31, 0.3),
-              0 0 60px rgba(159, 15, 31, 0.15);
-}
-
-.bright-glow {
-  box-shadow: 0 0 20px rgba(255, 77, 26, 0.2),
-              0 0 40px rgba(255, 77, 26, 0.1);
-}
-
-/* ── Card hover border animation ────────────────────────────────────────────── */
+/* ── Interactive Cards & Shadows ────────────────────────────────────────────── */
 .card-ember {
-  background: var(--bg-deep);
-  border: 1px solid rgba(242, 211, 177, 0.08);
-  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease, background-color 0.35s ease;
 }
 
 .card-ember:hover {
   border-color: rgba(159, 15, 31, 0.4);
-  box-shadow: 0 0 40px rgba(159, 15, 31, 0.12);
+  box-shadow: 0 12px 35px var(--accent-glow);
+  transform: translateY(-2px);
 }
 
-/* ── RTL-aware spacing helpers ──────────────────────────────────────────────── */
+.ember-glow {
+  box-shadow: 0 0 35px var(--accent-glow);
+}
+
+.bright-glow {
+  box-shadow: 0 0 20px rgba(255, 77, 26, 0.25);
+}
+
+/* ── Utilities ──────────────────────────────────────────────────────────────── */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
 [dir="rtl"] .flip-icon {
   transform: scaleX(-1);
 }

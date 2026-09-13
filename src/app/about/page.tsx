@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/language-context";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Quote, Sparkles, CheckCircle2 } from "lucide-react";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -29,47 +29,64 @@ export default function AboutPage() {
   const pillars = t.about.pillars;
 
   return (
-    <main className="relative mx-auto min-h-[calc(100vh-96px)] w-full max-w-6xl px-4 pb-24 pt-12 md:px-8">
-      {/* Background */}
-      <div className="pointer-events-none fixed inset-0 -z-10 bg-[#0B0B0C]" />
-      <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(ellipse_60%_40%_at_50%_5%,rgba(159,15,31,0.05),transparent_70%)]" />
+    <main className="relative mx-auto min-h-[calc(100vh-96px)] w-full max-w-6xl px-4 pb-24 pt-12 md:px-8 bg-theme-bg transition-colors duration-300">
+      {/* Background Ambience */}
+      <div className="pointer-events-none fixed inset-0 -z-10 bg-theme-bg" />
+      <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(ellipse_60%_40%_at_50%_5%,rgba(159,15,31,0.06),transparent_70%)]" />
 
       {/* ── Header ── */}
       <motion.section
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className="flex flex-col items-center text-center"
+        className="flex flex-col items-center text-center max-w-4xl mx-auto"
       >
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#9F0F1F]/[0.08] border border-[#9F0F1F]/20 text-[#9F0F1F] text-xs font-semibold uppercase tracking-[0.2em] mb-4 backdrop-blur-md">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#9F0F1F]/[0.08] border border-[#9F0F1F]/20 text-[#9F0F1F] text-xs font-semibold uppercase tracking-[0.2em] mb-4 backdrop-blur-md">
           <span className="w-1.5 h-1.5 rounded-full bg-[#9F0F1F] animate-pulse" />
           <span className="font-changa">{t.about.badge}</span>
         </div>
 
-        <h1 className="mt-4 max-w-4xl text-4xl font-extrabold tracking-tight text-[#F2D3B1] md:text-5xl lg:text-6xl leading-[1.1] font-changa">
+        <h1 className="mt-2 text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-theme-primary leading-[1.15] font-changa">
           {t.about.title}{" "}
           <span className="text-[#9F0F1F]">{t.about.titleAccent}</span>
         </h1>
 
-        <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-[#F2D3B1]/55 md:text-lg font-tajawal">
+        <p className="mx-auto mt-6 text-base leading-relaxed text-theme-secondary/80 md:text-xl font-tajawal max-w-3xl">
           {t.about.description}
         </p>
 
-        {/* Mission card */}
-        <div className="mt-10 w-full max-w-3xl rounded-3xl border border-[#9F0F1F]/20 bg-[#9F0F1F]/[0.04] p-8 backdrop-blur-2xl">
-          <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#9F0F1F] font-changa">
-            {language === "ar" ? "رسالتنا" : "Our Mission"}
-          </p>
-          <p className="mt-3 text-lg font-bold leading-relaxed text-[#F2D3B1] md:text-xl font-tajawal">
-            &ldquo;{t.about.mission}&rdquo;
-          </p>
+        {/* ── Visual Connector Bridge into "رسالتنا" ── */}
+        <div className="relative flex flex-col items-center my-6">
+          {/* Vertical gradient connecting line */}
+          <div className="h-10 w-px bg-gradient-to-b from-transparent via-[#9F0F1F] to-[#9F0F1F]" />
+          {/* Glowing node with quote icon */}
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#9F0F1F] text-white shadow-[0_0_20px_rgba(159,15,31,0.5)] my-1">
+            <Quote className="w-4 h-4 fill-white" />
+          </div>
+          <div className="h-6 w-px bg-gradient-to-b from-[#9F0F1F] to-transparent" />
+        </div>
+
+        {/* Mission Showcase Container — Visually Bound to the Intro */}
+        <div className="relative w-full max-w-3xl rounded-3xl border border-[#9F0F1F]/30 bg-theme-card p-8 md:p-10 shadow-xl overflow-hidden text-center">
+          <div className="pointer-events-none absolute -inset-10 bg-[radial-gradient(ellipse_at_center,rgba(159,15,31,0.08),transparent_70%)]" />
+          
+          <div className="relative z-10">
+            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.24em] text-[#9F0F1F] mb-3 font-changa">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF4D1A]" />
+              <span>{language === "ar" ? "رسالتنا وجوهر وجودنا" : "Our Core Mission"}</span>
+            </div>
+
+            <blockquote className="mt-2 text-xl sm:text-2xl md:text-3xl font-bold leading-relaxed text-theme-primary font-tajawal">
+              &ldquo;{t.about.mission}&rdquo;
+            </blockquote>
+          </div>
         </div>
       </motion.section>
 
       {/* ── Divider ── */}
       <div className="mx-auto mt-20 h-px w-full max-w-md bg-gradient-to-r from-transparent via-[#9F0F1F]/40 to-transparent" />
 
-      {/* ── Why Hodour ── */}
+      {/* ── Why Hodour / Pillars ── */}
       <motion.section
         variants={containerVariants}
         initial="hidden"
@@ -78,10 +95,10 @@ export default function AboutPage() {
         className="mt-16"
       >
         <div className="mb-12 text-center">
-          <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#9F0F1F] font-changa">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#9F0F1F] mb-2 font-changa">
             {pillars.title}
           </p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-[#F2D3B1] md:text-4xl font-changa">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-theme-primary font-changa">
             {pillars.subtitle}
           </h2>
         </div>
@@ -91,44 +108,54 @@ export default function AboutPage() {
             <motion.div
               key={pillar.title}
               variants={cardVariants}
-              className="group relative rounded-3xl border border-[#F2D3B1]/[0.08] bg-[#0B0B0C] p-7 flex flex-col transition-all duration-500 hover:border-[#9F0F1F]/30 hover:shadow-[0_0_40px_rgba(159,15,31,0.08)]"
+              className="group relative rounded-3xl border border-theme-border bg-theme-card p-7 md:p-8 flex flex-col justify-between shadow-sm hover:shadow-xl transition-all duration-300 hover:border-[#9F0F1F]/40 hover:-translate-y-1"
             >
-              <div className="flex items-center justify-between mb-4">
-                <p className="font-mono text-xl font-bold text-[#9F0F1F]/30 group-hover:text-[#9F0F1F] transition-colors">
-                  {String(i + 1).padStart(2, "0")}
+              <div>
+                <div className="flex items-center justify-between mb-5">
+                  <span className="font-mono text-2xl font-bold text-[#9F0F1F]/40 group-hover:text-[#9F0F1F] transition-colors">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className="w-2 h-2 rounded-full bg-[#9F0F1F]/20 group-hover:bg-[#FF4D1A] transition-colors" />
+                </div>
+
+                <h3 className="text-xl font-extrabold tracking-tight text-theme-primary group-hover:text-[#9F0F1F] transition-colors font-changa">
+                  {pillar.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-theme-secondary/80 font-tajawal">
+                  {pillar.body}
                 </p>
               </div>
 
-              <h3 className="text-xl font-extrabold tracking-tight text-[#F2D3B1] group-hover:text-white transition-colors font-changa">
-                {pillar.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-[#F2D3B1]/50 font-tajawal">
-                {pillar.body}
-              </p>
+              <div className="pt-6 mt-6 border-t border-theme-border flex items-center gap-2 text-xs font-bold text-[#9F0F1F]">
+                <CheckCircle2 className="w-3.5 h-3.5" />
+                <span className="font-changa">
+                  {language === "ar" ? "قيمة أساسية في حضور" : "Core Hodour Value"}
+                </span>
+              </div>
             </motion.div>
           ))}
         </div>
       </motion.section>
 
-      {/* ── Bottom CTA ── */}
+      {/* ── Bottom Call To Action ── */}
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="mt-20 flex flex-col items-center gap-6 rounded-3xl border border-[#F2D3B1]/[0.08] bg-[#0B0B0C] p-8 text-center relative overflow-hidden"
+        className="mt-20 flex flex-col items-center gap-6 rounded-3xl border border-theme-border bg-theme-card p-8 md:p-12 text-center relative overflow-hidden shadow-lg"
       >
         <div className="pointer-events-none absolute -inset-20 bg-[radial-gradient(ellipse_at_center,rgba(159,15,31,0.06),transparent_70%)]" />
 
-        <div className="relative z-10">
-          <p className="text-xl font-extrabold text-[#F2D3B1] md:text-2xl font-changa">
+        <div className="relative z-10 max-w-xl">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-theme-primary font-changa">
             {language === "ar"
               ? "جاهز تبني حضورك في السوق؟"
               : "Ready to build your market presence?"}
-          </p>
-          <p className="mt-1 text-sm text-[#F2D3B1]/50 font-tajawal">
+          </h2>
+          <p className="mt-2 text-sm text-theme-secondary/80 font-tajawal">
             {language === "ar"
-              ? "كلمنا وهنبدأ نرسملك خطة تسويق تناسب مشروعك."
+              ? "كلمنا وهنبدأ نرسملك خطة تسويق متكاملة تناسب طموح مشروعك."
               : "Talk to us and we'll craft a marketing plan tailored to your project."}
           </p>
         </div>
@@ -141,9 +168,9 @@ export default function AboutPage() {
           )}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="relative z-10 inline-flex items-center gap-2 rounded-xl bg-[#9F0F1F] px-7 py-3.5 text-xs font-extrabold uppercase tracking-[0.16em] text-[#F2D3B1] transition hover:shadow-[0_0_35px_rgba(159,15,31,0.4)]"
+          className="relative z-10 inline-flex items-center gap-2 rounded-xl bg-[#9F0F1F] px-8 py-3.5 text-xs font-extrabold uppercase tracking-[0.16em] text-[#F2D3B1] shadow-[0_0_25px_rgba(159,15,31,0.35)] transition-all hover:bg-[#B91C28] hover:shadow-[0_0_35px_rgba(159,15,31,0.5)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A]"
         >
-          <span>{t.cta.talkToUs}</span>
+          <span className="font-changa">{t.cta.talkToUs}</span>
           <Arrow className="w-4 h-4 text-[#F2D3B1]" />
         </a>
       </motion.div>

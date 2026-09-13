@@ -22,12 +22,13 @@ export function WhatsAppFab() {
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: -10, scale: 0.9 }}
             transition={{ duration: 0.2 }}
-            className="mb-2 rounded-xl bg-[#1a1a1a] border border-[#F2D3B1]/10 px-4 py-2.5 text-sm text-[#F2D3B1] shadow-xl backdrop-blur-xl max-w-[200px]"
+            className="mb-2 rounded-xl bg-theme-card border border-theme-border px-4 py-2.5 text-sm text-theme-primary shadow-xl backdrop-blur-xl max-w-[200px]"
           >
-            <p className="font-tajawal">محتاج مساعدة؟ كلمنا!</p>
+            <p className="font-tajawal text-xs">محتاج مساعدة؟ تواصل مع حضور فوراً!</p>
             <button
               onClick={() => setShowTooltip(false)}
-              className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-[#2E2A29] text-[#F2D3B1]/60 hover:text-[#F2D3B1] transition-colors"
+              className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-theme-surface text-theme-primary/70 hover:text-theme-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#9F0F1F]"
+              aria-label="إغلاق التلميح"
             >
               <X size={10} />
             </button>
@@ -39,14 +40,13 @@ export function WhatsAppFab() {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="group flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_4px_20px_rgba(37,211,102,0.35)] transition-all duration-300 hover:shadow-[0_4px_30px_rgba(37,211,102,0.5)] hover:scale-105 active:scale-95"
+        className="group flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_4px_20px_rgba(37,211,102,0.35)] transition-all duration-300 hover:shadow-[0_4px_30px_rgba(37,211,102,0.5)] hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white"
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
         whileHover={{ y: -2 }}
         whileTap={{ scale: 0.95 }}
-        aria-label="تواصل معنا على واتساب"
+        aria-label="تواصل معنا مباشرة على واتساب"
       >
-        {/* WhatsApp SVG icon */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="26"

@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import SiteNavbar from "@/components/site-navbar";
 import SiteFooter from "@/components/site-footer";
 import { LanguageProvider } from "@/lib/language-context";
+import { ThemeProvider } from "@/lib/theme-context";
 import "./globals.css";
 
 // ── Lazy-loaded client components ──
@@ -50,18 +51,38 @@ export default function RootLayout({
 }>) {
   const cookieStore = cookies();
   const savedLang = cookieStore.get("language")?.value;
+  const savedTheme = cookieStore.get("hodour-theme")?.value as "dark" | "light" | undefined;
   const initialLanguage = savedLang === "en" ? "en" : "ar";
+  const initialTheme = savedTheme === "light" ? "light" : "dark";
   const dir = initialLanguage === "ar" ? "rtl" : "ltr";
 
   return (
-    <html lang={initialLanguage} dir={dir}>
-      <body className="bg-[#0B0B0C] text-[#F2D3B1] antialiased">
-        <LanguageProvider initialLanguage={initialLanguage}>
-          <SiteNavbar />
-          {children}
-          <SiteFooter />
-          <WhatsAppFab />
-        </LanguageProvider>
+    <html lang={initialLanguage} dir={dir} className={initialTheme} data-theme={initialTheme} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                var theme = localStorage.getItem('hodour-theme');
+                if (theme === 'light' || theme === 'dark') {
+                  document.documentElement.classList.remove('light', 'dark');
+                  document.documentElement.classList.add(theme);
+                  document.documentElement.setAttribute('data-theme', theme);
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
+      </head>
+      <body className="bg-theme-bg text-theme-primary antialiased min-h-screen transition-colors duration-300">
+        <ThemeProvider initialTheme={initialTheme}>
+          <LanguageProvider initialLanguage={initialLanguage}>
+            <SiteNavbar />
+            {children}
+            <SiteFooter />
+            <WhatsAppFab />
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

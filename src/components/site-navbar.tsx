@@ -5,13 +5,15 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/lib/language-context";
-import { Menu, X, Globe, ArrowLeft, ArrowRight } from "lucide-react";
+import { useTheme } from "@/lib/theme-context";
+import { Menu, X, Globe, Sun, Moon, ArrowLeft, ArrowRight } from "lucide-react";
 
 const CEO_WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP || "201211050297";
 
 export default function SiteNavbar() {
   const pathname = usePathname();
   const { language, setLanguage, t } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const isRTL = language === "ar";
   const Arrow = isRTL ? ArrowLeft : ArrowRight;
@@ -39,22 +41,29 @@ export default function SiteNavbar() {
     setLanguage(language === "en" ? "ar" : "en");
   };
 
+  const isLight = theme === "light";
+
   return (
     <header className="sticky top-0 z-50 px-4 pb-2 pt-4 md:px-8">
       <motion.nav
         initial={{ opacity: 0, y: -14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="relative mx-auto flex w-full max-w-6xl items-center justify-between rounded-2xl border border-[#F2D3B1]/[0.08] bg-[#0B0B0C]/85 px-4 py-3 shadow-[0_10px_40px_rgba(0,0,0,0.6)] backdrop-blur-2xl md:px-6"
+        className="relative mx-auto flex w-full max-w-6xl items-center justify-between rounded-2xl border border-theme-border bg-theme-bg/85 px-4 py-3 shadow-[0_10px_35px_rgba(0,0,0,0.15)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.6)] backdrop-blur-2xl md:px-6 transition-colors duration-300"
       >
-        {/* Brand Logo — Text-based "حضور" */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <span className="text-xl font-changa font-bold tracking-wide text-[#F2D3B1] group-hover:text-white transition-colors">
+        {/* Brand Logo — "حضور / Hodour" */}
+        <Link
+          href="/"
+          className="flex items-center gap-2 group rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F] p-1"
+          aria-label={language === "ar" ? "حضور - الصفحة الرئيسية" : "Hodour - Home"}
+        >
+          <span className="text-xl font-changa font-bold tracking-wide text-theme-primary group-hover:text-[#9F0F1F] dark:group-hover:text-white transition-colors">
             {language === "ar" ? "حضور" : "Hodour"}
           </span>
+          <span className="w-1.5 h-1.5 rounded-full bg-[#FF4D1A] animate-pulse" />
         </Link>
 
-        {/* Desktop Links */}
+        {/* Desktop Navigation Links */}
         <ul className="hidden md:flex items-center justify-center gap-1 absolute left-1/2 -translate-x-1/2">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
@@ -62,10 +71,10 @@ export default function SiteNavbar() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`relative rounded-xl px-4 py-1.5 text-xs font-bold uppercase tracking-[0.14em] transition-colors ${
+                  className={`relative rounded-xl px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F] ${
                     isActive
-                      ? "text-[#0B0B0C]"
-                      : "text-[#F2D3B1]/60 hover:text-[#F2D3B1]"
+                      ? "text-[#F2D3B1]"
+                      : "text-theme-secondary/80 hover:text-theme-primary hover:bg-theme-card/40"
                   }`}
                 >
                   {isActive && (
@@ -86,36 +95,115 @@ export default function SiteNavbar() {
           })}
         </ul>
 
-        {/* Desktop Controls */}
-        <div className="hidden md:flex items-center gap-3">
+        {/* Desktop Controls (Theme Toggle & Language Switcher) */}
+        <div className="hidden md:flex items-center gap-2.5">
+          {/* Theme Switcher Toggle */}
+          <button
+            onClick={toggleTheme}
+            className="flex h-9 w-9 items-center justify-center rounded-xl border border-theme-border bg-theme-card text-theme-primary shadow-sm transition-all hover:border-[#9F0F1F]/40 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F]"
+            aria-label={
+              isLight
+                ? language === "ar"
+                  ? "التحويل للوضع الليلي"
+                  : "Switch to Dark Mode"
+                : language === "ar"
+                ? "التحويل للوضع النهاري"
+                : "Switch to Light Mode"
+            }
+            title={
+              isLight
+                ? language === "ar"
+                  ? "الوضع الليلي"
+                  : "Dark Mode"
+                : language === "ar"
+                ? "الوضع النهاري"
+                : "Light Mode"
+            }
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {isLight ? (
+                <motion.div
+                  key="sun"
+                  initial={{ rotate: -90, scale: 0.5, opacity: 0 }}
+                  animate={{ rotate: 0, scale: 1, opacity: 1 }}
+                  exit={{ rotate: 90, scale: 0.5, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Sun className="w-4 h-4 text-[#9F0F1F]" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="moon"
+                  initial={{ rotate: 90, scale: 0.5, opacity: 0 }}
+                  animate={{ rotate: 0, scale: 1, opacity: 1 }}
+                  exit={{ rotate: -90, scale: 0.5, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Moon className="w-4 h-4 text-[#FF4D1A]" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </button>
+
+          {/* Language Switcher Pill */}
           <button
             onClick={toggleLanguage}
-            className="flex items-center gap-1.5 rounded-xl border border-[#F2D3B1]/10 bg-[#2E2A29]/60 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-[#F2D3B1] backdrop-blur-md transition hover:border-[#9F0F1F]/40 hover:bg-[#9F0F1F]/10"
+            className="flex h-9 items-center gap-1.5 rounded-xl border border-theme-border bg-theme-card px-3 text-xs font-bold uppercase tracking-wider text-theme-primary shadow-sm transition-all hover:border-[#9F0F1F]/40 hover:bg-[#9F0F1F]/10 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F]"
+            aria-label={
+              language === "en" ? "تغيير اللغة إلى العربية" : "Switch language to English"
+            }
           >
-            <Globe className="w-3.5 h-3.5 text-[#F2D3B1]" />
-            <span>{language === "en" ? "عربي" : "EN"}</span>
+            <Globe className="w-3.5 h-3.5 text-[#9F0F1F] dark:text-[#FF4D1A]" />
+            <span className="font-changa">{language === "en" ? "عربي" : "EN"}</span>
           </button>
         </div>
 
-        {/* Mobile Controls */}
-        <div className="flex md:hidden items-center gap-3">
+        {/* Mobile Header Controls */}
+        <div className="flex md:hidden items-center gap-2">
+          {/* Mobile Theme Toggle */}
           <button
-            onClick={toggleLanguage}
-            className="flex items-center gap-1 rounded-lg border border-[#F2D3B1]/15 bg-[#2E2A29]/80 px-2.5 py-1 text-[11px] font-bold uppercase text-[#F2D3B1] transition active:scale-95"
+            onClick={toggleTheme}
+            className="flex h-11 w-11 items-center justify-center rounded-xl border border-theme-border bg-theme-card text-theme-primary transition active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F]"
+            aria-label={
+              isLight
+                ? language === "ar"
+                  ? "التحويل للوضع الليلي"
+                  : "Switch to Dark Mode"
+                : language === "ar"
+                ? "التحويل للوضع النهاري"
+                : "Switch to Light Mode"
+            }
           >
-            <Globe className="w-3 h-3 text-[#F2D3B1]" />
-            <span>{language === "en" ? "عربي" : "EN"}</span>
+            {isLight ? (
+              <Sun className="w-4 h-4 text-[#9F0F1F]" />
+            ) : (
+              <Moon className="w-4 h-4 text-[#FF4D1A]" />
+            )}
           </button>
 
+          {/* Mobile Language Switcher */}
+          <button
+            onClick={toggleLanguage}
+            className="flex h-11 items-center gap-1 rounded-xl border border-theme-border bg-theme-card px-3 text-xs font-bold uppercase text-theme-primary transition active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F]"
+            aria-label={
+              language === "en" ? "تغيير اللغة إلى العربية" : "Switch language to English"
+            }
+          >
+            <Globe className="w-3.5 h-3.5 text-[#9F0F1F] dark:text-[#FF4D1A]" />
+            <span className="font-changa">{language === "en" ? "عربي" : "EN"}</span>
+          </button>
+
+          {/* Mobile Hamburger Toggle Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#F2D3B1]/15 bg-[#2E2A29]/80 text-[#F2D3B1] backdrop-blur-md transition active:scale-95 hover:border-[#9F0F1F]/40"
-            aria-label="Toggle Navigation Menu"
+            className="flex h-11 w-11 items-center justify-center rounded-xl border border-theme-border bg-theme-card text-theme-primary backdrop-blur-md transition active:scale-95 hover:border-[#9F0F1F]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F]"
+            aria-label={isOpen ? "إغلاق القائمة" : "فتح القائمة"}
+            aria-expanded={isOpen}
           >
             {isOpen ? (
               <X className="w-5 h-5 text-[#9F0F1F]" />
             ) : (
-              <Menu className="w-5 h-5 text-[#F2D3B1]" />
+              <Menu className="w-5 h-5 text-theme-primary" />
             )}
           </button>
         </div>
@@ -129,21 +217,24 @@ export default function SiteNavbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden overflow-hidden mt-2 mx-auto w-full max-w-6xl rounded-3xl border border-[#F2D3B1]/[0.08] bg-[#0B0B0C]/95 shadow-[0_20px_60px_rgba(0,0,0,0.8)] backdrop-blur-3xl"
+            className="md:hidden overflow-hidden mt-2 mx-auto w-full max-w-6xl rounded-3xl border border-theme-border bg-theme-card/95 shadow-[0_20px_50px_rgba(0,0,0,0.25)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.8)] backdrop-blur-3xl"
           >
-            <div className="p-6 flex flex-col justify-between space-y-6">
-              {/* Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-[#F2D3B1]/[0.06]">
-                <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#9F0F1F]">
+            <div className="p-6 flex flex-col justify-between space-y-5">
+              {/* Drawer Header */}
+              <div className="flex items-center justify-between pb-3 border-b border-theme-border">
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[#9F0F1F]">
                   <span className="w-2 h-2 rounded-full bg-[#9F0F1F] animate-pulse" />
                   <span className="font-changa">
-                    {language === "ar" ? "القائمة" : "Menu"}
+                    {language === "ar" ? "قائمة التنقل" : "Navigation"}
                   </span>
                 </div>
+                <span className="text-xs text-theme-muted font-tajawal">
+                  {language === "ar" ? "حضور | Hodour" : "Hodour Agency"}
+                </span>
               </div>
 
-              {/* Links */}
-              <ul className="flex flex-col space-y-2">
+              {/* Navigation Links with 44px+ minimum height */}
+              <ul className="flex flex-col space-y-1.5">
                 {navLinks.map((link, idx) => {
                   const isActive = pathname === link.href;
                   return (
@@ -151,24 +242,24 @@ export default function SiteNavbar() {
                       key={link.href}
                       initial={{ opacity: 0, x: isRTL ? 20 : -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: idx * 0.06 + 0.1, duration: 0.3 }}
+                      transition={{ delay: idx * 0.05 + 0.08, duration: 0.25 }}
                     >
                       <Link
                         href={link.href}
                         onClick={() => setIsOpen(false)}
-                        className={`flex items-center justify-between rounded-2xl p-3.5 transition-all ${
+                        className={`flex min-h-[48px] items-center justify-between rounded-2xl px-4 py-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F] ${
                           isActive
-                            ? "bg-[#9F0F1F]/10 border border-[#9F0F1F]/20 text-[#F2D3B1] font-bold"
-                            : "text-[#F2D3B1]/60 hover:text-[#F2D3B1] hover:bg-[#F2D3B1]/[0.04]"
+                            ? "bg-[#9F0F1F] text-[#F2D3B1] font-bold shadow-md"
+                            : "text-theme-primary hover:bg-theme-surface/60 active:scale-[0.99]"
                         }`}
                       >
-                        <span className="text-base tracking-wide">
+                        <span className="text-base font-medium font-tajawal tracking-wide">
                           {link.label}
                         </span>
                         {isActive ? (
-                          <span className="h-2 w-2 rounded-full bg-[#9F0F1F] shadow-[0_0_10px_#9F0F1F]" />
+                          <span className="h-2 w-2 rounded-full bg-[#F2D3B1] shadow-[0_0_10px_#F2D3B1]" />
                         ) : (
-                          <Arrow className="w-4 h-4 text-[#F2D3B1]/30" />
+                          <Arrow className="w-4 h-4 text-theme-muted" />
                         )}
                       </Link>
                     </motion.li>
@@ -176,8 +267,8 @@ export default function SiteNavbar() {
                 })}
               </ul>
 
-              {/* CTA */}
-              <div className="pt-4 border-t border-[#F2D3B1]/[0.06] flex flex-col space-y-4">
+              {/* Quick WhatsApp Action (min-h 48px) */}
+              <div className="pt-3 border-t border-theme-border flex flex-col space-y-3">
                 <a
                   href={`https://wa.me/${CEO_WHATSAPP}?text=${encodeURIComponent(
                     language === "ar"
@@ -186,10 +277,10 @@ export default function SiteNavbar() {
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 rounded-xl bg-[#9F0F1F] py-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[#F2D3B1] shadow-[0_0_25px_rgba(159,15,31,0.3)] active:scale-[0.98] transition-transform"
+                  className="flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-[#9F0F1F] px-4 py-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[#F2D3B1] shadow-[0_0_25px_rgba(159,15,31,0.3)] active:scale-[0.98] transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A]"
                 >
-                  <span>
-                    {language === "ar" ? "كلمنا على واتساب" : "Talk to Hodour"}
+                  <span className="font-changa">
+                    {language === "ar" ? "تواصل معنا مباشرة عبر واتساب" : "Chat on WhatsApp"}
                   </span>
                   <Arrow className="w-4 h-4 text-[#F2D3B1]" />
                 </a>
