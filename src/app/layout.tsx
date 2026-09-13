@@ -53,7 +53,7 @@ export default function RootLayout({
   const savedLang = cookieStore.get("language")?.value;
   const savedTheme = cookieStore.get("hodour-theme")?.value as "dark" | "light" | undefined;
   const initialLanguage = savedLang === "en" ? "en" : "ar";
-  const initialTheme = savedTheme === "light" ? "light" : "dark";
+  const initialTheme = savedTheme === "dark" ? "dark" : "light";
   const dir = initialLanguage === "ar" ? "rtl" : "ltr";
 
   return (
@@ -63,12 +63,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               try {
-                var theme = localStorage.getItem('hodour-theme');
-                if (theme === 'light' || theme === 'dark') {
-                  document.documentElement.classList.remove('light', 'dark');
-                  document.documentElement.classList.add(theme);
-                  document.documentElement.setAttribute('data-theme', theme);
-                }
+                var theme = localStorage.getItem('hodour-theme') || 'light';
+                document.documentElement.classList.remove('light', 'dark');
+                document.documentElement.classList.add(theme);
+                document.documentElement.setAttribute('data-theme', theme);
               } catch (e) {}
             `,
           }}
