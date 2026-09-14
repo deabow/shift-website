@@ -91,11 +91,11 @@ export function Testimonials() {
         transition={{ duration: 0.45 }}
         className="text-center max-w-2xl mx-auto mb-12"
       >
-        <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-[#9F0F1F] dark:text-[#FF4D1A] mb-3 font-changa">
+        <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-[#9F0F1F] dark:text-[#FF4D1A] mb-3 font-alexandria">
           <span className="w-1.5 h-1.5 rounded-full bg-[#FF4D1A] animate-pulse" />
           <span>{language === "ar" ? "آراء العملاء والشركاء" : "Client Testimonials"}</span>
         </div>
-        <h2 className="text-3xl md:text-5xl font-extrabold text-theme-primary font-changa leading-tight">
+        <h2 className="text-3xl md:text-5xl font-extrabold text-theme-primary font-alexandria leading-tight">
           {language === "ar" ? (
             <>
               ثقة بنيناها <span className="text-[#9F0F1F] dark:text-[#FF4D1A]">بنتائج فعلية</span>
@@ -106,7 +106,7 @@ export function Testimonials() {
             </>
           )}
         </h2>
-        <p className="mt-3 text-sm md:text-base text-theme-secondary/80 font-tajawal">
+        <p className="mt-3 text-sm md:text-base text-theme-secondary/80 font-alexandria">
           {language === "ar"
             ? "شهادات وتجارب حقيقية من قيادات ومؤسسات شاركناهم رحلة صناعة الحضور الرقمي والسينمائي في مصر."
             : "Authentic feedback and tangible outcomes from institutional leaders and companies we partnered with."}
@@ -144,7 +144,7 @@ export function Testimonials() {
                     ))}
                   </div>
 
-                  <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#9F0F1F] dark:text-[#FF4D1A] bg-[#9F0F1F]/10 dark:bg-[#FF4D1A]/10 px-2.5 py-0.5 rounded-full font-changa">
+                  <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#9F0F1F] dark:text-[#FF4D1A] bg-[#9F0F1F]/10 dark:bg-[#FF4D1A]/10 px-2.5 py-0.5 rounded-full font-alexandria">
                     <CheckCircle className="w-3 h-3 text-[#FF4D1A]" />
                     <span>{language === "ar" ? "عميل موثّق" : "Verified Client"}</span>
                   </span>
@@ -153,7 +153,7 @@ export function Testimonials() {
                 {/* Quote Text */}
                 <div className="relative mb-5">
                   <Quote className="w-6 h-6 text-[#9F0F1F]/20 dark:text-[#FF4D1A]/20 absolute -top-1.5 start-0 -z-0 rtl:scale-x-[-1]" />
-                  <blockquote className="relative z-10 text-sm md:text-base leading-relaxed text-theme-secondary/90 font-tajawal pt-3">
+                  <blockquote className="relative z-10 text-sm md:text-base leading-relaxed text-theme-secondary/90 font-alexandria pt-3">
                     &ldquo;{quote}&rdquo;
                   </blockquote>
                 </div>
@@ -161,24 +161,24 @@ export function Testimonials() {
                 {/* Achieved Metric Tag */}
                 <div className="inline-flex items-center gap-1.5 rounded-xl bg-theme-surface/70 px-3 py-1.5 text-xs font-bold text-theme-primary mb-6 border border-theme-border/60">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#FF4D1A]" />
-                  <span className="font-changa">{metric}</span>
+                  <span className="font-alexandria">{metric}</span>
                 </div>
               </div>
 
               {/* Client Profile */}
               <div className="pt-4 border-t border-theme-border flex items-center gap-3">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#9F0F1F] text-[#F2D3B1] font-bold font-changa text-sm shadow-sm">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#9F0F1F] text-[#F2D3B1] font-bold font-alexandria text-sm shadow-sm">
                   {item.initials}
                 </div>
 
                 <div className="flex flex-col min-w-0">
-                  <h3 className="text-sm font-bold text-theme-primary font-changa truncate">
+                  <h3 className="text-sm font-bold text-theme-primary font-alexandria truncate">
                     {name}
                   </h3>
-                  <p className="text-xs text-[#9F0F1F] dark:text-[#FF4D1A] font-tajawal truncate font-semibold">
+                  <p className="text-xs text-[#9F0F1F] dark:text-[#FF4D1A] font-alexandria truncate font-semibold">
                     {role}
                   </p>
-                  <div className="flex items-center gap-1 text-[11px] text-theme-muted font-tajawal truncate mt-0.5">
+                  <div className="flex items-center gap-1 text-[11px] text-theme-muted font-alexandria truncate mt-0.5">
                     <Building2 className="w-3 h-3 shrink-0 text-theme-muted" />
                     <span className="truncate">{company}</span>
                   </div>

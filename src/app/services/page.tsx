@@ -81,11 +81,11 @@ function ServiceCard({
             </div>
           </div>
 
-          <h2 className="text-2xl font-extrabold tracking-tight text-theme-primary group-hover:text-[#9F0F1F] transition-colors mb-3 font-changa">
+          <h2 className="text-2xl font-extrabold tracking-tight text-theme-primary group-hover:text-[#9F0F1F] transition-colors mb-3 font-alexandria">
             {title}
           </h2>
 
-          <p className="text-sm leading-relaxed text-theme-secondary/80 font-tajawal mb-6">
+          <p className="text-sm leading-relaxed text-theme-secondary/80 font-alexandria mb-6">
             {desc}
           </p>
 
@@ -96,7 +96,7 @@ function ServiceCard({
                 className="flex items-center gap-2.5 text-xs md:text-sm text-theme-primary/90"
               >
                 <CheckCircle2 className="w-4 h-4 shrink-0 text-[#9F0F1F]" />
-                <span className="font-tajawal">{bullet}</span>
+                <span className="font-alexandria">{bullet}</span>
               </li>
             ))}
           </ul>
@@ -110,7 +110,7 @@ function ServiceCard({
             rel="noopener noreferrer"
             className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-[#9F0F1F]/10 border border-[#9F0F1F]/25 px-5 py-2.5 text-xs font-extrabold uppercase tracking-[0.14em] text-[#9F0F1F] dark:text-[#FF4D1A] transition-colors hover:bg-[#9F0F1F] hover:text-[#F2D3B1] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A]"
           >
-            <span className="font-changa">
+            <span className="font-alexandria">
               {language === "ar" ? "استشارة على واتساب" : "Consult on WhatsApp"}
             </span>
             <Arrow size={14} />
@@ -141,10 +141,10 @@ export default function ServicesPage() {
       >
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#9F0F1F]/[0.08] border border-[#9F0F1F]/20 text-[#9F0F1F] text-xs font-semibold uppercase tracking-[0.2em] mb-4 backdrop-blur-md">
           <span className="w-1.5 h-1.5 rounded-full bg-[#9F0F1F] animate-pulse" />
-          <span className="font-changa">{t.services.title}</span>
+          <span className="font-alexandria">{t.services.title}</span>
         </div>
 
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-theme-primary leading-[1.15] font-changa">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-theme-primary leading-[1.15] font-alexandria">
           {language === "ar" ? (
             <>
               خمس خدمات متكاملة.{" "}
@@ -157,7 +157,7 @@ export default function ServicesPage() {
             </>
           )}
         </h1>
-        <p className="mt-4 max-w-2xl text-base leading-relaxed text-theme-secondary/80 md:text-lg font-tajawal">
+        <p className="mt-4 max-w-2xl text-base leading-relaxed text-theme-secondary/80 md:text-lg font-alexandria">
           {t.services.subtitle}
         </p>
         <div className="mt-8 h-px w-32 bg-gradient-to-r from-transparent via-[#9F0F1F]/50 to-transparent" />
@@ -201,10 +201,10 @@ export default function ServicesPage() {
         <div className="pointer-events-none absolute -inset-20 bg-[radial-gradient(ellipse_at_center,rgba(159,15,31,0.06),transparent_70%)]" />
 
         <div className="relative z-10 flex flex-col max-w-md">
-          <p className="text-xl md:text-2xl font-extrabold text-theme-primary font-changa">
+          <p className="text-xl md:text-2xl font-extrabold text-theme-primary font-alexandria">
             {t.cta.notSure}
           </p>
-          <p className="mt-1 text-sm text-theme-secondary/80 font-tajawal">
+          <p className="mt-1 text-sm text-theme-secondary/80 font-alexandria">
             {t.cta.notSureDesc}
           </p>
         </div>
@@ -219,7 +219,7 @@ export default function ServicesPage() {
           rel="noopener noreferrer"
           className="relative z-10 shrink-0 inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-[#9F0F1F] px-7 py-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[#F2D3B1] shadow-[0_0_25px_rgba(159,15,31,0.35)] transition-all hover:bg-[#B91C28] hover:shadow-[0_0_35px_rgba(159,15,31,0.5)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A]"
         >
-          <span className="font-changa">{t.cta.talkToUs}</span>
+          <span className="font-alexandria">{t.cta.talkToUs}</span>
           <Arrow className="w-4 h-4 text-[#F2D3B1]" />
         </a>
       </motion.div>

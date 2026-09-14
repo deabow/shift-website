@@ -7,6 +7,7 @@ type OpenChatButtonProps = {
 
 export function OpenChatButton({ className, children }: OpenChatButtonProps) {
   const openChat = () => {
+    window.dispatchEvent(new Event("hodour-open-chat"));
     window.dispatchEvent(new Event("hdour-open-chat"));
   };
 

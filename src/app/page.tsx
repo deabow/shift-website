@@ -22,16 +22,8 @@ import {
 } from "lucide-react";
 import { ProjectVideoPlayer } from "@/components/project-video-player";
 
-const BentoPortfolio = dynamic(
-  () =>
-    import("@/components/bento-portfolio").then((mod) => mod.BentoPortfolio),
-  { ssr: false }
-);
-
-const Testimonials = dynamic(
-  () => import("@/components/testimonials").then((mod) => mod.Testimonials),
-  { ssr: false }
-);
+import { BentoPortfolio } from "@/components/bento-portfolio";
+import { Testimonials } from "@/components/testimonials";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -100,13 +92,13 @@ export default function Home() {
             className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-[#9F0F1F] bg-[#9F0F1F]/[0.08] border border-[#9F0F1F]/25 px-4 py-1.5 rounded-full backdrop-blur-md shadow-sm"
           >
             <span className="w-2 h-2 rounded-full bg-[#FF4D1A] animate-pulse inline-block" />
-            <span className="font-changa">{t.hero.badge}</span>
+            <span className="font-alexandria">{t.hero.badge}</span>
           </motion.div>
 
           {/* Main Title */}
           <motion.h1
             variants={itemVariants}
-            className="mt-6 md:mt-8 text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-theme-primary leading-[1.15] font-changa max-w-4xl"
+            className="mt-6 md:mt-8 text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-theme-primary leading-[1.15] font-alexandria max-w-4xl"
           >
             {t.hero.titleLine1}{" "}
             <br className="hidden sm:inline" />
@@ -116,7 +108,7 @@ export default function Home() {
           {/* Subtitle */}
           <motion.p
             variants={itemVariants}
-            className="mx-auto mt-6 max-w-2xl text-base md:text-xl leading-relaxed text-theme-secondary/80 font-tajawal"
+            className="mx-auto mt-6 max-w-2xl text-base md:text-xl leading-relaxed text-theme-secondary/80 font-alexandria"
           >
             {t.hero.subtitle}
           </motion.p>
@@ -130,7 +122,7 @@ export default function Home() {
               href="/services"
               className="group relative flex h-14 w-full sm:w-auto items-center justify-center overflow-hidden rounded-xl bg-[#9F0F1F] px-8 text-xs font-extrabold uppercase tracking-[0.18em] text-[#F2D3B1] shadow-[0_4px_25px_rgba(159,15,31,0.35)] transition-all duration-300 hover:bg-[#B91C28] hover:shadow-[0_4px_35px_rgba(159,15,31,0.5)] hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A]"
             >
-              <span className="relative z-10 flex items-center gap-2 font-changa">
+              <span className="relative z-10 flex items-center gap-2 font-alexandria">
                 <span>{t.hero.btnServices}</span>
                 <Arrow className="w-4 h-4 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
               </span>
@@ -140,7 +132,7 @@ export default function Home() {
               href="/portfolio"
               className="group flex h-14 w-full sm:w-auto items-center justify-center rounded-xl border border-theme-border bg-theme-card px-8 text-xs font-extrabold uppercase tracking-[0.18em] text-theme-primary backdrop-blur-xl shadow-sm transition-colors hover:border-[#9F0F1F]/50 hover:bg-[#9F0F1F]/10 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A]"
             >
-              <span className="flex items-center gap-2 font-changa">
+              <span className="flex items-center gap-2 font-alexandria">
                 <span>{t.hero.btnWork}</span>
                 <Arrow className="w-4 h-4 text-theme-muted transition-all group-hover:text-theme-primary group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
               </span>
@@ -170,7 +162,7 @@ export default function Home() {
               <div className="absolute top-4 left-4 right-4 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-black/65 backdrop-blur-md px-3.5 py-1.5 text-xs font-bold text-white border border-white/10">
                   <Film className="w-3.5 h-3.5 text-[#FF4D1A]" />
-                  <span className="font-changa">
+                  <span className="font-alexandria">
                     {language === "ar" ? "استعراض إنتاجات حضور 2026" : "Hodour Production Reel 2026"}
                   </span>
                 </span>
@@ -196,14 +188,14 @@ export default function Home() {
                 </button>
                 <button
                   onClick={() => setShowHeroVideo(true)}
-                  className="text-xs md:text-sm font-extrabold uppercase tracking-widest text-white drop-shadow-md hover:text-[#F2D3B1] transition-colors font-changa"
+                  className="text-xs md:text-sm font-extrabold uppercase tracking-widest text-white drop-shadow-md hover:text-[#F2D3B1] transition-colors font-alexandria"
                 >
                   {language === "ar" ? "مشاهدة شو ريل الحضور" : "Watch Hodour Showreel"}
                 </button>
               </div>
 
               {/* Bottom Quick Metric Bar */}
-              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-white/90 pointer-events-none font-tajawal">
+              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-white/90 pointer-events-none font-alexandria">
                 <span className="bg-black/60 backdrop-blur-md px-3 py-1 rounded-lg border border-white/10">
                   {language === "ar" ? "تصوير سينمائي • حملات إعلانية • مواقع ومنصات" : "Cinematography • Campaigns • Platforms"}
                 </span>
@@ -225,14 +217,14 @@ export default function Home() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-[#9F0F1F] mb-3 font-changa">
+          <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-[#9F0F1F] mb-3 font-alexandria">
             <span className="w-1.5 h-1.5 rounded-full bg-[#9F0F1F] animate-pulse" />
             <span>{t.services.title}</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-theme-primary font-changa">
+          <h2 className="text-3xl md:text-5xl font-extrabold text-theme-primary font-alexandria">
             {language === "ar" ? "خدمات تصنع الفارق لحضورك" : "Services That Build Your Presence"}
           </h2>
-          <p className="mt-3 text-sm md:text-base text-theme-secondary/70 max-w-2xl mx-auto font-tajawal">
+          <p className="mt-3 text-sm md:text-base text-theme-secondary/70 max-w-2xl mx-auto font-alexandria">
             {t.services.subtitle}
           </p>
         </motion.div>
@@ -260,11 +252,11 @@ export default function Home() {
                     </span>
                   </div>
 
-                  <h3 className="text-xl font-bold text-theme-primary font-changa group-hover:text-[#9F0F1F] transition-colors">
+                  <h3 className="text-xl font-bold text-theme-primary font-alexandria group-hover:text-[#9F0F1F] transition-colors">
                     {service.title}
                   </h3>
 
-                  <p className="mt-2.5 text-sm text-theme-secondary/80 leading-relaxed font-tajawal">
+                  <p className="mt-2.5 text-sm text-theme-secondary/80 leading-relaxed font-alexandria">
                     {service.desc}
                   </p>
                 </div>
@@ -274,7 +266,7 @@ export default function Home() {
                     href="/services"
                     className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-[#9F0F1F] hover:text-[#FF4D1A] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F] rounded-lg p-1"
                   >
-                    <span className="font-changa">{t.cta.learnMore}</span>
+                    <span className="font-alexandria">{t.cta.learnMore}</span>
                     <Arrow className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
                   </Link>
                   <span className="w-1.5 h-1.5 rounded-full bg-[#9F0F1F]/30 group-hover:bg-[#FF4D1A] transition-colors" />
@@ -305,10 +297,10 @@ export default function Home() {
           <div className="pointer-events-none absolute -inset-20 bg-[radial-gradient(ellipse_at_center,rgba(159,15,31,0.08),transparent_70%)]" />
 
           <div className="relative z-10 max-w-xl">
-            <h2 className="text-2xl md:text-4xl font-extrabold text-theme-primary font-changa leading-snug">
+            <h2 className="text-2xl md:text-4xl font-extrabold text-theme-primary font-alexandria leading-snug">
               {t.cta.notSure}
             </h2>
-            <p className="mt-3 text-sm md:text-base text-theme-secondary/80 font-tajawal">
+            <p className="mt-3 text-sm md:text-base text-theme-secondary/80 font-alexandria">
               {t.cta.notSureDesc}
             </p>
           </div>
@@ -318,7 +310,7 @@ export default function Home() {
               href="/contact"
               className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-[#9F0F1F] px-8 text-xs font-extrabold uppercase tracking-[0.16em] text-[#F2D3B1] shadow-[0_0_25px_rgba(159,15,31,0.3)] transition-colors hover:bg-[#B91C28] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A]"
             >
-              <span className="font-changa">{t.cta.getStarted}</span>
+              <span className="font-alexandria">{t.cta.getStarted}</span>
               <Arrow className="w-4 h-4 text-[#F2D3B1]" />
             </Link>
             <a
@@ -331,7 +323,7 @@ export default function Home() {
               rel="noopener noreferrer"
               className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-theme-border bg-theme-surface px-8 text-xs font-extrabold uppercase tracking-[0.16em] text-theme-primary transition-colors hover:border-[#9F0F1F]/50 hover:bg-[#9F0F1F]/10 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A]"
             >
-              <span className="font-changa">{t.cta.talkToUs}</span>
+              <span className="font-alexandria">{t.cta.talkToUs}</span>
               <Arrow className="w-4 h-4 text-theme-muted" />
             </a>
           </div>
@@ -359,7 +351,7 @@ export default function Home() {
               <div className="flex items-center justify-between border-b border-white/10 px-6 py-4 bg-zinc-950">
                 <div className="flex items-center gap-2">
                   <Film className="w-4 h-4 text-[#FF4D1A]" />
-                  <span className="text-sm font-bold text-white font-changa">
+                  <span className="text-sm font-bold text-white font-alexandria">
                     {language === "ar" ? "استعراض أعمال وإنتاج حضور السينمائي" : "Hodour Production Showreel"}
                   </span>
                 </div>

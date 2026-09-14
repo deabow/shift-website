@@ -175,14 +175,14 @@ export function BentoPortfolio() {
         className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10"
       >
         <div>
-          <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-[#9F0F1F] dark:text-[#FF4D1A] mb-3 font-changa">
+          <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-[#9F0F1F] dark:text-[#FF4D1A] mb-3 font-alexandria">
             <span className="w-1.5 h-1.5 rounded-full bg-[#FF4D1A] animate-pulse" />
             <span>{t.portfolio.title}</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-theme-primary font-changa leading-tight">
+          <h2 className="text-3xl md:text-5xl font-extrabold text-theme-primary font-alexandria leading-tight">
             {t.portfolio.subtitle}
           </h2>
-          <p className="mt-2.5 text-sm md:text-base text-theme-secondary/80 font-tajawal max-w-xl">
+          <p className="mt-2.5 text-sm md:text-base text-theme-secondary/80 font-alexandria max-w-xl">
             {language === "ar"
               ? "استعراض لإنتاجات 2026 الحقيقية — مشاريع فعلية تم تصويرها وتطويرها بدقة واحترافية متكاملة."
               : "Showcasing real 2026 productions — authentic client projects filmed and developed with full precision."}
@@ -193,7 +193,7 @@ export function BentoPortfolio() {
           href="/portfolio"
           className="group inline-flex items-center gap-2 text-sm font-bold text-[#9F0F1F] dark:text-[#FF4D1A] transition-colors shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A] rounded-lg p-1.5 min-h-[44px]"
         >
-          <span className="font-changa">
+          <span className="font-alexandria">
             {language === "ar" ? "استعرض كافة الأعمال" : "View All Works"}
           </span>
           <Arrow className="w-4 h-4 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
@@ -212,7 +212,7 @@ export function BentoPortfolio() {
             <button
               key={tab.key}
               onClick={() => setActiveFilter(tab.key as "all" | "media" | "web")}
-              className={`min-h-[44px] px-4 py-2 rounded-xl text-xs font-bold font-changa transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A] ${isActive
+              className={`min-h-[44px] px-4 py-2 rounded-xl text-xs font-bold font-alexandria transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A] ${isActive
                   ? "bg-[#9F0F1F] text-[#F2D3B1] shadow-md dark:shadow-[0_0_15px_rgba(159,15,31,0.5)]"
                   : "bg-theme-card border border-theme-border text-theme-secondary hover:text-theme-primary hover:border-[#9F0F1F]/30"
                 }`}
@@ -274,10 +274,10 @@ export function BentoPortfolio() {
                       ) : (
                         <Globe className="w-3 h-3 text-[#FF4D1A]" />
                       )}
-                      <span className="font-changa">{category}</span>
+                      <span className="font-alexandria">{category}</span>
                     </span>
 
-                    <span className="rounded-full bg-[#9F0F1F]/90 backdrop-blur-md px-2.5 py-1 text-[10px] font-bold text-[#F2D3B1] shadow-sm font-changa border border-white/10">
+                    <span className="rounded-full bg-[#9F0F1F]/90 backdrop-blur-md px-2.5 py-1 text-[10px] font-bold text-[#F2D3B1] shadow-sm font-alexandria border border-white/10">
                       {tag}
                     </span>
                   </div>
@@ -307,7 +307,7 @@ export function BentoPortfolio() {
                       aria-label={`زيارة موقع منصة ${title}`}
                     >
                       <div className="flex items-center gap-2 rounded-xl bg-[#9F0F1F] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#F2D3B1] shadow-md transition-colors hover:bg-[#B91C28]">
-                        <span className="font-changa">{language === "ar" ? "زيارة الموقع الحي" : "Visit Live Site"}</span>
+                        <span className="font-alexandria">{language === "ar" ? "زيارة الموقع الحي" : "Visit Live Site"}</span>
                         <ExternalLink className="w-4 h-4 text-[#F2D3B1]" />
                       </div>
                     </a>
@@ -316,7 +316,7 @@ export function BentoPortfolio() {
                   {/* Bottom Image Metric Bar */}
                   {metric && (
                     <div className="absolute bottom-3 left-3 right-3 flex items-center gap-1.5 pointer-events-none">
-                      <span className="inline-flex items-center gap-1 rounded-md bg-black/75 backdrop-blur-md px-2.5 py-1 text-[11px] font-bold text-white font-tajawal border border-white/10">
+                      <span className="inline-flex items-center gap-1 rounded-md bg-black/75 backdrop-blur-md px-2.5 py-1 text-[11px] font-bold text-white font-alexandria border border-white/10">
                         <CheckCircle2 className="w-3 h-3 text-[#FF4D1A]" />
                         <span>{metric}</span>
                       </span>
@@ -327,13 +327,13 @@ export function BentoPortfolio() {
                 {/* Project Information */}
                 <div className="p-6 flex flex-col flex-1 justify-between gap-4">
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-[#9F0F1F] dark:text-[#FF4D1A] mb-1.5 font-changa">
+                    <p className="text-xs font-bold uppercase tracking-wider text-[#9F0F1F] dark:text-[#FF4D1A] mb-1.5 font-alexandria">
                       {client}
                     </p>
-                    <h3 className="text-lg md:text-xl font-extrabold text-theme-primary font-changa leading-snug group-hover:text-[#9F0F1F] dark:group-hover:text-[#FF4D1A] transition-colors">
+                    <h3 className="text-lg md:text-xl font-extrabold text-theme-primary font-alexandria leading-snug group-hover:text-[#9F0F1F] dark:group-hover:text-[#FF4D1A] transition-colors">
                       {title}
                     </h3>
-                    <p className="mt-2.5 text-xs md:text-sm text-theme-secondary/80 font-tajawal leading-relaxed">
+                    <p className="mt-2.5 text-xs md:text-sm text-theme-secondary/80 font-alexandria leading-relaxed">
                       {description}
                     </p>
                   </div>
@@ -347,7 +347,7 @@ export function BentoPortfolio() {
                         className="inline-flex min-h-[44px] items-center gap-2 text-xs font-bold text-[#9F0F1F] dark:text-[#FF4D1A] hover:underline transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A] rounded-lg p-1"
                       >
                         <Play className="w-3.5 h-3.5 fill-current" />
-                        <span className="font-changa">
+                        <span className="font-alexandria">
                           {language === "ar" ? "مشاهدة الفيديو" : "Watch Video"}
                         </span>
                       </button>
@@ -358,13 +358,13 @@ export function BentoPortfolio() {
                         rel="noopener noreferrer"
                         className="inline-flex min-h-[44px] items-center gap-1.5 text-xs font-bold text-[#9F0F1F] dark:text-[#FF4D1A] hover:underline transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A] rounded-lg p-1"
                       >
-                        <span className="font-changa">
+                        <span className="font-alexandria">
                           {language === "ar" ? "تصفح الموقع" : "Browse Website"}
                         </span>
                         <ExternalLink className="w-3.5 h-3.5" />
                       </a>
                     ) : (
-                      <span className="text-xs text-theme-muted font-tajawal">
+                      <span className="text-xs text-theme-muted font-alexandria">
                         {language === "ar" ? "منظومة سحابية خاصة" : "Custom Cloud System"}
                       </span>
                     )}
@@ -402,7 +402,7 @@ export function BentoPortfolio() {
               <div className="flex items-center justify-between border-b border-white/10 px-6 py-4 bg-zinc-950">
                 <div className="flex items-center gap-2">
                   <Film className="w-4 h-4 text-[#FF4D1A]" />
-                  <span className="text-sm font-bold text-white font-changa">
+                  <span className="text-sm font-bold text-white font-alexandria">
                     {activeVideo.title}
                   </span>
                 </div>

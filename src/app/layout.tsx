@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import dynamic from "next/dynamic";
+import { Alexandria } from "next/font/google";
 import SiteNavbar from "@/components/site-navbar";
 import SiteFooter from "@/components/site-footer";
 import { LanguageProvider } from "@/lib/language-context";
 import { ThemeProvider } from "@/lib/theme-context";
 import "./globals.css";
+
+const alexandria = Alexandria({
+  subsets: ["arabic", "latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-alexandria",
+  display: "swap",
+});
 
 // ── Lazy-loaded client components ──
 const WhatsAppFab = dynamic(
@@ -72,7 +80,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="bg-theme-bg text-theme-primary antialiased min-h-screen transition-colors duration-300">
+      <body className={`${alexandria.variable} ${alexandria.className} font-alexandria bg-theme-bg text-theme-primary antialiased min-h-screen transition-colors duration-300`}>
         <ThemeProvider initialTheme={initialTheme}>
           <LanguageProvider initialLanguage={initialLanguage}>
             <SiteNavbar />

@@ -33,10 +33,12 @@ const config: Config = {
         },
       },
       fontFamily: {
-        changa: ["Changa", "sans-serif"],
-        tajawal: ["Tajawal", "sans-serif"],
-        grotesk: ["Space Grotesk", "sans-serif"],
-        inter: ["Inter", "sans-serif"],
+        alexandria: ["var(--font-alexandria)", "Alexandria", "sans-serif"],
+        changa: ["var(--font-alexandria)", "Alexandria", "sans-serif"],
+        tajawal: ["var(--font-alexandria)", "Alexandria", "sans-serif"],
+        grotesk: ["var(--font-alexandria)", "Alexandria", "sans-serif"],
+        inter: ["var(--font-alexandria)", "Alexandria", "sans-serif"],
+        sans: ["var(--font-alexandria)", "Alexandria", "sans-serif"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

@@ -19,21 +19,21 @@ export async function generateMetadata({
 }: CaseStudyPageProps): Promise<Metadata> {
   const project = await getProjectBySlug(params.slug);
   if (!project || !project.published) {
-    return { title: "Case Study | hdour" };
+    return { title: "Case Study | Hodour حضور" };
   }
 
   return {
-    title: `${project.title} | hdour Case Study`,
+    title: `${project.title} | Hodour Case Study`,
     description: project.description,
     openGraph: {
-      title: `${project.title} | hdour Case Study`,
+      title: `${project.title} | Hodour Case Study`,
       description: project.description,
       type: "article",
       images: [{ url: project.imageUrl, width: 1400, height: 934, alt: project.title }],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${project.title} | hdour Case Study`,
+      title: `${project.title} | Hodour Case Study`,
       description: project.description,
       images: [project.imageUrl],
     },

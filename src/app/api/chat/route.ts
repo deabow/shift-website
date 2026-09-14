@@ -18,17 +18,17 @@ type ChatResponse = {
   showWhatsApp: boolean;
 };
 
-const SYSTEM_INSTRUCTION = `أنت "hdour AI Agent"، المساعد الذكي الرسمي لشركة hdour للتكنولوجيا والإبداع الرقمي.
+const SYSTEM_INSTRUCTION = `أنت "Hodour AI Agent"، المساعد الذكي الرسمي لشركة حضور (Hodour) للإعلانات والتسويق المتكامل والإنتاج الإعلامي.
 
-معلومات عن hdour:
-- متخصصة في تطوير الويب (Next.js, React)، تطبيقات الموبايل (Flutter, React Native)، أنظمة المؤسسات والـ ERP المخصصة، والأمن السيبراني واختبار الاختراق.
-- المدير التنفيذي للشركة هو CEO hdour (Mohamed Tarek).
+معلومات عن حضور (Hodour):
+- شركة إعلانات وتسويق متكاملة في مصر: إنتاج إعلامي وسينمائي، تصميم جرافيكي وهوية بصرية، تسويق رقمي وإعلانات ممولة، تطوير مواقع وتطبيقات، وإدارة سوشيال ميديا.
+- المدير التنفيذي وفريق العمل متاحون لدعم ونمو كافة العملاء.
 
 قواعد التعامل:
 - تكلم العملاء باللهجة المصرية العامية المحترفة والراقية، بأسلوب ذكي ومختصر وودود.
 - لا تتكلم أكتر من 3-4 جمل في الرد الواحد.
-- وضح دايماً إزاي hdour تقدر تحل مشكلة العميل بأحدث التقنيات.
-- لو العميل سأل عن التواصل أو الأسعار، وجهه للتواصل مباشرة مع CEO hdour على واتساب.
+- وضح دايماً إزاي حضور (Hodour) تقدر تحل مشكلة العميل وتصنع له حضور حقيقي في السوق.
+- لو العميل سأل عن التواصل أو الأسعار، وجهه للتواصل مباشرة مع إدارة حضور عبر واتساب.
 - ما تذكرش أسماء منافسين أو شركات تانية أبداً.`;
 
 const RATE_LIMIT = { windowMs: 60_000, maxRequests: 10 };
@@ -41,34 +41,34 @@ function getLocalFallbackResponse(message: string): { reply: string; showWhatsAp
 
   if (lowerMsg.includes("سعر") || lowerMsg.includes("أسعار") || lowerMsg.includes("بكام") || lowerMsg.includes("price") || lowerMsg.includes("تكلفة")) {
     return {
-      reply: "أسعارنا بتختلف حسب حجم المشروع وتفاصيله. تقدر تتواصل مباشرة مع CEO hdour على واتساب وهيقدم لك استشارة وتسعير دقيق بعد دراسة متطلباتك! 💬",
+      reply: "أسعارنا بتختلف حسب حجم المشروع وتفاصيله. تقدر تتواصل مباشرة مع إدارة حضور (Hodour) على واتساب وهنقدّم لك استشارة وتسعير دقيق بعد دراسة متطلباتك! 💬",
       showWhatsApp: true
     };
   }
 
   if (lowerMsg.includes("خدمات") || lowerMsg.includes("بتعملوا ايه") || lowerMsg.includes("services")) {
     return {
-      reply: "إحنا في hdour بنقدم 4 خدمات أساسية: تطوير مواقع وتطبيقات، تسويق رقمي، هوية بصرية وإنتاج سينمائي، وأمن سيبراني. محتاج تفاصيل عن خدمة معينة؟",
+      reply: "إحنا في حضور (Hodour) بنقدم خدمات متكاملة: إنتاج إعلامي وسينمائي، تصميم وهوية بصرية، تسويق رقمي، وتطوير مواقع. محتاج تفاصيل عن خدمة معينة؟",
       showWhatsApp: false
     };
   }
 
-  if (lowerMsg.includes("موبايل") || lowerMsg.includes("تطبيقات") || lowerMsg.includes("app")) {
+  if (lowerMsg.includes("موبايل") || lowerMsg.includes("تطبيقات") || lowerMsg.includes("app") || lowerMsg.includes("موقع")) {
     return {
-      reply: "بنبرمج تطبيقات الموبايل باستخدام Flutter و React Native عشان نضمن أعلى أداء على iOS و Android. تواصل مع CEO hdour لو عندك فكرة تطبيق جاهزة للتنفيذ!",
+      reply: "بنطوّر مواقع ومنصات رقمية وتطبيقات فائقة السرعة والأمان لتنمية أعمالك. تواصل معنا على واتساب لو عندك فكرة جاهزة للتنفيذ!",
       showWhatsApp: true
     };
   }
 
   if (lowerMsg.includes("سلام") || lowerMsg.includes("اهلا") || lowerMsg.includes("أهلا") || lowerMsg.includes("hi") || lowerMsg.includes("مرحبا")) {
     return {
-      reply: "أهلاً بيك! إزاي أقدر أساعدك في تطوير البيزنس بتاعك النهاردة؟",
+      reply: "أهلاً بيك في حضور (Hodour)! إزاي نقدر نساعدك في صناعة حضور استثنائي لمشروعك النهاردة؟",
       showWhatsApp: false
     };
   }
 
   return {
-    reply: "أنا المساعد الذكي لـ hdour! حالياً تقدر تتواصل مباشرة مع CEO hdour على واتساب للمساعدة الفورية 👇",
+    reply: "أنا المساعد الذكي لـ حضور (Hodour)! حالياً تقدر تتواصل مباشرة مع فريقنا على واتساب للمساعدة الفورية 👇",
     showWhatsApp: true
   };
 }
@@ -173,7 +173,7 @@ export async function POST(req: Request): Promise<NextResponse> {
     logger.info("chat", "User hit 3-message limit, showing WhatsApp CTA");
     const response = NextResponse.json<ChatResponse>({
       reply:
-        "مشروعك واعد ويستحق حل تقني متكامل 🚀 لخصت تفاصيل طلبك وCEO hdour متاح للتواصل معك على واتساب الآن لمناقشة خطة العمل!",
+        "مشروعك واعد ويستحق حل متكامل 🚀 لخصت تفاصيل طلبك وفريق حضور (Hodour) متاح للتواصل معك على واتساب الآن لمناقشة خطة العمل!",
       showWhatsApp: true
     });
     applyRateLimitHeaders(response, rateResult);

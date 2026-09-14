@@ -24,12 +24,12 @@ export default function SiteFooter() {
               href="/"
               className="inline-flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F] rounded-lg w-fit p-1"
             >
-              <span className="text-2xl font-changa font-bold text-theme-primary group-hover:text-[#9F0F1F] transition-colors">
+              <span className="text-2xl font-alexandria font-bold text-theme-primary group-hover:text-[#9F0F1F] transition-colors">
                 {language === "ar" ? "حضور" : "Hodour"}
               </span>
               <span className="w-1.5 h-1.5 rounded-full bg-[#FF4D1A] animate-pulse" />
             </Link>
-            <p className="text-sm text-theme-secondary/80 max-w-xs leading-relaxed font-tajawal">
+            <p className="text-sm text-theme-secondary/80 max-w-xs leading-relaxed font-alexandria">
               {language === "ar"
                 ? "شركة إعلانات وتسويق وإنتاج إعلامي متكاملة في مصر. بنبني لك حضور حقيقي ومكانة راسخة في السوق."
                 : "A full-service advertising, marketing, and media production agency in Egypt. We build your real market presence."}
@@ -38,7 +38,7 @@ export default function SiteFooter() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-sm font-bold text-theme-primary mb-4 font-changa uppercase tracking-wider">
+            <h4 className="text-sm font-bold text-theme-primary mb-4 font-alexandria uppercase tracking-wider">
               {t.footer.quickLinks}
             </h4>
             <ul className="flex flex-col gap-2.5">
@@ -46,7 +46,7 @@ export default function SiteFooter() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-theme-secondary/80 hover:text-[#9F0F1F] transition-colors font-tajawal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F] rounded p-0.5"
+                    className="text-sm text-theme-secondary/80 hover:text-[#9F0F1F] transition-colors font-alexandria focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F] rounded p-0.5"
                   >
                     {link.label}
                   </Link>
@@ -57,7 +57,7 @@ export default function SiteFooter() {
 
           {/* Social / Follow */}
           <div>
-            <h4 className="text-sm font-bold text-theme-primary mb-4 font-changa uppercase tracking-wider">
+            <h4 className="text-sm font-bold text-theme-primary mb-4 font-alexandria uppercase tracking-wider">
               {t.footer.followUs}
             </h4>
             <div className="flex items-center gap-3">
@@ -86,7 +86,7 @@ export default function SiteFooter() {
 
               {/* Instagram */}
               <a
-                href="https://www.instagram.com/hodour"
+                href={process.env.NEXT_PUBLIC_INSTAGRAM || "https://www.instagram.com/hodour"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-theme-border bg-theme-surface text-theme-primary transition-colors hover:text-white hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888] hover:border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A]"
@@ -114,10 +114,10 @@ export default function SiteFooter() {
 
         {/* Bottom bar */}
         <div className="mt-12 pt-6 border-t border-theme-border flex flex-col items-center justify-between gap-3 md:flex-row">
-          <p className="text-xs text-theme-muted font-tajawal">
+          <p className="text-xs text-theme-muted font-alexandria">
             © {new Date().getFullYear()} Hodour حضور. {t.footer.rights}
           </p>
-          <p className="text-xs text-theme-muted font-tajawal">
+          <p className="text-xs text-theme-muted font-alexandria">
             {language === "ar"
               ? "صُنع بـ ❤️ في مصر"
               : "Made with ❤️ in Egypt"}

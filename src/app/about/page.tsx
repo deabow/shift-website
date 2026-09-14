@@ -43,41 +43,52 @@ export default function AboutPage() {
       >
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#9F0F1F]/[0.08] border border-[#9F0F1F]/20 text-[#9F0F1F] text-xs font-semibold uppercase tracking-[0.2em] mb-4 backdrop-blur-md">
           <span className="w-1.5 h-1.5 rounded-full bg-[#9F0F1F] animate-pulse" />
-          <span className="font-changa">{t.about.badge}</span>
+          <span className="font-alexandria">{t.about.badge}</span>
         </div>
 
-        <h1 className="mt-2 text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-theme-primary leading-[1.15] font-changa">
+        <h1 className="mt-2 text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-theme-primary leading-[1.15] font-alexandria">
           {t.about.title}{" "}
           <span className="text-[#9F0F1F]">{t.about.titleAccent}</span>
         </h1>
 
-        <p className="mx-auto mt-6 text-base leading-relaxed text-theme-secondary/80 md:text-xl font-tajawal max-w-3xl">
+        <p className="mx-auto mt-6 text-base leading-relaxed text-theme-secondary/80 md:text-xl font-alexandria max-w-3xl">
           {t.about.description}
         </p>
 
+        {/* ── Visual Connector Thread (ربط بصري مباشر وانسيابي) ── */}
+        <div className="flex flex-col items-center my-2 pointer-events-none" aria-hidden="true">
+          <div className="w-0.5 h-6 bg-gradient-to-b from-[#9F0F1F]/10 via-[#9F0F1F]/70 to-[#FF4D1A]" />
+          <div className="h-2.5 w-2.5 rounded-full bg-[#FF4D1A] ring-4 ring-[#9F0F1F]/25 shadow-[0_0_12px_#FF4D1A] animate-pulse" />
+          <div className="w-0.5 h-5 bg-gradient-to-b from-[#FF4D1A] to-[#9F0F1F]" />
+        </div>
+
         {/* ── Seamless Integrated Mission Container ── */}
-        <div className="relative w-full max-w-3xl mt-8 rounded-3xl border border-theme-border bg-gradient-to-b from-theme-card/60 via-theme-card to-theme-card p-8 md:p-10 shadow-md overflow-hidden text-center">
+        <div className="relative w-full max-w-3xl rounded-3xl border-2 border-[#9F0F1F]/25 bg-gradient-to-b from-theme-card/90 via-theme-card to-theme-card p-8 md:p-12 shadow-xl overflow-hidden text-center backdrop-blur-md">
           {/* Ambient Top Connector Gradient Flow */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-[#9F0F1F] to-transparent" />
-          <div className="pointer-events-none absolute -top-12 left-1/2 -translate-x-1/2 w-48 h-24 bg-[#9F0F1F]/15 blur-2xl" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-transparent via-[#FF4D1A] to-transparent" />
+          <div className="pointer-events-none absolute -top-16 left-1/2 -translate-x-1/2 w-64 h-32 bg-[#9F0F1F]/20 blur-3xl" />
 
           <div className="relative z-10 flex flex-col items-center">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#9F0F1F] text-[#F2D3B1] shadow-[0_0_20px_rgba(159,15,31,0.35)] mb-4">
-              <Quote className="w-5 h-5 fill-current" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#9F0F1F] text-[#F2D3B1] shadow-[0_0_25px_rgba(159,15,31,0.45)] mb-4">
+              <Quote className="w-6 h-6 fill-current" />
             </div>
 
-            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.24em] text-[#9F0F1F] dark:text-[#FF4D1A] mb-3 font-changa">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FF4D1A]" />
+            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.24em] text-[#9F0F1F] dark:text-[#FF4D1A] mb-3 font-alexandria">
+              <span className="w-2 h-2 rounded-full bg-[#FF4D1A] animate-pulse" />
               <span>{language === "ar" ? "رسالتنا وجوهر وجودنا" : "Our Core Mission"}</span>
             </div>
 
-            <blockquote className="mt-2 text-xl sm:text-2xl md:text-3xl font-bold leading-relaxed text-theme-primary font-tajawal">
+            <blockquote className="mt-2 text-xl sm:text-2xl md:text-3xl font-bold leading-relaxed text-theme-primary font-alexandria">
               &ldquo;{t.about.mission}&rdquo;
             </blockquote>
 
-            <p className="mt-4 text-xs font-mono text-theme-muted uppercase tracking-wider">
-              {language === "ar" ? "حضور — صُنّاع الحضور الحقيقي" : "Hodour — Makers of True Presence"}
-            </p>
+            <div className="mt-6 pt-5 border-t border-theme-border/60 w-full max-w-sm flex items-center justify-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#9F0F1F]" />
+              <p className="text-xs font-semibold text-theme-muted uppercase tracking-wider font-alexandria">
+                {language === "ar" ? "حضور — صُنّاع الحضور الحقيقي" : "Hodour — Makers of True Presence"}
+              </p>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#9F0F1F]" />
+            </div>
           </div>
         </div>
       </motion.section>
@@ -94,10 +105,10 @@ export default function AboutPage() {
         className="mt-16"
       >
         <div className="mb-12 text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#9F0F1F] mb-2 font-changa">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#9F0F1F] mb-2 font-alexandria">
             {pillars.title}
           </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-theme-primary font-changa">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-theme-primary font-alexandria">
             {pillars.subtitle}
           </h2>
         </div>
@@ -117,17 +128,17 @@ export default function AboutPage() {
                   <div className="w-2 h-2 rounded-full bg-[#9F0F1F]/20 group-hover:bg-[#FF4D1A] transition-colors" />
                 </div>
 
-                <h3 className="text-xl font-extrabold tracking-tight text-theme-primary group-hover:text-[#9F0F1F] transition-colors font-changa">
+                <h3 className="text-xl font-extrabold tracking-tight text-theme-primary group-hover:text-[#9F0F1F] transition-colors font-alexandria">
                   {pillar.title}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-theme-secondary/80 font-tajawal">
+                <p className="mt-3 text-sm leading-relaxed text-theme-secondary/80 font-alexandria">
                   {pillar.body}
                 </p>
               </div>
 
               <div className="pt-6 mt-6 border-t border-theme-border flex items-center gap-2 text-xs font-bold text-[#9F0F1F]">
                 <CheckCircle2 className="w-3.5 h-3.5" />
-                <span className="font-changa">
+                <span className="font-alexandria">
                   {language === "ar" ? "قيمة أساسية في حضور" : "Core Hodour Value"}
                 </span>
               </div>
@@ -147,12 +158,12 @@ export default function AboutPage() {
         <div className="pointer-events-none absolute -inset-20 bg-[radial-gradient(ellipse_at_center,rgba(159,15,31,0.06),transparent_70%)]" />
 
         <div className="relative z-10 max-w-xl">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-theme-primary font-changa">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-theme-primary font-alexandria">
             {language === "ar"
               ? "جاهز تبني حضورك في السوق؟"
               : "Ready to build your market presence?"}
           </h2>
-          <p className="mt-2 text-sm text-theme-secondary/80 font-tajawal">
+          <p className="mt-2 text-sm text-theme-secondary/80 font-alexandria">
             {language === "ar"
               ? "كلمنا وهنبدأ نرسملك خطة تسويق متكاملة تناسب طموح مشروعك."
               : "Talk to us and we'll craft a marketing plan tailored to your project."}
@@ -169,7 +180,7 @@ export default function AboutPage() {
           rel="noopener noreferrer"
           className="relative z-10 inline-flex items-center gap-2 rounded-xl bg-[#9F0F1F] px-8 py-3.5 text-xs font-extrabold uppercase tracking-[0.16em] text-[#F2D3B1] shadow-[0_0_25px_rgba(159,15,31,0.35)] transition-all hover:bg-[#B91C28] hover:shadow-[0_0_35px_rgba(159,15,31,0.5)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A]"
         >
-          <span className="font-changa">{t.cta.talkToUs}</span>
+          <span className="font-alexandria">{t.cta.talkToUs}</span>
           <Arrow className="w-4 h-4 text-[#F2D3B1]" />
         </a>
       </motion.div>

@@ -22,7 +22,7 @@ export function ClientMarquee() {
 
   return (
     <section className="mt-20 w-full overflow-hidden">
-      <p className="mb-5 text-center text-[10px] font-bold uppercase tracking-[0.28em] text-[#F2D3B1]/30 font-changa">
+      <p className="mb-5 text-center text-[10px] font-bold uppercase tracking-[0.28em] text-[#F2D3B1]/30 font-alexandria">
         {language === "ar" ? "شركاء النجاح" : "Trusted By"}
       </p>
 

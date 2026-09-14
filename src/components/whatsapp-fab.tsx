@@ -24,7 +24,7 @@ export function WhatsAppFab() {
             transition={{ duration: 0.2 }}
             className="mb-2 rounded-xl bg-theme-card border border-theme-border px-4 py-2.5 text-sm text-theme-primary shadow-xl backdrop-blur-xl max-w-[200px]"
           >
-            <p className="font-tajawal text-xs">محتاج مساعدة؟ تواصل مع حضور فوراً!</p>
+            <p className="font-alexandria text-xs">محتاج مساعدة؟ تواصل مع حضور فوراً!</p>
             <button
               onClick={() => setShowTooltip(false)}
               className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-theme-surface text-theme-primary/70 hover:text-theme-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#9F0F1F]"

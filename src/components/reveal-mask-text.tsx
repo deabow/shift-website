@@ -221,7 +221,7 @@ export function RevealMaskText() {
           fill="none"
           className={`${orbitron.className} uppercase text-[20vw] sm:text-7xl md:text-9xl lg:text-[15rem] tracking-[0.02em] sm:tracking-[0.08em] md:tracking-[0.12em] lg:tracking-[0.16em] font-black`}
         >
-          hdour
+          Hodour
         </text>
         <text
           x="50%"
@@ -231,7 +231,7 @@ export function RevealMaskText() {
           fill="rgba(255, 255, 255, 0.85)"
           className={`${orbitron.className} uppercase text-[20vw] sm:text-7xl md:text-9xl lg:text-[15rem] tracking-[0.02em] sm:tracking-[0.08em] md:tracking-[0.12em] lg:tracking-[0.16em] font-black`}
         >
-          hdour
+          Hodour
         </text>
       </svg>
 
@@ -242,7 +242,7 @@ export function RevealMaskText() {
       >
         <svg className="h-full w-full select-none">
           <defs>
-            <clipPath id="hdour-text-clip">
+            <clipPath id="hodour-text-clip">
               <text
                 x="50%"
                 y="50%"
@@ -250,7 +250,7 @@ export function RevealMaskText() {
                 textAnchor="middle"
                 className={`${orbitron.className} uppercase text-[20vw] sm:text-7xl md:text-9xl lg:text-[15rem] tracking-[0.02em] sm:tracking-[0.08em] md:tracking-[0.12em] lg:tracking-[0.16em] font-black`}
               >
-                hdour
+                Hodour
               </text>
             </clipPath>
           </defs>
@@ -259,7 +259,7 @@ export function RevealMaskText() {
             y="0"
             width="100%"
             height="100%"
-            clipPath="url(#hdour-text-clip)"
+            clipPath="url(#hodour-text-clip)"
           >
             <canvas ref={canvasRef} className="block h-full w-full bg-black" />
           </foreignObject>

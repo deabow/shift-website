@@ -1,12 +1,8 @@
 # Notes & Context
 
 ## Project Overview
-- **Workspace**: `hdour` (Next.js 14, Tailwind CSS, TypeScript, Framer Motion, Google GenAI, Vercel Blob).
-- **Core Domain**: hdour Website (Portfolio, Services, Admin, i18n, etc.).
-
-## Project Overview
-- **Workspace**: `hdour` (Next.js 14, Tailwind CSS, TypeScript, Framer Motion, Google GenAI, Vercel Blob).
-- **Core Domain**: hdour Website (Portfolio, Services, Admin, i18n, etc.).
+- **Workspace**: `Hodour` (Next.js 14, Tailwind CSS, TypeScript, Framer Motion, Google GenAI, Vercel Blob).
+- **Core Domain**: Hodour Website (Portfolio, Services, Admin, i18n, etc.).
 
 ## Identified Loop: Lead Capture, Qualification & Triage
 - **Objective**: Capture and qualify client leads automatically via Web Chatbot (and optional forms), extract lead details (name, phone, service needed, budget/timeline), prevent lead leakage, and prepare decision-ready briefs for human review in `/admin`.

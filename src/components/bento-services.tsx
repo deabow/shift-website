@@ -38,10 +38,10 @@ export function BentoServices() {
         transition={{ duration: 0.6 }}
         className="text-center mb-12"
       >
-        <h2 className="text-3xl md:text-4xl font-extrabold text-[#F2D3B1] font-changa">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-[#F2D3B1] font-alexandria">
           {t.services.title}
         </h2>
-        <p className="mt-3 text-sm md:text-base text-[#F2D3B1]/50 max-w-2xl mx-auto font-tajawal">
+        <p className="mt-3 text-sm md:text-base text-[#F2D3B1]/50 max-w-2xl mx-auto font-alexandria">
           {t.services.subtitle}
         </p>
       </motion.div>
@@ -63,11 +63,11 @@ export function BentoServices() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#9F0F1F]/20 bg-[#9F0F1F]/10 text-[#9F0F1F]">
                   <Icon size={18} strokeWidth={1.8} />
                 </div>
-                <h3 className="text-lg font-bold text-[#F2D3B1] font-changa">
+                <h3 className="text-lg font-bold text-[#F2D3B1] font-alexandria">
                   {service.title}
                 </h3>
               </div>
-              <p className="text-sm text-[#F2D3B1]/50 leading-relaxed font-tajawal">
+              <p className="text-sm text-[#F2D3B1]/50 leading-relaxed font-alexandria">
                 {service.desc}
               </p>
               <Link

@@ -9,7 +9,7 @@ export function requireAuth():
   const secret = process.env.ADMIN_SECRET || DEFAULT_ADMIN_SECRET;
 
   const cookieStore = cookies();
-  const token = cookieStore.get("hdour-admin-auth")?.value;
+  const token = cookieStore.get("hodour-admin-auth")?.value || cookieStore.get("hdour-admin-auth")?.value;
 
   if (token !== secret) {
     return {

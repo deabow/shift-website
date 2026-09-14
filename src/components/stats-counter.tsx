@@ -51,11 +51,11 @@ export function StatsCounter() {
             transition={{ delay: idx * 0.1, duration: 0.5 }}
             className="flex flex-col items-center text-center p-8 rounded-3xl border border-theme-border bg-theme-card shadow-sm hover:shadow-md transition-all"
           >
-            <span className="text-4xl md:text-5xl font-extrabold text-[#9F0F1F] font-changa">
+            <span className="text-4xl md:text-5xl font-extrabold text-[#9F0F1F] font-alexandria">
               <AnimatedNumber target={stat.value} />
               {stat.suffix}
             </span>
-            <span className="mt-2 text-sm md:text-base text-theme-secondary/80 font-tajawal">
+            <span className="mt-2 text-sm md:text-base text-theme-secondary/80 font-alexandria">
               {stat.label}
             </span>
           </motion.div>

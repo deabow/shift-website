@@ -27,7 +27,7 @@ export default function AdminLoginPage() {
           Secure Login
         </h1>
         <p className="mt-2 text-sm text-zinc-400">
-          Authenticate to access the hdour admin panel.
+          Authenticate to access the Hodour admin panel.
         </p>
 
         <form action="/api/admin/login" method="post" className="mt-8 space-y-5">

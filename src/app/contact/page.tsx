@@ -78,13 +78,13 @@ export default function ContactPage() {
       >
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#9F0F1F]/[0.08] border border-[#9F0F1F]/20 text-[#9F0F1F] text-xs font-semibold uppercase tracking-[0.2em] mb-4 backdrop-blur-md">
           <span className="w-1.5 h-1.5 rounded-full bg-[#9F0F1F] animate-pulse" />
-          <span className="font-changa">{t.contact.badge}</span>
+          <span className="font-alexandria">{t.contact.badge}</span>
         </div>
 
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-theme-primary leading-[1.15] font-changa">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-theme-primary leading-[1.15] font-alexandria">
           {t.contact.title}
         </h1>
-        <p className="mt-4 text-base text-theme-secondary/80 md:text-lg max-w-2xl mx-auto font-tajawal">
+        <p className="mt-4 text-base text-theme-secondary/80 md:text-lg max-w-2xl mx-auto font-alexandria">
           {t.contact.subtitle}
         </p>
       </motion.div>
@@ -106,7 +106,7 @@ export default function ContactPage() {
               <div>
                 <label
                   htmlFor="contact-name"
-                  className="block text-xs font-bold text-theme-secondary mb-2 uppercase tracking-wider font-changa"
+                  className="block text-xs font-bold text-theme-secondary mb-2 uppercase tracking-wider font-alexandria"
                 >
                   {t.contact.form.name}
                 </label>
@@ -117,7 +117,7 @@ export default function ContactPage() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full min-h-[46px] rounded-xl border border-theme-border bg-theme-surface/70 px-4 py-3 text-sm text-theme-primary placeholder-theme-muted/60 outline-none transition focus-visible:ring-2 focus-visible:ring-[#FF4D1A] font-tajawal"
+                  className="w-full min-h-[46px] rounded-xl border border-theme-border bg-theme-surface/70 px-4 py-3 text-sm text-theme-primary placeholder-theme-muted/60 outline-none transition focus-visible:ring-2 focus-visible:ring-[#FF4D1A] font-alexandria"
                   placeholder={
                     language === "ar" ? "محمد أحمد" : "John Doe"
                   }
@@ -126,7 +126,7 @@ export default function ContactPage() {
               <div>
                 <label
                   htmlFor="contact-email"
-                  className="block text-xs font-bold text-theme-secondary mb-2 uppercase tracking-wider font-changa"
+                  className="block text-xs font-bold text-theme-secondary mb-2 uppercase tracking-wider font-alexandria"
                 >
                   {t.contact.form.email}
                 </label>
@@ -137,7 +137,7 @@ export default function ContactPage() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full min-h-[46px] rounded-xl border border-theme-border bg-theme-surface/70 px-4 py-3 text-sm text-theme-primary placeholder-theme-muted/60 outline-none transition focus-visible:ring-2 focus-visible:ring-[#FF4D1A] font-tajawal"
+                  className="w-full min-h-[46px] rounded-xl border border-theme-border bg-theme-surface/70 px-4 py-3 text-sm text-theme-primary placeholder-theme-muted/60 outline-none transition focus-visible:ring-2 focus-visible:ring-[#FF4D1A] font-alexandria"
                   placeholder="email@example.com"
                   dir="ltr"
                 />
@@ -149,7 +149,7 @@ export default function ContactPage() {
               <div>
                 <label
                   htmlFor="contact-phone"
-                  className="block text-xs font-bold text-theme-secondary mb-2 uppercase tracking-wider font-changa"
+                  className="block text-xs font-bold text-theme-secondary mb-2 uppercase tracking-wider font-alexandria"
                 >
                   {t.contact.form.phone}
                 </label>
@@ -159,7 +159,7 @@ export default function ContactPage() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full min-h-[46px] rounded-xl border border-theme-border bg-theme-surface/70 px-4 py-3 text-sm text-theme-primary placeholder-theme-muted/60 outline-none transition focus-visible:ring-2 focus-visible:ring-[#FF4D1A] font-tajawal"
+                  className="w-full min-h-[46px] rounded-xl border border-theme-border bg-theme-surface/70 px-4 py-3 text-sm text-theme-primary placeholder-theme-muted/60 outline-none transition focus-visible:ring-2 focus-visible:ring-[#FF4D1A] font-alexandria"
                   placeholder="+20 1XX XXX XXXX"
                   dir="ltr"
                 />
@@ -167,7 +167,7 @@ export default function ContactPage() {
               <div>
                 <label
                   htmlFor="contact-service"
-                  className="block text-xs font-bold text-theme-secondary mb-2 uppercase tracking-wider font-changa"
+                  className="block text-xs font-bold text-theme-secondary mb-2 uppercase tracking-wider font-alexandria"
                 >
                   {t.contact.form.service}
                 </label>
@@ -176,7 +176,7 @@ export default function ContactPage() {
                   name="service"
                   value={formData.service}
                   onChange={handleChange}
-                  className="w-full min-h-[46px] rounded-xl border border-theme-border bg-theme-surface/70 px-4 py-3 text-sm text-theme-primary outline-none transition focus-visible:ring-2 focus-visible:ring-[#FF4D1A] font-tajawal appearance-none"
+                  className="w-full min-h-[46px] rounded-xl border border-theme-border bg-theme-surface/70 px-4 py-3 text-sm text-theme-primary outline-none transition focus-visible:ring-2 focus-visible:ring-[#FF4D1A] font-alexandria appearance-none"
                 >
                   <option value="" className="bg-theme-card text-theme-primary">
                     {t.contact.form.servicePlaceholder}
@@ -194,7 +194,7 @@ export default function ContactPage() {
             <div>
               <label
                 htmlFor="contact-message"
-                className="block text-xs font-bold text-theme-secondary mb-2 uppercase tracking-wider font-changa"
+                className="block text-xs font-bold text-theme-secondary mb-2 uppercase tracking-wider font-alexandria"
               >
                 {t.contact.form.message}
               </label>
@@ -205,7 +205,7 @@ export default function ContactPage() {
                 onChange={handleChange}
                 required
                 rows={5}
-                className="w-full resize-none rounded-xl border border-theme-border bg-theme-surface/70 px-4 py-3 text-sm text-theme-primary placeholder-theme-muted/60 outline-none transition focus-visible:ring-2 focus-visible:ring-[#FF4D1A] font-tajawal"
+                className="w-full resize-none rounded-xl border border-theme-border bg-theme-surface/70 px-4 py-3 text-sm text-theme-primary placeholder-theme-muted/60 outline-none transition focus-visible:ring-2 focus-visible:ring-[#FF4D1A] font-alexandria"
                 placeholder={
                   language === "ar"
                     ? "اكتب تفاصيل مشروعك أو استفسارك هنا..."
@@ -221,10 +221,10 @@ export default function ContactPage() {
               className="w-full min-h-[48px] flex items-center justify-center gap-2 rounded-xl bg-[#9F0F1F] py-3.5 text-sm font-extrabold uppercase tracking-[0.14em] text-[#F2D3B1] shadow-[0_0_25px_rgba(159,15,31,0.35)] transition-all duration-300 hover:bg-[#B91C28] hover:shadow-[0_0_35px_rgba(159,15,31,0.5)] disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A]"
             >
               {formState === "sending" ? (
-                <span className="font-changa">{t.contact.form.sending}</span>
+                <span className="font-alexandria">{t.contact.form.sending}</span>
               ) : (
                 <>
-                  <span className="font-changa">{t.contact.form.submit}</span>
+                  <span className="font-alexandria">{t.contact.form.submit}</span>
                   <Send size={15} />
                 </>
               )}
@@ -238,7 +238,7 @@ export default function ContactPage() {
                 className="flex items-center gap-2 rounded-xl bg-green-500/10 border border-green-500/30 px-4 py-3 text-sm text-green-600 dark:text-green-400"
               >
                 <CheckCircle size={16} />
-                <span className="font-tajawal">{t.contact.form.success}</span>
+                <span className="font-alexandria">{t.contact.form.success}</span>
               </motion.div>
             )}
             {formState === "error" && (
@@ -248,7 +248,7 @@ export default function ContactPage() {
                 className="flex items-center gap-2 rounded-xl bg-red-500/10 border border-red-500/30 px-4 py-3 text-sm text-red-600 dark:text-red-400"
               >
                 <AlertCircle size={16} />
-                <span className="font-tajawal">{t.contact.form.error}</span>
+                <span className="font-alexandria">{t.contact.form.error}</span>
               </motion.div>
             )}
           </form>
@@ -272,10 +272,10 @@ export default function ContactPage() {
               <Phone size={20} />
             </div>
             <div>
-              <p className="text-xs font-bold text-theme-muted uppercase tracking-wider font-changa">
+              <p className="text-xs font-bold text-theme-muted uppercase tracking-wider font-alexandria">
                 {t.contact.info.whatsapp}
               </p>
-              <p className="text-sm font-semibold text-theme-primary font-tajawal mt-0.5" dir="ltr">
+              <p className="text-sm font-semibold text-theme-primary font-alexandria mt-0.5" dir="ltr">
                 +2 012 1105 0297
               </p>
             </div>
@@ -290,10 +290,10 @@ export default function ContactPage() {
               <Mail size={20} />
             </div>
             <div>
-              <p className="text-xs font-bold text-theme-muted uppercase tracking-wider font-changa">
+              <p className="text-xs font-bold text-theme-muted uppercase tracking-wider font-alexandria">
                 {t.contact.info.email}
               </p>
-              <p className="text-sm font-semibold text-theme-primary font-tajawal mt-0.5" dir="ltr">
+              <p className="text-sm font-semibold text-theme-primary font-alexandria mt-0.5" dir="ltr">
                 info@hodour.com
               </p>
             </div>
@@ -305,10 +305,10 @@ export default function ContactPage() {
               <MapPin size={20} />
             </div>
             <div>
-              <p className="text-xs font-bold text-theme-muted uppercase tracking-wider font-changa">
+              <p className="text-xs font-bold text-theme-muted uppercase tracking-wider font-alexandria">
                 {t.contact.info.location}
               </p>
-              <p className="text-sm font-semibold text-theme-primary font-tajawal mt-0.5">
+              <p className="text-sm font-semibold text-theme-primary font-alexandria mt-0.5">
                 {language === "ar" ? "مصر — الشيخ زايد ومدينة السادات" : "Egypt — Sheikh Zayed & Sadat City"}
               </p>
             </div>
@@ -316,12 +316,12 @@ export default function ContactPage() {
 
           {/* Quick WhatsApp Action Box */}
           <div className="rounded-2xl border border-[#9F0F1F]/25 bg-theme-card p-6 text-center shadow-sm">
-            <p className="text-base font-extrabold text-theme-primary font-changa mb-2">
+            <p className="text-base font-extrabold text-theme-primary font-alexandria mb-2">
               {language === "ar"
                 ? "محتاج استشارة عاجلة؟"
                 : "Need an immediate consult?"}
             </p>
-            <p className="text-xs text-theme-secondary/80 font-tajawal mb-5">
+            <p className="text-xs text-theme-secondary/80 font-alexandria mb-5">
               {language === "ar"
                 ? "تواصل مع فريقنا مباشرة على واتساب وسنرد عليك في غضون دقائق."
                 : "Message our team directly on WhatsApp and we will respond within minutes."}

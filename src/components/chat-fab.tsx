@@ -28,13 +28,13 @@ function buildWhatsAppLink(messages: Message[]): string {
     .map((m, i) => `${i + 1}. ${m.text}`)
     .join("\n");
 
-  const text = `أهلاً CEO hdour 👋
-كنت بتكلم مع hdour AI Agent وعندي استفسار عن خدمات hdour.
+  const text = `أهلاً فريق حضور (Hodour) 👋
+كنت بتكلم مع Hodour AI Agent وعندي استفسار عن خدمات حضور.
 
 📋 ملخص المحادثة:
 ${userMessages}
 
-أنا مهتم بالتعاون مع hdour، ممكن نتواصل؟`;
+أنا مهتم بالتعاون مع حضور (Hodour)، ممكن نتواصل؟`;
 
   return `https://wa.me/${CEO_WHATSAPP}?text=${encodeURIComponent(text)}`;
 }
@@ -151,7 +151,7 @@ function WhatsAppCTA({ href }: { href: string }) {
       className="space-y-2"
     >
       <p className="text-center text-[11px] text-zinc-500">
-        CEO hdour متاح للتواصل على واتساب الآن 👇
+        فريق حضور (Hodour) متاح للتواصل على واتساب الآن 👇
       </p>
       <motion.a
         href={href}
@@ -167,7 +167,7 @@ function WhatsAppCTA({ href }: { href: string }) {
           animate={{ opacity: [0.25, 0.4, 0.25] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
         />
-        <span className="relative z-10">تواصل مع CEO hdour على واتساب</span>
+        <span className="relative z-10">تواصل مع حضور على واتساب</span>
         <ArrowLeft size={18} className="relative z-10" />
       </motion.a>
     </motion.div>
@@ -218,17 +218,17 @@ function ChatWindow({
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.9, y: 18 }}
       transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] as const }}
-      className="absolute bottom-[calc(100%+16px)] right-0 flex w-[93vw] max-w-sm origin-bottom-right flex-col rounded-2xl border border-white/12 bg-zinc-950/90 shadow-[0_20px_70px_rgba(0,0,0,0.7)] backdrop-blur-xl"
+      className="absolute bottom-[calc(100%+16px)] right-0 flex w-[93vw] max-w-sm origin-bottom-right flex-col rounded-2xl border border-white/12 bg-zinc-950/90 shadow-[0_20px_70px_rgba(0,0,0,0.7)] backdrop-blur-xl font-alexandria"
       dir="rtl"
-      aria-label="hdour AI chat"
+      aria-label="Hodour AI chat"
     >
       {/* ── Header ── */}
       <div className="flex items-center gap-3 border-b border-white/10 px-4 py-3">
         <RobotAvatar shouldLoad />
         <div className="flex-1">
-          <p className="text-xs font-bold text-violet-400">hdour AI Agent</p>
+          <p className="text-xs font-bold text-[#FF4D1A]">Hodour AI Agent</p>
           <div className="flex items-center gap-1.5 mt-0.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#FF4D1A] animate-pulse" />
             <span className="text-[10px] text-zinc-400">أونلاين الآن</span>
           </div>
         </div>
@@ -267,14 +267,14 @@ function ChatWindow({
               onChange={(e) => onInputChange(e.target.value)}
               disabled={isInputDisabled || isTyping}
               placeholder={
-                isInputDisabled ? "جاري التحويل إلى CEO hdour..." : "اكتب رسالتك..."
+                isInputDisabled ? "جاري التحويل إلى فريق حضور..." : "اكتب رسالتك..."
               }
-              className="flex-1 rounded-xl border border-white/15 bg-black/40 px-3 py-2.5 text-right text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-violet-500/50 disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex-1 rounded-xl border border-white/15 bg-black/40 px-3 py-2.5 text-right text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-[#9F0F1F]/50 disabled:cursor-not-allowed disabled:opacity-40 font-alexandria"
             />
             <button
               type="submit"
               disabled={!input.trim() || isTyping || isInputDisabled}
-              className="flex shrink-0 items-center justify-center rounded-xl bg-[#8b5cf6] p-2.5 text-black transition hover:bg-violet-400 disabled:opacity-40"
+              className="flex shrink-0 items-center justify-center rounded-xl bg-[#9F0F1F] p-2.5 text-[#F2D3B1] transition hover:bg-[#B91C28] disabled:opacity-40"
               aria-label="إرسال"
             >
               <Send size={17} className="rotate-180" />
@@ -286,10 +286,11 @@ function ChatWindow({
         {!showWhatsApp && (
           <p className="mt-2 text-center text-[10px] text-zinc-600">
             {MAX_USER_MESSAGES - messages.filter((m) => m.role === "user").length > 0
-              ? `${MAX_USER_MESSAGES - messages.filter((m) => m.role === "user").length} ${MAX_USER_MESSAGES - messages.filter((m) => m.role === "user").length === 1
-                ? "سؤال متبقي"
-                : "أسئلة متبقية"
-              }`
+              ? `${MAX_USER_MESSAGES - messages.filter((m) => m.role === "user").length} ${
+                  MAX_USER_MESSAGES - messages.filter((m) => m.role === "user").length === 1
+                    ? "سؤال متبقي"
+                    : "أسئلة متبقية"
+                }`
               : ""}
           </p>
         )}
@@ -305,7 +306,7 @@ export function ChatFab() {
     {
       id: uid(),
       role: "bot",
-      text: "أهلاً بيك في hdour! 👋 أنا hdour AI Agent، إزاي أقدر أساعدك في تطوير البيزنس بتاعك بالذكاء الاصطناعي والأمن السيبراني؟",
+      text: "أهلاً بيك في حضور (Hodour)! 👋 أنا مساعد حضور الذكي، إزاي نقدر نساعدك في صناعة حضور استثنائي لمشروعك؟",
     },
   ]);
   const [input, setInput] = useState("");
@@ -323,7 +324,11 @@ export function ChatFab() {
   useEffect(() => {
     const openChat = () => setIsOpen(true);
     window.addEventListener("hdour-open-chat", openChat);
-    return () => window.removeEventListener("hdour-open-chat", openChat);
+    window.addEventListener("hodour-open-chat", openChat);
+    return () => {
+      window.removeEventListener("hdour-open-chat", openChat);
+      window.removeEventListener("hodour-open-chat", openChat);
+    };
   }, []);
 
   const handleSend = useCallback(
@@ -372,7 +377,7 @@ export function ChatFab() {
           {
             id: uid(),
             role: "bot",
-            text: "عندي مشكلة تقنية بسيطة دلوقتي 😅 تقدر تتواصل مع CEO hdour مباشرة على واتساب وهيساعدك فوراً.",
+            text: "عندي مشكلة تقنية بسيطة دلوقتي 😅 تقدر تتواصل مع فريق حضور (Hodour) مباشرة على واتساب وهيساعدك فوراً.",
           },
         ]);
         setShowWhatsApp(true);

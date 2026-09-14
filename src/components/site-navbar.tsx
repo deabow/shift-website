@@ -57,7 +57,7 @@ export default function SiteNavbar() {
           className="flex items-center gap-2 group rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A] p-1"
           aria-label={language === "ar" ? "حضور - الصفحة الرئيسية" : "Hodour - Home"}
         >
-          <span className="text-xl font-changa font-bold tracking-wide text-theme-primary group-hover:text-[#9F0F1F] dark:group-hover:text-white transition-colors">
+          <span className="text-xl font-alexandria font-bold tracking-wide text-theme-primary group-hover:text-[#9F0F1F] dark:group-hover:text-white transition-colors">
             {language === "ar" ? "حضور" : "Hodour"}
           </span>
           <span className="w-1.5 h-1.5 rounded-full bg-[#FF4D1A] animate-pulse" />
@@ -154,7 +154,7 @@ export default function SiteNavbar() {
             }
           >
             <Globe className="w-4 h-4 text-[#9F0F1F] dark:text-[#FF4D1A]" />
-            <span className="font-changa font-bold text-xs">{language === "en" ? "عربي" : "EN"}</span>
+            <span className="font-alexandria font-bold text-xs">{language === "en" ? "عربي" : "EN"}</span>
           </button>
 
           {/* Mobile Hamburger Toggle Button (Mobile only) */}
@@ -188,11 +188,11 @@ export default function SiteNavbar() {
               <div className="flex items-center justify-between pb-3 border-b border-theme-border">
                 <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[#9F0F1F]">
                   <span className="w-2 h-2 rounded-full bg-[#9F0F1F] animate-pulse" />
-                  <span className="font-changa">
+                  <span className="font-alexandria">
                     {language === "ar" ? "قائمة التنقل" : "Navigation"}
                   </span>
                 </div>
-                <span className="text-xs text-theme-muted font-tajawal">
+                <span className="text-xs text-theme-muted font-alexandria">
                   {language === "ar" ? "حضور | Hodour" : "Hodour Agency"}
                 </span>
               </div>
@@ -217,7 +217,7 @@ export default function SiteNavbar() {
                             : "text-theme-primary hover:bg-theme-surface/60 active:scale-[0.99]"
                         }`}
                       >
-                        <span className="text-base font-medium font-tajawal tracking-wide">
+                        <span className="text-base font-medium font-alexandria tracking-wide">
                           {link.label}
                         </span>
                         {isActive ? (
@@ -243,7 +243,7 @@ export default function SiteNavbar() {
                   rel="noopener noreferrer"
                   className="flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-[#9F0F1F] px-4 py-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[#F2D3B1] shadow-[0_0_25px_rgba(159,15,31,0.3)] active:scale-[0.98] transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A]"
                 >
-                  <span className="font-changa">
+                  <span className="font-alexandria">
                     {language === "ar" ? "تواصل معنا مباشرة عبر واتساب" : "Chat on WhatsApp"}
                   </span>
                   <Arrow className="w-4 h-4 text-[#F2D3B1]" />

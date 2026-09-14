@@ -225,7 +225,7 @@ export function HorizontalPortfolio() {
                   </div>
 
                   <span className="text-[10px] font-mono text-zinc-300 bg-black/70 px-2.5 py-1 rounded-full border border-white/10 backdrop-blur-sm">
-                    {project.clientType || "hdour Agency"}
+                    {project.clientType || "Hodour Agency"}
                   </span>
                 </div>
 
@@ -353,7 +353,7 @@ export function HorizontalPortfolio() {
                 <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-white/10">
                   <div className="flex flex-wrap items-center gap-3">
                     <a
-                      href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP || "201211050297"}?text=${encodeURIComponent(`أهلاً CEO hdour، اطلعت على مشروع "${activeModalProject.title}" وأرغب في تنفيذ حل مماثل لشركتي.`)}`}
+                      href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP || "201211050297"}?text=${encodeURIComponent(`أهلاً فريق حضور (Hodour)، اطلعت على مشروع "${activeModalProject.title}" وأرغب في تنفيذ عمل مماثل لشركتي.`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 rounded-xl bg-violet-500 px-6 py-3 text-xs font-extrabold uppercase tracking-wider text-zinc-950 transition hover:bg-violet-400 hover:shadow-[0_0_30px_rgba(139,92,246,0.5)] cursor-pointer"

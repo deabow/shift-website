@@ -317,7 +317,7 @@ export function AdminPortfolioDashboard() {
         <div className="text-right w-full md:w-auto">
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-violet-500 mb-2">
             <Sparkles className="w-4 h-4 text-violet-400 animate-pulse" />
-            <span>لوحة تحكم معرض الأعمال — hdour Core</span>
+            <span>لوحة تحكم معرض الأعمال — Hodour Core</span>
           </div>
           <h1 className="text-2xl md:text-3xl font-extrabold text-zinc-900 dark:text-zinc-100">
             إدارة المشاريع والأعمال
@@ -811,7 +811,7 @@ export function AdminPortfolioDashboard() {
                       rows={2}
                       value={form.solution}
                       onChange={(e) => setForm({ ...form, solution: e.target.value })}
-                      placeholder="كيف قامت hdour بحل التحدي..."
+                      placeholder="كيف قامت حضور (Hodour) بحل التحدي..."
                       className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-2.5 text-xs text-zinc-900 dark:text-zinc-100 focus:border-violet-500 focus:outline-none"
                     />
                   </div>

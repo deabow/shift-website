@@ -23,12 +23,12 @@ export default function PortfolioPage() {
       >
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#9F0F1F]/[0.08] border border-[#9F0F1F]/20 text-[#9F0F1F] text-xs font-semibold uppercase tracking-[0.2em] mb-4 backdrop-blur-md">
           <Sparkles className="w-3.5 h-3.5" />
-          <span className="font-changa">
+          <span className="font-alexandria">
             {language === "ar" ? "معرض أعمال حضور" : "Hodour Portfolio"}
           </span>
         </div>
 
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-theme-primary leading-[1.15] font-changa">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-theme-primary leading-[1.15] font-alexandria">
           {language === "ar" ? (
             <>
               أعمال صنعت <span className="text-[#9F0F1F] dark:text-[#FF4D1A]">حضوراً استثنائياً</span>
@@ -40,7 +40,7 @@ export default function PortfolioPage() {
           )}
         </h1>
 
-        <p className="mt-4 text-base md:text-lg text-theme-secondary/80 font-tajawal max-w-2xl mx-auto">
+        <p className="mt-4 text-base md:text-lg text-theme-secondary/80 font-alexandria max-w-2xl mx-auto">
           {language === "ar"
             ? "استعراض لأبرز مشاريع الإنتاج الإعلامي، التصوير السينمائي، الحملات الإعلانية، وتطوير المنصات الرقمية لعملائنا في مصر."
             : "A showcase of our premier media productions, cinematic filming, advertising campaigns, and custom web platforms in Egypt."}
