@@ -55,23 +55,18 @@ export default function AboutPage() {
           {t.about.description}
         </p>
 
-        {/* ── Visual Connector Bridge into "رسالتنا" ── */}
-        <div className="relative flex flex-col items-center my-6">
-          {/* Vertical gradient connecting line */}
-          <div className="h-10 w-px bg-gradient-to-b from-transparent via-[#9F0F1F] to-[#9F0F1F]" />
-          {/* Glowing node with quote icon */}
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#9F0F1F] text-white shadow-[0_0_20px_rgba(159,15,31,0.5)] my-1">
-            <Quote className="w-4 h-4 fill-white" />
-          </div>
-          <div className="h-6 w-px bg-gradient-to-b from-[#9F0F1F] to-transparent" />
-        </div>
+        {/* ── Seamless Integrated Mission Container ── */}
+        <div className="relative w-full max-w-3xl mt-8 rounded-3xl border border-theme-border bg-gradient-to-b from-theme-card/60 via-theme-card to-theme-card p-8 md:p-10 shadow-md overflow-hidden text-center">
+          {/* Ambient Top Connector Gradient Flow */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-[#9F0F1F] to-transparent" />
+          <div className="pointer-events-none absolute -top-12 left-1/2 -translate-x-1/2 w-48 h-24 bg-[#9F0F1F]/15 blur-2xl" />
 
-        {/* Mission Showcase Container — Visually Bound to the Intro */}
-        <div className="relative w-full max-w-3xl rounded-3xl border border-[#9F0F1F]/30 bg-theme-card p-8 md:p-10 shadow-xl overflow-hidden text-center">
-          <div className="pointer-events-none absolute -inset-10 bg-[radial-gradient(ellipse_at_center,rgba(159,15,31,0.08),transparent_70%)]" />
-          
-          <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.24em] text-[#9F0F1F] mb-3 font-changa">
+          <div className="relative z-10 flex flex-col items-center">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#9F0F1F] text-[#F2D3B1] shadow-[0_0_20px_rgba(159,15,31,0.35)] mb-4">
+              <Quote className="w-5 h-5 fill-current" />
+            </div>
+
+            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.24em] text-[#9F0F1F] dark:text-[#FF4D1A] mb-3 font-changa">
               <span className="w-1.5 h-1.5 rounded-full bg-[#FF4D1A]" />
               <span>{language === "ar" ? "رسالتنا وجوهر وجودنا" : "Our Core Mission"}</span>
             </div>
@@ -79,6 +74,10 @@ export default function AboutPage() {
             <blockquote className="mt-2 text-xl sm:text-2xl md:text-3xl font-bold leading-relaxed text-theme-primary font-tajawal">
               &ldquo;{t.about.mission}&rdquo;
             </blockquote>
+
+            <p className="mt-4 text-xs font-mono text-theme-muted uppercase tracking-wider">
+              {language === "ar" ? "حضور — صُنّاع الحضور الحقيقي" : "Hodour — Makers of True Presence"}
+            </p>
           </div>
         </div>
       </motion.section>

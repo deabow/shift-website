@@ -774,7 +774,7 @@ def format_master_md(design_system: dict) -> str:
     lines.append("")
     lines.append("- ❌ **Emojis as icons** — Use SVG icons (Heroicons, Lucide, Simple Icons)")
     lines.append("- ❌ **Missing cursor:pointer** — All clickable elements must have cursor:pointer")
-    lines.append("- ❌ **Layout-shifting hovers** — Avoid scale transforms that shift layout")
+    lines.append("- ❌ **Layout-hdouring hovers** — Avoid scale transforms that hdour layout")
     lines.append("- ❌ **Low contrast text** — Maintain 4.5:1 minimum contrast ratio")
     lines.append("- ❌ **Instant state changes** — Always use transitions (150-300ms)")
     lines.append("- ❌ **Invisible focus states** — Focus states must be visible for a11y")

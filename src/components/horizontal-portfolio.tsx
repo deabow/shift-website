@@ -132,7 +132,7 @@ export function HorizontalPortfolio() {
           setApiProjects(data);
         }
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   const { scrollYProgress } = useScroll({
@@ -149,9 +149,9 @@ export function HorizontalPortfolio() {
     ? activeModalProject.gallery && activeModalProject.gallery.length > 0
       ? activeModalProject.gallery
       : [
-          ...(activeModalProject.imageUrl ? [{ type: "image" as const, url: activeModalProject.imageUrl }] : []),
-          ...(activeModalProject.videoUrl ? [{ type: "video" as const, url: activeModalProject.videoUrl }] : []),
-        ]
+        ...(activeModalProject.imageUrl ? [{ type: "image" as const, url: activeModalProject.imageUrl }] : []),
+        ...(activeModalProject.videoUrl ? [{ type: "video" as const, url: activeModalProject.videoUrl }] : []),
+      ]
     : [];
 
   return (
@@ -168,10 +168,10 @@ export function HorizontalPortfolio() {
           </h2>
           <p className="text-zinc-400 mt-2 max-w-xl text-sm md:text-base">{t.portfolio.subtitle}</p>
         </div>
-        
+
         {/* Horizontal Project Showcase Cards */}
-        <motion.div 
-          style={isMobile ? {} : { x }} 
+        <motion.div
+          style={isMobile ? {} : { x }}
           className={`flex gap-6 md:gap-10 ${isMobile ? "overflow-x-auto snap-x snap-mandatory px-4 pb-8 w-full" : "px-12 xl:px-32 mt-28"}`}
         >
           {projectsToDisplay.map((project) => {
@@ -206,7 +206,7 @@ export function HorizontalPortfolio() {
                       {hasVideo ? (
                         <>
                           <Film className="w-3 h-3 text-violet-400" />
-                          <span>{isAr ? "فيلم سينمائي 8K" : "Cinematic Reel"}</span>
+                          <span>{isAr ? "فيلم سينمائي عالية " : "Cinematic Reel"}</span>
                         </>
                       ) : (
                         <>
@@ -225,7 +225,7 @@ export function HorizontalPortfolio() {
                   </div>
 
                   <span className="text-[10px] font-mono text-zinc-300 bg-black/70 px-2.5 py-1 rounded-full border border-white/10 backdrop-blur-sm">
-                    {project.clientType || "SHIFT Agency"}
+                    {project.clientType || "hdour Agency"}
                   </span>
                 </div>
 
@@ -353,7 +353,7 @@ export function HorizontalPortfolio() {
                 <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-white/10">
                   <div className="flex flex-wrap items-center gap-3">
                     <a
-                      href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP || "201211050297"}?text=${encodeURIComponent(`أهلاً CEO SHIFT، اطلعت على مشروع "${activeModalProject.title}" وأرغب في تنفيذ حل مماثل لشركتي.`)}`}
+                      href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP || "201211050297"}?text=${encodeURIComponent(`أهلاً CEO hdour، اطلعت على مشروع "${activeModalProject.title}" وأرغب في تنفيذ حل مماثل لشركتي.`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 rounded-xl bg-violet-500 px-6 py-3 text-xs font-extrabold uppercase tracking-wider text-zinc-950 transition hover:bg-violet-400 hover:shadow-[0_0_30px_rgba(139,92,246,0.5)] cursor-pointer"

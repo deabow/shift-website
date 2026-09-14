@@ -117,7 +117,7 @@ export default function ContactPage() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full min-h-[46px] rounded-xl border border-theme-border bg-theme-surface/70 px-4 py-3 text-sm text-theme-primary placeholder-theme-muted/60 outline-none transition focus-visible:ring-2 focus-visible:ring-[#9F0F1F] font-tajawal"
+                  className="w-full min-h-[46px] rounded-xl border border-theme-border bg-theme-surface/70 px-4 py-3 text-sm text-theme-primary placeholder-theme-muted/60 outline-none transition focus-visible:ring-2 focus-visible:ring-[#FF4D1A] font-tajawal"
                   placeholder={
                     language === "ar" ? "محمد أحمد" : "John Doe"
                   }
@@ -137,7 +137,7 @@ export default function ContactPage() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full min-h-[46px] rounded-xl border border-theme-border bg-theme-surface/70 px-4 py-3 text-sm text-theme-primary placeholder-theme-muted/60 outline-none transition focus-visible:ring-2 focus-visible:ring-[#9F0F1F] font-tajawal"
+                  className="w-full min-h-[46px] rounded-xl border border-theme-border bg-theme-surface/70 px-4 py-3 text-sm text-theme-primary placeholder-theme-muted/60 outline-none transition focus-visible:ring-2 focus-visible:ring-[#FF4D1A] font-tajawal"
                   placeholder="email@example.com"
                   dir="ltr"
                 />
@@ -159,7 +159,7 @@ export default function ContactPage() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full min-h-[46px] rounded-xl border border-theme-border bg-theme-surface/70 px-4 py-3 text-sm text-theme-primary placeholder-theme-muted/60 outline-none transition focus-visible:ring-2 focus-visible:ring-[#9F0F1F] font-tajawal"
+                  className="w-full min-h-[46px] rounded-xl border border-theme-border bg-theme-surface/70 px-4 py-3 text-sm text-theme-primary placeholder-theme-muted/60 outline-none transition focus-visible:ring-2 focus-visible:ring-[#FF4D1A] font-tajawal"
                   placeholder="+20 1XX XXX XXXX"
                   dir="ltr"
                 />
@@ -176,7 +176,7 @@ export default function ContactPage() {
                   name="service"
                   value={formData.service}
                   onChange={handleChange}
-                  className="w-full min-h-[46px] rounded-xl border border-theme-border bg-theme-surface/70 px-4 py-3 text-sm text-theme-primary outline-none transition focus-visible:ring-2 focus-visible:ring-[#9F0F1F] font-tajawal appearance-none"
+                  className="w-full min-h-[46px] rounded-xl border border-theme-border bg-theme-surface/70 px-4 py-3 text-sm text-theme-primary outline-none transition focus-visible:ring-2 focus-visible:ring-[#FF4D1A] font-tajawal appearance-none"
                 >
                   <option value="" className="bg-theme-card text-theme-primary">
                     {t.contact.form.servicePlaceholder}
@@ -205,7 +205,7 @@ export default function ContactPage() {
                 onChange={handleChange}
                 required
                 rows={5}
-                className="w-full resize-none rounded-xl border border-theme-border bg-theme-surface/70 px-4 py-3 text-sm text-theme-primary placeholder-theme-muted/60 outline-none transition focus-visible:ring-2 focus-visible:ring-[#9F0F1F] font-tajawal"
+                className="w-full resize-none rounded-xl border border-theme-border bg-theme-surface/70 px-4 py-3 text-sm text-theme-primary placeholder-theme-muted/60 outline-none transition focus-visible:ring-2 focus-visible:ring-[#FF4D1A] font-tajawal"
                 placeholder={
                   language === "ar"
                     ? "اكتب تفاصيل مشروعك أو استفسارك هنا..."
@@ -266,7 +266,7 @@ export default function ContactPage() {
             href={`https://wa.me/${CEO_WHATSAPP}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-4 rounded-2xl border border-theme-border bg-theme-card p-5 transition-all duration-300 hover:border-[#9F0F1F]/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F]"
+            className="group flex items-center gap-4 rounded-2xl border border-theme-border bg-theme-card p-5 transition-colors hover:border-[#9F0F1F]/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A]"
           >
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#25D366]/15 text-[#25D366] shrink-0">
               <Phone size={20} />
@@ -284,7 +284,7 @@ export default function ContactPage() {
           {/* Email Card */}
           <a
             href="mailto:info@hodour.com"
-            className="group flex items-center gap-4 rounded-2xl border border-theme-border bg-theme-card p-5 transition-all duration-300 hover:border-[#9F0F1F]/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F]"
+            className="group flex items-center gap-4 rounded-2xl border border-theme-border bg-theme-card p-5 transition-colors hover:border-[#9F0F1F]/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A]"
           >
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#9F0F1F]/15 text-[#9F0F1F] shrink-0">
               <Mail size={20} />

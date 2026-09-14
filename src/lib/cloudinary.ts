@@ -20,7 +20,7 @@ export type UploadResult = {
 export async function uploadToCloudinary(
   buffer: Buffer,
   fileName: string,
-  folder: string = "shift-agency",
+  folder: string = "hdour-agency",
 ): Promise<UploadResult> {
   const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
   const apiKey = process.env.CLOUDINARY_API_KEY;

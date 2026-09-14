@@ -13,7 +13,7 @@ export default function AdminPanelPage() {
               <span>منطقة الإدارة المشفرة الآمنة</span>
             </div>
             <h1 className="text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-white">
-              لوحة تحكم معرض أعمال SHIFT
+              لوحة تحكم معرض أعمال حضور | Hodour
             </h1>
             <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">
               جميع التعديلات والإضافات التي تتم هنا تظهر فورياً وبدون أي تأخير في معرض الأعمال بالموقع.

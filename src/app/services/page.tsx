@@ -108,7 +108,7 @@ function ServiceCard({
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-[#9F0F1F]/10 border border-[#9F0F1F]/25 px-5 py-2.5 text-xs font-extrabold uppercase tracking-[0.14em] text-[#9F0F1F] transition-all duration-300 hover:bg-[#9F0F1F] hover:text-[#F2D3B1] hover:shadow-[0_0_25px_rgba(159,15,31,0.3)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F]"
+            className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-[#9F0F1F]/10 border border-[#9F0F1F]/25 px-5 py-2.5 text-xs font-extrabold uppercase tracking-[0.14em] text-[#9F0F1F] dark:text-[#FF4D1A] transition-colors hover:bg-[#9F0F1F] hover:text-[#F2D3B1] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A]"
           >
             <span className="font-changa">
               {language === "ar" ? "استشارة على واتساب" : "Consult on WhatsApp"}

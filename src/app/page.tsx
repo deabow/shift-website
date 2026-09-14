@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "@/lib/language-context";
@@ -28,28 +28,28 @@ const BentoPortfolio = dynamic(
   { ssr: false }
 );
 
-const StatsCounter = dynamic(
-  () => import("@/components/stats-counter").then((mod) => mod.StatsCounter),
+const Testimonials = dynamic(
+  () => import("@/components/testimonials").then((mod) => mod.Testimonials),
   { ssr: false }
 );
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
+      staggerChildren: 0.1,
+      delayChildren: 0.08,
     },
   },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 28 },
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring" as const, stiffness: 95, damping: 20 },
+    transition: { duration: 0.45, ease: "easeOut" },
   },
 };
 
@@ -69,6 +69,7 @@ export default function Home() {
   const Arrow = isRTL ? ArrowLeft : ArrowRight;
 
   const [showHeroVideo, setShowHeroVideo] = useState(false);
+  const [heroImageLoaded, setHeroImageLoaded] = useState(false);
 
   return (
     <main className="relative flex w-full flex-col items-center overflow-hidden bg-theme-bg transition-colors duration-300">
@@ -137,7 +138,7 @@ export default function Home() {
 
             <Link
               href="/portfolio"
-              className="group flex h-14 w-full sm:w-auto items-center justify-center rounded-xl border border-theme-border bg-theme-card px-8 text-xs font-extrabold uppercase tracking-[0.18em] text-theme-primary backdrop-blur-xl shadow-sm transition-all duration-300 hover:border-[#9F0F1F]/50 hover:bg-[#9F0F1F]/10 hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F]"
+              className="group flex h-14 w-full sm:w-auto items-center justify-center rounded-xl border border-theme-border bg-theme-card px-8 text-xs font-extrabold uppercase tracking-[0.18em] text-theme-primary backdrop-blur-xl shadow-sm transition-colors hover:border-[#9F0F1F]/50 hover:bg-[#9F0F1F]/10 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A]"
             >
               <span className="flex items-center gap-2 font-changa">
                 <span>{t.hero.btnWork}</span>
@@ -153,11 +154,13 @@ export default function Home() {
           >
             <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full rounded-2xl overflow-hidden bg-theme-surface">
               <Image
-                src="/portfolio-media/kamal-abou-ali-law-video-cover.jpeg"
-                alt="Hodour Media Production Showcase"
+                src="/portfolio-media/khaleej-real-estate-compilation-cover.jpeg"
+                alt="Hodour Production Reel 2026 - استعراض أعمال حضور"
                 fill
                 priority
-                className="object-cover object-center transition-transform duration-700 hover:scale-105"
+                className={`object-cover object-center transition-all duration-700 ease-out ${heroImageLoaded ? "blur-0 scale-100 opacity-100" : "blur-md scale-105 opacity-80"
+                  }`}
+                onLoad={() => setHeroImageLoaded(true)}
               />
 
               {/* Cinematic Vignette */}
@@ -174,7 +177,7 @@ export default function Home() {
 
                 <div className="hidden sm:flex items-center gap-2">
                   <span className="rounded-full bg-black/60 backdrop-blur-md px-3 py-1 text-[11px] font-bold text-[#F2D3B1] border border-white/10">
-                    8K Drone Cinema
+                    عالية  Drone Cinema
                   </span>
                   <span className="rounded-full bg-[#9F0F1F]/90 backdrop-blur-md px-3 py-1 text-[11px] font-bold text-white shadow">
                     Commercials & Media
@@ -186,7 +189,7 @@ export default function Home() {
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
                 <button
                   onClick={() => setShowHeroVideo(true)}
-                  className="group/play flex items-center justify-center rounded-full bg-[#9F0F1F] p-5 md:p-6 text-white shadow-[0_0_40px_rgba(159,15,31,0.7)] transition-all duration-300 hover:scale-110 hover:bg-[#C41E2F] active:scale-95 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white"
+                  className="group/play flex items-center justify-center rounded-full bg-[#9F0F1F] p-5 md:p-6 text-white shadow-[0_0_35px_rgba(159,15,31,0.6)] transition-colors duration-200 hover:bg-[#B91C28] active:scale-95 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white"
                   aria-label="مشاهدة فيديو استعراض أعمال حضور"
                 >
                   <Play className="w-7 h-7 md:w-8 md:h-8 fill-white translate-x-0.5" />
@@ -287,19 +290,17 @@ export default function Home() {
         <BentoPortfolio />
       </div>
 
-      {/* ── Stats Counter ── */}
-      <section className="w-full max-w-5xl px-4 md:px-8 py-8">
-        <StatsCounter />
-      </section>
+      {/* ── Client Testimonials (Verified Clients & Real Results) ── */}
+      <Testimonials />
 
       {/* ── Bottom Call To Action ── */}
       <section className="w-full max-w-5xl px-4 md:px-8 py-16 md:py-20">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col items-center gap-6 rounded-3xl border border-theme-border bg-theme-card p-8 md:p-14 text-center relative overflow-hidden shadow-lg"
+          transition={{ duration: 0.45 }}
+          className="flex flex-col items-center gap-6 rounded-3xl border border-theme-border bg-theme-card p-8 md:p-14 text-center relative overflow-hidden shadow-sm"
         >
           <div className="pointer-events-none absolute -inset-20 bg-[radial-gradient(ellipse_at_center,rgba(159,15,31,0.08),transparent_70%)]" />
 
@@ -315,7 +316,7 @@ export default function Home() {
           <div className="relative z-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             <Link
               href="/contact"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[#9F0F1F] px-8 text-xs font-extrabold uppercase tracking-[0.16em] text-[#F2D3B1] shadow-[0_0_25px_rgba(159,15,31,0.3)] transition-all hover:bg-[#B91C28] hover:shadow-[0_0_35px_rgba(159,15,31,0.5)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A]"
+              className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-[#9F0F1F] px-8 text-xs font-extrabold uppercase tracking-[0.16em] text-[#F2D3B1] shadow-[0_0_25px_rgba(159,15,31,0.3)] transition-colors hover:bg-[#B91C28] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A]"
             >
               <span className="font-changa">{t.cta.getStarted}</span>
               <Arrow className="w-4 h-4 text-[#F2D3B1]" />
@@ -328,7 +329,7 @@ export default function Home() {
               )}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-theme-border bg-theme-surface px-8 text-xs font-extrabold uppercase tracking-[0.16em] text-theme-primary transition-all hover:border-[#9F0F1F]/50 hover:bg-[#9F0F1F]/10 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F]"
+              className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-theme-border bg-theme-surface px-8 text-xs font-extrabold uppercase tracking-[0.16em] text-theme-primary transition-colors hover:border-[#9F0F1F]/50 hover:bg-[#9F0F1F]/10 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A]"
             >
               <span className="font-changa">{t.cta.talkToUs}</span>
               <Arrow className="w-4 h-4 text-theme-muted" />

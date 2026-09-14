@@ -74,32 +74,32 @@ export function RevealMaskText() {
         radius.set(0);
       }
     };
-    
+
     checkMobile();
     window.addEventListener("resize", checkMobile);
-    
+
     let autoAnimateId: number;
     let angle = 0;
-    
+
     const autoAnimate = () => {
       if (isMobile && containerRef.current && isVisibleRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
         const movementRadius = Math.min(rect.width, rect.height) * 0.3;
-        
+
         cursorX.set(centerX + Math.cos(angle) * movementRadius);
         cursorY.set(centerY + Math.sin(angle) * movementRadius);
-        
+
         angle += 0.02;
       }
       autoAnimateId = requestAnimationFrame(autoAnimate);
     };
-    
+
     if (isMobile) {
       autoAnimateId = requestAnimationFrame(autoAnimate);
     }
-    
+
     return () => {
       window.removeEventListener("resize", checkMobile);
       if (autoAnimateId) cancelAnimationFrame(autoAnimateId);
@@ -221,7 +221,7 @@ export function RevealMaskText() {
           fill="none"
           className={`${orbitron.className} uppercase text-[20vw] sm:text-7xl md:text-9xl lg:text-[15rem] tracking-[0.02em] sm:tracking-[0.08em] md:tracking-[0.12em] lg:tracking-[0.16em] font-black`}
         >
-          SHIFT
+          hdour
         </text>
         <text
           x="50%"
@@ -231,7 +231,7 @@ export function RevealMaskText() {
           fill="rgba(255, 255, 255, 0.85)"
           className={`${orbitron.className} uppercase text-[20vw] sm:text-7xl md:text-9xl lg:text-[15rem] tracking-[0.02em] sm:tracking-[0.08em] md:tracking-[0.12em] lg:tracking-[0.16em] font-black`}
         >
-          SHIFT
+          hdour
         </text>
       </svg>
 
@@ -242,7 +242,7 @@ export function RevealMaskText() {
       >
         <svg className="h-full w-full select-none">
           <defs>
-            <clipPath id="shift-text-clip">
+            <clipPath id="hdour-text-clip">
               <text
                 x="50%"
                 y="50%"
@@ -250,7 +250,7 @@ export function RevealMaskText() {
                 textAnchor="middle"
                 className={`${orbitron.className} uppercase text-[20vw] sm:text-7xl md:text-9xl lg:text-[15rem] tracking-[0.02em] sm:tracking-[0.08em] md:tracking-[0.12em] lg:tracking-[0.16em] font-black`}
               >
-                SHIFT
+                hdour
               </text>
             </clipPath>
           </defs>
@@ -259,7 +259,7 @@ export function RevealMaskText() {
             y="0"
             width="100%"
             height="100%"
-            clipPath="url(#shift-text-clip)"
+            clipPath="url(#hdour-text-clip)"
           >
             <canvas ref={canvasRef} className="block h-full w-full bg-black" />
           </foreignObject>

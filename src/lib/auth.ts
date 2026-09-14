@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-const DEFAULT_ADMIN_SECRET = "shift_session_xK9mP2vL8nQ4wR7jT";
+const DEFAULT_ADMIN_SECRET = "hdour_session_xK9mP2vL8nQ4wR7jT";
 
 export function requireAuth():
   | { ok: true }
@@ -9,7 +9,7 @@ export function requireAuth():
   const secret = process.env.ADMIN_SECRET || DEFAULT_ADMIN_SECRET;
 
   const cookieStore = cookies();
-  const token = cookieStore.get("shift-admin-auth")?.value;
+  const token = cookieStore.get("hdour-admin-auth")?.value;
 
   if (token !== secret) {
     return {

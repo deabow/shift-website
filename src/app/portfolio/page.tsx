@@ -31,11 +31,11 @@ export default function PortfolioPage() {
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-theme-primary leading-[1.15] font-changa">
           {language === "ar" ? (
             <>
-              أعمال صنعت <span className="text-[#9F0F1F]">حضوراً استثنائياً</span>
+              أعمال صنعت <span className="text-[#9F0F1F] dark:text-[#FF4D1A]">حضوراً استثنائياً</span>
             </>
           ) : (
             <>
-              Work That Created <span className="text-[#9F0F1F]">Real Presence</span>
+              Work That Created <span className="text-[#9F0F1F] dark:text-[#FF4D1A]">Real Presence</span>
             </>
           )}
         </h1>

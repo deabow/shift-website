@@ -19,21 +19,21 @@ export async function generateMetadata({
 }: CaseStudyPageProps): Promise<Metadata> {
   const project = await getProjectBySlug(params.slug);
   if (!project || !project.published) {
-    return { title: "Case Study | SHIFT" };
+    return { title: "Case Study | hdour" };
   }
 
   return {
-    title: `${project.title} | SHIFT Case Study`,
+    title: `${project.title} | hdour Case Study`,
     description: project.description,
     openGraph: {
-      title: `${project.title} | SHIFT Case Study`,
+      title: `${project.title} | hdour Case Study`,
       description: project.description,
       type: "article",
       images: [{ url: project.imageUrl, width: 1400, height: 934, alt: project.title }],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${project.title} | SHIFT Case Study`,
+      title: `${project.title} | hdour Case Study`,
       description: project.description,
       images: [project.imageUrl],
     },
@@ -50,9 +50,9 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
     project.gallery && project.gallery.length > 0
       ? project.gallery
       : [
-          ...(project.imageUrl ? [{ type: "image" as const, url: project.imageUrl }] : []),
-          ...(project.videoUrl ? [{ type: "video" as const, url: project.videoUrl }] : []),
-        ];
+        ...(project.imageUrl ? [{ type: "image" as const, url: project.imageUrl }] : []),
+        ...(project.videoUrl ? [{ type: "video" as const, url: project.videoUrl }] : []),
+      ];
 
   return (
     <main className="mx-auto min-h-[calc(100vh-96px)] w-full max-w-6xl px-4 pb-20 pt-10 md:px-8">

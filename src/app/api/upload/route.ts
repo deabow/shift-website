@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
-    const uploadResult = await uploadToCloudinary(buffer, filename, "shift-portfolio");
+    const uploadResult = await uploadToCloudinary(buffer, filename, "hdour-portfolio");
 
     logger.info("upload", `Uploaded file: ${filename} -> ${uploadResult.url.slice(0, 40)}...`);
 

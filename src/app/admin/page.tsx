@@ -2,12 +2,12 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-const DEFAULT_ADMIN_SECRET = "shift_session_xK9mP2vL8nQ4wR7jT";
+const DEFAULT_ADMIN_SECRET = "hdour_session_xK9mP2vL8nQ4wR7jT";
 
 export default function AdminLoginPage() {
   const adminSecret = process.env.ADMIN_SECRET || DEFAULT_ADMIN_SECRET;
   const isAuthenticated = Boolean(
-    cookies().get("shift-admin-auth")?.value === adminSecret,
+    cookies().get("hdour-admin-auth")?.value === adminSecret,
   );
 
   if (isAuthenticated) {
@@ -27,7 +27,7 @@ export default function AdminLoginPage() {
           Secure Login
         </h1>
         <p className="mt-2 text-sm text-zinc-400">
-          Authenticate to access the SHIFT admin panel.
+          Authenticate to access the hdour admin panel.
         </p>
 
         <form action="/api/admin/login" method="post" className="mt-8 space-y-5">
@@ -44,7 +44,7 @@ export default function AdminLoginPage() {
               placeholder="Enter admin password"
             />
           </div>
-          
+
           <button
             type="submit"
             className="w-full rounded-xl bg-violet-500 px-5 py-3.5 text-xs font-extrabold uppercase tracking-[0.16em] text-zinc-950 transition hover:bg-violet-400 hover:shadow-[0_0_25px_rgba(139, 92, 246,0.5)]"

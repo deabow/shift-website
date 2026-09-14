@@ -18,17 +18,17 @@ type ChatResponse = {
   showWhatsApp: boolean;
 };
 
-const SYSTEM_INSTRUCTION = `أنت "Shift AI Agent"، المساعد الذكي الرسمي لشركة SHIFT للتكنولوجيا والإبداع الرقمي.
+const SYSTEM_INSTRUCTION = `أنت "hdour AI Agent"، المساعد الذكي الرسمي لشركة hdour للتكنولوجيا والإبداع الرقمي.
 
-معلومات عن SHIFT:
+معلومات عن hdour:
 - متخصصة في تطوير الويب (Next.js, React)، تطبيقات الموبايل (Flutter, React Native)، أنظمة المؤسسات والـ ERP المخصصة، والأمن السيبراني واختبار الاختراق.
-- المدير التنفيذي للشركة هو CEO SHIFT (Mohamed Tarek).
+- المدير التنفيذي للشركة هو CEO hdour (Mohamed Tarek).
 
 قواعد التعامل:
 - تكلم العملاء باللهجة المصرية العامية المحترفة والراقية، بأسلوب ذكي ومختصر وودود.
 - لا تتكلم أكتر من 3-4 جمل في الرد الواحد.
-- وضح دايماً إزاي SHIFT تقدر تحل مشكلة العميل بأحدث التقنيات.
-- لو العميل سأل عن التواصل أو الأسعار، وجهه للتواصل مباشرة مع CEO SHIFT على واتساب.
+- وضح دايماً إزاي hdour تقدر تحل مشكلة العميل بأحدث التقنيات.
+- لو العميل سأل عن التواصل أو الأسعار، وجهه للتواصل مباشرة مع CEO hdour على واتساب.
 - ما تذكرش أسماء منافسين أو شركات تانية أبداً.`;
 
 const RATE_LIMIT = { windowMs: 60_000, maxRequests: 10 };
@@ -41,21 +41,21 @@ function getLocalFallbackResponse(message: string): { reply: string; showWhatsAp
 
   if (lowerMsg.includes("سعر") || lowerMsg.includes("أسعار") || lowerMsg.includes("بكام") || lowerMsg.includes("price") || lowerMsg.includes("تكلفة")) {
     return {
-      reply: "أسعارنا بتختلف حسب حجم المشروع وتفاصيله. تقدر تتواصل مباشرة مع CEO SHIFT على واتساب وهيقدم لك استشارة وتسعير دقيق بعد دراسة متطلباتك! 💬",
+      reply: "أسعارنا بتختلف حسب حجم المشروع وتفاصيله. تقدر تتواصل مباشرة مع CEO hdour على واتساب وهيقدم لك استشارة وتسعير دقيق بعد دراسة متطلباتك! 💬",
       showWhatsApp: true
     };
   }
 
   if (lowerMsg.includes("خدمات") || lowerMsg.includes("بتعملوا ايه") || lowerMsg.includes("services")) {
     return {
-      reply: "إحنا في SHIFT بنقدم 4 خدمات أساسية: تطوير مواقع وتطبيقات، تسويق رقمي، هوية بصرية وإنتاج سينمائي، وأمن سيبراني. محتاج تفاصيل عن خدمة معينة؟",
+      reply: "إحنا في hdour بنقدم 4 خدمات أساسية: تطوير مواقع وتطبيقات، تسويق رقمي، هوية بصرية وإنتاج سينمائي، وأمن سيبراني. محتاج تفاصيل عن خدمة معينة؟",
       showWhatsApp: false
     };
   }
 
   if (lowerMsg.includes("موبايل") || lowerMsg.includes("تطبيقات") || lowerMsg.includes("app")) {
     return {
-      reply: "بنبرمج تطبيقات الموبايل باستخدام Flutter و React Native عشان نضمن أعلى أداء على iOS و Android. تواصل مع CEO SHIFT لو عندك فكرة تطبيق جاهزة للتنفيذ!",
+      reply: "بنبرمج تطبيقات الموبايل باستخدام Flutter و React Native عشان نضمن أعلى أداء على iOS و Android. تواصل مع CEO hdour لو عندك فكرة تطبيق جاهزة للتنفيذ!",
       showWhatsApp: true
     };
   }
@@ -68,7 +68,7 @@ function getLocalFallbackResponse(message: string): { reply: string; showWhatsAp
   }
 
   return {
-    reply: "أنا المساعد الذكي لـ SHIFT! حالياً تقدر تتواصل مباشرة مع CEO SHIFT على واتساب للمساعدة الفورية 👇",
+    reply: "أنا المساعد الذكي لـ hdour! حالياً تقدر تتواصل مباشرة مع CEO hdour على واتساب للمساعدة الفورية 👇",
     showWhatsApp: true
   };
 }
@@ -173,7 +173,7 @@ export async function POST(req: Request): Promise<NextResponse> {
     logger.info("chat", "User hit 3-message limit, showing WhatsApp CTA");
     const response = NextResponse.json<ChatResponse>({
       reply:
-        "مشروعك واعد ويستحق حل تقني متكامل 🚀 لخصت تفاصيل طلبك وCEO SHIFT متاح للتواصل معك على واتساب الآن لمناقشة خطة العمل!",
+        "مشروعك واعد ويستحق حل تقني متكامل 🚀 لخصت تفاصيل طلبك وCEO hdour متاح للتواصل معك على واتساب الآن لمناقشة خطة العمل!",
       showWhatsApp: true
     });
     applyRateLimitHeaders(response, rateResult);

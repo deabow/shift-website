@@ -28,13 +28,13 @@ function buildWhatsAppLink(messages: Message[]): string {
     .map((m, i) => `${i + 1}. ${m.text}`)
     .join("\n");
 
-  const text = `أهلاً CEO SHIFT 👋
-كنت بتكلم مع Shift AI Agent وعندي استفسار عن خدمات SHIFT.
+  const text = `أهلاً CEO hdour 👋
+كنت بتكلم مع hdour AI Agent وعندي استفسار عن خدمات hdour.
 
 📋 ملخص المحادثة:
 ${userMessages}
 
-أنا مهتم بالتعاون مع SHIFT، ممكن نتواصل؟`;
+أنا مهتم بالتعاون مع hdour، ممكن نتواصل؟`;
 
   return `https://wa.me/${CEO_WHATSAPP}?text=${encodeURIComponent(text)}`;
 }
@@ -151,7 +151,7 @@ function WhatsAppCTA({ href }: { href: string }) {
       className="space-y-2"
     >
       <p className="text-center text-[11px] text-zinc-500">
-        CEO SHIFT متاح للتواصل على واتساب الآن 👇
+        CEO hdour متاح للتواصل على واتساب الآن 👇
       </p>
       <motion.a
         href={href}
@@ -167,7 +167,7 @@ function WhatsAppCTA({ href }: { href: string }) {
           animate={{ opacity: [0.25, 0.4, 0.25] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
         />
-        <span className="relative z-10">تواصل مع CEO SHIFT على واتساب</span>
+        <span className="relative z-10">تواصل مع CEO hdour على واتساب</span>
         <ArrowLeft size={18} className="relative z-10" />
       </motion.a>
     </motion.div>
@@ -220,13 +220,13 @@ function ChatWindow({
       transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] as const }}
       className="absolute bottom-[calc(100%+16px)] right-0 flex w-[93vw] max-w-sm origin-bottom-right flex-col rounded-2xl border border-white/12 bg-zinc-950/90 shadow-[0_20px_70px_rgba(0,0,0,0.7)] backdrop-blur-xl"
       dir="rtl"
-      aria-label="Shift AI chat"
+      aria-label="hdour AI chat"
     >
       {/* ── Header ── */}
       <div className="flex items-center gap-3 border-b border-white/10 px-4 py-3">
         <RobotAvatar shouldLoad />
         <div className="flex-1">
-          <p className="text-xs font-bold text-violet-400">Shift AI Agent</p>
+          <p className="text-xs font-bold text-violet-400">hdour AI Agent</p>
           <div className="flex items-center gap-1.5 mt-0.5">
             <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse" />
             <span className="text-[10px] text-zinc-400">أونلاين الآن</span>
@@ -267,7 +267,7 @@ function ChatWindow({
               onChange={(e) => onInputChange(e.target.value)}
               disabled={isInputDisabled || isTyping}
               placeholder={
-                isInputDisabled ? "جاري التحويل إلى CEO SHIFT..." : "اكتب رسالتك..."
+                isInputDisabled ? "جاري التحويل إلى CEO hdour..." : "اكتب رسالتك..."
               }
               className="flex-1 rounded-xl border border-white/15 bg-black/40 px-3 py-2.5 text-right text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-violet-500/50 disabled:cursor-not-allowed disabled:opacity-40"
             />
@@ -305,7 +305,7 @@ export function ChatFab() {
     {
       id: uid(),
       role: "bot",
-      text: "أهلاً بيك في SHIFT! 👋 أنا Shift AI Agent، إزاي أقدر أساعدك في تطوير البيزنس بتاعك بالذكاء الاصطناعي والأمن السيبراني؟",
+      text: "أهلاً بيك في hdour! 👋 أنا hdour AI Agent، إزاي أقدر أساعدك في تطوير البيزنس بتاعك بالذكاء الاصطناعي والأمن السيبراني؟",
     },
   ]);
   const [input, setInput] = useState("");
@@ -322,8 +322,8 @@ export function ChatFab() {
   // Listen for custom event from other components (e.g., portfolio CTA)
   useEffect(() => {
     const openChat = () => setIsOpen(true);
-    window.addEventListener("shift-open-chat", openChat);
-    return () => window.removeEventListener("shift-open-chat", openChat);
+    window.addEventListener("hdour-open-chat", openChat);
+    return () => window.removeEventListener("hdour-open-chat", openChat);
   }, []);
 
   const handleSend = useCallback(
@@ -372,7 +372,7 @@ export function ChatFab() {
           {
             id: uid(),
             role: "bot",
-            text: "عندي مشكلة تقنية بسيطة دلوقتي 😅 تقدر تتواصل مع CEO SHIFT مباشرة على واتساب وهيساعدك فوراً.",
+            text: "عندي مشكلة تقنية بسيطة دلوقتي 😅 تقدر تتواصل مع CEO hdour مباشرة على واتساب وهيساعدك فوراً.",
           },
         ]);
         setShowWhatsApp(true);

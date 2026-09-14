@@ -54,7 +54,7 @@ export default function SiteNavbar() {
         {/* Brand Logo — "حضور / Hodour" */}
         <Link
           href="/"
-          className="flex items-center gap-2 group rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F] p-1"
+          className="flex items-center gap-2 group rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A] p-1"
           aria-label={language === "ar" ? "حضور - الصفحة الرئيسية" : "Hodour - Home"}
         >
           <span className="text-xl font-changa font-bold tracking-wide text-theme-primary group-hover:text-[#9F0F1F] dark:group-hover:text-white transition-colors">
@@ -71,7 +71,7 @@ export default function SiteNavbar() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`relative rounded-xl px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F] ${
+                  className={`relative rounded-xl px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A] ${
                     isActive
                       ? "text-[#F2D3B1]"
                       : "text-theme-secondary/80 hover:text-theme-primary hover:bg-theme-card/40"
@@ -95,12 +95,12 @@ export default function SiteNavbar() {
           })}
         </ul>
 
-        {/* Desktop Controls (Theme Toggle & Language Switcher) */}
-        <div className="hidden md:flex items-center gap-2.5">
+        {/* Unified Header Controls — Guarantees exactly ONE Language & Theme button in the DOM */}
+        <div className="flex items-center gap-2">
           {/* Theme Switcher Toggle */}
           <button
             onClick={toggleTheme}
-            className="flex h-9 w-9 items-center justify-center rounded-xl border border-theme-border bg-theme-card text-theme-primary shadow-sm transition-all hover:border-[#9F0F1F]/40 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F]"
+            className="flex h-11 w-11 md:h-9 md:w-9 items-center justify-center rounded-xl border border-theme-border bg-theme-card text-theme-primary shadow-sm transition-colors hover:border-[#9F0F1F]/40 hover:bg-theme-surface/60 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A]"
             aria-label={
               isLight
                 ? language === "ar"
@@ -124,9 +124,9 @@ export default function SiteNavbar() {
               {isLight ? (
                 <motion.div
                   key="sun"
-                  initial={{ rotate: -90, scale: 0.5, opacity: 0 }}
+                  initial={{ rotate: -90, scale: 0.7, opacity: 0 }}
                   animate={{ rotate: 0, scale: 1, opacity: 1 }}
-                  exit={{ rotate: 90, scale: 0.5, opacity: 0 }}
+                  exit={{ rotate: 90, scale: 0.7, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
                   <Sun className="w-4 h-4 text-[#9F0F1F]" />
@@ -134,9 +134,9 @@ export default function SiteNavbar() {
               ) : (
                 <motion.div
                   key="moon"
-                  initial={{ rotate: 90, scale: 0.5, opacity: 0 }}
+                  initial={{ rotate: 90, scale: 0.7, opacity: 0 }}
                   animate={{ rotate: 0, scale: 1, opacity: 1 }}
-                  exit={{ rotate: -90, scale: 0.5, opacity: 0 }}
+                  exit={{ rotate: -90, scale: 0.7, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
                   <Moon className="w-4 h-4 text-[#FF4D1A]" />
@@ -145,58 +145,22 @@ export default function SiteNavbar() {
             </AnimatePresence>
           </button>
 
-          {/* Language Switcher Pill */}
+          {/* Language Switcher Pill (Single, strictly once in DOM) */}
           <button
             onClick={toggleLanguage}
-            className="flex h-9 items-center gap-1.5 rounded-xl border border-theme-border bg-theme-card px-3 text-xs font-bold uppercase tracking-wider text-theme-primary shadow-sm transition-all hover:border-[#9F0F1F]/40 hover:bg-[#9F0F1F]/10 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F]"
+            className="flex h-11 md:h-9 items-center gap-1.5 rounded-xl border border-theme-border bg-theme-card px-3 text-xs font-bold uppercase tracking-wider text-theme-primary shadow-sm transition-colors hover:border-[#9F0F1F]/40 hover:bg-[#9F0F1F]/10 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A]"
             aria-label={
               language === "en" ? "تغيير اللغة إلى العربية" : "Switch language to English"
             }
           >
-            <Globe className="w-3.5 h-3.5 text-[#9F0F1F] dark:text-[#FF4D1A]" />
-            <span className="font-changa">{language === "en" ? "عربي" : "EN"}</span>
-          </button>
-        </div>
-
-        {/* Mobile Header Controls */}
-        <div className="flex md:hidden items-center gap-2">
-          {/* Mobile Theme Toggle */}
-          <button
-            onClick={toggleTheme}
-            className="flex h-11 w-11 items-center justify-center rounded-xl border border-theme-border bg-theme-card text-theme-primary transition active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F]"
-            aria-label={
-              isLight
-                ? language === "ar"
-                  ? "التحويل للوضع الليلي"
-                  : "Switch to Dark Mode"
-                : language === "ar"
-                ? "التحويل للوضع النهاري"
-                : "Switch to Light Mode"
-            }
-          >
-            {isLight ? (
-              <Sun className="w-4 h-4 text-[#9F0F1F]" />
-            ) : (
-              <Moon className="w-4 h-4 text-[#FF4D1A]" />
-            )}
+            <Globe className="w-4 h-4 text-[#9F0F1F] dark:text-[#FF4D1A]" />
+            <span className="font-changa font-bold text-xs">{language === "en" ? "عربي" : "EN"}</span>
           </button>
 
-          {/* Mobile Language Switcher */}
-          <button
-            onClick={toggleLanguage}
-            className="flex h-11 items-center gap-1 rounded-xl border border-theme-border bg-theme-card px-3 text-xs font-bold uppercase text-theme-primary transition active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F]"
-            aria-label={
-              language === "en" ? "تغيير اللغة إلى العربية" : "Switch language to English"
-            }
-          >
-            <Globe className="w-3.5 h-3.5 text-[#9F0F1F] dark:text-[#FF4D1A]" />
-            <span className="font-changa">{language === "en" ? "عربي" : "EN"}</span>
-          </button>
-
-          {/* Mobile Hamburger Toggle Button */}
+          {/* Mobile Hamburger Toggle Button (Mobile only) */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="flex h-11 w-11 items-center justify-center rounded-xl border border-theme-border bg-theme-card text-theme-primary backdrop-blur-md transition active:scale-95 hover:border-[#9F0F1F]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F]"
+            className="flex md:hidden h-11 w-11 items-center justify-center rounded-xl border border-theme-border bg-theme-card text-theme-primary backdrop-blur-md transition-colors active:scale-95 hover:border-[#9F0F1F]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A]"
             aria-label={isOpen ? "إغلاق القائمة" : "فتح القائمة"}
             aria-expanded={isOpen}
           >
@@ -247,7 +211,7 @@ export default function SiteNavbar() {
                       <Link
                         href={link.href}
                         onClick={() => setIsOpen(false)}
-                        className={`flex min-h-[48px] items-center justify-between rounded-2xl px-4 py-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9F0F1F] ${
+                        className={`flex min-h-[48px] items-center justify-between rounded-2xl px-4 py-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D1A] ${
                           isActive
                             ? "bg-[#9F0F1F] text-[#F2D3B1] font-bold shadow-md"
                             : "text-theme-primary hover:bg-theme-surface/60 active:scale-[0.99]"

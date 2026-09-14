@@ -106,9 +106,9 @@ export function AdminPortfolioDashboard() {
       project.gallery && project.gallery.length > 0
         ? project.gallery
         : [
-            ...(project.imageUrl ? [{ type: "image" as const, url: project.imageUrl }] : []),
-            ...(project.videoUrl ? [{ type: "video" as const, url: project.videoUrl }] : []),
-          ];
+          ...(project.imageUrl ? [{ type: "image" as const, url: project.imageUrl }] : []),
+          ...(project.videoUrl ? [{ type: "video" as const, url: project.videoUrl }] : []),
+        ];
 
     setForm({
       title: project.title,
@@ -135,9 +135,9 @@ export function AdminPortfolioDashboard() {
       project.gallery && project.gallery.length > 0
         ? project.gallery
         : [
-            ...(project.imageUrl ? [{ type: "image" as const, url: project.imageUrl }] : []),
-            ...(project.videoUrl ? [{ type: "video" as const, url: project.videoUrl }] : []),
-          ];
+          ...(project.imageUrl ? [{ type: "image" as const, url: project.imageUrl }] : []),
+          ...(project.videoUrl ? [{ type: "video" as const, url: project.videoUrl }] : []),
+        ];
 
     setForm({
       title: `${project.title} (Copy)`,
@@ -317,7 +317,7 @@ export function AdminPortfolioDashboard() {
         <div className="text-right w-full md:w-auto">
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-violet-500 mb-2">
             <Sparkles className="w-4 h-4 text-violet-400 animate-pulse" />
-            <span>لوحة تحكم معرض الأعمال — SHIFT Core</span>
+            <span>لوحة تحكم معرض الأعمال — hdour Core</span>
           </div>
           <h1 className="text-2xl md:text-3xl font-extrabold text-zinc-900 dark:text-zinc-100">
             إدارة المشاريع والأعمال
@@ -370,11 +370,10 @@ export function AdminPortfolioDashboard() {
             <button
               key={cat.id}
               onClick={() => setSelectedCategoryFilter(cat.id)}
-              className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap ${
-                selectedCategoryFilter === cat.id
+              className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap ${selectedCategoryFilter === cat.id
                   ? "bg-violet-500 text-zinc-950 shadow-[0_0_20px_rgba(139, 92, 246,0.4)]"
                   : "bg-zinc-100 dark:bg-zinc-900/60 border border-black/10 dark:border-white/[0.06] text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
-              }`}
+                }`}
             >
               {cat.label}
             </button>
@@ -456,11 +455,10 @@ export function AdminPortfolioDashboard() {
                   {/* Status Toggle Button */}
                   <button
                     onClick={() => togglePublished(project)}
-                    className={`absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-md transition-transform active:scale-95 flex items-center gap-1 ${
-                      project.published
+                    className={`absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-md transition-transform active:scale-95 flex items-center gap-1 ${project.published
                         ? "bg-violet-500/90 text-zinc-950 shadow-[0_0_15px_rgba(139, 92, 246,0.5)]"
                         : "bg-amber-500/90 text-zinc-950"
-                    }`}
+                      }`}
                   >
                     {project.published ? <Eye className="w-3 h-3" /> : <EyeOff className="w-3 h-3" />}
                     <span>{project.published ? "منشور (Live)" : "مسودة (Draft)"}</span>
@@ -562,11 +560,10 @@ export function AdminPortfolioDashboard() {
                           key={cat.id}
                           type="button"
                           onClick={() => setForm((prev) => ({ ...prev, category: cat.id }))}
-                          className={`flex items-center justify-center gap-2 p-3 rounded-xl border text-xs font-bold uppercase transition-all ${
-                            isSelected
+                          className={`flex items-center justify-center gap-2 p-3 rounded-xl border text-xs font-bold uppercase transition-all ${isSelected
                               ? "bg-violet-500/20 border-violet-500/50 text-violet-600 dark:text-violet-400 shadow-[0_0_15px_rgba(139, 92, 246,0.3)]"
                               : "bg-zinc-100 dark:bg-zinc-900/60 border-black/10 dark:border-white/[0.06] text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
-                          }`}
+                            }`}
                         >
                           <CatIcon className="w-4 h-4 text-violet-500" />
                           <span>{cat.label}</span>
@@ -814,7 +811,7 @@ export function AdminPortfolioDashboard() {
                       rows={2}
                       value={form.solution}
                       onChange={(e) => setForm({ ...form, solution: e.target.value })}
-                      placeholder="كيف قامت SHIFT بحل التحدي..."
+                      placeholder="كيف قامت hdour بحل التحدي..."
                       className="w-full rounded-xl border border-black/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/80 p-2.5 text-xs text-zinc-900 dark:text-zinc-100 focus:border-violet-500 focus:outline-none"
                     />
                   </div>

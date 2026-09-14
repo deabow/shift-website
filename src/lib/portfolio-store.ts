@@ -18,7 +18,7 @@ const BLOB_STORE_KEY = "portfolio-projects.json";
 
 // Global in-memory cache for serverless instance reuse
 const globalStore = globalThis as unknown as {
-  __SHIFT_PORTFOLIO_CACHE__?: PortfolioProject[];
+  __hdour_PORTFOLIO_CACHE__?: PortfolioProject[];
 };
 
 /* ─── Vercel Blob helpers ─────────────────────────────────────────────────── */
@@ -93,21 +93,21 @@ async function fetchFromCloudDatabase(): Promise<PortfolioProject[] | null> {
 /* ─── Core read/write ─────────────────────────────────────────────────────── */
 
 async function readProjects(): Promise<PortfolioProject[]> {
-  if (globalStore.__SHIFT_PORTFOLIO_CACHE__ && globalStore.__SHIFT_PORTFOLIO_CACHE__.length > 0) {
-    return globalStore.__SHIFT_PORTFOLIO_CACHE__;
+  if (globalStore.__hdour_PORTFOLIO_CACHE__ && globalStore.__hdour_PORTFOLIO_CACHE__.length > 0) {
+    return globalStore.__hdour_PORTFOLIO_CACHE__;
   }
 
   // 1. Try cloud database adapter first
   const dbData = await fetchFromCloudDatabase();
   if (dbData && dbData.length > 0) {
-    globalStore.__SHIFT_PORTFOLIO_CACHE__ = dbData;
+    globalStore.__hdour_PORTFOLIO_CACHE__ = dbData;
     return dbData;
   }
 
   // 2. Try Vercel Blob store (persistent serverless storage)
   const blobData = await readFromVercelBlob();
   if (blobData && blobData.length > 0) {
-    globalStore.__SHIFT_PORTFOLIO_CACHE__ = blobData;
+    globalStore.__hdour_PORTFOLIO_CACHE__ = blobData;
     return blobData;
   }
 
@@ -116,7 +116,7 @@ async function readProjects(): Promise<PortfolioProject[]> {
     const raw = await fs.readFile(DATA_FILE, "utf8");
     const data = JSON.parse(raw) as PortfolioProject[];
     if (Array.isArray(data) && data.length > 0) {
-      globalStore.__SHIFT_PORTFOLIO_CACHE__ = data;
+      globalStore.__hdour_PORTFOLIO_CACHE__ = data;
       return data;
     }
   } catch {
@@ -128,19 +128,19 @@ async function readProjects(): Promise<PortfolioProject[]> {
     const raw = await fs.readFile(TMP_FILE, "utf8");
     const data = JSON.parse(raw) as PortfolioProject[];
     if (Array.isArray(data) && data.length > 0) {
-      globalStore.__SHIFT_PORTFOLIO_CACHE__ = data;
+      globalStore.__hdour_PORTFOLIO_CACHE__ = data;
       return data;
     }
   } catch {
     // Ignore
   }
 
-  globalStore.__SHIFT_PORTFOLIO_CACHE__ = [];
+  globalStore.__hdour_PORTFOLIO_CACHE__ = [];
   return [];
 }
 
 async function writeProjects(projects: PortfolioProject[]) {
-  globalStore.__SHIFT_PORTFOLIO_CACHE__ = projects;
+  globalStore.__hdour_PORTFOLIO_CACHE__ = projects;
 
   // 1. If Cloud DB URL exists, sync to Cloud Database
   const dbUrl = process.env.DATABASE_URL || process.env.MONGODB_URI || process.env.POSTGRES_URL;
@@ -225,9 +225,9 @@ export async function createProject(input: CreatePortfolioInput) {
   const initialGallery = input.gallery && input.gallery.length > 0
     ? input.gallery
     : [
-        ...(input.imageUrl ? [{ type: "image" as const, url: input.imageUrl }] : []),
-        ...(input.videoUrl ? [{ type: "video" as const, url: input.videoUrl }] : []),
-      ];
+      ...(input.imageUrl ? [{ type: "image" as const, url: input.imageUrl }] : []),
+      ...(input.videoUrl ? [{ type: "video" as const, url: input.videoUrl }] : []),
+    ];
 
   const newProject: PortfolioProject = {
     id: `prj_${Date.now().toString(36)}`,

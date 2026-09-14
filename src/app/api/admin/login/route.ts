@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { logger } from "@/lib/logger";
 
-const DEFAULT_ADMIN_PASSWORD = "shift_secure_2026";
-const DEFAULT_ADMIN_SECRET = "shift_session_xK9mP2vL8nQ4wR7jT";
+const DEFAULT_ADMIN_PASSWORD = "hdour_secure_2026";
+const DEFAULT_ADMIN_SECRET = "hdour_session_xK9mP2vL8nQ4wR7jT";
 
 export async function POST(request: Request) {
   const expectedPassword = process.env.ADMIN_PASSWORD || DEFAULT_ADMIN_PASSWORD;
@@ -20,7 +20,7 @@ export async function POST(request: Request) {
   logger.info("admin/login", "Successful login");
 
   const response = NextResponse.redirect(new URL("/admin/panel", request.url), 303);
-  response.cookies.set("shift-admin-auth", adminSecret, {
+  response.cookies.set("hdour-admin-auth", adminSecret, {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",

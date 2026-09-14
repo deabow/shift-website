@@ -5,7 +5,7 @@ export async function POST(request: Request) {
   logger.info("admin/logout", "User logged out");
 
   const response = NextResponse.redirect(new URL("/admin", request.url), 303);
-  response.cookies.set("shift-admin-auth", "", {
+  response.cookies.set("hdour-admin-auth", "", {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
