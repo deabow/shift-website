@@ -169,7 +169,7 @@ export default function Home() {
 
                 <div className="hidden sm:flex items-center gap-2">
                   <span className="rounded-full bg-black/60 backdrop-blur-md px-3 py-1 text-[11px] font-bold text-[#F2D3B1] border border-white/10">
-                    عالية  Drone Cinema
+                    4K Drone Cinema
                   </span>
                   <span className="rounded-full bg-[#9F0F1F]/90 backdrop-blur-md px-3 py-1 text-[11px] font-bold text-white shadow">
                     Commercials & Media

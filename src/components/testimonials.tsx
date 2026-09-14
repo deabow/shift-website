@@ -48,12 +48,12 @@ const CLIENT_TESTIMONIALS: TestimonialItem[] = [
     roleEn: "Head of Marketing & Real Estate Investment",
     companyAr: "شركة الخليج للتطوير العقاري",
     companyEn: "Al-Khaleej Real Estate Development",
-    serviceAr: "التصوير الجوي بالدرون عالية  + مونتاج سينمائي",
-    serviceEn: "عالية  Drone Cinematography & Video Showcase",
+    serviceAr: "التصوير الجوي بالدرون بدقة 4K + مونتاج سينمائي",
+    serviceEn: "4K Drone Cinematography & Video Showcase",
     quoteAr:
       "التصوير الجوي بالدرون والمونتاج السينمائي لمولاتنا التجارية بالسادات قدّم مشروعاتنا للمستثمرين بأعلى مستوى من الاحترافية والجاذبية، وأصبح الفيلم الأداة البيعية الأولى لفريق التسويق.",
     quoteEn:
-      "The عالية  drone cinematography and promotional film for our commercial malls presented our projects to investors with prime professionalism, becoming our sales team's primary conversion asset.",
+      "The 4K drone cinematography and promotional film for our commercial malls presented our projects to investors with prime professionalism, becoming our sales team's primary conversion asset.",
     metricAr: "تغطية 12+ موقع ومول تجاري استثماري",
     metricEn: "12+ Commercial Malls Documented",
     initials: "خل",

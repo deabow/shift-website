@@ -206,7 +206,7 @@ export function HorizontalPortfolio() {
                       {hasVideo ? (
                         <>
                           <Film className="w-3 h-3 text-violet-400" />
-                          <span>{isAr ? "فيلم سينمائي عالية " : "Cinematic Reel"}</span>
+                          <span>{isAr ? "فيلم سينمائي 4K" : "4K Cinematic Reel"}</span>
                         </>
                       ) : (
                         <>
