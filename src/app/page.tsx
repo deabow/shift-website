@@ -27,7 +27,6 @@ import { ProjectVideoPlayer } from "@/components/project-video-player";
 import { BentoPortfolio } from "@/components/bento-portfolio";
 import { StatsCounter } from "@/components/stats-counter";
 import { ClientMarquee } from "@/components/client-marquee";
-import { Testimonials } from "@/components/testimonials";
 import { InteractiveProjectPlanner } from "@/components/interactive-project-planner";
 
 const containerVariants: Variants = {
@@ -426,8 +425,6 @@ export default function Home() {
         <BentoPortfolio />
       </div>
 
-      {/* ── Integrated Client Testimonials ── */}
-      <Testimonials />
 
       {/* ── Bottom Call To Action ── */}
       <section className="w-full max-w-5xl px-4 md:px-8 py-16 md:py-24">

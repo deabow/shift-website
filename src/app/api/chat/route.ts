@@ -81,7 +81,7 @@ async function callGeminiWithRetry(
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({
-        model: "gemini-2.0-flash",
+        model: "gemini-3.6-flash",
         systemInstruction: SYSTEM_INSTRUCTION,
       });
 
@@ -140,7 +140,6 @@ export async function POST(req: Request): Promise<NextResponse> {
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
-  // If API key is missing entirely, we don't return an error, we just use the fallback engine later
   if (!apiKey) {
     logger.warn("chat", "GEMINI_API_KEY is not set. Will use fallback engine.");
   }
