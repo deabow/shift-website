@@ -81,7 +81,7 @@ function RobotAvatar({ shouldLoad = false }: { shouldLoad?: boolean }) {
 
   if (LottiePlayer && animData) {
     return (
-      <div className="relative h-9 w-9 overflow-hidden rounded-full border border-violet-400/30 bg-violet-400/10">
+      <div className="relative h-9 w-9 overflow-hidden rounded-full border border-[#9F0F1F]/30 bg-[#9F0F1F]/10">
         <LottiePlayer
           animationData={animData}
           play
@@ -94,7 +94,7 @@ function RobotAvatar({ shouldLoad = false }: { shouldLoad?: boolean }) {
 
   // Fallback
   return (
-    <div className="flex h-9 w-9 items-center justify-center rounded-full border border-violet-400/30 bg-violet-400/10 text-base">
+    <div className="flex h-9 w-9 items-center justify-center rounded-full border border-[#9F0F1F]/30 bg-[#9F0F1F]/10 text-base">
       🤖
     </div>
   );
@@ -109,7 +109,7 @@ function TypingDots() {
           {[0, 150, 300].map((delay) => (
             <span
               key={delay}
-              className="h-2 w-2 rounded-full bg-violet-400/70 animate-bounce"
+              className="h-2 w-2 rounded-full bg-[#FF4D1A] animate-bounce"
               style={{ animationDelay: `${delay}ms` }}
             />
           ))}
@@ -131,7 +131,7 @@ function MessageBubble({ msg }: { msg: Message }) {
     >
       <div
         className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${isUser
-          ? "rounded-tr-none bg-[#8b5cf6] text-white shadow-[0_4px_20px_rgba(139, 92, 246,0.3)]"
+          ? "rounded-tr-none bg-[#9F0F1F] text-[#F2D3B1] shadow-[0_4px_20px_rgba(159,15,31,0.35)]"
           : "rounded-tl-none border border-white/10 bg-white/[0.06] text-zinc-200"
           }`}
       >
@@ -412,13 +412,13 @@ export function ChatFab() {
         onClick={() => setIsOpen((prev) => !prev)}
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.93 }}
-        className="relative flex h-14 w-14 items-center justify-center rounded-full border border-violet-500/30 bg-[#8b5cf6] text-black shadow-[0_12px_35px_rgba(139, 92, 246,0.5)] transition"
+        className="relative flex h-14 w-14 items-center justify-center rounded-full border border-[#9F0F1F]/40 bg-[#9F0F1F] text-[#F2D3B1] shadow-[0_12px_35px_rgba(159,15,31,0.5)] transition"
         aria-label={isOpen ? "إغلاق المحادثة" : "فتح المحادثة مع AI"}
       >
         {/* Subtle ring animation when chat is closed */}
         {!isOpen && (
           <motion.span
-            className="absolute inset-0 rounded-full border-2 border-violet-400/50"
+            className="absolute inset-0 rounded-full border-2 border-[#FF4D1A]/50"
             animate={{ scale: [1, 1.35], opacity: [0.6, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
           />

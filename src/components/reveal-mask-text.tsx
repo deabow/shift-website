@@ -131,7 +131,7 @@ export function RevealMaskText() {
       ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
       ctx.fillRect(0, 0, width, height);
 
-      ctx.fillStyle = "#8b5cf6";
+      ctx.fillStyle = "#9F0F1F";
       ctx.font = `bold ${fontSize}px monospace`;
 
       for (let i = 0; i < drops.length; i++) {
@@ -142,9 +142,9 @@ export function RevealMaskText() {
         ctx.fillText(char, x, y);
 
         if (Math.random() > 0.98) {
-          ctx.fillStyle = "#ffffff";
+          ctx.fillStyle = "#FF4D1A";
           ctx.fillText(char, x, y);
-          ctx.fillStyle = "#8b5cf6";
+          ctx.fillStyle = "#9F0F1F";
         }
 
         if (y > height && Math.random() > 0.975) {

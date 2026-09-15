@@ -1,87 +1,123 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useMotionValue } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const [cursorText, setCursorText] = useState<string | null>(null);
 
-  // Direct motion values without spring physics lag for instantaneous 1:1 mouse tracking
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
+  // Raw mouse coordinates
+  const mouseX = useMotionValue(-100);
+  const mouseY = useMotionValue(-100);
+
+  // Smooth trailing spring for the outer ring
+  const springConfig = { damping: 28, stiffness: 350, mass: 0.5 };
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
-    // Only enable custom cursor on desktop screens
-    if (typeof window === "undefined" || window.innerWidth < 768) return;
+    // Only enable on non-touch devices with fine pointer (desktop)
+    if (typeof window === "undefined") return;
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (isTouch || prefersReducedMotion || window.innerWidth < 768) return;
 
-    const moveCursor = (e: MouseEvent) => {
-      cursorX.set(e.clientX - 16);
-      cursorY.set(e.clientY - 16);
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+      if (!isVisible) setIsVisible(true);
     };
 
-    const handleMouseEnter = () => setIsVisible(true);
     const handleMouseLeave = () => setIsVisible(false);
+    const handleMouseEnter = () => setIsVisible(true);
 
-    // Hover detection for interactive buttons, links, and clickable cards
-    const handleHoverStart = (e: MouseEvent) => {
+    const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as Element | null;
       if (!target) return;
+
+      // Check for cursor text data attributes
+      const customTextElem = target.closest("[data-cursor-text]") as HTMLElement | null;
+      if (customTextElem) {
+        setCursorText(customTextElem.getAttribute("data-cursor-text"));
+      } else {
+        setCursorText(null);
+      }
 
       const clickable =
         target.closest("a") ||
         target.closest("button") ||
         target.closest("[role='button']") ||
+        target.closest("input") ||
+        target.closest("textarea") ||
+        target.closest("select") ||
         (target.classList && target.classList.contains("cursor-pointer"));
 
-      if (clickable) {
-        setIsHovering(true);
-      }
+      setIsHovering(Boolean(clickable));
     };
 
-    const handleHoverEnd = () => setIsHovering(false);
-
-    window.addEventListener("mousemove", moveCursor, { passive: true });
-    document.addEventListener("mouseenter", handleMouseEnter);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     document.addEventListener("mouseleave", handleMouseLeave);
-    document.addEventListener("mouseover", handleHoverStart);
-    document.addEventListener("mouseout", handleHoverEnd);
-
-    setIsVisible(true);
+    document.addEventListener("mouseenter", handleMouseEnter);
+    document.addEventListener("mouseover", handleMouseOver, { passive: true });
 
     return () => {
-      window.removeEventListener("mousemove", moveCursor);
-      document.removeEventListener("mouseenter", handleMouseEnter);
+      window.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseleave", handleMouseLeave);
-      document.removeEventListener("mouseover", handleHoverStart);
-      document.removeEventListener("mouseout", handleHoverEnd);
+      document.removeEventListener("mouseenter", handleMouseEnter);
+      document.removeEventListener("mouseover", handleMouseOver);
     };
-  }, [cursorX, cursorY]);
+  }, [mouseX, mouseY, isVisible]);
 
   if (!isVisible) return null;
 
   return (
-    <motion.div
-      className="pointer-events-none fixed left-0 top-0 z-[100] hidden md:flex items-center justify-center rounded-full mix-blend-difference"
-      style={{
-        x: cursorX,
-        y: cursorY,
-        width: 32,
-        height: 32,
-      }}
-      animate={{
-        scale: isHovering ? 2 : 1,
-        backgroundColor: isHovering ? "rgba(139, 92, 246, 0.9)" : "rgba(255, 255, 255, 0.15)",
-        border: isHovering ? "none" : "1.5px solid rgba(255, 255, 255, 0.7)",
-      }}
-      transition={{ duration: 0.1, ease: "easeOut" }}
-    >
+    <>
+      {/* Precision inner dot (instant 1:1 response) */}
       <motion.div
-        className="w-1.5 h-1.5 rounded-full bg-violet-400"
-        animate={{
-          opacity: isHovering ? 0 : 1,
+        className="pointer-events-none fixed left-0 top-0 z-[100] hidden md:block rounded-full bg-[#FF4D1A] shadow-[0_0_12px_#FF4D1A]"
+        style={{
+          x: mouseX,
+          y: mouseY,
+          translateX: "-50%",
+          translateY: "-50%",
+          width: isHovering ? 6 : 4,
+          height: isHovering ? 6 : 4,
         }}
+        transition={{ duration: 0.1 }}
       />
-    </motion.div>
+
+      {/* Trailing smooth magnetic aura / ring */}
+      <motion.div
+        className="pointer-events-none fixed left-0 top-0 z-[99] hidden md:flex items-center justify-center rounded-full border border-[#9F0F1F]/40 backdrop-blur-[1px]"
+        style={{
+          x: smoothX,
+          y: smoothY,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+        animate={{
+          width: cursorText ? 72 : isHovering ? 48 : 28,
+          height: cursorText ? 72 : isHovering ? 48 : 28,
+          backgroundColor: isHovering
+            ? "rgba(159, 15, 31, 0.15)"
+            : "rgba(255, 77, 26, 0.04)",
+          borderColor: isHovering
+            ? "rgba(255, 77, 26, 0.6)"
+            : "rgba(159, 15, 31, 0.35)",
+          boxShadow: isHovering
+            ? "0 0 25px rgba(159, 15, 31, 0.35)"
+            : "0 0 0px transparent",
+        }}
+        transition={{ duration: 0.18, ease: "easeOut" }}
+      >
+        {cursorText && (
+          <span className="font-alexandria text-[10px] font-extrabold uppercase tracking-wider text-[#F2D3B1] bg-[#9F0F1F]/90 px-2 py-0.5 rounded-full shadow">
+            {cursorText}
+          </span>
+        )}
+      </motion.div>
+    </>
   );
 }
