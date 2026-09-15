@@ -1,13 +1,18 @@
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-
-const DEFAULT_ADMIN_SECRET = "hdour_session_xK9mP2vL8nQ4wR7jT";
+import {
+  ADMIN_COOKIE_NAME,
+  LEGACY_ADMIN_COOKIE_NAME,
+  getAdminSecret,
+} from "@/lib/auth";
 
 export default function AdminLoginPage() {
-  const adminSecret = process.env.ADMIN_SECRET || DEFAULT_ADMIN_SECRET;
+  const adminSecret = getAdminSecret();
+  const cookieStore = cookies();
   const isAuthenticated = Boolean(
-    cookies().get("hdour-admin-auth")?.value === adminSecret,
+    cookieStore.get(ADMIN_COOKIE_NAME)?.value === adminSecret ||
+      cookieStore.get(LEGACY_ADMIN_COOKIE_NAME)?.value === adminSecret,
   );
 
   if (isAuthenticated) {

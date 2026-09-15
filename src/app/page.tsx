@@ -23,7 +23,6 @@ import {
 import { ProjectVideoPlayer } from "@/components/project-video-player";
 
 import { BentoPortfolio } from "@/components/bento-portfolio";
-import { Testimonials } from "@/components/testimonials";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -281,9 +280,6 @@ export default function Home() {
       <div className="w-full relative">
         <BentoPortfolio />
       </div>
-
-      {/* ── Client Testimonials (Verified Clients & Real Results) ── */}
-      <Testimonials />
 
       {/* ── Bottom Call To Action ── */}
       <section className="w-full max-w-5xl px-4 md:px-8 py-16 md:py-20">

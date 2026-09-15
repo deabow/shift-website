@@ -1,12 +1,15 @@
 import { NextResponse } from "next/server";
 import { logger } from "@/lib/logger";
-
-const DEFAULT_ADMIN_PASSWORD = "hdour_secure_2026";
-const DEFAULT_ADMIN_SECRET = "hdour_session_xK9mP2vL8nQ4wR7jT";
+import {
+  ADMIN_COOKIE_NAME,
+  LEGACY_ADMIN_COOKIE_NAME,
+  DEFAULT_ADMIN_PASSWORD,
+  getAdminSecret,
+} from "@/lib/auth";
 
 export async function POST(request: Request) {
   const expectedPassword = process.env.ADMIN_PASSWORD || DEFAULT_ADMIN_PASSWORD;
-  const adminSecret = process.env.ADMIN_SECRET || DEFAULT_ADMIN_SECRET;
+  const adminSecret = getAdminSecret();
 
   const formData = await request.formData();
   const password = formData.get("password");
@@ -16,17 +19,19 @@ export async function POST(request: Request) {
     return NextResponse.redirect(new URL("/admin?error=invalid", request.url), 303);
   }
 
-
   logger.info("admin/login", "Successful login");
 
   const response = NextResponse.redirect(new URL("/admin/panel", request.url), 303);
-  response.cookies.set("hdour-admin-auth", adminSecret, {
+  const cookieOptions = {
     httpOnly: true,
-    sameSite: "lax",
+    sameSite: "lax" as const,
     secure: process.env.NODE_ENV === "production",
     path: "/",
     maxAge: 60 * 60 * 8,
-  });
+  };
+
+  response.cookies.set(ADMIN_COOKIE_NAME, adminSecret, cookieOptions);
+  response.cookies.set(LEGACY_ADMIN_COOKIE_NAME, adminSecret, cookieOptions);
 
   return response;
 }

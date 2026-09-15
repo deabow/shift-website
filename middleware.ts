@@ -1,10 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-const DEFAULT_ADMIN_SECRET = "hodour_session_xK9mP2vL8nQ4wR7jT";
+const DEFAULT_ADMIN_SECRET = "shift_session_xK9mP2vL8nQ4wR7jT";
 
 function isAuthenticated(request: NextRequest): boolean {
   const adminSecret = process.env.ADMIN_SECRET || DEFAULT_ADMIN_SECRET;
-  const cookieValue = request.cookies.get("hodour-admin-auth")?.value;
+  const cookieValue =
+    request.cookies.get("hodour-admin-auth")?.value ||
+    request.cookies.get("hdour-admin-auth")?.value;
   return cookieValue === adminSecret;
 }
 

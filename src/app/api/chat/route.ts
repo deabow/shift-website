@@ -180,7 +180,9 @@ export async function POST(req: Request): Promise<NextResponse> {
     return response;
   }
 
-  const geminiContents = history
+  // Build sanitized alternating contents for Gemini API:
+  // Rules: must start with 'user', and roles must alternate strictly (user -> model -> user)
+  const rawTurns = history
     .filter(
       (m) =>
         (m.role === "user" || m.role === "bot") &&
@@ -189,18 +191,35 @@ export async function POST(req: Request): Promise<NextResponse> {
     )
     .map((m) => ({
       role: m.role === "user" ? ("user" as const) : ("model" as const),
-      parts: [{ text: m.text }],
+      parts: [{ text: m.text.trim() }],
     }));
 
-  const sanitizedContents =
-    geminiContents.length > 0 && geminiContents[0].role !== "user"
-      ? geminiContents.slice(1)
-      : geminiContents;
+  const alternatingTurns: { role: "user" | "model"; parts: { text: string }[] }[] = [];
+  for (const turn of rawTurns) {
+    if (alternatingTurns.length === 0) {
+      if (turn.role === "user") {
+        alternatingTurns.push(turn);
+      }
+    } else {
+      const lastTurn = alternatingTurns[alternatingTurns.length - 1];
+      if (lastTurn.role !== turn.role) {
+        alternatingTurns.push(turn);
+      } else {
+        lastTurn.parts[0].text += `\n${turn.parts[0].text}`;
+      }
+    }
+  }
 
-  sanitizedContents.push({
-    role: "user" as const,
-    parts: [{ text: rawMessage }],
-  });
+  if (alternatingTurns.length > 0 && alternatingTurns[alternatingTurns.length - 1].role === "user") {
+    alternatingTurns[alternatingTurns.length - 1].parts[0].text += `\n${rawMessage}`;
+  } else {
+    alternatingTurns.push({
+      role: "user" as const,
+      parts: [{ text: rawMessage }],
+    });
+  }
+
+  const sanitizedContents = alternatingTurns;
 
   logger.info("chat", `Sending ${sanitizedContents.length} turn(s) to Gemini`);
 
